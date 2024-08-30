@@ -1,4 +1,4 @@
-import 'package:e_commerce_application/domain/auth/usecase/get_ages.dart';
+import 'package:e_commerce_application/domain/auth/usecase/get_ages_usecase.dart';
 import 'package:e_commerce_application/presentation/auth/bloc/ages_display_state.dart';
 import 'package:e_commerce_application/service_locator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

@@ -10,6 +10,7 @@ abstract class AuthFirebaseService {
   Future<Either> getAges();
   Future<Either> sendPasswordResetEmail(String email);
   Future<bool> isLoggedIn();
+  Future<Either> getUser();
 }
 
 class AuthFirebaseServiceImpl extends AuthFirebaseService {
@@ -31,6 +32,8 @@ class AuthFirebaseServiceImpl extends AuthFirebaseService {
         'email': user.email,
         'gender': user.gender,
         'age': user.age,
+        'image': returnedData.user!.photoURL,
+        'userId': returnedData.user!.uid
       });
 
       return const Right('Sign up was successfull');
@@ -92,6 +95,21 @@ class AuthFirebaseServiceImpl extends AuthFirebaseService {
       return true;
     } else {
       return false;
+    }
+  }
+
+  @override
+  Future<Either> getUser() async {
+    try {
+      var currentUser = FirebaseAuth.instance.currentUser;
+      var userData = await FirebaseFirestore.instance
+          .collection('Users')
+          .doc(currentUser?.uid)
+          .get()
+          .then((value) => value.data());
+      return Right(userData);
+    } catch (e) {
+      return const Left('Please try again.');
     }
   }
 }

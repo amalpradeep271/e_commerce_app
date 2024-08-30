@@ -1,6 +1,7 @@
 import 'package:e_commerce_application/common/bloc/button/button_state.dart';
 import 'package:e_commerce_application/common/bloc/button/button_state_cubit.dart';
 import 'package:e_commerce_application/common/helper/bottomsheet/app_bottomsheet.dart';
+import 'package:e_commerce_application/common/helper/navigator/app_navigator.dart';
 import 'package:e_commerce_application/common/widgets/app_button/basic_reactive_button.dart';
 import 'package:e_commerce_application/common/widgets/appbar/app_bar.dart';
 import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
@@ -9,6 +10,7 @@ import 'package:e_commerce_application/domain/auth/usecase/signup_usecase.dart';
 import 'package:e_commerce_application/presentation/auth/bloc/age_selection_cubit.dart';
 import 'package:e_commerce_application/presentation/auth/bloc/ages_display_cubit.dart';
 import 'package:e_commerce_application/presentation/auth/bloc/gender_selection_cubit.dart';
+import 'package:e_commerce_application/presentation/auth/pages/signin_page.dart';
 import 'package:e_commerce_application/presentation/auth/widgets/ages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -186,6 +188,7 @@ class GenderAndAgeSelectionPage extends StatelessWidget {
                 context
                     .read<ButtonStateCubit>()
                     .execute(usecase: SignUpUseCase(), params: userCreationReq);
+                AppNavigator.pushReplacement(context, SignInPage());
               },
               title: 'Finish',
             );
