@@ -1,7 +1,9 @@
 import 'package:e_commerce_application/common/bloc/categories/categories_display_cubit.dart';
 import 'package:e_commerce_application/common/bloc/categories/categories_display_state.dart';
 import 'package:e_commerce_application/common/helper/images/images_display.dart';
+import 'package:e_commerce_application/common/helper/navigator/app_navigator.dart';
 import 'package:e_commerce_application/domain/category/entity/category_entity.dart';
+import 'package:e_commerce_application/presentation/All_categories/pages/all_categories_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,7 +40,7 @@ class Categories extends StatelessWidget {
 
   Widget _seaAll(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -48,7 +50,10 @@ class Categories extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              // AppNavigator.push(context, const AllCategoriesPage());
+              AppNavigator.push(
+                context,
+                const AllCategoriesPage(),
+              );
             },
             child: const Text(
               'See All',
@@ -62,16 +67,16 @@ class Categories extends StatelessWidget {
 
   Widget _categories(List<CategoryEntity> categories) {
     return SizedBox(
-      height: 100,
+      height: 100.h,
       child: ListView.separated(
           scrollDirection: Axis.horizontal,
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          padding: EdgeInsets.symmetric(horizontal: 16.w),
           itemBuilder: (contetx, index) {
             return Column(
               children: [
                 Container(
-                  height: 60,
-                  width: 60,
+                  height: 60.h,
+                  width: 60.w,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: Colors.white,
@@ -84,8 +89,8 @@ class Categories extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 10,
+                SizedBox(
+                  height: 10.h,
                 ),
                 Text(
                   categories[index].title,
@@ -97,7 +102,7 @@ class Categories extends StatelessWidget {
               ],
             );
           },
-          separatorBuilder: (context, index) => const SizedBox(width: 15),
+          separatorBuilder: (context, index) => SizedBox(width: 15.w),
           itemCount: categories.length),
     );
   }
