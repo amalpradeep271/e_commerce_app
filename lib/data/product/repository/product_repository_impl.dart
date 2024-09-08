@@ -40,7 +40,7 @@ class ProductRepositoryImpl extends ProductRepository {
   }
 
   @override
-  Future<Either> getProductsByCategoryId(String categoryId) async {
+  Future<Either> getproductsbyCategoryId(String categoryId) async {
     var returnedData =
         await sl<ProductFirebaseService>().getProductsByCategoryId(categoryId);
     return returnedData.fold(

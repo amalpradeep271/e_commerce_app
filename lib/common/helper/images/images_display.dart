@@ -8,4 +8,8 @@ class ImageDisplayHelper {
   static String generateProductImageURL(String title) {
     return AppUrl.productImage + title + AppUrl.alt;
   }
+
+    static String generateSingleProductImageURL(String title) {
+    return AppUrl.productSelectImage + title + AppUrl.alt;
+  }
 }

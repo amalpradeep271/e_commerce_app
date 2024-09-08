@@ -1,6 +1,6 @@
 class ProductColorEntity {
   final String title;
-  final List<int> hexCode;
+  final String hexCode;
 
   ProductColorEntity({
     required this.title,

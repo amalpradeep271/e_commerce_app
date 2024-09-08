@@ -1,6 +1,8 @@
 import 'package:e_commerce_application/common/helper/images/images_display.dart';
+import 'package:e_commerce_application/common/helper/navigator/app_navigator.dart';
 import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
 import 'package:e_commerce_application/domain/product/entity/product_entity.dart';
+import 'package:e_commerce_application/presentation/product_detail/pages/product_details_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -12,7 +14,12 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // AppNavigator.push(context, ProductDetailPage(productEntity: productEntity,));
+        AppNavigator.push(
+          context,
+          ProductDetailsPage(
+            productEntity: productEntity,
+          ),
+        );
       },
       child: Container(
         width: 180,
@@ -30,7 +37,7 @@ class ProductCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Colors.white,
                   image: DecorationImage(
-                    fit: BoxFit.fill,
+                    fit: BoxFit.cover,
                     image: NetworkImage(
                       ImageDisplayHelper.generateProductImageURL(
                         productEntity.images[0],
@@ -62,8 +69,8 @@ class ProductCard extends StatelessWidget {
                       children: [
                         Text(
                           productEntity.discountPrice == 0
-                              ? "${productEntity.price}\$"
-                              : "${productEntity.discountPrice}\$",
+                              ? "₹ ${productEntity.price}"
+                              : "₹ ${productEntity.discountPrice}",
                           style: const TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w300,
@@ -75,7 +82,7 @@ class ProductCard extends StatelessWidget {
                         Text(
                           productEntity.discountPrice == 0
                               ? ''
-                              : "${productEntity.price}\$",
+                              : "₹ ${productEntity.price}",
                           style: const TextStyle(
                               fontSize: 12,
                               color: Colors.grey,

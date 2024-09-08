@@ -2,7 +2,7 @@ import 'package:e_commerce_application/common/helper/navigator/app_navigator.dar
 import 'package:e_commerce_application/core/configs/assets/app_vectors.dart';
 import 'package:e_commerce_application/presentation/search/pages/search_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class SearchField extends StatelessWidget {
   const SearchField({super.key});
@@ -17,16 +17,17 @@ class SearchField extends StatelessWidget {
           AppNavigator.push(context, const SearchPage());
         },
         decoration: InputDecoration(
-            contentPadding: const EdgeInsets.all(12),
-            focusedBorder:
-                OutlineInputBorder(borderRadius: BorderRadius.circular(50)),
-            enabledBorder:
-                OutlineInputBorder(borderRadius: BorderRadius.circular(50)),
-            prefixIcon: SvgPicture.asset(
-              AppVectors.search,
-              fit: BoxFit.none,
-            ),
-            hintText: 'search'),
+          contentPadding: const EdgeInsets.all(12),
+          focusedBorder:
+              OutlineInputBorder(borderRadius: BorderRadius.circular(50)),
+          enabledBorder:
+              OutlineInputBorder(borderRadius: BorderRadius.circular(50)),
+          prefixIcon: SvgPicture.asset(
+            AppVectors.search,
+            fit: BoxFit.none,
+          ),
+          hintText: 'search',
+        ),
       ),
     );
   }

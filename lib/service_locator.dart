@@ -16,7 +16,7 @@ import 'package:e_commerce_application/domain/category/repository/category_repos
 import 'package:e_commerce_application/domain/category/usecase/get_category_usecase.dart';
 import 'package:e_commerce_application/domain/product/repository/product_repository.dart';
 import 'package:e_commerce_application/domain/product/usecase/get_newin_usecase.dart';
-import 'package:e_commerce_application/domain/product/usecase/get_product_by_categoryId.dart';
+import 'package:e_commerce_application/domain/product/usecase/get_product_by_category_id.dart';
 import 'package:e_commerce_application/domain/product/usecase/get_products_by_title.dart';
 import 'package:e_commerce_application/domain/product/usecase/get_topselling_usecase.dart';
 import 'package:get_it/get_it.dart';

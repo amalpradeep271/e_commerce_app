@@ -56,7 +56,7 @@ class TopSelling extends StatelessWidget {
 
   Widget _products(List<ProductEntity> products) {
     return SizedBox(
-      height: 300.h,
+      height: 280.h,
       child: ListView.separated(
         shrinkWrap: true,
         padding: EdgeInsets.symmetric(

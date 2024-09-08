@@ -10,7 +10,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:e_commerce_application/common/bloc/product/product_display_cubit.dart';
 import 'package:e_commerce_application/domain/category/entity/category_entity.dart';
-import 'package:e_commerce_application/domain/product/usecase/get_product_by_categoryId.dart';
+import 'package:e_commerce_application/domain/product/usecase/get_product_by_category_id.dart';
 import 'package:e_commerce_application/service_locator.dart';
 
 class CategoryProductsPage extends StatelessWidget {

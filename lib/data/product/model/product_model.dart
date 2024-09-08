@@ -1,6 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-
-import 'package:e_commerce_application/data/product/model/product_color_model.dart';
 import 'package:e_commerce_application/domain/product/entity/product_entity.dart';
 
 class ProductModel {
@@ -34,7 +32,9 @@ class ProductModel {
     return ProductModel(
       categoryId: map['categoryId'] as String,
       // color: List<ProductColorModel>.from(
-      //   map['colors'].map((e) => ProductColorModel.fromMap(e)),
+      //   map['colors'].map(
+      //     (e) => ProductColorModel.fromMap(e),
+      //   ),
       // ),
       createdDate: map['createdDate'] as Timestamp,
       discountPrice: map['discountPrice'] as num,
@@ -80,5 +80,22 @@ extension ProductModelX on ProductModel {
       title: title,
       salesNumber: salesNumber,
     );
+  }
+}
+
+extension ProductXEntity on ProductEntity {
+  ProductModel fromEntity() {
+    return ProductModel(
+        categoryId: categoryId,
+        // color: color.map((e) => e.fromEntity()).toList(),
+        createdDate: createdDate,
+        discountPrice: discountPrice,
+        gender: gender,
+        images: images,
+        price: price,
+        sizes: sizes,
+        productId: productId,
+        salesNumber: salesNumber,
+        title: title);
   }
 }
