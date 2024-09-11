@@ -1,9 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:e_commerce_application/data/product/model/product_color_model.dart';
 import 'package:e_commerce_application/domain/product/entity/product_entity.dart';
 
 class ProductModel {
   final String categoryId;
-  // final List<ProductColorModel> color;
+  final List<ProductColorModel> color;
   final Timestamp createdDate;
   final num discountPrice;
   final num gender;
@@ -16,7 +17,7 @@ class ProductModel {
 
   ProductModel({
     required this.categoryId,
-    // required this.color,
+    required this.color,
     required this.createdDate,
     required this.discountPrice,
     required this.gender,
@@ -31,11 +32,11 @@ class ProductModel {
   factory ProductModel.fromMap(Map<String, dynamic> map) {
     return ProductModel(
       categoryId: map['categoryId'] as String,
-      // color: List<ProductColorModel>.from(
-      //   map['colors'].map(
-      //     (e) => ProductColorModel.fromMap(e),
-      //   ),
-      // ),
+      color: List<ProductColorModel>.from(
+        map['colors'].map(
+          (e) => ProductColorModel.fromMap(e),
+        ),
+      ),
       createdDate: map['createdDate'] as Timestamp,
       discountPrice: map['discountPrice'] as num,
       gender: map['gender'] as num,
@@ -51,7 +52,7 @@ class ProductModel {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'categoryId': categoryId,
-      // 'colors': color.map((e) => e.toMap()).toList(),
+      'colors': color.map((e) => e.toMap()).toList(),
       'createdDate': createdDate,
       'discountPrice': discountPrice,
       'gender': gender,
@@ -69,7 +70,7 @@ extension ProductModelX on ProductModel {
   ProductEntity toEntity() {
     return ProductEntity(
       categoryId: categoryId,
-      // color: color.map((e) => e.toEntity()).toList(),
+      color: color.map((e) => e.toEntity()).toList(),
       createdDate: createdDate,
       discountPrice: discountPrice,
       gender: gender,
@@ -87,7 +88,7 @@ extension ProductXEntity on ProductEntity {
   ProductModel fromEntity() {
     return ProductModel(
         categoryId: categoryId,
-        // color: color.map((e) => e.fromEntity()).toList(),
+        color: color.map((e) => e.fromEntity()).toList(),
         createdDate: createdDate,
         discountPrice: discountPrice,
         gender: gender,

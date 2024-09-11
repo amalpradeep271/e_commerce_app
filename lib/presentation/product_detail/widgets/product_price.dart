@@ -15,7 +15,7 @@ class ProductPrice extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: Text(
-        "\₹ ${productEntity.discountPrice != 0 ? productEntity.discountPrice : productEntity.price}",
+        "₹ ${productEntity.discountPrice != 0 ? productEntity.discountPrice : productEntity.price}",
         style: const TextStyle(
           fontWeight: FontWeight.bold,
           color: AppColors.primary,

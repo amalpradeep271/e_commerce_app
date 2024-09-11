@@ -1,5 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:e_commerce_application/common/bloc/button/button_state_cubit.dart';
 import 'package:e_commerce_application/common/widgets/appbar/app_bar.dart';
+import 'package:e_commerce_application/presentation/product_detail/bloc/product_color_selection_cubit.dart';
+import 'package:e_commerce_application/presentation/product_detail/bloc/product_quanitity_cubit.dart';
+import 'package:e_commerce_application/presentation/product_detail/bloc/product_size_selection_cubit.dart';
 import 'package:e_commerce_application/presentation/product_detail/widgets/add_to_cart.dart';
 import 'package:e_commerce_application/presentation/product_detail/widgets/favourite_button.dart';
 import 'package:e_commerce_application/presentation/product_detail/widgets/product_images.dart';
@@ -11,6 +15,7 @@ import 'package:e_commerce_application/presentation/product_detail/widgets/selec
 import 'package:flutter/material.dart';
 
 import 'package:e_commerce_application/domain/product/entity/product_entity.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProductDetailsPage extends StatelessWidget {
@@ -22,52 +27,60 @@ class ProductDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: BasicAppbar(
-        hideBack: false,
-        action: FavoriteButton(
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => ProductQuantityCubit()),
+        BlocProvider(create: (context) => ProductColorSelectionCubit()),
+        BlocProvider(create: (context) => ProductSizeSelectionCubit()),
+        BlocProvider(create: (context) => ButtonStateCubit()),
+      ],
+      child: Scaffold(
+        appBar: BasicAppbar(
+          hideBack: false,
+          action: FavoriteButton(
+            productEntity: productEntity,
+          ),
+        ),
+        bottomNavigationBar: AddToCart(
           productEntity: productEntity,
         ),
-      ),
-      bottomNavigationBar: AddToCart(
-        productEntity: productEntity,
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ProductImages(productEntity: productEntity),
-            SizedBox(
-              height: 10.h,
-            ),
-            ProductTitle(
-              productEntity: productEntity,
-            ),
-            SizedBox(
-              height: 10.h,
-            ),
-            ProductPrice(
-              productEntity: productEntity,
-            ),
-            SizedBox(
-              height: 20.h,
-            ),
-            SelectedSize(
-              productEntity: productEntity,
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            SelectedColor(
-              productEntity: productEntity,
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            ProductQuantity(
-              productEntity: productEntity,
-            ),
-          ],
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ProductImages(productEntity: productEntity),
+              SizedBox(
+                height: 10.h,
+              ),
+              ProductTitle(
+                productEntity: productEntity,
+              ),
+              SizedBox(
+                height: 5.h,
+              ),
+              ProductPrice(
+                productEntity: productEntity,
+              ),
+              SizedBox(
+                height: 10.h,
+              ),
+              SelectedSize(
+                productEntity: productEntity,
+              ),
+              SizedBox(
+                height: 10.h,
+              ),
+              SelectedColor(
+                productEntity: productEntity,
+              ),
+              SizedBox(
+                height: 10.h,
+              ),
+              ProductQuantity(
+                productEntity: productEntity,
+              ),
+            ],
+          ),
         ),
       ),
     );

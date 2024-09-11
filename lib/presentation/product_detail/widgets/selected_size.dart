@@ -4,7 +4,6 @@ import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
 import 'package:e_commerce_application/presentation/product_detail/bloc/product_size_selection_cubit.dart';
 import 'package:e_commerce_application/presentation/product_detail/widgets/product_sizes.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import 'package:e_commerce_application/domain/product/entity/product_entity.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,11 +23,10 @@ class SelectedSize extends StatelessWidget {
       onTap: () {
         AppBottomsheet.display(
           context,
-          // BlocProvider.value(
-          //   value: BlocProvider.of<ProductSizeSelectionCubit>(context),
-          //   child:
-          ProductSizes(productEntity: productEntity),
-          // ),
+          BlocProvider.value(
+            value: BlocProvider.of<ProductSizeSelectionCubit>(context),
+            child: ProductSizes(productEntity: productEntity),
+          ),
         );
       },
       child: Container(
@@ -48,17 +46,15 @@ class SelectedSize extends StatelessWidget {
             ),
             Row(
               children: [
-                // BlocBuilder<ProductSizeSelectionCubit, int>(
-                //   builder: (context, state) {
-                //     return
-                Text(
-                  'S',
-                  // productEntity.sizes[state],
-                  style: const TextStyle(
-                      fontWeight: FontWeight.bold, fontSize: 18),
+                BlocBuilder<ProductSizeSelectionCubit, int>(
+                  builder: (context, state) {
+                    return Text(
+                      productEntity.sizes[state],
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 18),
+                    );
+                  },
                 ),
-                //   },
-                // ),
                 SizedBox(width: 15.w),
                 const Icon(
                   Icons.keyboard_arrow_down,

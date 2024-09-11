@@ -18,14 +18,11 @@ class ProductSizes extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: MediaQuery.of(context).size.height / 2,
-      padding: EdgeInsets.all(25.w),
+      padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
-        color: AppColors.background,
-        borderRadius: BorderRadius.only(
-          topRight: Radius.circular(16.r),
-          topLeft: Radius.circular(16.r),
-        ),
-      ),
+          color: AppColors.background,
+          borderRadius: BorderRadius.only(
+              topRight: Radius.circular(16.r), topLeft: Radius.circular(16.r))),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -36,20 +33,16 @@ class ProductSizes extends StatelessWidget {
                 const Center(
                   child: Text(
                     'Size',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 22,
-                    ),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
                   ),
                 ),
                 Align(
                   alignment: Alignment.bottomRight,
                   child: IconButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon: const Icon(Icons.close),
-                  ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: const Icon(Icons.close)),
                 )
               ],
             ),
@@ -57,55 +50,54 @@ class ProductSizes extends StatelessWidget {
           SizedBox(height: 20.h),
           Expanded(
             child: ListView.separated(
-              itemBuilder: (context, index) {
-                // return BlocBuilder<ProductSizeSelectionCubit, int>(
-                //   builder: (context, state) {
-                return GestureDetector(
-                  onTap: () {
-                    // context
-                    //     .read<ProductSizeSelectionCubit>()
-                    //     .itemSelection(index);
-                    // Navigator.pop(context);
-                  },
-                  child: Container(
-                    height: 60.h,
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    decoration: BoxDecoration(
-                      color:
-                          //  state == index
-                          //     ?
-                          AppColors.primary,
-                      // : AppColors.secondBackground,
-                      borderRadius: BorderRadius.circular(50.r),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          productEntity.sizes[index],
-                          style: const TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 16),
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return BlocBuilder<ProductSizeSelectionCubit, int>(
+                    builder: (context, state) => GestureDetector(
+                      onTap: () {
+                        context
+                            .read<ProductSizeSelectionCubit>()
+                            .itemSelection(index);
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                        height: 60.h,
+                        padding: EdgeInsets.symmetric(horizontal: 16.w),
+                        decoration: BoxDecoration(
+                            color: state == index
+                                ? AppColors.primary
+                                : AppColors.secondBackground,
+                            borderRadius: BorderRadius.circular(50.r)),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 15),
+                              child: Text(
+                                productEntity.sizes[index],
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                ),
+                              ),
+                            ),
+                            state == index
+                                ? const Icon(
+                                    Icons.check,
+                                    size: 30,
+                                  )
+                                : Container(
+                                    width: 30,
+                                  )
+                          ],
                         ),
-                        // state == index
-                        //     ? const Icon(
-                        //         Icons.check,
-                        //         size: 30,
-                        //       )
-                        //     :
-                        Container(
-                          width: 30.w,
-                        )
-                      ],
+                      ),
                     ),
-                  ),
-                );
-              },
-              separatorBuilder: (context, index) => SizedBox(
-                height: 20.h,
-              ),
-              itemCount: productEntity.sizes.length,
-            ),
-          )
+                  );
+                },
+                separatorBuilder: (context, index) => SizedBox(height: 20.h),
+                itemCount: productEntity.sizes.length),
+          ),
         ],
       ),
     );
