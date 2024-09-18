@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:e_commerce_application/common/bloc/button/button_state_cubit.dart';
 import 'package:e_commerce_application/common/widgets/appbar/app_bar.dart';
+import 'package:e_commerce_application/presentation/product_detail/bloc/favourite_icon_cubit.dart';
 import 'package:e_commerce_application/presentation/product_detail/bloc/product_color_selection_cubit.dart';
 import 'package:e_commerce_application/presentation/product_detail/bloc/product_quanitity_cubit.dart';
 import 'package:e_commerce_application/presentation/product_detail/bloc/product_size_selection_cubit.dart';
@@ -33,6 +34,7 @@ class ProductDetailsPage extends StatelessWidget {
         BlocProvider(create: (context) => ProductColorSelectionCubit()),
         BlocProvider(create: (context) => ProductSizeSelectionCubit()),
         BlocProvider(create: (context) => ButtonStateCubit()),
+        BlocProvider(create: (context) => FavoriteIconCubit()..isFavorite(productEntity.productId)),
       ],
       child: Scaffold(
         appBar: BasicAppbar(

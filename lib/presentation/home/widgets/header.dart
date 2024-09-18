@@ -6,6 +6,7 @@ import 'package:e_commerce_application/domain/auth/entity/user_entity.dart';
 import 'package:e_commerce_application/presentation/cart/pages/cart_page.dart';
 import 'package:e_commerce_application/presentation/home/bloc/user_info_display_cubit.dart';
 import 'package:e_commerce_application/presentation/home/bloc/user_info_display_state.dart';
+import 'package:e_commerce_application/presentation/settings/pages/settings_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -48,7 +49,9 @@ class Header extends StatelessWidget {
 
   Widget _profileImage(UserEntity user, BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        AppNavigator.push(context, const SettingsPage());
+      },
       child: Container(
         height: 40.h,
         width: 40.w,
@@ -56,8 +59,10 @@ class Header extends StatelessWidget {
           image: DecorationImage(
             fit: BoxFit.cover,
             image: user.image.isEmpty
-                ? const AssetImage(
-                    AppImages.profile,
+                ? AssetImage(
+                    user.gender == 1
+                        ? AppImages.profilemen
+                        : AppImages.profilewomen,
                   )
                 : NetworkImage(user.image),
           ),

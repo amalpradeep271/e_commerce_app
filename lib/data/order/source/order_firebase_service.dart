@@ -9,6 +9,7 @@ abstract class OrderFirebaseService {
   Future<Either> getCartProducts();
   Future<Either> removeCartProduct(String id);
   Future<Either> orderRegistration(OrderRegistrationReqModel order);
+  Future<Either> getOrders();
 }
 
 class OrderFirebaseServiceImpl extends OrderFirebaseService {
@@ -89,6 +90,21 @@ class OrderFirebaseServiceImpl extends OrderFirebaseService {
       }
 
       return const Right('Order registered successfully');
+    } catch (e) {
+      return const Left('Please try again');
+    }
+  }
+
+  @override
+  Future<Either> getOrders() async {
+    try {
+      var user = FirebaseAuth.instance.currentUser;
+      var returnedData = await FirebaseFirestore.instance
+          .collection("Users")
+          .doc(user!.uid)
+          .collection('Orders')
+          .get();
+      return Right(returnedData.docs.map((e) => e.data()).toList());
     } catch (e) {
       return const Left('Please try again');
     }

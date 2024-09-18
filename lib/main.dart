@@ -26,8 +26,13 @@ class MyApp extends StatelessWidget {
       designSize: const Size(360, 690),
       minTextAdapt: true,
       splitScreenMode: true,
-      child: BlocProvider(
-        create: (context) => SplashCubit()..appStarted(),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (_) => SplashCubit()..appStarted(),
+          )
+          
+        ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'e commerce app',

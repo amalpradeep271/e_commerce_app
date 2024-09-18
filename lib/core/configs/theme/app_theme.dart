@@ -3,6 +3,35 @@ import 'package:flutter/material.dart';
 import 'app_colors.dart';
 
 class AppTheme {
+  static final lightTheme = ThemeData(
+    primaryColor: AppColors.primary,
+    scaffoldBackgroundColor: AppColors.lightBackground,
+    brightness: Brightness.light,
+    fontFamily: 'OpenSans_Condensed',
+    //  inputDecorationTheme: InputDecorationTheme(
+    //   hintStyle: const TextStyle(
+    //     fontWeight: FontWeight.w500,
+    //     color: AppColors.hintTextColor,
+    //   ),
+    //   filled: true,
+    //   fillColor: AppColors.transparent,
+    //   contentPadding: const EdgeInsets.all(20),
+    //   enabledBorder: OutlineInputBorder(
+    //     borderRadius: BorderRadius.circular(25),
+    //     borderSide: const BorderSide(
+    //       color: AppColors.black,
+    //       width: 0.2,
+    //     ),
+    //   ),
+    //   border: OutlineInputBorder(
+    //     borderRadius: BorderRadius.circular(25),
+    //     borderSide: const BorderSide(
+    //       color: AppColors.black,
+    //       width: 0.2,
+    //     ),
+    //   ),
+    // ),
+  );
   static final appTheme = ThemeData(
     primaryColor: AppColors.primary,
     scaffoldBackgroundColor: AppColors.background,

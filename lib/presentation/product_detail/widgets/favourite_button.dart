@@ -1,6 +1,8 @@
 import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
 import 'package:e_commerce_application/domain/product/entity/product_entity.dart';
+import 'package:e_commerce_application/presentation/product_detail/bloc/favourite_icon_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class FavoriteButton extends StatelessWidget {
@@ -11,7 +13,7 @@ class FavoriteButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: () {
-        // context.read<FavoriteIconCubit>().onTap(productEntity);
+        context.read<FavoriteIconCubit>().onTap(productEntity);
       },
       icon: Container(
         height: 40.h,
@@ -20,17 +22,14 @@ class FavoriteButton extends StatelessWidget {
           color: AppColors.secondBackground,
           shape: BoxShape.circle,
         ),
-        child:
-            //  BlocBuilder<FavoriteIconCubit,bool>(
-            //   builder: (context,state) =>
-            Icon(
-          //  state ? Icons.favorite :
-          Icons.favorite_outline,
-          size: 18,
-          color: Colors.white,
+        child: BlocBuilder<FavoriteIconCubit, bool>(
+          builder: (context, state) => Icon(
+            state ? Icons.favorite : Icons.favorite_outline,
+            size: 18,
+            color: Colors.red,
+          ),
         ),
       ),
-      // ),
     );
   }
 }

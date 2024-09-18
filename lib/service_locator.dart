@@ -18,12 +18,18 @@ import 'package:e_commerce_application/domain/category/usecase/get_category_usec
 import 'package:e_commerce_application/domain/order/repository/order_repository.dart';
 import 'package:e_commerce_application/domain/order/usecase/add_to_cart_usecase.dart';
 import 'package:e_commerce_application/domain/order/usecase/get_cart_products_usecase.dart';
+import 'package:e_commerce_application/domain/order/usecase/get_orders_usecase.dart';
+import 'package:e_commerce_application/domain/order/usecase/order_registration_usecase.dart';
 import 'package:e_commerce_application/domain/order/usecase/remove_cart_products_usecase.dart';
 import 'package:e_commerce_application/domain/product/repository/product_repository.dart';
+import 'package:e_commerce_application/domain/product/usecase/add_or_remove_favourite_product_usecase.dart';
+import 'package:e_commerce_application/domain/product/usecase/get_favourite_products_usecase.dart';
 import 'package:e_commerce_application/domain/product/usecase/get_newin_usecase.dart';
 import 'package:e_commerce_application/domain/product/usecase/get_product_by_category_id.dart';
 import 'package:e_commerce_application/domain/product/usecase/get_products_by_title.dart';
 import 'package:e_commerce_application/domain/product/usecase/get_topselling_usecase.dart';
+import 'package:e_commerce_application/domain/product/usecase/is_favourite_usecase.dart';
+import 'package:e_commerce_application/domain/user/usecase/get_user_usecase.dart';
 import 'package:get_it/get_it.dart';
 
 final sl = GetIt.instance;
@@ -60,4 +66,11 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<AddToCartUseCase>(AddToCartUseCase());
   sl.registerSingleton<GetCartProductsUseCase>(GetCartProductsUseCase());
   sl.registerSingleton<RemoveCartProductsUseCase>(RemoveCartProductsUseCase());
+  sl.registerSingleton<OrderRegistrationUseCase>(OrderRegistrationUseCase());
+  sl.registerSingleton<AddOrRemoveFavoriteProductUseCase>(
+      AddOrRemoveFavoriteProductUseCase());
+  sl.registerSingleton<IsFavoriteUseCase>(IsFavoriteUseCase());
+  sl.registerSingleton<GetFavortiesProductsUseCase>(
+      GetFavortiesProductsUseCase());
+  sl.registerSingleton<GetOrdersUseCase>(GetOrdersUseCase());
 }

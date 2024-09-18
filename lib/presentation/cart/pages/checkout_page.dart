@@ -4,10 +4,10 @@ import 'package:e_commerce_application/common/bloc/button/button_state_cubit.dar
 import 'package:e_commerce_application/common/helper/cart/cart_helper.dart';
 import 'package:e_commerce_application/common/helper/navigator/app_navigator.dart';
 import 'package:e_commerce_application/common/widgets/app_button/basic_reactive_button.dart';
-import 'package:e_commerce_application/presentation/cart/pages/cart_page.dart';
+import 'package:e_commerce_application/data/order/model/order_registration_req_model.dart';
+import 'package:e_commerce_application/domain/order/usecase/order_registration_usecase.dart';
 import 'package:e_commerce_application/presentation/cart/pages/order_placed_page.dart';
 import 'package:flutter/material.dart';
-
 import 'package:e_commerce_application/common/widgets/appbar/app_bar.dart';
 import 'package:e_commerce_application/domain/order/entity/product_ordered_entity.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -75,16 +75,17 @@ class CheckOutPage extends StatelessWidget {
                         ),
                       ),
                       onPressed: () {
-                        // context.read < ButtonStateCubit > ().execute(
-                        //   usecase: OrderRegistrationUseCase(),
-                        //   params: OrderRegistrationReq(
-                        //     products: products,
-                        //     createdDate: DateTime.now().toString(),
-                        //     itemCount: products.length,
-                        //     totalPrice: CartHelper.calculateCartSubtotal(products),
-                        //     shippingAddress: _addressCon.text
-                        //   )
-                        // );
+                        context.read<ButtonStateCubit>().execute(
+                              usecase: OrderRegistrationUseCase(),
+                              params: OrderRegistrationReqModel(
+                                products: products,
+                                createdDate: DateTime.now().toString(),
+                                itemCount: products.length,
+                                totalPrice:
+                                    CartHelper.calculateCartSubtotal(products),
+                                shippingAddress: _addressCon.text,
+                              ),
+                            );
                       })
                 ],
               );
