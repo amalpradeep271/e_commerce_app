@@ -8,30 +8,81 @@ class AppTheme {
     scaffoldBackgroundColor: AppColors.lightBackground,
     brightness: Brightness.light,
     fontFamily: 'OpenSans_Condensed',
-    //  inputDecorationTheme: InputDecorationTheme(
-    //   hintStyle: const TextStyle(
-    //     fontWeight: FontWeight.w500,
-    //     color: AppColors.hintTextColor,
-    //   ),
-    //   filled: true,
-    //   fillColor: AppColors.transparent,
-    //   contentPadding: const EdgeInsets.all(20),
-    //   enabledBorder: OutlineInputBorder(
-    //     borderRadius: BorderRadius.circular(25),
-    //     borderSide: const BorderSide(
-    //       color: AppColors.black,
-    //       width: 0.2,
-    //     ),
-    //   ),
-    //   border: OutlineInputBorder(
-    //     borderRadius: BorderRadius.circular(25),
-    //     borderSide: const BorderSide(
-    //       color: AppColors.black,
-    //       width: 0.2,
-    //     ),
-    //   ),
-    // ),
+    inputDecorationTheme: InputDecorationTheme(
+      hintStyle: const TextStyle(
+        fontWeight: FontWeight.w500,
+        color: AppColors.hintTextColor,
+      ),
+      filled: true,
+      fillColor: AppColors.transparent,
+      contentPadding: const EdgeInsets.all(20),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(25),
+        borderSide: const BorderSide(
+          color: AppColors.blackColor,
+          width: 0.2,
+        ),
+      ),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(25),
+        borderSide: const BorderSide(
+          color: AppColors.blackColor,
+          width: 0.2,
+        ),
+      ),
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: AppColors.primary,
+        elevation: 0,
+        textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(100),
+        ),
+      ),
+    ),
   );
+
+  static final darkTheme = ThemeData(
+    primaryColor: AppColors.primary,
+    scaffoldBackgroundColor: AppColors.background,
+    brightness: Brightness.dark,
+    fontFamily: 'OpenSans_Condensed',
+    inputDecorationTheme: InputDecorationTheme(
+      hintStyle: const TextStyle(
+        fontWeight: FontWeight.w500,
+        color: AppColors.whiteColor,
+      ),
+      filled: true,
+      fillColor: AppColors.transparent,
+      contentPadding: const EdgeInsets.all(20),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(25),
+        borderSide: const BorderSide(
+          color: AppColors.whiteColor,
+          width: 0.2,
+        ),
+      ),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(25),
+        borderSide: const BorderSide(
+          color: AppColors.whiteColor,
+          width: 0.2,
+        ),
+      ),
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: AppColors.primary,
+        elevation: 0,
+        textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(100),
+        ),
+      ),
+    ),
+  );
+
   static final appTheme = ThemeData(
     primaryColor: AppColors.primary,
     scaffoldBackgroundColor: AppColors.background,

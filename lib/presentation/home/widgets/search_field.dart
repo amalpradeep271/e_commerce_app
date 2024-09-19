@@ -1,5 +1,8 @@
+import 'package:e_commerce_application/common/helper/mode/is_dark_mode.dart';
 import 'package:e_commerce_application/common/helper/navigator/app_navigator.dart';
 import 'package:e_commerce_application/core/configs/assets/app_vectors.dart';
+import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
+import 'package:e_commerce_application/presentation/home/widgets/header.dart';
 import 'package:e_commerce_application/presentation/search/pages/search_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -26,6 +29,8 @@ class SearchField extends StatelessWidget {
             AppVectors.search,
             fit: BoxFit.none,
           ),
+          prefixIconColor:
+              context.isDarkMode ? AppColors.whiteColor : AppColors.blackColor,
           hintText: 'search',
         ),
       ),

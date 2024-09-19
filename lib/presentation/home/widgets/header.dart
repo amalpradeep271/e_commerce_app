@@ -1,3 +1,4 @@
+import 'package:e_commerce_application/common/helper/mode/is_dark_mode.dart';
 import 'package:e_commerce_application/common/helper/navigator/app_navigator.dart';
 import 'package:e_commerce_application/core/configs/assets/app_images.dart';
 import 'package:e_commerce_application/core/configs/assets/app_vectors.dart';
@@ -35,7 +36,7 @@ class Header extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   _profileImage(state.user, context),
-                  _gender(state.user),
+                  _gender(state.user, context),
                   _card(context),
                 ],
               );
@@ -73,7 +74,7 @@ class Header extends StatelessWidget {
     );
   }
 
-  Widget _gender(UserEntity user) {
+  Widget _gender(UserEntity user, BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: 16.w,
@@ -90,6 +91,7 @@ class Header extends StatelessWidget {
           user.gender == 1 ? 'Men' : 'Women',
           style: const TextStyle(
             fontWeight: FontWeight.w500,
+            color: AppColors.whiteColor,
             fontSize: 16,
           ),
         ),

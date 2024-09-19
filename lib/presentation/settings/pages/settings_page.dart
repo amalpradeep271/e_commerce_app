@@ -2,6 +2,7 @@ import 'package:e_commerce_application/common/widgets/appbar/app_bar.dart';
 import 'package:e_commerce_application/presentation/settings/widgets/my_account_tile.dart';
 import 'package:e_commerce_application/presentation/settings/widgets/my_favourites_tile.dart';
 import 'package:e_commerce_application/presentation/settings/widgets/my_orders_tile.dart';
+import 'package:e_commerce_application/presentation/settings/widgets/theme_mode_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -26,7 +27,12 @@ class SettingsPage extends StatelessWidget {
             SizedBox(
               height: 15.h,
             ),
-            const MyOrdersTile()
+            const MyOrdersTile(),
+            SizedBox(
+              height: 15.h,
+            ),
+            
+            ThemeModeTile(),
           ],
         ),
       ),

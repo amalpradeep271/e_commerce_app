@@ -29,7 +29,6 @@ import 'package:e_commerce_application/domain/product/usecase/get_product_by_cat
 import 'package:e_commerce_application/domain/product/usecase/get_products_by_title.dart';
 import 'package:e_commerce_application/domain/product/usecase/get_topselling_usecase.dart';
 import 'package:e_commerce_application/domain/product/usecase/is_favourite_usecase.dart';
-import 'package:e_commerce_application/domain/user/usecase/get_user_usecase.dart';
 import 'package:get_it/get_it.dart';
 
 final sl = GetIt.instance;

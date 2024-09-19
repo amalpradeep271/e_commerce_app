@@ -1,5 +1,6 @@
 import 'package:e_commerce_application/core/configs/theme/app_theme.dart';
 import 'package:e_commerce_application/firebase_options.dart';
+import 'package:e_commerce_application/presentation/settings/bloc/theme_cubit.dart';
 import 'package:e_commerce_application/presentation/spalsh/bloc/splash_cubit.dart';
 import 'package:e_commerce_application/presentation/spalsh/pages/splash_page.dart';
 import 'package:e_commerce_application/service_locator.dart';
@@ -28,16 +29,18 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       child: MultiBlocProvider(
         providers: [
-          BlocProvider(
-            create: (_) => SplashCubit()..appStarted(),
-          )
-          
+          BlocProvider(create: (_) => ThemeCubit()),
+          BlocProvider(create: (_) => SplashCubit()..appStarted())
         ],
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'e commerce app',
-          theme: AppTheme.appTheme,
-          home: const SplashPage(),
+        child: BlocBuilder<ThemeCubit, ThemeMode>(
+          builder: (context, mode) => MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'e commerce app',
+            theme: AppTheme.lightTheme,
+            darkTheme: AppTheme.darkTheme,
+            themeMode: mode,
+            home: const SplashPage(),
+          ),
         ),
       ),
     );
