@@ -1,4 +1,3 @@
-import 'package:e_commerce_application/common/helper/mode/is_dark_mode.dart';
 import 'package:e_commerce_application/common/helper/navigator/app_navigator.dart';
 import 'package:e_commerce_application/core/configs/assets/app_images.dart';
 import 'package:e_commerce_application/core/configs/assets/app_vectors.dart';

@@ -1,6 +1,6 @@
 import 'package:e_commerce_application/common/helper/navigator/app_navigator.dart';
 import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
-import 'package:e_commerce_application/presentation/settings/pages/my_acoount_page.dart';
+import 'package:e_commerce_application/presentation/settings/pages/my_account_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

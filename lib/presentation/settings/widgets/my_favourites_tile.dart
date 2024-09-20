@@ -1,4 +1,3 @@
-import 'package:e_commerce_application/common/helper/bottomsheet/app_bottomsheet.dart';
 import 'package:e_commerce_application/common/helper/navigator/app_navigator.dart';
 import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
 import 'package:e_commerce_application/presentation/settings/pages/my_favourites_page.dart';

@@ -1,6 +1,5 @@
 import 'package:e_commerce_application/common/widgets/appbar/app_bar.dart';
 import 'package:e_commerce_application/core/configs/assets/app_images.dart';
-import 'package:e_commerce_application/main.dart';
 import 'package:e_commerce_application/presentation/home/bloc/user_info_display_cubit.dart';
 import 'package:e_commerce_application/presentation/home/bloc/user_info_display_state.dart';
 import 'package:flutter/cupertino.dart';

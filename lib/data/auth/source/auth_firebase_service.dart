@@ -98,6 +98,9 @@ class AuthFirebaseServiceImpl extends AuthFirebaseService {
     }
   }
 
+
+
+
   @override
   Future<Either> getUser() async {
     try {
