@@ -25,7 +25,11 @@ class MyAccountTile extends StatelessWidget {
           children: [
             Text(
               'My Account',
-              style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
+              style: TextStyle(
+                fontWeight: FontWeight.w400,
+                fontSize: 16,
+                color: AppColors.whiteColor,
+              ),
             ),
             Icon(Icons.arrow_forward_ios_rounded)
           ],

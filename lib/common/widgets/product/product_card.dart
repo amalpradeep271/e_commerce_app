@@ -61,6 +61,7 @@ class ProductCard extends StatelessWidget {
                     Text(
                       productEntity.title,
                       style: const TextStyle(
+                          color: AppColors.whiteColor,
                           fontSize: 12,
                           overflow: TextOverflow.ellipsis,
                           fontWeight: FontWeight.w300),
@@ -72,6 +73,7 @@ class ProductCard extends StatelessWidget {
                               ? "₹ ${productEntity.price}"
                               : "₹ ${productEntity.discountPrice}",
                           style: const TextStyle(
+                            color: AppColors.whiteColor,
                             fontSize: 12,
                             fontWeight: FontWeight.w300,
                           ),

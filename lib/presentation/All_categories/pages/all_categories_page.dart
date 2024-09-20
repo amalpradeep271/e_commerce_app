@@ -90,7 +90,10 @@ class AllCategoriesPage extends StatelessWidget {
                         Text(
                           state.categories[index].title,
                           style: const TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w400),
+                            color: AppColors.whiteColor,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                          ),
                         )
                       ],
                     ),

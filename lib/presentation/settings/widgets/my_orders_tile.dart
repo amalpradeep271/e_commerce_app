@@ -25,7 +25,11 @@ class MyOrdersTile extends StatelessWidget {
           children: [
             Text(
               'My Orders',
-              style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
+              style: TextStyle(
+                fontWeight: FontWeight.w400,
+                fontSize: 16,
+                color: AppColors.whiteColor,
+              ),
             ),
             Icon(Icons.arrow_forward_ios_rounded)
           ],
