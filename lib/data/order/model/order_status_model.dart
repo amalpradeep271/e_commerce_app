@@ -15,11 +15,32 @@ class OrderStatusModel {
         done: map['done'] as bool,
         createdDate: map['createdDate'] as Timestamp);
   }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'title': title,
+      'done': done,
+      'createdDate': createdDate,
+    };
+  }
 }
 
 extension OrderStatusXModel on OrderStatusModel {
   OrderStatusEntity toEntity() {
     return OrderStatusEntity(
-        createdDate: createdDate, done: done, title: title);
+      createdDate: createdDate,
+      done: done,
+      title: title,
+    );
+  }
+}
+
+extension OrderStatusXEntity on OrderStatusEntity {
+  OrderStatusModel fromEntity() {
+    return OrderStatusModel(
+      title: title,
+      done: done,
+      createdDate: createdDate,
+    );
   }
 }

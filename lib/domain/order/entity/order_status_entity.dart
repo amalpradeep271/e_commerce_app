@@ -5,6 +5,9 @@ class OrderStatusEntity {
   final bool done;
   final Timestamp createdDate;
 
-  OrderStatusEntity(
-      {required this.title, required this.done, required this.createdDate});
+  OrderStatusEntity({
+    required this.title,
+    required this.done,
+    required this.createdDate,
+  });
 }

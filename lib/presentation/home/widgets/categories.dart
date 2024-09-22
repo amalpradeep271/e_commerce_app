@@ -4,6 +4,7 @@ import 'package:e_commerce_application/common/helper/images/images_display.dart'
 import 'package:e_commerce_application/common/helper/navigator/app_navigator.dart';
 import 'package:e_commerce_application/domain/category/entity/category_entity.dart';
 import 'package:e_commerce_application/presentation/All_categories/pages/all_categories_page.dart';
+import 'package:e_commerce_application/presentation/categories_products/pages/categories_products_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -71,35 +72,45 @@ class Categories extends StatelessWidget {
       child: ListView.separated(
           scrollDirection: Axis.horizontal,
           padding: EdgeInsets.symmetric(horizontal: 16.w),
-          itemBuilder: (contetx, index) {
-            return Column(
-              children: [
-                Container(
-                  height: 60.h,
-                  width: 60.w,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.white,
-                    image: DecorationImage(
-                      fit: BoxFit.fill,
-                      image: NetworkImage(
-                        ImageDisplayHelper.generateCategoryImageURL(
-                            categories[index].image),
+          itemBuilder: (context, index) {
+            return GestureDetector(
+              onTap: () {
+                AppNavigator.push(
+                  context,
+                  CategoryProductsPage(
+                    categoryEntity: categories[index],
+                  ),
+                );
+              },
+              child: Column(
+                children: [
+                  Container(
+                    height: 60.h,
+                    width: 60.w,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.white,
+                      image: DecorationImage(
+                        fit: BoxFit.fill,
+                        image: NetworkImage(
+                          ImageDisplayHelper.generateCategoryImageURL(
+                              categories[index].image),
+                        ),
                       ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: 10.h,
-                ),
-                Text(
-                  categories[index].title,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 14,
+                  SizedBox(
+                    height: 10.h,
                   ),
-                )
-              ],
+                  Text(
+                    categories[index].title,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 14,
+                    ),
+                  )
+                ],
+              ),
             );
           },
           separatorBuilder: (context, index) => SizedBox(width: 15.w),

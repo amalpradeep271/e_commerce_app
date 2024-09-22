@@ -1,12 +1,14 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:math';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_commerce_application/common/bloc/button/button_state.dart';
 import 'package:e_commerce_application/common/bloc/button/button_state_cubit.dart';
 import 'package:e_commerce_application/common/helper/cart/cart_helper.dart';
 import 'package:e_commerce_application/common/helper/navigator/app_navigator.dart';
 import 'package:e_commerce_application/common/widgets/app_button/basic_reactive_button.dart';
 import 'package:e_commerce_application/data/order/model/order_registration_req_model.dart';
+import 'package:e_commerce_application/domain/order/entity/order_status_entity.dart';
 import 'package:e_commerce_application/domain/order/usecase/order_registration_usecase.dart';
 import 'package:e_commerce_application/presentation/cart/pages/order_placed_page.dart';
 import 'package:flutter/material.dart';
@@ -79,6 +81,24 @@ class CheckOutPage extends StatelessWidget {
                       ),
                       onPressed: () {
                         var uuid = const Uuid();
+                        List<OrderStatusEntity> orderStatusList = [
+                          OrderStatusEntity(
+                              createdDate: Timestamp.fromDate(DateTime.now()),
+                              done: true,
+                              title: 'Order Placed'),
+                          OrderStatusEntity(
+                              createdDate: Timestamp.fromDate(DateTime.now()),
+                              done: false,
+                              title: 'Order Confirmed'),
+                          OrderStatusEntity(
+                              createdDate: Timestamp.fromDate(DateTime.now()),
+                              done: false,
+                              title: 'Shipped'),
+                          OrderStatusEntity(
+                              createdDate: Timestamp.fromDate(DateTime.now()),
+                              done: false,
+                              title: 'Delivered'),
+                        ];
                         context.read<ButtonStateCubit>().execute(
                               usecase: OrderRegistrationUseCase(),
                               params: OrderRegistrationReqModel(
@@ -89,6 +109,7 @@ class CheckOutPage extends StatelessWidget {
                                 totalPrice:
                                     CartHelper.calculateCartSubtotal(products),
                                 shippingAddress: _addressCon.text,
+                                orderStatus: orderStatusList,
                               ),
                             );
                       })

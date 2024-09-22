@@ -1,6 +1,8 @@
+import 'package:e_commerce_application/common/helper/mode/is_dark_mode.dart';
 import 'package:e_commerce_application/common/helper/navigator/app_navigator.dart';
 import 'package:e_commerce_application/common/widgets/app_button/basic_app_button.dart';
 import 'package:e_commerce_application/common/widgets/appbar/app_bar.dart';
+import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
 import 'package:e_commerce_application/data/auth/models/user_creation_req.dart';
 import 'package:e_commerce_application/presentation/auth/pages/gender_and_age_selection_page.dart';
 import 'package:e_commerce_application/presentation/auth/pages/signin_page.dart';
@@ -102,14 +104,25 @@ class SignupPage extends StatelessWidget {
     return RichText(
       text: TextSpan(
         children: [
-          const TextSpan(text: "Do you have an account? "),
+          TextSpan(
+              text: "Do you have an account? ",
+              style: TextStyle(
+                color: context.isDarkMode
+                    ? AppColors.whiteColor
+                    : AppColors.blackColor,
+              )),
           TextSpan(
             text: 'Signin',
             recognizer: TapGestureRecognizer()
               ..onTap = () {
                 AppNavigator.pushReplacement(context, SignInPage());
               },
-            style: const TextStyle(fontWeight: FontWeight.bold),
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: context.isDarkMode
+                  ? AppColors.whiteColor
+                  : AppColors.blackColor,
+            ),
           )
         ],
       ),

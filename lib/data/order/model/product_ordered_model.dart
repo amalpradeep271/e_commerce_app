@@ -64,33 +64,35 @@ class ProductOrderedModel {
 extension ProductOrderedXModel on ProductOrderedModel {
   ProductOrderedEntity toEntity() {
     return ProductOrderedEntity(
-        productId: productId,
-        productTitle: productTitle,
-        productQuantity: productQuantity,
-        productColor: productColor,
-        productSize: productSize,
-        productPrice: productPrice,
-        discountPrice: discountPrice,
-        totalPrice: totalPrice,
-        productImage: productImage,
-        createdDate: createdDate,
-        id: id);
+      productId: productId,
+      productTitle: productTitle,
+      productQuantity: productQuantity,
+      productColor: productColor,
+      productSize: productSize,
+      productPrice: productPrice,
+      discountPrice: discountPrice,
+      totalPrice: totalPrice,
+      productImage: productImage,
+      createdDate: createdDate,
+      id: id,
+    );
   }
 }
 
 extension ProductOrderedXEntity on ProductOrderedEntity {
   ProductOrderedModel fromEntity() {
     return ProductOrderedModel(
-        productId: productId,
-        productTitle: productTitle,
-        productQuantity: productQuantity,
-        productColor: productColor,
-        productSize: productSize,
-        productPrice: productPrice,
-        discountPrice: discountPrice,
-        totalPrice: totalPrice,
-        productImage: productImage,
-        createdDate: createdDate,
-        id: id);
+      productId: productId,
+      productTitle: productTitle,
+      productQuantity: productQuantity,
+      productColor: productColor,
+      productSize: productSize,
+      productPrice: productPrice,
+      discountPrice: discountPrice,
+      totalPrice: totalPrice,
+      productImage: productImage,
+      createdDate: createdDate,
+      id: id,
+    );
   }
 }

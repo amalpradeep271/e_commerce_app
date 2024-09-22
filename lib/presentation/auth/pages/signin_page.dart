@@ -1,8 +1,10 @@
 import 'package:e_commerce_application/common/bloc/button/button_state.dart';
 import 'package:e_commerce_application/common/bloc/button/button_state_cubit.dart';
+import 'package:e_commerce_application/common/helper/mode/is_dark_mode.dart';
 import 'package:e_commerce_application/common/helper/navigator/app_navigator.dart';
 import 'package:e_commerce_application/common/widgets/app_button/basic_reactive_button.dart';
 import 'package:e_commerce_application/common/widgets/appbar/app_bar.dart';
+import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
 import 'package:e_commerce_application/data/auth/models/user_signin_req.dart';
 import 'package:e_commerce_application/domain/auth/usecase/signin_usecase.dart';
 import 'package:e_commerce_application/presentation/auth/pages/forgot_password_page.dart';
@@ -114,10 +116,13 @@ class SignInPage extends StatelessWidget {
     return RichText(
       text: TextSpan(
         children: [
-          const TextSpan(
+          TextSpan(
             text: "Don't you have an account? ",
             style: TextStyle(
               fontSize: 14,
+              color: context.isDarkMode
+                  ? AppColors.whiteColor
+                  : AppColors.blackColor,
             ),
           ),
           TextSpan(
@@ -126,9 +131,12 @@ class SignInPage extends StatelessWidget {
               ..onTap = () {
                 AppNavigator.push(context, SignupPage());
               },
-            style: const TextStyle(
+            style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 14,
+              color: context.isDarkMode
+                  ? AppColors.whiteColor
+                  : AppColors.blackColor,
             ),
           )
         ],
@@ -140,10 +148,13 @@ class SignInPage extends StatelessWidget {
     return RichText(
       text: TextSpan(
         children: [
-          const TextSpan(
+          TextSpan(
             text: "Forgot password? ",
             style: TextStyle(
               fontSize: 14,
+              color: context.isDarkMode
+                  ? AppColors.whiteColor
+                  : AppColors.blackColor,
             ),
           ),
           TextSpan(
@@ -152,9 +163,12 @@ class SignInPage extends StatelessWidget {
               ..onTap = () {
                 AppNavigator.push(context, ForgotPasswordPage());
               },
-            style: const TextStyle(
+            style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 14,
+              color: context.isDarkMode
+                  ? AppColors.whiteColor
+                  : AppColors.blackColor,
             ),
           )
         ],
