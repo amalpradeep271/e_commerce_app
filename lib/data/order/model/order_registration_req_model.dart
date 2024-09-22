@@ -2,6 +2,7 @@ import 'package:e_commerce_application/data/order/model/product_ordered_model.da
 import 'package:e_commerce_application/domain/order/entity/product_ordered_entity.dart';
 
 class OrderRegistrationReqModel {
+  final String code;
   final List<ProductOrderedEntity> products;
   final String createdDate;
   final String shippingAddress;
@@ -9,6 +10,7 @@ class OrderRegistrationReqModel {
   final double totalPrice;
 
   OrderRegistrationReqModel({
+    required this.code,
     required this.products,
     required this.createdDate,
     required this.shippingAddress,
@@ -19,6 +21,7 @@ class OrderRegistrationReqModel {
 
     Map<String, dynamic> toMap() {
     return <String, dynamic>{
+      'code':code,
       'products': products.map((e) => e.fromEntity().toMap()).toList(),
       'createdDate': createdDate,
       'itemCount': itemCount,

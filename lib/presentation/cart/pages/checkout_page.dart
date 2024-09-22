@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:math';
+
 import 'package:e_commerce_application/common/bloc/button/button_state.dart';
 import 'package:e_commerce_application/common/bloc/button/button_state_cubit.dart';
 import 'package:e_commerce_application/common/helper/cart/cart_helper.dart';
@@ -12,6 +14,7 @@ import 'package:e_commerce_application/common/widgets/appbar/app_bar.dart';
 import 'package:e_commerce_application/domain/order/entity/product_ordered_entity.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:uuid/uuid.dart';
 
 class CheckOutPage extends StatelessWidget {
   final List<ProductOrderedEntity> products;
@@ -75,9 +78,11 @@ class CheckOutPage extends StatelessWidget {
                         ),
                       ),
                       onPressed: () {
+                        var uuid = const Uuid();
                         context.read<ButtonStateCubit>().execute(
                               usecase: OrderRegistrationUseCase(),
                               params: OrderRegistrationReqModel(
+                                code: '#${uuid.v4().substring(0, 7)}',
                                 products: products,
                                 createdDate: DateTime.now().toString(),
                                 itemCount: products.length,
