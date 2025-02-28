@@ -94,7 +94,8 @@ class Categories extends StatelessWidget {
                         fit: BoxFit.fill,
                         image: NetworkImage(
                           ImageDisplayHelper.generateCategoryImageURL(
-                              categories[index].image),
+                            categories[index].image,
+                          ),
                         ),
                       ),
                     ),
