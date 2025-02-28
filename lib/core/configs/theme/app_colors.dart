@@ -40,7 +40,7 @@ class AppColors {
   static Color whiteGrey = const Color(0xFFAFA8A8);
   static const Color lightBlue = Color(0xFF407DF2);
   static const Color pink = Color.fromARGB(255, 253, 223, 237);
-  static  Color appDividerColor=Colors.grey.shade300;
+  static Color appDividerColor = Colors.grey.shade300;
 
   static const LinearGradient categoryLinercolor = LinearGradient(
     colors: [
@@ -57,5 +57,10 @@ class AppColors {
     ],
     begin: Alignment.centerLeft,
     end: Alignment.centerRight,
+  );
+  static const LinearGradient drawerHeaderColor = LinearGradient(
+    colors: [Color(0xFFEBAA4B), Color(0xFFDF7E38)],
+    begin: Alignment(0.70, -0.72),
+    end: Alignment(-0.7, 0.72),
   );
 }

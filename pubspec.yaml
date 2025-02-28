@@ -33,6 +33,7 @@ dependencies:
   dartz: ^0.10.1
   firebase_auth: null
   firebase_core: null
+  firebase_storage: ^12.4.4
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.6
@@ -40,6 +41,7 @@ dependencies:
   flutter_svg: null
   get_it: null
   google_fonts: ^6.2.1
+  image_picker: ^1.1.2
   uuid: ^4.5.0
 
 dev_dependencies:
@@ -72,13 +74,9 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: OpenSans_Condensed
+    - family: Khadi
       fonts:
-        - asset: assets/fonts/OpenSans_Condensed-Regular.ttf
-        - asset: assets/fonts/OpenSans_Condensed-Italic.ttf
-          style: italic
-        - asset: assets/fonts/OpenSans_Condensed-Bold.ttf
-          weight: 900
+        - asset: assets\fonts\Khadi.ttf
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

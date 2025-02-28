@@ -1,10 +1,8 @@
-import 'package:e_commerce_application/presentation/home/widgets/categories.dart';
-import 'package:e_commerce_application/presentation/home/widgets/header.dart';
-import 'package:e_commerce_application/presentation/home/widgets/new_in.dart';
-import 'package:e_commerce_application/presentation/home/widgets/search_field.dart';
-import 'package:e_commerce_application/presentation/home/widgets/top_selling.dart';
+import 'package:e_commerce_application/common/widgets/app_drawer/app_drawer.dart';
+import 'package:e_commerce_application/common/widgets/appbar/app_bar.dart';
+import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
+import 'package:e_commerce_application/core/configs/theme/app_icons.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -12,11 +10,21 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: CustomAppDrawer(),
+      appBar: CustomAppBar(
+        onTap: () async {
+          // await controller.getSearchData();
+        },
+        searchBox: true,
+        backgroundColor: AppColors.transparent,
+        actionIconData2: AppIcons.cart,
+        // onAction2Pressed: () => Get.toNamed(AppRoutes.cartscreen),
+        // itemcount: controller.itemcount.value,
+        // isLoading: controller.isLoading.value,
+      ),
       body: SingleChildScrollView(
           child: Column(
         children: [
-          // const Header(),
-          // SizedBox(height: 24.h),
           // const SearchField(),
           // SizedBox(height: 24.h),
           // const Categories(),
