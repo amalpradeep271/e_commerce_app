@@ -1,6 +1,7 @@
 import 'package:e_commerce_application/common/bloc/button/button_state.dart';
 import 'package:e_commerce_application/common/bloc/button/button_state_cubit.dart';
 import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
+import 'package:e_commerce_application/core/configs/theme/app_text_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -51,8 +52,7 @@ class BasicReactiveButton extends StatelessWidget {
       child: content ??
           Text(
             title,
-            style: const TextStyle(
-                color: AppColors.whiteColor, fontWeight: FontWeight.w400),
+            style: AppTextStyles.base.whiteColor.s18.w700,
           ),
     );
   }

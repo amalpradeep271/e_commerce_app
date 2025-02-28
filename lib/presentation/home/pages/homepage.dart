@@ -15,15 +15,15 @@ class HomePage extends StatelessWidget {
       body: SingleChildScrollView(
           child: Column(
         children: [
-          const Header(),
-          SizedBox(height: 24.h),
-          const SearchField(),
-          SizedBox(height: 24.h),
-          const Categories(),
-          SizedBox(height: 24.h),
-          const TopSelling(),
-          SizedBox(height: 24.h),
-          const NewIn(),
+          // const Header(),
+          // SizedBox(height: 24.h),
+          // const SearchField(),
+          // SizedBox(height: 24.h),
+          // const Categories(),
+          // SizedBox(height: 24.h),
+          // const TopSelling(),
+          // SizedBox(height: 24.h),
+          // const NewIn(),
         ],
       )),
     );

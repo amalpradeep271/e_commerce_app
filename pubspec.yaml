@@ -39,6 +39,7 @@ dependencies:
   flutter_screenutil: ^5.9.3
   flutter_svg: null
   get_it: null
+  google_fonts: ^6.2.1
   uuid: ^4.5.0
 
 dev_dependencies:

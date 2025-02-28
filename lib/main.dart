@@ -28,19 +28,12 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       child: MultiBlocProvider(
-        providers: [
-          BlocProvider(create: (_) => ThemeCubit()),
-          BlocProvider(create: (_) => SplashCubit()..appStarted())
-        ],
-        child: BlocBuilder<ThemeCubit, ThemeMode>(
-          builder: (context, mode) => MaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: 'e commerce app',
-            theme: AppTheme.lightTheme,
-            darkTheme: AppTheme.darkTheme,
-            themeMode: mode,
-            home: const SplashPage(),
-          ),
+        providers: [BlocProvider(create: (_) => SplashCubit()..appStarted())],
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Khadi Irinjalakuda',
+          theme: AppTheme.lightTheme,
+          home: const SplashPage(),
         ),
       ),
     );

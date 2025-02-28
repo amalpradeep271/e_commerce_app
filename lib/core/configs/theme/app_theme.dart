@@ -4,14 +4,14 @@ import 'app_colors.dart';
 
 class AppTheme {
   static final lightTheme = ThemeData(
-    primaryColor: AppColors.primary,
-    scaffoldBackgroundColor: AppColors.lightBackground,
+    primaryColor: AppColors.kPrimaryColor,
+    scaffoldBackgroundColor: AppColors.white,
     brightness: Brightness.light,
     fontFamily: 'OpenSans_Condensed',
     inputDecorationTheme: InputDecorationTheme(
       hintStyle: const TextStyle(
         fontWeight: FontWeight.w500,
-        color: AppColors.hintTextColor,
+        color: AppColors.grey,
       ),
       filled: true,
       fillColor: AppColors.transparent,
@@ -19,61 +19,21 @@ class AppTheme {
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(25),
         borderSide: const BorderSide(
-          color: AppColors.blackColor,
+          color: AppColors.black,
           width: 0.2,
         ),
       ),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(25),
         borderSide: const BorderSide(
-          color: AppColors.blackColor,
+          color: AppColors.black,
           width: 0.2,
         ),
       ),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        backgroundColor: AppColors.primary,
-        elevation: 0,
-        textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(100),
-        ),
-      ),
-    ),
-  );
-
-  static final darkTheme = ThemeData(
-    primaryColor: AppColors.primary,
-    scaffoldBackgroundColor: AppColors.background,
-    brightness: Brightness.dark,
-    fontFamily: 'OpenSans_Condensed',
-    inputDecorationTheme: InputDecorationTheme(
-      hintStyle: const TextStyle(
-        fontWeight: FontWeight.w500,
-        color: AppColors.whiteColor,
-      ),
-      filled: true,
-      fillColor: AppColors.transparent,
-      contentPadding: const EdgeInsets.all(20),
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(25),
-        borderSide: const BorderSide(
-          color: AppColors.whiteColor,
-          width: 0.2,
-        ),
-      ),
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(25),
-        borderSide: const BorderSide(
-          color: AppColors.whiteColor,
-          width: 0.2,
-        ),
-      ),
-    ),
-    elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: AppColors.primary,
+        backgroundColor: AppColors.kPrimaryColor,
         elevation: 0,
         textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
         shape: RoundedRectangleBorder(
@@ -84,19 +44,19 @@ class AppTheme {
   );
 
   static final appTheme = ThemeData(
-    primaryColor: AppColors.primary,
-    scaffoldBackgroundColor: AppColors.background,
+    primaryColor: AppColors.kPrimaryColor,
+    scaffoldBackgroundColor: AppColors.white,
     brightness: Brightness.dark,
     fontFamily: 'OpenSans_Condensed',
     snackBarTheme: const SnackBarThemeData(
-      backgroundColor: AppColors.background,
-      contentTextStyle: TextStyle(color: AppColors.whiteColor),
+      backgroundColor: AppColors.kPrimaryColor,
+      contentTextStyle: TextStyle(color: AppColors.white),
     ),
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
-      fillColor: AppColors.secondBackground,
+      fillColor: AppColors.whiteGrey,
       hintStyle: const TextStyle(
-        color: AppColors.greyColor,
+        color: AppColors.grey,
         fontWeight: FontWeight.w400,
       ),
       contentPadding: const EdgeInsets.all(16),
@@ -107,7 +67,7 @@ class AppTheme {
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        backgroundColor: AppColors.primary,
+        backgroundColor: AppColors.kPrimaryColor,
         elevation: 0,
         textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
         shape: RoundedRectangleBorder(
