@@ -39,10 +39,10 @@ var arrayOfListTiles = [
     // Navigator.pop(Get.context!);
     // Get.toNamed(AppRoutes.privacypolicy);
   }),
-  DrawerTileData(Icons.policy, "Disclaimer", () {
-    // Navigator.pop(Get.context!);
-    // Get.toNamed(AppRoutes.disclaimer);
-  }),
+  // DrawerTileData(Icons.policy, "Disclaimer", () {
+  //   // Navigator.pop( BuildContext context);
+  //   // Get.toNamed(AppRoutes.disclaimer);
+  // }),
 ];
 
 class CustomAppDrawer extends StatelessWidget {
