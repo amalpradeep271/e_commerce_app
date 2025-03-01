@@ -22,7 +22,7 @@ class HomePage extends StatelessWidget {
         // itemcount: controller.itemcount.value,
         // isLoading: controller.isLoading.value,
       ),
-      body: SingleChildScrollView(
+      body: const SingleChildScrollView(
           child: Column(
         children: [
           // const SearchField(),

@@ -1,6 +1,5 @@
 import 'package:e_commerce_application/core/configs/theme/app_theme.dart';
 import 'package:e_commerce_application/firebase_options.dart';
-import 'package:e_commerce_application/presentation/settings/bloc/theme_cubit.dart';
 import 'package:e_commerce_application/presentation/spalsh/bloc/splash_cubit.dart';
 import 'package:e_commerce_application/presentation/spalsh/pages/splash_page.dart';
 import 'package:e_commerce_application/service_locator.dart';

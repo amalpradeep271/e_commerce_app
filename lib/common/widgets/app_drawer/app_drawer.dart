@@ -11,9 +11,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'dart:math' as math;
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -46,7 +43,7 @@ var arrayOfListTiles = [
 ];
 
 class CustomAppDrawer extends StatelessWidget {
-  CustomAppDrawer({
+  const CustomAppDrawer({
     super.key,
   });
 
