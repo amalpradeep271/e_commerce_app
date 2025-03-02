@@ -12,6 +12,7 @@
 
 import 'package:e_commerce_application/common/bloc/categories/categories_display_cubit.dart';
 import 'package:e_commerce_application/common/bloc/categories/categories_display_state.dart';
+import 'package:e_commerce_application/common/helper/images/images_display.dart';
 import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
 import 'package:e_commerce_application/core/configs/theme/app_text_theme.dart';
 import 'package:e_commerce_application/domain/category/entity/category_entity.dart';
@@ -77,7 +78,7 @@ class Categories extends StatelessWidget {
           itemBuilder: (context, index) {
             return _categoryButton(
               onTap: () {},
-              buttonImage: "",
+              buttonImage: categories[index].image,
               butttontitle: categories[index].title,
             );
           },
@@ -103,15 +104,15 @@ class Categories extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 5),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               SvgPicture.network(
-                buttonImage,
+                ImageDisplayHelper.generateCategoryImageURL(buttonImage),
                 width: 25,
                 height: 25,
               ),
               SizedBox(
-                width: 80,
+                // width: 80,
                 child: Text(
                   butttontitle,
                   overflow: TextOverflow.ellipsis,
