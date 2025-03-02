@@ -44,7 +44,7 @@ class SigninPage extends StatelessWidget {
                 ScaffoldMessenger.of(context).showSnackBar(snackbar);
               }
               if (state is ButtonSuccessState) {
-                AppNavigator.pushAndRemove(context, const HomePage());
+                AppNavigator.pushAndRemove(context, HomePage());
               }
             },
             child: loginbody(context),

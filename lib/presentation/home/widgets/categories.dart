@@ -10,112 +10,118 @@
 // import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-// class Categories extends StatelessWidget {
-//   const Categories({super.key});
+import 'package:e_commerce_application/common/bloc/categories/categories_display_cubit.dart';
+import 'package:e_commerce_application/common/bloc/categories/categories_display_state.dart';
+import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
+import 'package:e_commerce_application/core/configs/theme/app_text_theme.dart';
+import 'package:e_commerce_application/domain/category/entity/category_entity.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return BlocProvider(
-//       create: (context) => CategoriesDisplayCubit()..displayCategories(),
-//       child: BlocBuilder<CategoriesDisplayCubit, CategoriesDisplayState>(
-//         builder: (context, state) {
-//           if (state is CategoriesLoading) {
-//             return const CupertinoActivityIndicator();
-//           }
-//           if (state is CategoriesLoaded) {
-//             return Column(
-//               children: [
-//                 _seaAll(context),
-//                 SizedBox(
-//                   height: 20.h,
-//                 ),
-//                 _categories(state.categories)
-//               ],
-//             );
-//           }
-//           return Container();
-//         },
-//       ),
-//     );
-//   }
+class Categories extends StatelessWidget {
+  const Categories({super.key});
 
-//   Widget _seaAll(BuildContext context) {
-//     return Padding(
-//       padding: EdgeInsets.symmetric(horizontal: 16.w),
-//       child: Row(
-//         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//         children: [
-//           const Text(
-//             'Categories',
-//             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-//           ),
-//           GestureDetector(
-//             onTap: () {
-//               AppNavigator.push(
-//                 context,
-//                 const AllCategoriesPage(),
-//               );
-//             },
-//             child: const Text(
-//               'See All',
-//               style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
-//             ),
-//           )
-//         ],
-//       ),
-//     );
-//   }
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _title(context),
+        SizedBox(
+          height: 20.h,
+        ),
+        BlocProvider(
+          create: (context) => CategoriesDisplayCubit()..displayCategories(),
+          child: BlocBuilder<CategoriesDisplayCubit, CategoriesDisplayState>(
+            builder: (context, state) {
+              if (state is CategoriesLoading) {
+                return const CupertinoActivityIndicator();
+              }
+              if (state is CategoriesLoaded) {
+                return _categories(state.categories);
+              }
+              return Container();
+            },
+          ),
+        )
+      ],
+    );
+  }
 
-//   Widget _categories(List<CategoryEntity> categories) {
-//     return SizedBox(
-//       height: 100.h,
-//       child: ListView.separated(
-//           scrollDirection: Axis.horizontal,
-//           padding: EdgeInsets.symmetric(horizontal: 16.w),
-//           itemBuilder: (context, index) {
-//             return GestureDetector(
-//               onTap: () {
-//                 AppNavigator.push(
-//                   context,
-//                   CategoryProductsPage(
-//                     categoryEntity: categories[index],
-//                   ),
-//                 );
-//               },
-//               child: Column(
-//                 children: [
-//                   Container(
-//                     height: 60.h,
-//                     width: 60.w,
-//                     decoration: BoxDecoration(
-//                       shape: BoxShape.circle,
-//                       color: Colors.white,
-//                       image: DecorationImage(
-//                         fit: BoxFit.fill,
-//                         image: NetworkImage(
-//                           ImageDisplayHelper.generateCategoryImageURL(
-//                             categories[index].image,
-//                           ),
-//                         ),
-//                       ),
-//                     ),
-//                   ),
-//                   SizedBox(
-//                     height: 10.h,
-//                   ),
-//                   Text(
-//                     categories[index].title,
-//                     style: const TextStyle(
-//                       fontWeight: FontWeight.w400,
-//                       fontSize: 14,
-//                     ),
-//                   )
-//                 ],
-//               ),
-//             );
-//           },
-//           separatorBuilder: (context, index) => SizedBox(width: 15.w),
-//           itemCount: categories.length),
-//     );
-//   }
-// }
+  Widget _title(BuildContext context) {
+    return Column(
+      children: [
+        SizedBox(
+          height: 14.h,
+        ),
+        Text(
+          "Categories",
+          style: AppTextStyles.base.w500.s16,
+        ),
+        // SizedBox(
+        //   height: 14.h,
+        // ),
+      ],
+    );
+  }
+
+  Widget _categories(List<CategoryEntity> categories) {
+    return SizedBox(
+      height: 40.h,
+      child: ListView.separated(
+          scrollDirection: Axis.horizontal,
+          // padding: EdgeInsets.symmetric(horizontal: 16.w),
+          itemBuilder: (context, index) {
+            return _categoryButton(
+              onTap: () {},
+              buttonImage: "",
+              butttontitle: categories[index].title,
+            );
+          },
+          separatorBuilder: (context, index) => SizedBox(width: 15.w),
+          itemCount: categories.length),
+    );
+  }
+
+  _categoryButton({
+    required VoidCallback onTap,
+    required String buttonImage,
+    required String butttontitle,
+  }) {
+    return InkWell(
+      onTap: () {
+        onTap();
+      },
+      child: Container(
+        width: 120,
+        decoration: BoxDecoration(
+            gradient: AppColors.categoryLinercolor,
+            borderRadius: BorderRadius.circular(5)),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 5),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SvgPicture.network(
+                buttonImage,
+                width: 25,
+                height: 25,
+              ),
+              SizedBox(
+                width: 80,
+                child: Text(
+                  butttontitle,
+                  overflow: TextOverflow.ellipsis,
+                  style: AppTextStyles.base.w400.s15,
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

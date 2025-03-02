@@ -5,6 +5,10 @@ class ImageDisplayHelper {
     return AppUrl.categoryImage + title + AppUrl.alt;
   }
 
+   static String generateBannerImageURL(String title) {
+    return AppUrl.bannerImage + title + AppUrl.alt;
+  }
+
   static String generateProductImageURL(String title) {
     return AppUrl.productImage + title + AppUrl.alt;
   }

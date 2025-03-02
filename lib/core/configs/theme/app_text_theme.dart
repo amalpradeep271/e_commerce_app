@@ -101,6 +101,11 @@ extension AppFontSize on TextStyle {
         fontSize: 14,
       );
 
+  /// fontSize: 15
+  TextStyle get s15 => copyWith(
+        fontSize: 15,
+      );
+
   /// fontSize: 16
   TextStyle get s16 => copyWith(
         fontSize: 16,

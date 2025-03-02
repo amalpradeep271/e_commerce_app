@@ -2,6 +2,8 @@ import 'package:e_commerce_application/data/auth/repository/auth_repository_impl
 import 'package:e_commerce_application/data/auth/source/auth_firebase_service.dart';
 import 'package:e_commerce_application/data/category/repository/category_repository_impl.dart';
 import 'package:e_commerce_application/data/category/source/category_firebase_service.dart';
+import 'package:e_commerce_application/data/home/repository/banner_repository_impl.dart';
+import 'package:e_commerce_application/data/home/source/banner_firebase_service.dart';
 import 'package:e_commerce_application/data/order/repository/order_repository_impl.dart';
 import 'package:e_commerce_application/data/order/source/order_firebase_service.dart';
 import 'package:e_commerce_application/data/product/repository/product_repository_impl.dart';
@@ -15,6 +17,8 @@ import 'package:e_commerce_application/domain/auth/usecase/signin_usecase.dart';
 import 'package:e_commerce_application/domain/auth/usecase/signup_usecase.dart';
 import 'package:e_commerce_application/domain/category/repository/category_repository.dart';
 import 'package:e_commerce_application/domain/category/usecase/get_category_usecase.dart';
+import 'package:e_commerce_application/domain/home/repository/banner_repository.dart';
+import 'package:e_commerce_application/domain/home/usecase/get_banners_usecase.dart';
 import 'package:e_commerce_application/domain/order/repository/order_repository.dart';
 import 'package:e_commerce_application/domain/order/usecase/add_to_cart_usecase.dart';
 import 'package:e_commerce_application/domain/order/usecase/get_cart_products_usecase.dart';
@@ -37,6 +41,7 @@ Future<void> initializeDependencies() async {
 //Services
 
   sl.registerSingleton<AuthFirebaseService>(AuthFirebaseServiceImpl());
+  sl.registerSingleton<BannerFirebaseService>(BannerFirebaseServiceImpl());
   sl.registerSingleton<CategoryFireBaseService>(CategoryFireBaseServiceImpl());
   sl.registerSingleton<ProductFirebaseService>(ProductFirebaseServiceImpl());
   sl.registerSingleton<OrderFirebaseService>(OrderFirebaseServiceImpl());
@@ -44,6 +49,7 @@ Future<void> initializeDependencies() async {
 //Repositories
 
   sl.registerSingleton<AuthRepository>(AuthRepositoryImpl());
+  sl.registerSingleton<BannerRepository>(BannerRepositoryImpl());
   sl.registerSingleton<CategoryRepository>(CategoryRepositoryImpl());
   sl.registerSingleton<ProductRepository>(ProductRepositoryImpl());
   sl.registerSingleton<OrderRepository>(OrderRepositoryImpl());
@@ -56,6 +62,7 @@ Future<void> initializeDependencies() async {
       SendPasswordResetEmailUseCase());
   sl.registerSingleton<IsLoggedInUseCase>(IsLoggedInUseCase());
   sl.registerSingleton<GetUserUseCase>(GetUserUseCase());
+  sl.registerSingleton<GetBannersUsecase>(GetBannersUsecase());
   sl.registerSingleton<GetCategoryUseCase>(GetCategoryUseCase());
   sl.registerSingleton<GetTopSellingUseCase>(GetTopSellingUseCase());
   sl.registerSingleton<GetNewInUseCase>(GetNewInUseCase());
