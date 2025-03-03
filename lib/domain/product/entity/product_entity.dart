@@ -13,8 +13,14 @@ class ProductEntity {
   final List<String> sizes;
   final String title;
   final num salesNumber;
+  final String description;
+  final String dimensions;
+  final String manufactureInformation;
 
   ProductEntity({
+    required this.description,
+    required this.dimensions,
+    required this.manufactureInformation,
     required this.categoryId,
     required this.color,
     required this.createdDate,

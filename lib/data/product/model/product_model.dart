@@ -14,8 +14,14 @@ class ProductModel {
   final List<String> sizes;
   final num salesNumber;
   final String title;
+  final String description;
+  final String dimensions;
+  final String manufactureInformation;
 
   ProductModel({
+    required this.description,
+    required this.dimensions,
+    required this.manufactureInformation,
     required this.categoryId,
     required this.color,
     required this.createdDate,
@@ -46,6 +52,9 @@ class ProductModel {
       sizes: List<String>.from(map['sizes'].map((e) => e.toString())),
       salesNumber: map['salesNumber'] as num,
       title: map['title'] as String,
+      description: map['description'] as String,
+      dimensions: map['dimensions'] as String,
+      manufactureInformation: map['manufacture information'] as String,
     );
   }
 
@@ -62,6 +71,9 @@ class ProductModel {
       'productId': productId,
       'salesNumber': salesNumber,
       'title': title,
+      'description': description,
+      'dimensions': dimensions,
+      'manufacture information': manufactureInformation,
     };
   }
 }
@@ -69,6 +81,9 @@ class ProductModel {
 extension ProductModelX on ProductModel {
   ProductEntity toEntity() {
     return ProductEntity(
+      description: description,
+      dimensions: dimensions,
+      manufactureInformation: manufactureInformation,
       categoryId: categoryId,
       color: color.map((e) => e.toEntity()).toList(),
       createdDate: createdDate,
@@ -87,16 +102,20 @@ extension ProductModelX on ProductModel {
 extension ProductXEntity on ProductEntity {
   ProductModel fromEntity() {
     return ProductModel(
-        categoryId: categoryId,
-        color: color.map((e) => e.fromEntity()).toList(),
-        createdDate: createdDate,
-        discountPrice: discountPrice,
-        gender: gender,
-        images: images,
-        price: price,
-        sizes: sizes,
-        productId: productId,
-        salesNumber: salesNumber,
-        title: title);
+      description: description,
+      dimensions: dimensions,
+      manufactureInformation: manufactureInformation,
+      categoryId: categoryId,
+      color: color.map((e) => e.fromEntity()).toList(),
+      createdDate: createdDate,
+      discountPrice: discountPrice,
+      gender: gender,
+      images: images,
+      price: price,
+      sizes: sizes,
+      productId: productId,
+      salesNumber: salesNumber,
+      title: title,
+    );
   }
 }
