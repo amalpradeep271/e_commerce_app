@@ -1,10 +1,11 @@
-// import 'package:e_commerce_application/common/helper/images/images_display.dart';
-// import 'package:e_commerce_application/common/helper/navigator/app_navigator.dart';
-// import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
-// import 'package:e_commerce_application/domain/product/entity/product_entity.dart';
-// import 'package:e_commerce_application/presentation/product_detail/pages/product_details_page.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:e_commerce_application/common/helper/images/images_display.dart';
+import 'package:e_commerce_application/common/helper/navigator/app_navigator.dart';
+import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
+import 'package:e_commerce_application/core/configs/theme/app_text_theme.dart';
+import 'package:e_commerce_application/domain/product/entity/product_entity.dart';
+import 'package:e_commerce_application/presentation/product_detail/pages/product_details_page.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 // class ProductCard extends StatelessWidget {
 //   final ProductEntity productEntity;
@@ -14,12 +15,12 @@
 //   Widget build(BuildContext context) {
 //     return GestureDetector(
 //       onTap: () {
-//         AppNavigator.push(
-//           context,
-//           ProductDetailsPage(
-//             productEntity: productEntity,
-//           ),
-//         );
+//         // AppNavigator.push(
+//         //   context,
+//         //   ProductDetailsPage(
+//         //     productEntity: productEntity,
+//         //   ),
+//         // );
 //       },
 //       child: Container(
 //         width: 180,
@@ -103,3 +104,101 @@
 //     );
 //   }
 // }
+
+class ProductCard extends StatelessWidget {
+  const ProductCard({
+    super.key,
+    required this.productEntity,
+    // required this.iswishlisted,
+    // this.onTap,
+    // required this.deletewishlist,
+    // required this.addtowishlist,
+  });
+  final ProductEntity productEntity;
+
+  // final bool iswishlisted;
+  // final void Function()? onTap;
+  // final void Function()? deletewishlist;
+  // final void Function()? addtowishlist;
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        GestureDetector(
+            onTap: () {},
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  height: 190.h,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5.r),
+                    image: DecorationImage(
+                      image: NetworkImage(
+                        ImageDisplayHelper.generateProductImageURL(
+                          productEntity.images[0],
+                        ),
+                      ),
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  productEntity.title,
+                  overflow: TextOverflow.ellipsis,
+                  style: AppTextStyles.base.w500.s15,
+                ),
+                Text(
+                  productEntity.discountPrice == 0
+                      ? "₹ ${productEntity.price}"
+                      : "₹ ${productEntity.discountPrice}",
+                  style: AppTextStyles.base.w700.s15,
+                )
+              ],
+            )),
+        Align(
+          alignment: Alignment.topRight,
+          child: IconButton(
+              onPressed: () {
+                // if (iswishlisted) {
+                //   deletewishlist();
+                // } else {
+                //   addtowishlist();
+                // }
+                // Get.dialog(AlertDialog(
+                //   title: const Text("Wishlist"),
+                //   content: Text(iswishlisted
+                //       ? 'Do you want to remove this item from your wishlist?'
+                //       : 'Do you want to add this item to your wishlist?'),
+                //   actions: [
+                //     TextButton(
+                //         onPressed: () {
+                //           if (iswishlisted) {
+                //             deletewishlist!();
+                //           } else {
+                //             addtowishlist!();
+                //           }
+                //           Get.back();
+                //         },
+                //         child: Text(iswishlisted ? 'Remove' : 'Add')),
+                //     TextButton(
+                //         onPressed: () {
+                //           // Get.back();
+                //         },
+                //         child: const Text("Cancel"))
+                //   ],
+                // ));
+              },
+              icon: const Icon(
+                Icons.favorite,
+                color: AppColors.grey,
+              )),
+        )
+      ],
+    );
+  }
+}

@@ -8,6 +8,7 @@ import 'package:e_commerce_application/presentation/home/bloc/banners_display_cu
 import 'package:e_commerce_application/presentation/home/bloc/banners_display_state.dart';
 import 'package:e_commerce_application/presentation/home/widgets/banner_carousel_slider.dart';
 import 'package:e_commerce_application/presentation/home/widgets/categories.dart';
+import 'package:e_commerce_application/presentation/home/widgets/top_selling.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -87,8 +88,8 @@ class HomePage extends StatelessWidget {
             ),
 
             const Categories(),
-            // SizedBox(height: 24.h),
-            // const TopSelling(),
+            SizedBox(height: 24.h),
+            const TopSelling(),
             // SizedBox(height: 24.h),
             // const NewIn(),
           ],
