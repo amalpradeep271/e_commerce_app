@@ -3,11 +3,11 @@ import 'package:e_commerce_application/common/widgets/app_drawer/app_drawer.dart
 import 'package:e_commerce_application/common/widgets/appbar/app_bar.dart';
 import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
 import 'package:e_commerce_application/core/configs/theme/app_icons.dart';
-import 'package:e_commerce_application/core/configs/theme/app_text_theme.dart';
 import 'package:e_commerce_application/presentation/home/bloc/banners_display_cubit.dart';
 import 'package:e_commerce_application/presentation/home/bloc/banners_display_state.dart';
 import 'package:e_commerce_application/presentation/home/widgets/banner_carousel_slider.dart';
 import 'package:e_commerce_application/presentation/home/widgets/categories.dart';
+import 'package:e_commerce_application/presentation/home/widgets/new_in.dart';
 import 'package:e_commerce_application/presentation/home/widgets/top_selling.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -86,12 +86,11 @@ class HomePage extends StatelessWidget {
                 },
               ),
             ),
-
             const Categories(),
             SizedBox(height: 24.h),
             const TopSelling(),
-            // SizedBox(height: 24.h),
-            // const NewIn(),
+            SizedBox(height: 24.h),
+            const NewIn(),
           ],
         ),
       )),

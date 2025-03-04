@@ -1,9 +1,11 @@
 import 'package:e_commerce_application/common/bloc/product/product_display_cubit.dart';
 import 'package:e_commerce_application/common/bloc/product/product_display_state.dart';
+import 'package:e_commerce_application/common/helper/navigator/app_navigator.dart';
 import 'package:e_commerce_application/common/widgets/product/product_card.dart';
 import 'package:e_commerce_application/common/widgets/product/product_heading.dart';
 import 'package:e_commerce_application/domain/product/entity/product_entity.dart';
 import 'package:e_commerce_application/domain/product/usecase/get_topselling_usecase.dart';
+import 'package:e_commerce_application/presentation/all_products/pages/all_products_page.dart';
 import 'package:e_commerce_application/service_locator.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -19,7 +21,7 @@ class TopSelling extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        _topSelling(),
+        _topSelling(context),
         SizedBox(
           height: 20.h,
         ),
@@ -30,7 +32,7 @@ class TopSelling extends StatelessWidget {
           child: BlocBuilder<ProductsDisplayCubit, ProductsDisplayState>(
             builder: (context, state) {
               if (state is ProductsLoading) {
-                return const CupertinoActivityIndicator();
+                return const Center(child: CupertinoActivityIndicator());
               }
               if (state is ProductsLoaded) {
                 return _products(state.products);
@@ -43,10 +45,15 @@ class TopSelling extends StatelessWidget {
     );
   }
 
-  Widget _topSelling() {
+  Widget _topSelling(context) {
     return ProductHeading(
       productHeading: "Top Selling",
-      allProductClick: () {},
+      allProductClick: () {
+        AppNavigator.push(
+          context,
+          const AllProductsPage(),
+        );
+      },
     );
   }
 
@@ -64,7 +71,7 @@ class TopSelling extends StatelessWidget {
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (_, index) {
-             return ProductCard(
+            return ProductCard(
               productEntity: products[index],
             );
           },
