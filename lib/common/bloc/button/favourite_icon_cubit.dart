@@ -10,15 +10,20 @@ class FavoriteIconCubit extends Cubit<bool> {
 
   void isFavorite(String productId) async {
     var result = await sl<IsFavoriteUseCase>().call(params: productId);
-    emit(result);
+    if (!isClosed) emit(result);
   }
 
   void onTap(ProductEntity product) async {
     var result =
         await sl<AddOrRemoveFavoriteProductUseCase>().call(params: product);
     result.fold((error) {}, (data) {
-      emit(data);
-      sl<ProductsDisplayCubit>().displayProducts(); // Refresh wishlist
+      if (!isClosed) emit(data);
+      print("Favorite button tapped. Updating wishlist...");
+
+      if (!isClosed) {
+        sl<ProductsDisplayCubit>().displayProducts(
+            showLoading: false); // Ensure cubit is still active
+      }
     });
   }
 }

@@ -2,9 +2,7 @@ import 'package:e_commerce_application/common/bloc/product/product_display_cubit
 import 'package:e_commerce_application/common/bloc/product/product_display_state.dart';
 import 'package:e_commerce_application/common/widgets/appbar/app_bar.dart';
 import 'package:e_commerce_application/domain/product/entity/product_entity.dart';
-import 'package:e_commerce_application/domain/product/usecase/get_favourite_products_usecase.dart';
 import 'package:e_commerce_application/presentation/wishlist/widgets/wishlist_card.dart';
-import 'package:e_commerce_application/service_locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,21 +15,7 @@ class WishlistPage extends StatelessWidget {
       appBar: CustomAppBar(
         title: 'My Favorites',
       ),
-      body: wishlistBody(),
-    );
-  }
-
-  Widget wishlistBody() {
-    return BlocProvider(
-      create: (context) =>
-          ProductsDisplayCubit(useCase: sl<GetFavortiesProductsUseCase>())
-            ..displayProducts(),
-      child: BlocBuilder<ProductsDisplayCubit, ProductsDisplayState>(
-        // listener: (context, state) {
-        //   if (state is ProductsLoaded) {
-        //     context.read<ProductsDisplayCubit>().displayProducts();
-        //   }
-        // },
+      body: BlocBuilder<ProductsDisplayCubit, ProductsDisplayState>(
         builder: (context, state) {
           if (state is ProductsLoading) {
             return const Center(

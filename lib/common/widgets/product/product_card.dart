@@ -71,8 +71,11 @@ class ProductCard extends StatelessWidget {
                 ],
               )),
           Align(
-              alignment: Alignment.topRight,
-              child: FavoriteButton(productEntity: productEntity))
+            alignment: Alignment.topRight,
+            child: FavoriteButton(
+              productEntity: productEntity,
+            ),
+          )
         ],
       ),
     );
