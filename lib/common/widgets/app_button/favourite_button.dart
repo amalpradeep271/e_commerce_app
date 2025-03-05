@@ -15,7 +15,9 @@ class FavoriteButton extends StatelessWidget {
     return IconButton(
       onPressed: () {
         context.read<FavoriteIconCubit>().onTap(productEntity);
-        context.read<ProductsDisplayCubit>().displayProducts(); // Force update
+        context
+            .read<ProductsDisplayCubit>()
+            .displayProducts(showLoading: false); // Force update
       },
       icon: Container(
         height: 40.h,

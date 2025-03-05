@@ -80,4 +80,6 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<GetFavortiesProductsUseCase>(
       GetFavortiesProductsUseCase());
   sl.registerSingleton<GetOrdersUseCase>(GetOrdersUseCase());
+  sl.registerFactory(
+      () => ProductsDisplayCubit(useCase: sl<GetFavortiesProductsUseCase>()));
 }

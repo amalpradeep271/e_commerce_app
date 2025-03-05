@@ -21,8 +21,11 @@ class FavoriteIconCubit extends Cubit<bool> {
       print("Favorite button tapped. Updating wishlist...");
 
       if (!isClosed) {
-        sl<ProductsDisplayCubit>().displayProducts(
-            showLoading: false); // Ensure cubit is still active
+        if (sl.isRegistered<ProductsDisplayCubit>()) {
+          sl<ProductsDisplayCubit>().displayProducts(showLoading: false);
+        }
+//         sl<ProductsDisplayCubit>().displayProducts(
+//             showLoading: false); // Ensure cubit is still active
       }
     });
   }
