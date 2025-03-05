@@ -13,18 +13,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shimmer/shimmer.dart';
 
 // ignore: must_be_immutable
 class HomePage extends StatelessWidget {
-  HomePage({super.key});
-
-  final val = 0;
-  var activeIndex = 0;
-
-  int onIndexChange(int value) {
-    final val = activeIndex = value;
-    return val;
-  }
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -51,17 +44,30 @@ class HomePage extends StatelessWidget {
               child: BlocBuilder<BannersDisplayCubit, BannersDisplayState>(
                 builder: (context, state) {
                   if (state is BannersLoading) {
-                    return const Center(child: CupertinoActivityIndicator());
+                    return Shimmer.fromColors(
+                      baseColor: const Color.fromARGB(255, 218, 221, 227),
+                      highlightColor: AppColors.colorDivider,
+                      child: Container(
+                        margin: EdgeInsets.only(
+                            top: 30.h, bottom: 10.h, left: 10.w),
+                        height: 200.h, // Same height as banner slider
+                        width: double.infinity,
+                        decoration: const BoxDecoration(
+                          color: AppColors.white,
+                        ),
+                      ),
+                    );
                   }
                   if (state is BannersLoaded) {
                     return BannerCarouselSlider(
-                      height: 200,
+                      height: 200.h,
                       autoPlay: true,
                       itemBuilder: (context, index, _) {
                         return Padding(
                           padding: EdgeInsets.only(
                             top: 30.h,
                             bottom: 10.h,
+                            left: 10.w,
                           ),
                           child: SizedBox(
                             height: 100,
@@ -72,14 +78,17 @@ class HomePage extends StatelessWidget {
                               ),
                               fit: BoxFit.cover,
                               errorBuilder: (context, error, _) {
-                                return const Text("Image not available");
+                                return const Center(
+                                  child: Text(
+                                    "Image not available",
+                                  ),
+                                );
                               },
                             ),
                           ),
                         );
                       },
                       itemCount: state.banners.length,
-                      onPageChanged: (index, _) => onIndexChange(index),
                     );
                   }
                   return Container();

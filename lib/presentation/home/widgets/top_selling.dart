@@ -51,7 +51,9 @@ class TopSelling extends StatelessWidget {
       allProductClick: () {
         AppNavigator.push(
           context,
-          const AllProductsPage(),
+          const AllProductsPage(
+            title: "Top Selling",
+          ),
         );
       },
     );
@@ -75,23 +77,6 @@ class TopSelling extends StatelessWidget {
               productEntity: products[index],
             );
           },
-        )
-        // ListView.separated(
-        //   shrinkWrap: true,
-        //   padding: EdgeInsets.symmetric(
-        //     horizontal: 16.w,
-        //   ),
-        //   scrollDirection: Axis.horizontal,
-        //   itemBuilder: (context, index) {
-        //     return ProductCard(
-        //       productEntity: products[index],
-        //     );
-        //   },
-        //   separatorBuilder: (context, index) => SizedBox(
-        //     width: 10.w,
-        //   ),
-        //   itemCount: products.length,
-        // ),
-        );
+        ));
   }
 }
