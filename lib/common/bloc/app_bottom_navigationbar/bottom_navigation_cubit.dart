@@ -8,7 +8,6 @@ class BottomNavigationCubit extends Cubit<int> {
   void changeTabIndex(int index, BuildContext context) {
     emit(index);
     if (index == 1) {
-      print("Switched to Wishlist - Refreshing products");
       context.read<ProductsDisplayCubit>().displayProducts(showLoading: false);
     }
   }

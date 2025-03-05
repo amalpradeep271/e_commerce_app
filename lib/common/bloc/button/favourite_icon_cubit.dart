@@ -24,8 +24,6 @@ class FavoriteIconCubit extends Cubit<bool> {
         if (sl.isRegistered<ProductsDisplayCubit>()) {
           sl<ProductsDisplayCubit>().displayProducts(showLoading: false);
         }
-//         sl<ProductsDisplayCubit>().displayProducts(
-//             showLoading: false); // Ensure cubit is still active
       }
     });
   }
