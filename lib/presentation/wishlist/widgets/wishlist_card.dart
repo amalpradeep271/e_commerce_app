@@ -102,24 +102,24 @@ class WishlistCard extends StatelessWidget {
             const Divider(
               color: AppColors.productGray,
             ),
-            SizedBox(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Icon(
-                    AppIcons.delete,
-                    size: 20,
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      context.read<FavoriteIconCubit>().onTap(productEntity);
-                    },
-                    child: const Text("Remove"),
-                  ),
-                ],
+            InkWell(
+              onTap: () {
+                context.read<FavoriteIconCubit>().onTap(productEntity);
+              },
+              child: const SizedBox(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      AppIcons.delete,
+                      size: 20,
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text("Remove"),
+                  ],
+                ),
               ),
             ),
           ],

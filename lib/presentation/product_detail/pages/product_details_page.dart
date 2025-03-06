@@ -1,6 +1,9 @@
 import 'package:e_commerce_application/common/bloc/button/button_state_cubit.dart';
+import 'package:e_commerce_application/common/bloc/button/favourite_icon_cubit.dart';
+import 'package:e_commerce_application/common/widgets/appbar/app_bar.dart';
 import 'package:e_commerce_application/presentation/product_detail/bloc/product_image_view_cubit.dart';
 import 'package:e_commerce_application/presentation/product_detail/bloc/product_quanitity_cubit.dart';
+import 'package:e_commerce_application/presentation/product_detail/bloc/product_size_selection_cubit.dart';
 import 'package:e_commerce_application/presentation/product_detail/widgets/add_to_cart.dart';
 import 'package:e_commerce_application/presentation/product_detail/widgets/product_color.dart';
 import 'package:e_commerce_application/presentation/product_detail/widgets/product_images.dart';
@@ -29,13 +32,16 @@ class ProductDetailsPage extends StatelessWidget {
           create: (context) => ProductImageViewCubit(),
         ),
         BlocProvider(create: (context) => ProductQuantityCubit()),
-        // BlocProvider(create: (context) => ProductSizeSelectionCubit()),
+        BlocProvider(create: (context) => ProductSizeSelectionCubit()),
         BlocProvider(create: (context) => ButtonStateCubit()),
-        // BlocProvider(
-        //     create: (context) =>
-        //         FavoriteIconCubit()..isFavorite(productEntity.productId)),
+        BlocProvider(
+            create: (context) =>
+                FavoriteIconCubit()..isFavorite(productEntity.productId)),
       ],
       child: Scaffold(
+        appBar: CustomAppBar(
+            // actionIconData1: ,
+            ),
         // appBar: BasicAppbar(
         //   hideBack: false,
         //   action: FavoriteButton(
@@ -54,7 +60,7 @@ class ProductDetailsPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ProductImages(productEntity: productEntity),
-
+        
                   ProductTitle(productEntity: productEntity),
                   const SizedBox(
                     height: 5,
@@ -67,7 +73,7 @@ class ProductDetailsPage extends StatelessWidget {
                     ],
                   ),
                   const RatingBars(rating: 3),
-
+        
                   ProductColors(productEntity: productEntity),
                   ProductSizes(productEntity: productEntity),
                   const SizedBox(
@@ -76,7 +82,7 @@ class ProductDetailsPage extends StatelessWidget {
                   Text(
                     productEntity.description,
                   ),
-
+        
                   const SizedBox(
                     height: 30,
                   ),
@@ -96,7 +102,7 @@ class ProductDetailsPage extends StatelessWidget {
                     collapsedtext: "",
                     expandedtext: productEntity.dimensions,
                   ),
-
+        
                   // Text(
                   //   "Reviews",
                   //   style: AppTextStyles.base.s16.w600,
@@ -122,24 +128,24 @@ class ProductDetailsPage extends StatelessWidget {
                   const SizedBox(
                     height: 10,
                   ),
-                  // Form(
-                  //   key: controller.reviewValidator,
-                  //   child: TextFormField(
-                  //     controller: controller.reviewcontroller,
-                  //     maxLines: 5,
-                  //     keyboardType: TextInputType.multiline,
-                  //     decoration: const InputDecoration(
-                  //         border: OutlineInputBorder(),
-                  //         hintText:
-                  //             "Share the details of your own experience on this product"),
-                  //     validator: (value) {
-                  //       if (value!.isEmpty) {
-                  //         return 'cannot post empty review type something';
-                  //       }
-                  //       return null;
-                  //     },
-                  //   ),
-                  // ),
+                  
+                  Form(
+                    child: TextFormField(
+                      controller: controller.reviewcontroller,
+                      maxLines: 5,
+                      keyboardType: TextInputType.multiline,
+                      decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                          hintText:
+                              "Share the details of your own experience on this product"),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'cannot post empty review type something';
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
                   const SizedBox(
                     height: 10,
                   ),

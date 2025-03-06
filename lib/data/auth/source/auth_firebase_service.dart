@@ -30,8 +30,8 @@ class AuthFirebaseServiceImpl extends AuthFirebaseService {
         'firstName': user.firstName,
         'lastName': user.lastName,
         'email': user.email,
-        'gender': user.gender,
-        'age': user.age,
+        // 'gender': user.gender,
+        // 'age': user.age,
         'image': returnedData.user!.photoURL,
         'userId': returnedData.user!.uid
       });
@@ -97,9 +97,6 @@ class AuthFirebaseServiceImpl extends AuthFirebaseService {
       return false;
     }
   }
-
-
-
 
   @override
   Future<Either> getUser() async {

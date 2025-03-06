@@ -13,9 +13,11 @@
 import 'package:e_commerce_application/common/bloc/categories/categories_display_cubit.dart';
 import 'package:e_commerce_application/common/bloc/categories/categories_display_state.dart';
 import 'package:e_commerce_application/common/helper/images/images_display.dart';
+import 'package:e_commerce_application/common/helper/navigator/app_navigator.dart';
 import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
 import 'package:e_commerce_application/core/configs/theme/app_text_theme.dart';
 import 'package:e_commerce_application/domain/category/entity/category_entity.dart';
+import 'package:e_commerce_application/presentation/categories_products/pages/categories_products_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -62,9 +64,6 @@ class Categories extends StatelessWidget {
           "Categories",
           style: AppTextStyles.base.w500.s16,
         ),
-        // SizedBox(
-        //   height: 14.h,
-        // ),
       ],
     );
   }
@@ -74,10 +73,17 @@ class Categories extends StatelessWidget {
       height: 40.h,
       child: ListView.separated(
           scrollDirection: Axis.horizontal,
-          // padding: EdgeInsets.symmetric(horizontal: 16.w),
           itemBuilder: (context, index) {
             return _categoryButton(
-              onTap: () {},
+              onTap: () {
+                AppNavigator.push(
+                  context,
+                  CategoryProductsPage(
+                    title: categories[index].title,
+                    categoryEntity: categories[index],
+                  ),
+                );
+              },
               buttonImage: categories[index].image,
               butttontitle: categories[index].title,
             );
@@ -112,7 +118,6 @@ class Categories extends StatelessWidget {
                 height: 25,
               ),
               SizedBox(
-                // width: 80,
                 child: Text(
                   butttontitle,
                   overflow: TextOverflow.ellipsis,

@@ -61,22 +61,23 @@ class TopSelling extends StatelessWidget {
 
   Widget _products(List<ProductEntity> products) {
     return SizedBox(
-        height: 280.h,
-        child: GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            mainAxisSpacing: 10,
-            crossAxisSpacing: 10.0,
-            mainAxisExtent: 300,
-          ),
-          itemCount: 2,
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemBuilder: (_, index) {
-            return ProductCard(
-              productEntity: products[index],
-            );
-          },
-        ));
+      height: 280.h,
+      child: GridView.builder(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          mainAxisSpacing: 10,
+          crossAxisSpacing: 10.0,
+          mainAxisExtent: 300,
+        ),
+        itemCount: 2,
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        itemBuilder: (_, index) {
+          return ProductCard(
+            productEntity: products[index],
+          );
+        },
+      ),
+    );
   }
 }

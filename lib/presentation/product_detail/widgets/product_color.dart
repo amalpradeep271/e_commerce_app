@@ -16,7 +16,7 @@ class ProductColors extends StatelessWidget {
           "Color :",
           style: AppTextStyles.base.s16.blackColor,
         ),
-        SizedBox(width: 8.w), // Space between text and button
+        SizedBox(width: 8.w),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
           decoration: BoxDecoration(

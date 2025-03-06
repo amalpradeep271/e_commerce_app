@@ -12,7 +12,8 @@ class ProductPrice extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           "₹${productEntity.discountPrice != 0 ? productEntity.discountPrice : productEntity.price}",

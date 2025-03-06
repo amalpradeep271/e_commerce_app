@@ -2,13 +2,15 @@ import 'package:e_commerce_application/common/bloc/button/button_state.dart';
 import 'package:e_commerce_application/common/bloc/button/button_state_cubit.dart';
 import 'package:e_commerce_application/common/bloc/textfield/password_visibility_cubit.dart';
 import 'package:e_commerce_application/common/helper/navigator/app_navigator.dart';
+import 'package:e_commerce_application/common/widgets/app_bottom_navigationbar/custom_app_bottom_navigationbar.dart';
 import 'package:e_commerce_application/common/widgets/app_button/basic_reactive_button.dart';
 import 'package:e_commerce_application/common/widgets/app_textfield/basic_app_textformfield.dart';
 import 'package:e_commerce_application/core/configs/assets/app_images.dart';
 import 'package:e_commerce_application/core/configs/theme/app_text_theme.dart';
 import 'package:e_commerce_application/data/auth/models/user_signin_req.dart';
 import 'package:e_commerce_application/domain/auth/usecase/signin_usecase.dart';
-import 'package:e_commerce_application/presentation/home/pages/homepage.dart';
+import 'package:e_commerce_application/presentation/auth/pages/forgot_password_page.dart';
+import 'package:e_commerce_application/presentation/auth/pages/signup_page.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -44,7 +46,8 @@ class SigninPage extends StatelessWidget {
                 ScaffoldMessenger.of(context).showSnackBar(snackbar);
               }
               if (state is ButtonSuccessState) {
-                AppNavigator.pushAndRemove(context, const HomePage());
+                AppNavigator.pushAndRemove(
+                    context, const CustomAppBottomNavigationBar());
               }
             },
             child: loginbody(context),
@@ -105,8 +108,8 @@ class SigninPage extends StatelessWidget {
               return null;
             },
           ),
-          const SizedBox(
-            height: 10,
+          SizedBox(
+            height: 20.h,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -115,14 +118,14 @@ class SigninPage extends StatelessWidget {
                 "Don't you have an account? ",
                 "Create one",
                 () {
-                  // AppNavigator.push(context, SignupPage());
+                  AppNavigator.push(context, SignupPage());
                 },
               ),
               _buildRichText(
                 "Forgot password? ",
                 "Reset",
                 () {
-                  // AppNavigator.push(context, ForgotPasswordPage());
+                  AppNavigator.push(context, ForgotPasswordPage());
                 },
               ),
             ],
