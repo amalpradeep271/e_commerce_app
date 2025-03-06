@@ -7,16 +7,16 @@ class AppColors {
 
   static MaterialColor appPrimarySwatch =
       MaterialColor(kPrimaryColor.value, <int, Color>{
-    50: kPrimaryColor.withOpacity(0.1),
-    100: kPrimaryColor.withOpacity(0.2),
-    200: kPrimaryColor.withOpacity(0.3),
-    300: kPrimaryColor.withOpacity(0.4),
-    400: kPrimaryColor.withOpacity(0.5),
-    500: kPrimaryColor.withOpacity(0.6),
-    600: kPrimaryColor.withOpacity(0.7),
-    700: kPrimaryColor.withOpacity(0.8),
-    800: kPrimaryColor.withOpacity(0.9),
-    900: kPrimaryColor.withOpacity(1.0),
+    50: kPrimaryColor.withValues(alpha: 0.1),
+    100: kPrimaryColor.withValues(alpha: 0.2),
+    200: kPrimaryColor.withValues(alpha: 0.3),
+    300: kPrimaryColor.withValues(alpha: 0.4),
+    400: kPrimaryColor.withValues(alpha: 0.5),
+    500: kPrimaryColor.withValues(alpha: 0.6),
+    600: kPrimaryColor.withValues(alpha: 0.7),
+    700: kPrimaryColor.withValues(alpha: 0.8),
+    800: kPrimaryColor.withValues(alpha: 0.9),
+    900: kPrimaryColor.withValues(alpha: 1.0),
   });
 
   static const Color white = Colors.white;

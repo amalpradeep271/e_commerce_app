@@ -1,8 +1,10 @@
 import 'package:e_commerce_application/common/helper/images/images_display.dart';
+import 'package:e_commerce_application/common/helper/navigator/app_navigator.dart';
 import 'package:e_commerce_application/common/widgets/app_button/favourite_button.dart';
 import 'package:e_commerce_application/core/configs/theme/app_text_theme.dart';
 import 'package:e_commerce_application/domain/product/entity/product_entity.dart';
 import 'package:e_commerce_application/common/bloc/button/favourite_icon_cubit.dart';
+import 'package:e_commerce_application/presentation/product_detail/pages/product_details_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -22,7 +24,14 @@ class ProductCard extends StatelessWidget {
       child: Stack(
         children: [
           GestureDetector(
-              onTap: () {},
+              onTap: () {
+                AppNavigator.push(
+                  context,
+                  ProductDetailsPage(
+                    productEntity: productEntity,
+                  ),
+                );
+              },
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

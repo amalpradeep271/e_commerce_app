@@ -32,6 +32,7 @@ dependencies:
   cloud_firestore: null
   cupertino_icons: ^1.0.8
   dartz: ^0.10.1
+  expandable: ^5.0.1
   firebase_auth: null
   firebase_core: null
   firebase_storage: ^12.4.4

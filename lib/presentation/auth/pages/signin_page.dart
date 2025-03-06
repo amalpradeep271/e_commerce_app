@@ -44,7 +44,7 @@ class SigninPage extends StatelessWidget {
                 ScaffoldMessenger.of(context).showSnackBar(snackbar);
               }
               if (state is ButtonSuccessState) {
-                AppNavigator.pushAndRemove(context, HomePage());
+                AppNavigator.pushAndRemove(context, const HomePage());
               }
             },
             child: loginbody(context),
@@ -125,42 +125,6 @@ class SigninPage extends StatelessWidget {
                   // AppNavigator.push(context, ForgotPasswordPage());
                 },
               ),
-              // Expanded(
-              //   child: RichText(
-              //     text: TextSpan(
-              //       children: [
-              //         TextSpan(
-              //             text: "Don't you have an account? ",
-              //             style: AppTextStyles.base.grayColor.s14.w500),
-              //         TextSpan(
-              //             text: 'Create one',
-              //             recognizer: TapGestureRecognizer()
-              //               ..onTap = () {
-              //                 // AppNavigator.push(context, SignupPage());
-              //               },
-              //             style: AppTextStyles.base.grayColor.s14.w900)
-              //       ],
-              //     ),
-              //   ),
-              // ),
-              // Expanded(
-              //   child: RichText(
-              //     text: TextSpan(
-              //       children: [
-              //         TextSpan(
-              //             text: "Forgot password? ",
-              //             style: AppTextStyles.base.grayColor.s14.w500),
-              //         TextSpan(
-              //             text: 'Reset',
-              //             recognizer: TapGestureRecognizer()
-              //               ..onTap = () {
-              //                 // AppNavigator.push(context, ForgotPasswordPage());
-              //               },
-              //             style: AppTextStyles.base.grayColor.s14.w900)
-              //       ],
-              //     ),
-              //   ),
-              // ),
             ],
           ),
           SizedBox(

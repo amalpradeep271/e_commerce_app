@@ -7,14 +7,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BannerCarouselSlider extends StatelessWidget {
-  const BannerCarouselSlider(
-      {super.key,
-      required this.itemCount,
-      required this.itemBuilder,
-      required this.autoPlay,
-      required this.height,
-      this.initialPage,
-      this.carosuelController});
+  const BannerCarouselSlider({
+    super.key,
+    required this.itemCount,
+    required this.itemBuilder,
+    required this.autoPlay,
+    required this.height,
+    this.initialPage,
+    this.carosuelController,
+  });
   final int itemCount;
   final Widget Function(BuildContext, int, int) itemBuilder;
   final bool autoPlay;
