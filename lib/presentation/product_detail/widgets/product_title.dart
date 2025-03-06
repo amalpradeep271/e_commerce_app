@@ -15,7 +15,7 @@ class ProductTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       productEntity.title,
-      style: AppTextStyles.base.s24.w500,
+      style: AppTextStyles.base.s20.w500,
     );
   }
 }

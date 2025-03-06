@@ -38,7 +38,7 @@ class ProductImages extends StatelessWidget {
                       ImageDisplayHelper.generateSingleProductImageURL(
                         productEntity.images[index],
                       ),
-                      fit: BoxFit.cover,
+                      fit: BoxFit.contain,
                       errorBuilder: (context, error, _) {
                         return const Text("Image not available");
                       },
@@ -81,7 +81,7 @@ class ProductImages extends StatelessWidget {
                           context
                               .read<ProductImageViewCubit>()
                               .selectImage(index);
-                          carosuelController!
+                          carosuelController
                               .animateToPage(index); // Update carousel
                         },
                         child: Card(

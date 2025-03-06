@@ -149,8 +149,7 @@ class CustomAppDrawer extends StatelessWidget {
                               child: CircleAvatar(
                                 backgroundImage: state.user.image.isEmpty
                                     ? const AssetImage(AppImages.profilemen)
-                                    : NetworkImage(state.user.image)
-                                        as ImageProvider,
+                                    : NetworkImage(state.user.image),
                                 radius: 55,
                               ),
                             ),
@@ -234,7 +233,7 @@ class CustomAppDrawer extends StatelessWidget {
     }
   }
 
-  Future<void> _uploadImage(BuildContext context, File imageFile) async {
+ Future<void> _uploadImage(BuildContext context, File imageFile) async {
     try {
       String userId = FirebaseAuth.instance.currentUser!.uid;
       String fileName = 'users/$userId/profile.jpg';
@@ -248,19 +247,22 @@ class CustomAppDrawer extends StatelessWidget {
       String imageUrl = await taskSnapshot.ref.getDownloadURL();
 
       // Update Firestore document
-      await FirebaseFirestore.instance
-          .collection('Users')
-          .doc(userId)
-          .update({'image': imageUrl});
-
+      await FirebaseFirestore.instance.collection('Users').doc(userId).update({
+        'image': imageUrl,
+      });
       if (context.mounted) {
+        // Notify Bloc to reload user data
+
         context.read<UserInfoDisplayCubit>().displayUserInfo();
+
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Profile image updated successfully')),
         );
       }
     } catch (e) {
       if (context.mounted) {
+        // Notify Bloc to reload user data
+
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Error uploading image')),
         );
@@ -272,9 +274,18 @@ class CustomAppDrawer extends StatelessWidget {
 class CurveClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
-    return Path()
+    int curveHeight = 40;
+    Offset controlPoint = Offset(size.width / 2, size.height + curveHeight);
+    Offset endPoint = Offset(size.width, size.height - curveHeight);
+
+    Path path = Path()
+      ..lineTo(0, size.height - curveHeight)
+      ..quadraticBezierTo(
+          controlPoint.dx, controlPoint.dy, endPoint.dx, endPoint.dy)
       ..lineTo(size.width, 0)
       ..close();
+
+    return path;
   }
 
   @override

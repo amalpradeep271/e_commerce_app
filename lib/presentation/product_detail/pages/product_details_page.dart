@@ -1,8 +1,15 @@
+import 'package:e_commerce_application/common/bloc/button/button_state_cubit.dart';
 import 'package:e_commerce_application/presentation/product_detail/bloc/product_image_view_cubit.dart';
+import 'package:e_commerce_application/presentation/product_detail/bloc/product_quanitity_cubit.dart';
+import 'package:e_commerce_application/presentation/product_detail/widgets/add_to_cart.dart';
+import 'package:e_commerce_application/presentation/product_detail/widgets/product_color.dart';
 import 'package:e_commerce_application/presentation/product_detail/widgets/product_images.dart';
 import 'package:e_commerce_application/presentation/product_detail/widgets/product_informations.dart';
 import 'package:e_commerce_application/presentation/product_detail/widgets/product_price.dart';
+import 'package:e_commerce_application/presentation/product_detail/widgets/product_quantity.dart';
+import 'package:e_commerce_application/presentation/product_detail/widgets/product_sizes.dart';
 import 'package:e_commerce_application/presentation/product_detail/widgets/product_title.dart';
+import 'package:e_commerce_application/presentation/product_detail/widgets/ratingbar_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:e_commerce_application/domain/product/entity/product_entity.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,11 +27,10 @@ class ProductDetailsPage extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => ProductImageViewCubit(),
-        )
-        // BlocProvider(create: (context) => ProductQuantityCubit()),
-        // BlocProvider(create: (context) => ProductColorSelectionCubit()),
+        ),
+        BlocProvider(create: (context) => ProductQuantityCubit()),
         // BlocProvider(create: (context) => ProductSizeSelectionCubit()),
-        // BlocProvider(create: (context) => ButtonStateCubit()),
+        BlocProvider(create: (context) => ButtonStateCubit()),
         // BlocProvider(
         //     create: (context) =>
         //         FavoriteIconCubit()..isFavorite(productEntity.productId)),
@@ -36,47 +42,41 @@ class ProductDetailsPage extends StatelessWidget {
         //     productEntity: productEntity,
         //   ),
         // ),
-        // bottomNavigationBar: AddToCart(
-        //   productEntity: productEntity,
-        // ),
+        bottomNavigationBar: AddToCart(
+          productEntity: productEntity,
+        ),
         body: ListView(
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
+                spacing: 8,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ProductImages(productEntity: productEntity),
 
-                  const SizedBox(
-                    height: 20,
-                  ),
                   ProductTitle(productEntity: productEntity),
-
                   const SizedBox(
-                    height: 10,
+                    height: 5,
                   ),
-                  ProductPrice(productEntity: productEntity),
-
-                  const SizedBox(
-                    height: 10,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ProductPrice(productEntity: productEntity),
+                      ProductQuantity(productEntity: productEntity),
+                    ],
                   ),
-                  // RatingBarIndicator(
-                  //   itemBuilder: (context, index) => const Icon(
-                  //     Icons.star,
-                  //     color: AppColors.kPrimaryColor,
-                  //   ),
-                  //   itemCount: 5,
-                  //   itemSize: 17,
-                  //   direction: Axis.horizontal,
-                  //   rating: 3,
-                  // ),
+                  const RatingBars(rating: 3),
+
+                  ProductColors(productEntity: productEntity),
+                  ProductSizes(productEntity: productEntity),
                   const SizedBox(
-                    height: 10,
+                    height: 5,
                   ),
                   Text(
                     productEntity.description,
                   ),
+
                   const SizedBox(
                     height: 30,
                   ),
@@ -214,66 +214,6 @@ class ProductDetailsPage extends StatelessWidget {
                   // const SizedBox(
                   //   height: 30,
                   // ),
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.center,
-                  //   children: [
-                  //     Container(
-                  //       height: 40,
-                  //       width: 50,
-                  //       decoration: BoxDecoration(
-                  //           border:
-                  //               Border.all(color: AppColors.kPrimaryColor),
-                  //           borderRadius: const BorderRadius.only(
-                  //               topLeft: Radius.circular(5),
-                  //               bottomLeft: Radius.circular(5))),
-                  //       child: const Icon(Khadi.cart),
-                  //     ),
-                  //     controller.isincart.value
-                  //         ? Button(
-                  //             text: "Go to Cart",
-                  //             style: AppTextStyles.base.whiteColor.s16,
-                  //             width: 150,
-                  //             backgroundcolor: AppColors.kPrimaryColor,
-                  //             borderside: const BorderSide(
-                  //                 color: AppColors.kPrimaryColor),
-                  //             height: 40,
-                  //             borderRadius: const BorderRadius.only(
-                  //                 topRight: Radius.circular(5),
-                  //                 bottomRight: Radius.circular(5)),
-                  //             onPressed: () {
-                  //               Get.toNamed(AppRoutes.cartscreen);
-                  //             },
-                  //           )
-                  //         : AbsorbPointer(
-                  //             absorbing: controller.productviewmodel.value
-                  //                         .outOfStock ==
-                  //                     true
-                  //                 ? true
-                  //                 : false,
-                  //             child: Button(
-                  //               text: "Add to Cart",
-                  //               style: AppTextStyles.base.whiteColor.s16,
-                  //               width: 150,
-                  //               backgroundcolor: AppColors.kPrimaryColor,
-                  //               borderside: const BorderSide(
-                  //                   color: AppColors.kPrimaryColor),
-                  //               height: 40,
-                  //               borderRadius: const BorderRadius.only(
-                  //                   topRight: Radius.circular(5),
-                  //                   bottomRight: Radius.circular(5)),
-                  //               onPressed: () {
-                  //                 controller.addToCart(
-                  //                     controller.productviewmodel.value
-                  //                         .variants!.variantId!,
-                  //                     1);
-                  //               },
-                  //             ),
-                  //           ),
-                  //   ],
-                  // ),
-                  // const SizedBox(
-                  //   height: 30,
-                  // )
                 ],
               ),
             ),

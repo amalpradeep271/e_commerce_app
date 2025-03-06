@@ -39,6 +39,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.6
+  flutter_rating_bar: ^4.0.1
   flutter_screenutil: ^5.9.3
   flutter_svg: null
   get_it: null
