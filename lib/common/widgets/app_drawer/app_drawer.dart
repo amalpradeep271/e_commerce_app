@@ -1,10 +1,13 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:e_commerce_application/common/helper/navigator/app_navigator.dart';
+import 'package:e_commerce_application/common/widgets/app_bottom_navigationbar/custom_app_bottom_navigationbar.dart';
 import 'package:e_commerce_application/core/configs/assets/app_images.dart';
 import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
 import 'package:e_commerce_application/core/configs/theme/app_icons.dart';
 import 'package:e_commerce_application/core/configs/theme/app_text_theme.dart';
+import 'package:e_commerce_application/presentation/auth/pages/signin_page.dart';
 import 'package:e_commerce_application/presentation/home/bloc/user_info_display_cubit.dart';
 import 'package:e_commerce_application/presentation/home/bloc/user_info_display_state.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -17,81 +20,75 @@ import 'package:image_picker/image_picker.dart';
 class DrawerTileData {
   final IconData icon;
   final String tileName;
-  final VoidCallback callback;
-
+  final void Function(BuildContext) callback;
 
   DrawerTileData(this.icon, this.tileName, this.callback);
 }
 
-var arrayOfListTiles = [
-  DrawerTileData(AppIcons.home, "Home", () {
-    // Navigator.pop(Get.context!);
-    // Get.toNamed(AppRoutes.landingscreen);
-  }),
-  DrawerTileData(Icons.share, "Share App", () {}),
-  DrawerTileData(AppIcons.contact, "Contact Us", () {
-    // Navigator.pop(Get.context!);
-    // Get.toNamed(AppRoutes.contactus);
-  }),
-  DrawerTileData(AppIcons.privacypolicy, "Privacy Policy", () {
-    // Navigator.pop(Get.context!);
-    // Get.toNamed(AppRoutes.privacypolicy);
-  }),
-  // DrawerTileData(Icons.policy, "Disclaimer", () {
-  //   // Navigator.pop( BuildContext context);
-  //   // Get.toNamed(AppRoutes.disclaimer);
-  // }),
-];
-
 class CustomAppDrawer extends StatelessWidget {
-  const CustomAppDrawer({
-    super.key,
-  });
+  const CustomAppDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
+    List<DrawerTileData> arrayOfListTiles = [
+      DrawerTileData(AppIcons.home, "Home", (context) {
+        AppNavigator.pushAndRemove(
+          context,
+          const CustomAppBottomNavigationBar(),
+        );
+      }),
+      DrawerTileData(Icons.share, "Share App", (context) {}),
+      DrawerTileData(AppIcons.contact, "Contact Us", (context) {
+        // Implement Contact Us Navigation
+      }),
+      DrawerTileData(AppIcons.privacypolicy, "Privacy Policy", (context) {
+        // Implement Privacy Policy Navigation
+      }),
+    ];
+
     return BlocProvider(
       create: (context) => UserInfoDisplayCubit()..displayUserInfo(),
       child: SizedBox(
-          width: 500,
-          child: drawerWidget(
-            context,
-          )),
+        width: 500,
+        child: drawerWidget(context, arrayOfListTiles),
+      ),
     );
   }
 
   Drawer drawerWidget(
-    BuildContext context,
-  ) {
+      BuildContext context, List<DrawerTileData> arrayOfListTiles) {
     return Drawer(
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
       child: ListView(
-        padding: const EdgeInsets.all(0.0),
         children: [
-          getDrawerHeader(),
-          const SizedBox(
-            height: 22,
-          ),
+          getDrawerHeader(context),
+          const SizedBox(height: 22),
           for (DrawerTileData listTile in arrayOfListTiles)
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 6),
               child: setListTile(
-                  listTile.icon, listTile.tileName, listTile.callback),
+                listTile.icon,
+                listTile.tileName,
+                () => listTile.callback(context),
+              ),
             ),
-          const SizedBox(
-            height: 28,
-          ),
+          const SizedBox(height: 28),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               InkWell(
-                onTap: () {},
+                onTap: () async {
+                  await FirebaseAuth.instance.signOut();
+                  if (context.mounted) {
+                    AppNavigator.pushAndRemove(
+                      context,
+                      SigninPage(),
+                    );
+                  }
+                },
                 child: Row(
                   children: [
-                    const Icon(
-                      Icons.logout,
-                      size: 18,
-                    ),
+                    const Icon(Icons.logout, size: 18),
                     Text(
                       "Logout",
                       style: AppTextStyles.getAppTextStyleCustomized(
@@ -104,19 +101,15 @@ class CustomAppDrawer extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  // Navigator.pop(Get.context!);
-                  // Get.toNamed(AppRoutes.termsandconditions);
+                  // Implement Terms and Conditions Navigation
                 },
                 child: Text(
-                  "Term and Condition",
+                  "Terms and Conditions",
                   style: AppTextStyles.getAppTextStyleCustomized(
                     textColor: AppColors.black,
                     textSize: 12,
                   ),
                 ),
-              ),
-              const SizedBox(
-                height: 5,
               ),
             ],
           ),
@@ -125,7 +118,7 @@ class CustomAppDrawer extends StatelessWidget {
     );
   }
 
-  Widget getDrawerHeader() {
+  Widget getDrawerHeader(BuildContext context) {
     return ClipPath(
       clipper: CurveClipper(),
       child: SizedBox(
@@ -156,25 +149,26 @@ class CustomAppDrawer extends StatelessWidget {
                               child: CircleAvatar(
                                 backgroundImage: state.user.image.isEmpty
                                     ? const AssetImage(AppImages.profilemen)
-                                    : NetworkImage(state.user.image),
+                                    : NetworkImage(state.user.image)
+                                        as ImageProvider,
                                 radius: 55,
                               ),
                             ),
-                            const SizedBox(
-                              height: 10,
-                            ),
+                            const SizedBox(height: 10),
                             Text(
                               state.user.firstName,
                               style: AppTextStyles.getAppTextStyleCustomized(
-                                  textColor: AppColors.white, textSize: 16),
+                                textColor: AppColors.white,
+                                textSize: 16,
+                              ),
                             ),
-                            const SizedBox(
-                              height: 5,
-                            ),
+                            const SizedBox(height: 5),
                             Text(
                               state.user.email,
                               style: AppTextStyles.getAppTextStyleCustomized(
-                                  textColor: AppColors.white, textSize: 12),
+                                textColor: AppColors.white,
+                                textSize: 12,
+                              ),
                             ),
                           ],
                         );
@@ -187,11 +181,11 @@ class CustomAppDrawer extends StatelessWidget {
               Align(
                 alignment: Alignment.topRight,
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 20, bottom: 0),
+                  padding: const EdgeInsets.only(top: 20),
                   child: IconButton(
                     iconSize: 22,
                     onPressed: () {
-                      // Navigator.pop(Get.overlayContext!);
+                      // Close Drawer Action
                     },
                     icon: const Icon(
                       Icons.close,
@@ -211,18 +205,16 @@ class CustomAppDrawer extends StatelessWidget {
   ListTile setListTile(
       IconData iconData, String data, GestureTapCallback onTap) {
     Color itemColor = Colors.black.withAlpha(127);
-
     return ListTile(
-      leading: Icon(
-        iconData,
-        size: 18,
-        color: itemColor,
-      ),
+      leading: Icon(iconData, size: 18, color: itemColor),
       horizontalTitleGap: 14,
       title: Text(
         data,
         style: AppTextStyles.getAppTextStyleCustomized(
-            textWeight: FontWeight.w500, textColor: itemColor, textSize: 16),
+          textWeight: FontWeight.w500,
+          textColor: itemColor,
+          textSize: 16,
+        ),
       ),
       onTap: onTap,
       trailing: const Icon(Icons.arrow_forward_ios, size: 16),
@@ -256,22 +248,19 @@ class CustomAppDrawer extends StatelessWidget {
       String imageUrl = await taskSnapshot.ref.getDownloadURL();
 
       // Update Firestore document
-      await FirebaseFirestore.instance.collection('Users').doc(userId).update({
-        'image': imageUrl,
-      });
+      await FirebaseFirestore.instance
+          .collection('Users')
+          .doc(userId)
+          .update({'image': imageUrl});
+
       if (context.mounted) {
-        // Notify Bloc to reload user data
-
         context.read<UserInfoDisplayCubit>().displayUserInfo();
-
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Profile image updated successfully')),
         );
       }
     } catch (e) {
       if (context.mounted) {
-        // Notify Bloc to reload user data
-
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Error uploading image')),
         );
@@ -283,18 +272,9 @@ class CustomAppDrawer extends StatelessWidget {
 class CurveClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
-    int curveHeight = 40;
-    Offset controlPoint = Offset(size.width / 2, size.height + curveHeight);
-    Offset endPoint = Offset(size.width, size.height - curveHeight);
-
-    Path path = Path()
-      ..lineTo(0, size.height - curveHeight)
-      ..quadraticBezierTo(
-          controlPoint.dx, controlPoint.dy, endPoint.dx, endPoint.dy)
+    return Path()
       ..lineTo(size.width, 0)
       ..close();
-
-    return path;
   }
 
   @override
