@@ -13,6 +13,7 @@ import 'package:e_commerce_application/presentation/product_detail/widgets/produ
 import 'package:e_commerce_application/presentation/product_detail/widgets/product_sizes.dart';
 import 'package:e_commerce_application/presentation/product_detail/widgets/product_title.dart';
 import 'package:e_commerce_application/presentation/product_detail/widgets/ratingbar_indicator.dart';
+import 'package:e_commerce_application/presentation/review/widget/review_form.dart';
 import 'package:flutter/material.dart';
 import 'package:e_commerce_application/domain/product/entity/product_entity.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -60,7 +61,7 @@ class ProductDetailsPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ProductImages(productEntity: productEntity),
-        
+
                   ProductTitle(productEntity: productEntity),
                   const SizedBox(
                     height: 5,
@@ -73,7 +74,7 @@ class ProductDetailsPage extends StatelessWidget {
                     ],
                   ),
                   const RatingBars(rating: 3),
-        
+
                   ProductColors(productEntity: productEntity),
                   ProductSizes(productEntity: productEntity),
                   const SizedBox(
@@ -82,7 +83,7 @@ class ProductDetailsPage extends StatelessWidget {
                   Text(
                     productEntity.description,
                   ),
-        
+
                   const SizedBox(
                     height: 30,
                   ),
@@ -102,7 +103,7 @@ class ProductDetailsPage extends StatelessWidget {
                     collapsedtext: "",
                     expandedtext: productEntity.dimensions,
                   ),
-        
+
                   // Text(
                   //   "Reviews",
                   //   style: AppTextStyles.base.s16.w600,
@@ -128,50 +129,9 @@ class ProductDetailsPage extends StatelessWidget {
                   const SizedBox(
                     height: 10,
                   ),
-                  
-                  Form(
-                    child: TextFormField(
-                      controller: controller.reviewcontroller,
-                      maxLines: 5,
-                      keyboardType: TextInputType.multiline,
-                      decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          hintText:
-                              "Share the details of your own experience on this product"),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'cannot post empty review type something';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.end,
-                  //   children: [
-                  //     GestureDetector(
-                  //         onTap: () {
-                  //           if (controller.reviewValidator.currentState!
-                  //               .validate()) {
-                  //             controller.addReview(controller
-                  //                 .productviewmodel
-                  //                 .value
-                  //                 .variants!
-                  //                 .productId!
-                  //                 .toInt());
-                  //           }
-                  //         },
-                  //         child: Text("Submit",
-                  //             style: AppTextStyles.base.accountblue.s14)),
-                  //     const Icon(
-                  //       Khadi.success,
-                  //       color: AppColors.accountblue,
-                  //     ),
-                  //   ],
-                  // ),
+
+                  ReviewForm(),
+
                   const SizedBox(
                     height: 20,
                   ),

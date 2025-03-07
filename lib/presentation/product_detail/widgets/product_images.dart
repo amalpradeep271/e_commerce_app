@@ -1,6 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:e_commerce_application/common/helper/images/images_display.dart';
-import 'package:e_commerce_application/common/widgets/app_button/favourite_button.dart';
 import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
 import 'package:e_commerce_application/presentation/product_detail/bloc/product_image_view_cubit.dart';
 import 'package:flutter/material.dart';
@@ -122,16 +121,16 @@ class ProductImages extends StatelessWidget {
             ),
           ],
         ),
-        Padding(
-          padding: const EdgeInsets.only(right: 15, top: 15),
-          child: Align(
-            alignment: Alignment.topRight,
-            child: FavoriteButton(
-              iconSize: 40.sp,
-              productEntity: productEntity,
-            ),
-          ),
-        ),
+        // Padding(
+        //   padding: const EdgeInsets.only(right: 15, top: 15),
+        //   child: Align(
+        //     alignment: Alignment.topRight,
+        //     child: FavoriteButton(
+        //       iconSize: 40.sp,
+        //       productEntity: productEntity,
+        //     ),
+        //   ),
+        // ),
       ],
     );
   }
