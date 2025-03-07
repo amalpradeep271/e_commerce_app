@@ -83,6 +83,7 @@ class ReviewForm extends StatelessWidget {
                   height: 10,
                 ),
                 RatingBar.builder(
+                  itemSize: 25,
                   itemBuilder: (context, index) {
                     return const Icon(
                       Icons.star,
