@@ -184,6 +184,7 @@ class CustomAppDrawer extends StatelessWidget {
                   child: IconButton(
                     iconSize: 22,
                     onPressed: () {
+                      Navigator.pop(context);
                       // Close Drawer Action
                     },
                     icon: const Icon(
@@ -233,7 +234,7 @@ class CustomAppDrawer extends StatelessWidget {
     }
   }
 
- Future<void> _uploadImage(BuildContext context, File imageFile) async {
+  Future<void> _uploadImage(BuildContext context, File imageFile) async {
     try {
       String userId = FirebaseAuth.instance.currentUser!.uid;
       String fileName = 'users/$userId/profile.jpg';
