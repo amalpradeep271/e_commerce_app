@@ -1,6 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:developer';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:e_commerce_application/common/bloc/button/button_state.dart';
+import 'package:e_commerce_application/common/helper/navigator/app_navigator.dart';
+import 'package:e_commerce_application/presentation/review/page/all_review_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -29,80 +33,120 @@ class ReviewForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => RatingCubit(),
-      child: BlocBuilder<RatingCubit, double>(
-        builder: (context, rating) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Reviews",
-                style: AppTextStyles.base.s16.w600,
+      child: BlocListener<ButtonStateCubit, ButtonState>(
+        listener: (context, state) {
+          if (state is ButtonFailureState) {
+            var snackbar = SnackBar(
+              content: Text(
+                state.errorMessage,
               ),
-              const SizedBox(
-                height: 10,
+              behavior: SnackBarBehavior.floating,
+            );
+            ScaffoldMessenger.of(context).showSnackBar(snackbar);
+          }
+          if (state is ButtonSuccessState) {
+            var snackbar = SnackBar(
+              content: Text(
+                state.successMessage,
               ),
-              RatingBar.builder(
-                itemBuilder: (context, index) {
-                  return const Icon(
-                    Icons.star,
-                    color: AppColors.kPrimaryColor,
-                  );
-                },
-                onRatingUpdate: (newRating) {
-                  context.read<RatingCubit>().changeRating(newRating);
-                  log(context.read<RatingCubit>().state.toString());
-                },
-                itemCount: 5,
-                minRating: 0,
-                initialRating: rating,
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Form(
-                key: reviewValidator,
-                child: TextFormField(
-                  controller: _reviewController,
-                  maxLines: 5,
-                  keyboardType: TextInputType.multiline,
-                  decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText:
-                          "Share the details of your own experience on this product"),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'cannot post empty review type something';
-                    }
-                    return null;
-                  },
-                ),
-              ),
-              SizedBox(
-                height: 10.h,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  BasicTextButton(
-                    onPressed: () {
-                      if (reviewValidator.currentState!.validate()) {
-                        context.read<ButtonStateCubit>().execute(
-                              usecase: AddReviewUseCase(),
-                              params: AddReviewReqModel(
-                                productId: productEntity.productId,
-                                rating: context.read<RatingCubit>().state,
-                                review: _reviewController.text,
-                              ),
-                            );
-                      }
-                    },
-                    title: 'Submit',
-                  ),
-                ],
-              )
-            ],
-          );
+              behavior: SnackBarBehavior.floating,
+            );
+            ScaffoldMessenger.of(context).showSnackBar(snackbar);
+            _reviewController.clear();
+            context.read<RatingCubit>().changeRating(0);
+          }
         },
+        child: BlocBuilder<RatingCubit, double>(
+          builder: (context, rating) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Reviews",
+                      style: AppTextStyles.base.s16.w600,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        AppNavigator.push(context, const AllReviewPage());
+                      },
+                      child: Text(
+                        "All Reviews",
+                        style: AppTextStyles.base.s16.w600,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                RatingBar.builder(
+                  itemBuilder: (context, index) {
+                    return const Icon(
+                      Icons.star,
+                      color: AppColors.kPrimaryColor,
+                    );
+                  },
+                  onRatingUpdate: (newRating) {
+                    context.read<RatingCubit>().changeRating(newRating);
+                    log(context.read<RatingCubit>().state.toString());
+                  },
+                  itemCount: 5,
+                  minRating: 0,
+                  initialRating: rating,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Form(
+                  key: reviewValidator,
+                  child: TextFormField(
+                    controller: _reviewController,
+                    maxLines: 5,
+                    keyboardType: TextInputType.multiline,
+                    decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        hintText:
+                            "Share the details of your own experience on this product"),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'cannot post empty review type something';
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+                SizedBox(
+                  height: 10.h,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    BasicTextButton(
+                      onPressed: () {
+                        if (reviewValidator.currentState!.validate()) {
+                          context.read<ButtonStateCubit>().execute(
+                                usecase: AddReviewUseCase(),
+                                params: AddReviewReqModel(
+                                  createdDate:
+                                      Timestamp.fromDate(DateTime.now()),
+                                  productId: productEntity.productId,
+                                  rating: context.read<RatingCubit>().state,
+                                  review: _reviewController.text,
+                                ),
+                              );
+                        }
+                      },
+                      title: 'Submit',
+                    ),
+                  ],
+                )
+              ],
+            );
+          },
+        ),
       ),
     );
   }

@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:e_commerce_application/data/review/model/add_review_req_model.dart';
-import 'package:e_commerce_application/data/review/source/review_firebase_service.dart';
+import 'package:e_commerce_application/data/review/source/review_firebase_services.dart';
 import 'package:e_commerce_application/domain/review/repository/review_repository.dart';
 import 'package:e_commerce_application/service_locator.dart';
 

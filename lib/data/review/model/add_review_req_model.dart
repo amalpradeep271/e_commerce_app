@@ -1,14 +1,18 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class AddReviewReqModel {
   final String productId;
   final String review;
   final double rating;
+  final Timestamp createdDate;
 
   AddReviewReqModel({
     required this.productId,
     required this.review,
     required this.rating,
+    required this.createdDate,
   });
 
   Map<String, dynamic> toMap() {
@@ -16,6 +20,7 @@ class AddReviewReqModel {
       'productId': productId,
       'review': review,
       'rating': rating,
+      'createdDate':createdDate,
     };
   }
 
@@ -24,6 +29,7 @@ class AddReviewReqModel {
       productId: map['productId'] as String,
       review: map['review'] as String,
       rating: map['rating'] as double,
+      createdDate: map['createdDate'] as Timestamp
     );
   }
 

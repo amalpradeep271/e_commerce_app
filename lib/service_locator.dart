@@ -10,7 +10,7 @@ import 'package:e_commerce_application/data/order/source/order_firebase_service.
 import 'package:e_commerce_application/data/product/repository/product_repository_impl.dart';
 import 'package:e_commerce_application/data/product/source/product_firebase_service.dart';
 import 'package:e_commerce_application/data/review/repository/review_repository_impl.dart';
-import 'package:e_commerce_application/data/review/source/review_firebase_service.dart';
+import 'package:e_commerce_application/data/review/source/review_firebase_services.dart';
 import 'package:e_commerce_application/domain/auth/repository/auth_repository.dart';
 import 'package:e_commerce_application/domain/auth/usecase/get_ages_usecase.dart';
 import 'package:e_commerce_application/domain/auth/usecase/get_user_usecase.dart';
