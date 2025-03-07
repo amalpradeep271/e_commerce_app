@@ -43,12 +43,6 @@ class ProductDetailsPage extends StatelessWidget {
         appBar: CustomAppBar(
             // actionIconData1: ,
             ),
-        // appBar: BasicAppbar(
-        //   hideBack: false,
-        //   action: FavoriteButton(
-        //     productEntity: productEntity,
-        //   ),
-        // ),
         bottomNavigationBar: AddToCart(
           productEntity: productEntity,
         ),
@@ -56,131 +50,103 @@ class ProductDetailsPage extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
-                spacing: 8,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ProductImages(productEntity: productEntity),
+              child: SingleChildScrollView(
+                child: Column(
+                  spacing: 8,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ProductImages(productEntity: productEntity),
 
-                  ProductTitle(productEntity: productEntity),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      ProductPrice(productEntity: productEntity),
-                      ProductQuantity(productEntity: productEntity),
-                    ],
-                  ),
-                  const RatingBars(rating: 3),
+                    ProductTitle(productEntity: productEntity),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        ProductPrice(productEntity: productEntity),
+                        ProductQuantity(productEntity: productEntity),
+                      ],
+                    ),
+                    const RatingBars(rating: 3),
 
-                  ProductColors(productEntity: productEntity),
-                  ProductSizes(productEntity: productEntity),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    productEntity.description,
-                  ),
+                    ProductColors(productEntity: productEntity),
+                    ProductSizes(productEntity: productEntity),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Text(
+                      productEntity.description,
+                    ),
 
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  DropDownWidget(
-                    heading: "Manufacturer Information",
-                    collapsedtext: "",
-                    expandedtext: productEntity.manufactureInformation,
-                  ),
-                  const DropDownWidget(
-                    heading: "Disclaimer",
-                    collapsedtext: "",
-                    expandedtext:
-                        "The image is for representation purposes only. The packaging you receive might vary.",
-                  ),
-                  DropDownWidget(
-                    heading: "Product Dimensions",
-                    collapsedtext: "",
-                    expandedtext: productEntity.dimensions,
-                  ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    DropDownWidget(
+                      heading: "Manufacturer Information",
+                      collapsedtext: "",
+                      expandedtext: productEntity.manufactureInformation,
+                    ),
+                    const DropDownWidget(
+                      heading: "Disclaimer",
+                      collapsedtext: "",
+                      expandedtext:
+                          "The image is for representation purposes only. The packaging you receive might vary.",
+                    ),
+                    DropDownWidget(
+                      heading: "Product Dimensions",
+                      collapsedtext: "",
+                      expandedtext: productEntity.dimensions,
+                    ),
 
-                  // Text(
-                  //   "Reviews",
-                  //   style: AppTextStyles.base.s16.w600,
-                  // ),
-                  // const SizedBox(
-                  //   height: 10,
-                  // ),
-                  // RatingBar.builder(
-                  //   itemBuilder: (context, index) {
-                  //     return const Icon(
-                  //       Icons.star,
-                  //       size: 10,
-                  //       color: AppColors.kPrimaryColor,
-                  //     );
-                  //   },
-                  //   onRatingUpdate: (rating) {
-                  //     controller.changerating(rating);
-                  //   },
-                  //   itemCount: 5,
-                  //   minRating: 1,
-                  //   initialRating: controller.initialRating,
-                  // ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-
-                  ReviewForm(),
-
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  // controller.productviewmodel.value.variants!.product!
-                  //         .reviews!.isEmpty
-                  //     ? const SizedBox()
-                  //     : reviewbody(),
-                  // const SizedBox(
-                  //   height: 20,
-                  // ),
-                  // GestureDetector(
-                  //   onTap: () {
-                  //     Get.toNamed(
-                  //       AppRoutes.reviewscreen,
-                  //       arguments: controller
-                  //           .productviewmodel.value.variants!.productId!,
-                  //     );
-                  //   },
-                  //   child: controller.productviewmodel.value.variants!
-                  //           .product!.reviews!.isEmpty
-                  //       ? const SizedBox()
-                  //       : Row(
-                  //           mainAxisAlignment: MainAxisAlignment.end,
-                  //           children: [
-                  //             const Icon(
-                  //               Khadi.success,
-                  //               color: AppColors.accountblue,
-                  //             ),
-                  //             Text(
-                  //               "View All",
-                  //               style: AppTextStyles.base.accountblue.s14,
-                  //             ),
-                  //           ],
-                  //         ),
-                  // ),
-                  // Text(
-                  //   "Featured Products",
-                  //   style: AppTextStyles.base.s16.w600,
-                  // ),
-                  // const SizedBox(
-                  //   height: 20,
-                  // ),
-                  // controller.productviewmodel.value.similarProducts!.isEmpty
-                  //     ? const SizedBox()
-                  //     : featuredproductbody(),
-                  // const SizedBox(
-                  //   height: 30,
-                  // ),
-                ],
+                    ReviewForm(productEntity: productEntity),
+                    // controller.productviewmodel.value.variants!.product!
+                    //         .reviews!.isEmpty
+                    //     ? const SizedBox()
+                    //     : reviewbody(),
+                    // const SizedBox(
+                    //   height: 20,
+                    // ),
+                    // GestureDetector(
+                    //   onTap: () {
+                    //     Get.toNamed(
+                    //       AppRoutes.reviewscreen,
+                    //       arguments: controller
+                    //           .productviewmodel.value.variants!.productId!,
+                    //     );
+                    //   },
+                    //   child: controller.productviewmodel.value.variants!
+                    //           .product!.reviews!.isEmpty
+                    //       ? const SizedBox()
+                    //       : Row(
+                    //           mainAxisAlignment: MainAxisAlignment.end,
+                    //           children: [
+                    //             const Icon(
+                    //               Khadi.success,
+                    //               color: AppColors.accountblue,
+                    //             ),
+                    //             Text(
+                    //               "View All",
+                    //               style: AppTextStyles.base.accountblue.s14,
+                    //             ),
+                    //           ],
+                    //         ),
+                    // ),
+                    // Text(
+                    //   "Featured Products",
+                    //   style: AppTextStyles.base.s16.w600,
+                    // ),
+                    // const SizedBox(
+                    //   height: 20,
+                    // ),
+                    // controller.productviewmodel.value.similarProducts!.isEmpty
+                    //     ? const SizedBox()
+                    //     : featuredproductbody(),
+                    // const SizedBox(
+                    //   height: 30,
+                    // ),
+                  ],
+                ),
               ),
             ),
           ],

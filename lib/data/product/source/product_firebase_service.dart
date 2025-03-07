@@ -20,7 +20,7 @@ class ProductFirebaseServiceImpl extends ProductFirebaseService {
     try {
       var returnedData = await FirebaseFirestore.instance
           .collection('Products')
-          .where('salesNumber', isGreaterThanOrEqualTo: 22)
+          .where('salesNumber', isGreaterThanOrEqualTo: 22   )
           .get();
       return Right(returnedData.docs.map((e) => e.data()).toList());
     } catch (e) {

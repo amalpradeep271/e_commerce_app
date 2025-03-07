@@ -6,7 +6,7 @@ class AppColors {
   static const Color kPrimaryColor = Color(0xFFE5951F);
 
   static MaterialColor appPrimarySwatch =
-      MaterialColor(kPrimaryColor.value, <int, Color>{
+      MaterialColor(kPrimaryColor.toARGB32(), <int, Color>{
     50: kPrimaryColor.withValues(alpha: 0.1),
     100: kPrimaryColor.withValues(alpha: 0.2),
     200: kPrimaryColor.withValues(alpha: 0.3),

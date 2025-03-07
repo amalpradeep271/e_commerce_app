@@ -9,6 +9,8 @@ import 'package:e_commerce_application/data/order/repository/order_repository_im
 import 'package:e_commerce_application/data/order/source/order_firebase_service.dart';
 import 'package:e_commerce_application/data/product/repository/product_repository_impl.dart';
 import 'package:e_commerce_application/data/product/source/product_firebase_service.dart';
+import 'package:e_commerce_application/data/review/repository/review_repository_impl.dart';
+import 'package:e_commerce_application/data/review/source/review_firebase_service.dart';
 import 'package:e_commerce_application/domain/auth/repository/auth_repository.dart';
 import 'package:e_commerce_application/domain/auth/usecase/get_ages_usecase.dart';
 import 'package:e_commerce_application/domain/auth/usecase/get_user_usecase.dart';
@@ -34,6 +36,8 @@ import 'package:e_commerce_application/domain/product/usecase/get_product_by_cat
 import 'package:e_commerce_application/domain/product/usecase/get_products_by_title.dart';
 import 'package:e_commerce_application/domain/product/usecase/get_topselling_usecase.dart';
 import 'package:e_commerce_application/domain/product/usecase/is_favourite_usecase.dart';
+import 'package:e_commerce_application/domain/review/repository/review_repository.dart';
+import 'package:e_commerce_application/domain/review/usecase/add_to_review_usecase.dart';
 import 'package:get_it/get_it.dart';
 
 final sl = GetIt.instance;
@@ -46,6 +50,7 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<CategoryFireBaseService>(CategoryFireBaseServiceImpl());
   sl.registerSingleton<ProductFirebaseService>(ProductFirebaseServiceImpl());
   sl.registerSingleton<OrderFirebaseService>(OrderFirebaseServiceImpl());
+  sl.registerSingleton<ReviewFirebaseService>(ReviewFirebaseServiceImpl());
 
 //Repositories
 
@@ -54,6 +59,7 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<CategoryRepository>(CategoryRepositoryImpl());
   sl.registerSingleton<ProductRepository>(ProductRepositoryImpl());
   sl.registerSingleton<OrderRepository>(OrderRepositoryImpl());
+  sl.registerSingleton<ReviewRepository>(ReviewRepositoryImpl());
 
 //Usecases
   sl.registerSingleton<SignUpUseCase>(SignUpUseCase());
@@ -80,6 +86,8 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<GetFavortiesProductsUseCase>(
       GetFavortiesProductsUseCase());
   sl.registerSingleton<GetOrdersUseCase>(GetOrdersUseCase());
+  sl.registerSingleton<AddReviewUseCase>(AddReviewUseCase());
+
   sl.registerFactory(
       () => ProductsDisplayCubit(useCase: sl<GetFavortiesProductsUseCase>()));
 }
