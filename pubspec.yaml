@@ -41,6 +41,7 @@ dependencies:
   flutter_bloc: ^8.1.6
   flutter_rating_bar: ^4.0.1
   flutter_screenutil: ^5.9.3
+  flutter_secure_storage: ^9.2.4
   flutter_svg: null
   get_it: null
   google_fonts: ^6.2.1

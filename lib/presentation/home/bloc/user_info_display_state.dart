@@ -7,6 +7,9 @@ class UserInfoDisaplyLoading extends UserInfoDisaplyState {}
 class UserInfoDisaplyLoaded extends UserInfoDisaplyState {
   final UserEntity user;
 
+            
+
+
   UserInfoDisaplyLoaded({required this.user});
 }
 

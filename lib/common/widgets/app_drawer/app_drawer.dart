@@ -141,6 +141,7 @@ class CustomAppDrawer extends StatelessWidget {
                             child: CupertinoActivityIndicator());
                       }
                       if (state is UserInfoDisaplyLoaded) {
+                        
                         return Column(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [

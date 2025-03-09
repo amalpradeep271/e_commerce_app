@@ -6,9 +6,13 @@ class AddReviewReqModel {
   final String productId;
   final String review;
   final double rating;
+  final String userName;
+  final String userImage;
   final Timestamp createdDate;
 
   AddReviewReqModel({
+    required this.userName,
+    required this.userImage,
     required this.productId,
     required this.review,
     required this.rating,
@@ -20,7 +24,9 @@ class AddReviewReqModel {
       'productId': productId,
       'review': review,
       'rating': rating,
-      'createdDate':createdDate,
+      'createdDate': createdDate,
+      'userName': userName,
+      'userImage': userImage,
     };
   }
 
@@ -29,7 +35,9 @@ class AddReviewReqModel {
       productId: map['productId'] as String,
       review: map['review'] as String,
       rating: map['rating'] as double,
-      createdDate: map['createdDate'] as Timestamp
+      userName: map['userName'] as String,
+      userImage: map['userImage'] as String,
+      createdDate: map['createdDate'] as Timestamp,
     );
   }
 

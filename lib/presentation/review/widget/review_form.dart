@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_commerce_application/common/bloc/button/button_state.dart';
 import 'package:e_commerce_application/common/helper/navigator/app_navigator.dart';
+import 'package:e_commerce_application/core/constants/app_preference.dart';
 import 'package:e_commerce_application/presentation/review/page/all_review_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -126,18 +127,27 @@ class ReviewForm extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     BasicTextButton(
-                      onPressed: () {
+                      onPressed: () async {
+                        final pref = AppPref();
+                        String? userImage =
+                            await pref.imageStorage.read(key: pref.imageKey);
+                        String? userName =
+                            await pref.nameStorage.read(key: pref.nameKey);
                         if (reviewValidator.currentState!.validate()) {
-                          context.read<ButtonStateCubit>().execute(
-                                usecase: AddReviewUseCase(),
-                                params: AddReviewReqModel(
-                                  createdDate:
-                                      Timestamp.fromDate(DateTime.now()),
-                                  productId: productEntity.productId,
-                                  rating: context.read<RatingCubit>().state,
-                                  review: _reviewController.text,
-                                ),
-                              );
+                          if (context.mounted) {
+                            context.read<ButtonStateCubit>().execute(
+                                  usecase: AddReviewUseCase(),
+                                  params: AddReviewReqModel(
+                                    userImage: userImage.toString(),
+                                    userName: userName.toString(),
+                                    createdDate:
+                                        Timestamp.fromDate(DateTime.now()),
+                                    productId: productEntity.productId,
+                                    rating: context.read<RatingCubit>().state,
+                                    review: _reviewController.text,
+                                  ),
+                                );
+                          }
                         }
                       },
                       title: 'Submit',
