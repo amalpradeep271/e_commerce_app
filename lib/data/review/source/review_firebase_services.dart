@@ -4,6 +4,7 @@ import 'package:e_commerce_application/data/review/model/add_review_req_model.da
 
 abstract class ReviewFirebaseService {
   Future<Either> addReview(AddReviewReqModel addReviewReqModel);
+  Future<Either> getAllReviews();
 }
 
 class ReviewFirebaseServiceImpl extends ReviewFirebaseService {
@@ -14,6 +15,17 @@ class ReviewFirebaseServiceImpl extends ReviewFirebaseService {
             addReviewReqModel.toMap(),
           );
       return const Right('Review Added successfully');
+    } catch (e) {
+      return const Left('Please try again.');
+    }
+  }
+
+  @override
+  Future<Either> getAllReviews() async {
+    try {
+      var reviews =
+          await FirebaseFirestore.instance.collection('Reviews').get();
+      return Right(reviews.docs.map((e) => e.data()).toList());
     } catch (e) {
       return const Left('Please try again.');
     }

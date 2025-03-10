@@ -71,7 +71,10 @@ class ReviewForm extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () {
-                        AppNavigator.push(context, const AllReviewPage());
+                        AppNavigator.push(
+                          context,
+                          const AllReviewPage(),
+                        );
                       },
                       child: Text(
                         "All Reviews",

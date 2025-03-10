@@ -38,6 +38,7 @@ import 'package:e_commerce_application/domain/product/usecase/get_topselling_use
 import 'package:e_commerce_application/domain/product/usecase/is_favourite_usecase.dart';
 import 'package:e_commerce_application/domain/review/repository/review_repository.dart';
 import 'package:e_commerce_application/domain/review/usecase/add_to_review_usecase.dart';
+import 'package:e_commerce_application/domain/review/usecase/get_review_usecase.dart';
 import 'package:get_it/get_it.dart';
 
 final sl = GetIt.instance;
@@ -87,6 +88,8 @@ Future<void> initializeDependencies() async {
       GetFavortiesProductsUseCase());
   sl.registerSingleton<GetOrdersUseCase>(GetOrdersUseCase());
   sl.registerSingleton<AddReviewUseCase>(AddReviewUseCase());
+    sl.registerSingleton<GetReviewsUsecase>(GetReviewsUsecase());
+
 
   sl.registerFactory(
       () => ProductsDisplayCubit(useCase: sl<GetFavortiesProductsUseCase>()));

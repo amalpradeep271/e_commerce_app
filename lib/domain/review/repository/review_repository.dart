@@ -3,4 +3,5 @@ import 'package:e_commerce_application/data/review/model/add_review_req_model.da
 
 abstract class ReviewRepository {
   Future<Either> addReview(AddReviewReqModel addReviewReqModel);
+  Future<Either> getAllReviews();
 }
