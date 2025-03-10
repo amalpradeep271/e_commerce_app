@@ -1,8 +1,12 @@
+import 'dart:developer';
+
 import 'package:e_commerce_application/domain/cart/entity/product_ordered_entity.dart';
 import 'package:e_commerce_application/domain/cart/usecase/get_cart_products_usecase.dart';
 import 'package:e_commerce_application/domain/cart/usecase/remove_cart_products_usecase.dart';
 import 'package:e_commerce_application/presentation/cart/bloc/cart_product_display_state.dart';
+import 'package:e_commerce_application/presentation/cart/bloc/cart_status_cubit.dart';
 import 'package:e_commerce_application/service_locator.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CartProductsDisplayCubit extends Cubit<CartProductsDisplayState> {
@@ -20,15 +24,23 @@ class CartProductsDisplayCubit extends Cubit<CartProductsDisplayState> {
     );
   }
 
-  Future<void> removeProduct(ProductOrderedEntity product) async {
+  Future<void> removeProduct(
+      ProductOrderedEntity product, BuildContext context) async {
+    log("🛑 Removing product: ${product.id}");
+
     emit(CartProductsLoading());
     var returnedData =
         await sl<RemoveCartProductsUseCase>().call(params: product.id);
 
     returnedData.fold((error) {
+      log("❌ Failed to remove product: $error");
       emit(LoadCartProductsFailure(errorMessage: error));
-    }, (data) {
-      displayCartProducts();
+    }, (data) async {
+      log("✅ Product removed successfully!");
+      displayCartProducts(); // ✅ Refresh UI after removal
+
+   
+      
     });
   }
 }

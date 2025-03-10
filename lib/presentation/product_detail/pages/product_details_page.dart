@@ -1,6 +1,7 @@
 import 'package:e_commerce_application/common/bloc/button/button_state_cubit.dart';
 import 'package:e_commerce_application/common/bloc/button/favourite_icon_cubit.dart';
 import 'package:e_commerce_application/common/widgets/appbar/app_bar.dart';
+import 'package:e_commerce_application/presentation/cart/bloc/cart_status_cubit.dart';
 import 'package:e_commerce_application/presentation/product_detail/bloc/product_color_selection_cubit.dart';
 import 'package:e_commerce_application/presentation/product_detail/bloc/product_image_view_cubit.dart';
 import 'package:e_commerce_application/presentation/product_detail/bloc/product_quanitity_cubit.dart';
@@ -42,8 +43,13 @@ class ProductDetailsPage extends StatelessWidget {
         BlocProvider(
             create: (context) => ButtonStateCubit()), // For Submit Review
         BlocProvider(
-            create: (context) =>
-                FavoriteIconCubit()..isFavorite(productEntity.productId)),
+          create: (context) =>
+              FavoriteIconCubit()..isFavorite(productEntity.productId),
+        ),
+        BlocProvider(
+          create: (context) =>
+              CartStatusCubit()..checkCartStatus(productEntity.productId),
+        )
       ],
       child: Scaffold(
         appBar: CustomAppBar(),
@@ -60,7 +66,6 @@ class ProductDetailsPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     ProductImages(productEntity: productEntity),
-
                     ProductTitle(productEntity: productEntity),
                     const SizedBox(
                       height: 5,
@@ -73,7 +78,6 @@ class ProductDetailsPage extends StatelessWidget {
                       ],
                     ),
                     const RatingBars(rating: 3),
-
                     ProductColors(productEntity: productEntity),
                     ProductSizes(productEntity: productEntity),
                     const SizedBox(
@@ -82,7 +86,6 @@ class ProductDetailsPage extends StatelessWidget {
                     Text(
                       productEntity.description,
                     ),
-
                     const SizedBox(
                       height: 30,
                     ),
@@ -102,26 +105,11 @@ class ProductDetailsPage extends StatelessWidget {
                       collapsedtext: "",
                       expandedtext: productEntity.dimensions,
                     ),
-
                     BlocProvider(
                       create: (context) =>
                           ButtonStateCubit(), // Separate Cubit for Review
                       child: ReviewForm(productEntity: productEntity),
                     ),
-
-                    // Text(
-                    //   "Featured Products",
-                    //   style: AppTextStyles.base.s16.w600,
-                    // ),
-                    // const SizedBox(
-                    //   height: 20,
-                    // ),
-                    // controller.productviewmodel.value.similarProducts!.isEmpty
-                    //     ? const SizedBox()
-                    //     : featuredproductbody(),
-                    // const SizedBox(
-                    //   height: 30,
-                    // ),
                   ],
                 ),
               ),
