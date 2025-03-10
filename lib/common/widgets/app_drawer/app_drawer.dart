@@ -7,6 +7,8 @@ import 'package:e_commerce_application/core/configs/assets/app_images.dart';
 import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
 import 'package:e_commerce_application/core/configs/theme/app_icons.dart';
 import 'package:e_commerce_application/core/configs/theme/app_text_theme.dart';
+import 'package:e_commerce_application/presentation/agreements/pages/privacy_policy_page.dart';
+import 'package:e_commerce_application/presentation/agreements/pages/terms_and_condition_pages.dart';
 import 'package:e_commerce_application/presentation/auth/pages/signin_page.dart';
 import 'package:e_commerce_application/presentation/home/bloc/user_info_display_cubit.dart';
 import 'package:e_commerce_application/presentation/home/bloc/user_info_display_state.dart';
@@ -42,7 +44,7 @@ class CustomAppDrawer extends StatelessWidget {
         // Implement Contact Us Navigation
       }),
       DrawerTileData(AppIcons.privacypolicy, "Privacy Policy", (context) {
-        // Implement Privacy Policy Navigation
+        AppNavigator.push(context, const PrivacyPolicyPage());
       }),
     ];
 
@@ -101,7 +103,7 @@ class CustomAppDrawer extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  // Implement Terms and Conditions Navigation
+                  AppNavigator.push(context, const TermsAndConditionPage());
                 },
                 child: Text(
                   "Terms and Conditions",
@@ -141,7 +143,6 @@ class CustomAppDrawer extends StatelessWidget {
                             child: CupertinoActivityIndicator());
                       }
                       if (state is UserInfoDisaplyLoaded) {
-                        
                         return Column(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
