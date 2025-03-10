@@ -33,4 +33,9 @@ class CartRepositoryImpl extends CartRepository {
       return Right(message);
     });
   }
+
+  @override
+  Future<Either> isProductInCart(String productId) async {
+    return await sl<CartFirebaseServices>().isProductInCart(productId);
+  }
 }

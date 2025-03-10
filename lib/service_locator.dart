@@ -21,6 +21,7 @@ import 'package:e_commerce_application/domain/auth/usecase/send_password_reset_e
 import 'package:e_commerce_application/domain/auth/usecase/signin_usecase.dart';
 import 'package:e_commerce_application/domain/auth/usecase/signup_usecase.dart';
 import 'package:e_commerce_application/domain/cart/repository/cart_repository.dart';
+import 'package:e_commerce_application/domain/cart/usecase/is_product_in_cart_usecase.dart';
 import 'package:e_commerce_application/domain/category/repository/category_repository.dart';
 import 'package:e_commerce_application/domain/category/usecase/get_category_usecase.dart';
 import 'package:e_commerce_application/domain/home/repository/banner_repository.dart';
@@ -94,7 +95,7 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<GetOrdersUseCase>(GetOrdersUseCase());
   sl.registerSingleton<AddReviewUseCase>(AddReviewUseCase());
   sl.registerSingleton<GetReviewsUsecase>(GetReviewsUsecase());
-
+  sl.registerSingleton<IsProductInCartUsecase>(IsProductInCartUsecase());
   sl.registerFactory(
       () => ProductsDisplayCubit(useCase: sl<GetFavortiesProductsUseCase>()));
 }

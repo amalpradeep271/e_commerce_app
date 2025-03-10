@@ -5,4 +5,5 @@ abstract class CartRepository {
   Future<Either> addToCart(AddToCartReq addToCartReq);
   Future<Either> getCartProducts();
   Future<Either> removeCartProduct(String id);
+  Future<Either> isProductInCart(String productId);
 }

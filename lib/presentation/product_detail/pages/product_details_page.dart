@@ -1,6 +1,7 @@
 import 'package:e_commerce_application/common/bloc/button/button_state_cubit.dart';
 import 'package:e_commerce_application/common/bloc/button/favourite_icon_cubit.dart';
 import 'package:e_commerce_application/common/widgets/appbar/app_bar.dart';
+import 'package:e_commerce_application/presentation/product_detail/bloc/product_color_selection_cubit.dart';
 import 'package:e_commerce_application/presentation/product_detail/bloc/product_image_view_cubit.dart';
 import 'package:e_commerce_application/presentation/product_detail/bloc/product_quanitity_cubit.dart';
 import 'package:e_commerce_application/presentation/product_detail/bloc/product_size_selection_cubit.dart';
@@ -34,15 +35,18 @@ class ProductDetailsPage extends StatelessWidget {
         ),
         BlocProvider(create: (context) => ProductQuantityCubit()),
         BlocProvider(create: (context) => ProductSizeSelectionCubit()),
-        BlocProvider(create: (context) => ButtonStateCubit()),
+
+        BlocProvider(create: (context) => ProductColorSelectionCubit()),
+        BlocProvider(
+            create: (context) => ButtonStateCubit()), // For Add to Cart
+        BlocProvider(
+            create: (context) => ButtonStateCubit()), // For Submit Review
         BlocProvider(
             create: (context) =>
                 FavoriteIconCubit()..isFavorite(productEntity.productId)),
       ],
       child: Scaffold(
-        appBar: CustomAppBar(
-            // actionIconData1: ,
-            ),
+        appBar: CustomAppBar(),
         bottomNavigationBar: AddToCart(
           productEntity: productEntity,
         ),
@@ -99,39 +103,12 @@ class ProductDetailsPage extends StatelessWidget {
                       expandedtext: productEntity.dimensions,
                     ),
 
-                    ReviewForm(productEntity: productEntity),
-                    // controller.productviewmodel.value.variants!.product!
-                    //         .reviews!.isEmpty
-                    //     ? const SizedBox()
-                    //     : reviewbody(),
-                    // const SizedBox(
-                    //   height: 20,
-                    // ),
-                    // GestureDetector(
-                    //   onTap: () {
-                    //     Get.toNamed(
-                    //       AppRoutes.reviewscreen,
-                    //       arguments: controller
-                    //           .productviewmodel.value.variants!.productId!,
-                    //     );
-                    //   },
-                    //   child: controller.productviewmodel.value.variants!
-                    //           .product!.reviews!.isEmpty
-                    //       ? const SizedBox()
-                    //       : Row(
-                    //           mainAxisAlignment: MainAxisAlignment.end,
-                    //           children: [
-                    //             const Icon(
-                    //               Khadi.success,
-                    //               color: AppColors.accountblue,
-                    //             ),
-                    //             Text(
-                    //               "View All",
-                    //               style: AppTextStyles.base.accountblue.s14,
-                    //             ),
-                    //           ],
-                    //         ),
-                    // ),
+                    BlocProvider(
+                      create: (context) =>
+                          ButtonStateCubit(), // Separate Cubit for Review
+                      child: ReviewForm(productEntity: productEntity),
+                    ),
+
                     // Text(
                     //   "Featured Products",
                     //   style: AppTextStyles.base.s16.w600,

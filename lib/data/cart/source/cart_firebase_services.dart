@@ -7,8 +7,8 @@ abstract class CartFirebaseServices {
   Future<Either> addToCart(AddToCartReq addToCartReq);
   Future<Either> getCartProducts();
   Future<Either> removeCartProduct(String id);
+  Future<Either> isProductInCart(String productId);
 }
-
 
 class CartFirebaseServicesImpl extends CartFirebaseServices {
   @override
@@ -66,4 +66,20 @@ class CartFirebaseServicesImpl extends CartFirebaseServices {
     }
   }
 
+  @override
+  Future<Either> isProductInCart(String productId) async {
+    try {
+      var user = FirebaseAuth.instance.currentUser;
+      var cartQuery = await FirebaseFirestore.instance
+          .collection('Users')
+          .doc(user!.uid)
+          .collection('Cart')
+          .where('productId', isEqualTo: productId)
+          .get();
+
+      return Right(cartQuery.docs.isNotEmpty);
+    } catch (e) {
+      return const Left('Failed to check cart status');
+    }
+  }
 }
