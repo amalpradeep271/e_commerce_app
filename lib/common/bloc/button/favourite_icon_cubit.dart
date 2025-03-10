@@ -18,7 +18,7 @@ class FavoriteIconCubit extends Cubit<bool> {
         await sl<AddOrRemoveFavoriteProductUseCase>().call(params: product);
     result.fold((error) {}, (data) {
       if (!isClosed) emit(data);
-      print("Favorite button tapped. Updating wishlist...");
+      // print("Favorite button tapped. Updating wishlist...");
 
       if (!isClosed) {
         if (sl.isRegistered<ProductsDisplayCubit>()) {

@@ -1,5 +1,5 @@
 import 'package:e_commerce_application/domain/order/entity/order_status_entity.dart';
-import 'package:e_commerce_application/domain/order/entity/product_ordered_entity.dart';
+import 'package:e_commerce_application/domain/cart/entity/product_ordered_entity.dart';
 
 class OrderEntity {
   final List < ProductOrderedEntity > products;
