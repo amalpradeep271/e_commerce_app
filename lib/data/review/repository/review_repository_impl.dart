@@ -12,8 +12,8 @@ class ReviewRepositoryImpl extends ReviewRepository {
   }
   
   @override
-  Future<Either> getAllReviews() async{
-  var reviews = await sl<ReviewFirebaseService>().getAllReviews();
+  Future<Either> getAllReviews(String productId) async{
+  var reviews = await sl<ReviewFirebaseService>().getAllReviews(productId);
     return reviews.fold(
       (error) {
         return Left(error);

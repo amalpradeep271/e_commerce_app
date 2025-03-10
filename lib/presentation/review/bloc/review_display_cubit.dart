@@ -6,8 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ReviewsDisplayCubit extends Cubit<ReviewsDisplayState> {
   ReviewsDisplayCubit() : super(ReviewsLoading());
 
-  void displayReviews() async {
-    var returnedData = await sl<GetReviewsUsecase>().call();
+  void displayReviews(dynamic params) async {
+    var returnedData = await sl<GetReviewsUsecase>().call(params: params);
     returnedData.fold(
       (error) {
         emit(ReviewsLoadFailure());

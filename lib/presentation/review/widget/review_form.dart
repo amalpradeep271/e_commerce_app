@@ -73,7 +73,9 @@ class ReviewForm extends StatelessWidget {
                       onTap: () {
                         AppNavigator.push(
                           context,
-                          const AllReviewPage(),
+                          AllReviewPage(
+                            productEntity: productEntity,
+                          ),
                         );
                       },
                       child: Text(

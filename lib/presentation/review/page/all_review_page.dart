@@ -1,6 +1,7 @@
 import 'package:e_commerce_application/common/widgets/appbar/app_bar.dart';
 import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
 import 'package:e_commerce_application/core/configs/theme/app_text_theme.dart';
+import 'package:e_commerce_application/domain/product/entity/product_entity.dart';
 import 'package:e_commerce_application/presentation/review/bloc/review_display_cubit.dart';
 import 'package:e_commerce_application/presentation/review/bloc/review_display_state.dart';
 import 'package:flutter/cupertino.dart';
@@ -11,7 +12,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 
 class AllReviewPage extends StatelessWidget {
-  const AllReviewPage({super.key});
+  final ProductEntity productEntity;
+
+  const AllReviewPage({super.key, required this.productEntity});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +28,8 @@ class AllReviewPage extends StatelessWidget {
 
   Widget reviewbody() {
     return BlocProvider(
-      create: (context) => ReviewsDisplayCubit()..displayReviews(),
+      create: (context) =>
+          ReviewsDisplayCubit()..displayReviews(productEntity.productId),
       child: BlocBuilder<ReviewsDisplayCubit, ReviewsDisplayState>(
         builder: (context, state) {
           if (state is ReviewsLoading) {
@@ -34,6 +38,11 @@ class AllReviewPage extends StatelessWidget {
             );
           }
           if (state is ReviewsLoaded) {
+            if (state.reviews.isEmpty) {
+              return const Center(
+                child: Text('No Reviews Yet'),
+              );
+            }
             return Padding(
               padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
               child: Column(
