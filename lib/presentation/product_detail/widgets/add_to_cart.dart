@@ -87,9 +87,7 @@ class AddToCart extends StatelessWidget {
                           .markAsAdded(); // ✅ Ensure UI updates
                     },
                   );
-                  // context
-                  //     .read<CartStatusCubit>()
-                  //     .checkCartStatus(productEntity.productId);
+                
                 }
               },
               content: Row(
@@ -109,7 +107,7 @@ class AddToCart extends StatelessWidget {
                   ),
                   BlocListener<CartStatusCubit, bool>(
                     listener: (context, state) {
-                      
+
                     },
                     child: Text(
                       isInCart ? 'Go to Cart' : 'Add to Cart',

@@ -1,10 +1,7 @@
-import 'dart:developer';
-
 import 'package:e_commerce_application/common/helper/images/images_display.dart';
 import 'package:e_commerce_application/core/configs/theme/app_text_theme.dart';
 import 'package:e_commerce_application/domain/cart/entity/product_ordered_entity.dart';
 import 'package:e_commerce_application/presentation/cart/bloc/cart_product_display_cubit.dart';
-import 'package:e_commerce_application/presentation/cart/bloc/cart_status_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -122,14 +119,10 @@ class ProductOrderedCard extends StatelessWidget {
                         .read<CartProductsDisplayCubit>()
                         .removeProduct(productOrderedEntity, context)
                         .then(
-                      (_) {
-                        log("🗑️ Calling markAsRemoved()...");
-                        context.read<CartStatusCubit>().markAsRemoved();
-
-                        log("🔄 Checking cart status again...");
+                      (value) {
                         context
-                            .read<CartStatusCubit>()
-                            .checkCartStatus(productOrderedEntity.productId);
+                            .read<CartProductsDisplayCubit>()
+                            .displayCartProducts();
                       },
                     );
                   },

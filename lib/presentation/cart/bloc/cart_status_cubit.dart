@@ -1,35 +1,39 @@
-import 'package:dartz/dartz.dart';
+import 'dart:developer';
+
 import 'package:e_commerce_application/domain/cart/usecase/is_product_in_cart_usecase.dart';
-import 'package:e_commerce_application/presentation/cart/bloc/cart_status_state.dart';
+import 'package:e_commerce_application/service_locator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CartStatusCubit extends Cubit<CartStatusState> {
-  final IsProductInCartUsecase isProductInCartUsecase;
+class CartStatusCubit extends Cubit<bool> {
+  CartStatusCubit() : super(false);
 
-  CartStatusCubit({required this.isProductInCartUsecase}) : super(CartInitial());
+  void checkCartStatus(String productId) async {
+    print("🔍 Checking cart status for productId: $productId");
 
-  Future<void> checkCartStatus(String productId) async {
-    emit(CartLoading()); // Optional: Show loading state if needed
-
-    final Either<dynamic, bool> result = await isProductInCartUsecase.call(params: productId);
+    var result = await sl<IsProductInCartUsecase>().call(params: productId);
 
     result.fold(
-      (failure) => emit(CartError("Error checking cart status")),
+      (error) {
+        print("❌ Cart check failed: $error");
+        emit(false);
+      },
       (isInCart) {
-        if (isInCart) {
-          emit(ProductInCartState());
-        } else {
-          emit(ProductNotInCartState());
-        }
+        print("✅ Cart check result: $isInCart");
+
+        emit(isInCart);
       },
     );
   }
 
   void markAsAdded() {
-    emit(ProductAddedToCartState());
+    log("🛒 Marking product as added to cart");
+
+    emit(true);
   }
 
   void markAsRemoved() {
-    emit(ProductRemovedFromCartState());
+    log("🗑️ Marking product as removed from cart");
+
+    emit(false);
   }
 }
