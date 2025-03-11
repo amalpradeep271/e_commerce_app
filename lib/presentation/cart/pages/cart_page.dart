@@ -4,7 +4,6 @@ import 'package:e_commerce_application/core/configs/theme/app_text_theme.dart';
 import 'package:e_commerce_application/domain/cart/entity/product_ordered_entity.dart';
 import 'package:e_commerce_application/presentation/cart/bloc/cart_product_display_cubit.dart';
 import 'package:e_commerce_application/presentation/cart/bloc/cart_product_display_state.dart';
-import 'package:e_commerce_application/presentation/cart/bloc/cart_status_cubit.dart';
 import 'package:e_commerce_application/presentation/cart/widgets/checkout.dart';
 import 'package:e_commerce_application/presentation/cart/widgets/product_ordered_card.dart';
 import 'package:flutter/cupertino.dart';

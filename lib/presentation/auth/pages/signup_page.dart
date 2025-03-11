@@ -7,6 +7,7 @@ import 'package:e_commerce_application/common/widgets/app_textfield/basic_app_te
 import 'package:e_commerce_application/core/configs/assets/app_images.dart';
 import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
 import 'package:e_commerce_application/core/configs/theme/app_text_theme.dart';
+import 'package:e_commerce_application/core/constants/app_preference.dart';
 import 'package:e_commerce_application/data/auth/models/user_creation_req.dart';
 import 'package:e_commerce_application/domain/auth/usecase/signup_usecase.dart';
 import 'package:e_commerce_application/presentation/auth/pages/signin_page.dart';
@@ -164,18 +165,25 @@ class SignupPage extends StatelessWidget {
     return Builder(
       builder: (context) {
         return BasicReactiveButton(
-          onPressed: () {
+          onPressed: () async {
+            final pref = AppPref();
+            await pref.nameStorage.write(
+              key: pref.nameKey,
+              value: "${_firstNameController.text} ${_lastNameController.text}",
+            );
             var signUpReq = UserCreationReq(
               firstName: _firstNameController.text,
               lastName: _lastNameController.text,
               email: _emailController.text,
               password: _passwordController.text,
             );
-            context.read<ButtonStateCubit>().execute(
-                  usecase: SignUpUseCase(),
-                  params: signUpReq,
-                );
-            AppNavigator.pushReplacement(context, SigninPage());
+            if (context.mounted) {
+              context.read<ButtonStateCubit>().execute(
+                    usecase: SignUpUseCase(),
+                    params: signUpReq,
+                  );
+              AppNavigator.pushReplacement(context, SigninPage());
+            }
           },
           title: "Sign Up",
         );

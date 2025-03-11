@@ -19,10 +19,7 @@ class UserInfoDisplayCubit extends Cubit<UserInfoDisaplyState> {
       (data) async {
         UserEntity dat = data;
         final pref = AppPref();
-        await pref.nameStorage.write(
-          key: pref.nameKey,
-          value: "${dat.firstName} ${dat.lastName}",
-        );
+        
         await pref.imageStorage.write(
           key: pref.imageKey,
           value: dat.image,

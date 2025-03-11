@@ -31,7 +31,7 @@ class AddToCart extends StatelessWidget {
             behavior: SnackBarBehavior.floating,
           );
           ScaffoldMessenger.of(context).showSnackBar(snackbar);
-          AppNavigator.push(context, CartPage());
+          AppNavigator.push(context, const CartPage());
         }
         if (state is ButtonFailureState) {
           var snackbar = SnackBar(

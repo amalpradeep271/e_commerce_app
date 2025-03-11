@@ -1,4 +1,5 @@
 import 'package:e_commerce_application/common/widgets/appbar/app_bar.dart';
+import 'package:e_commerce_application/core/configs/assets/app_images.dart';
 import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
 import 'package:e_commerce_application/core/configs/theme/app_text_theme.dart';
 import 'package:e_commerce_application/domain/product/entity/product_entity.dart';
@@ -101,9 +102,12 @@ class AllReviewPage extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 CircleAvatar(
-                                  backgroundImage: NetworkImage(
-                                    state.reviews[index].userImage,
-                                  ),
+                                  backgroundImage: state
+                                          .reviews[index].userImage.isEmpty
+                                      ? const AssetImage(AppImages.profilemen)
+                                      : NetworkImage(
+                                          state.reviews[index].userImage,
+                                        ),
                                 ),
                                 SizedBox(
                                   width: 25.w,
