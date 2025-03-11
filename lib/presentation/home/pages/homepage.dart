@@ -1,8 +1,10 @@
 import 'package:e_commerce_application/common/helper/images/images_display.dart';
+import 'package:e_commerce_application/common/helper/navigator/app_navigator.dart';
 import 'package:e_commerce_application/common/widgets/app_drawer/app_drawer.dart';
 import 'package:e_commerce_application/common/widgets/appbar/app_bar.dart';
 import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
 import 'package:e_commerce_application/core/configs/theme/app_icons.dart';
+import 'package:e_commerce_application/presentation/cart/pages/cart_page.dart';
 import 'package:e_commerce_application/presentation/home/bloc/banners_display_cubit.dart';
 import 'package:e_commerce_application/presentation/home/bloc/banners_display_state.dart';
 import 'package:e_commerce_application/presentation/home/widgets/banner_carousel_slider.dart';
@@ -29,7 +31,7 @@ class HomePage extends StatelessWidget {
         searchBox: true,
         backgroundColor: AppColors.transparent,
         actionIconData2: AppIcons.cart,
-        // onAction2Pressed: () => Get.toNamed(AppRoutes.cartscreen),
+        onAction2Pressed: () => AppNavigator.push(context, const CartPage()),
         // itemcount: controller.itemcount.value,
         // isLoading: controller.isLoading.value,
       ),

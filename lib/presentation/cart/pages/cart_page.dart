@@ -22,41 +22,36 @@ class CartPage extends StatelessWidget {
         title: 'Cart',
       ),
       body: BlocProvider(
-        create: (context) => CartStatusCubit()..markAsRemoved(),
-        child: BlocProvider(
-          create: (context) =>
-              CartProductsDisplayCubit()..displayCartProducts(),
-          child:
-              BlocBuilder<CartProductsDisplayCubit, CartProductsDisplayState>(
-            builder: (context, state) {
-              if (state is CartProductsLoading) {
-                return const Center(
-                  child: CupertinoActivityIndicator(),
-                );
-              }
-              if (state is CartProductsLoaded) {
-                return state.products.isEmpty
-                    ? Center(child: _cartIsEmpty())
-                    : Stack(
-                        children: [
-                          _products(state.products, context),
-                          Align(
-                            alignment: Alignment.bottomCenter,
-                            child: Checkout(
-                              products: state.products,
-                            ),
-                          )
-                        ],
-                      );
-              }
-              if (state is LoadCartProductsFailure) {
-                return Center(
-                  child: Text(state.errorMessage),
-                );
-              }
-              return Container();
-            },
-          ),
+        create: (context) => CartProductsDisplayCubit()..displayCartProducts(),
+        child: BlocBuilder<CartProductsDisplayCubit, CartProductsDisplayState>(
+          builder: (context, state) {
+            if (state is CartProductsLoading) {
+              return const Center(
+                child: CupertinoActivityIndicator(),
+              );
+            }
+            if (state is CartProductsLoaded) {
+              return state.products.isEmpty
+                  ? Center(child: _cartIsEmpty())
+                  : Stack(
+                      children: [
+                        _products(state.products, context),
+                        Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Checkout(
+                            products: state.products,
+                          ),
+                        )
+                      ],
+                    );
+            }
+            if (state is LoadCartProductsFailure) {
+              return Center(
+                child: Text(state.errorMessage),
+              );
+            }
+            return Container();
+          },
         ),
       ),
     );
@@ -67,20 +62,8 @@ class CartPage extends StatelessWidget {
     return ListView.separated(
       padding: EdgeInsets.all(16.w),
       itemBuilder: (context, index) {
-        return MultiBlocProvider(
-          providers: [
-            BlocProvider(
-              create: (context) => CartProductsDisplayCubit()
-                ..removeProduct(products[index], parentContext),
-            ),
-            BlocProvider(
-              create: (context) =>
-                  CartProductsDisplayCubit()..displayCartProducts(),
-            ),
-          ],
-          child: ProductOrderedCard(
-            productOrderedEntity: products[index],
-          ),
+        return ProductOrderedCard(
+          productOrderedEntity: products[index],
         );
       },
       separatorBuilder: (context, index) => SizedBox(
