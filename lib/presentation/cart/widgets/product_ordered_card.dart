@@ -114,17 +114,10 @@ class ProductOrderedCard extends StatelessWidget {
                   style: AppTextStyles.base.s14.w600,
                 ),
                 GestureDetector(
-                  onTap: () async {
+                  onTap: () {
                     context
                         .read<CartProductsDisplayCubit>()
-                        .removeProduct(productOrderedEntity, context)
-                        .then(
-                      (value) {
-                        context
-                            .read<CartProductsDisplayCubit>()
-                            .displayCartProducts();
-                      },
-                    );
+                        .removeProduct(productOrderedEntity, context);
                   },
                   child: Container(
                     height: 23.h,

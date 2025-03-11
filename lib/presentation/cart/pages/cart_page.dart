@@ -22,7 +22,7 @@ class CartPage extends StatelessWidget {
         title: 'Cart',
       ),
       body: BlocProvider(
-        create: (context) => CartStatusCubit(),
+        create: (context) => CartStatusCubit()..markAsRemoved(),
         child: BlocProvider(
           create: (context) =>
               CartProductsDisplayCubit()..displayCartProducts(),
@@ -67,9 +67,17 @@ class CartPage extends StatelessWidget {
     return ListView.separated(
       padding: EdgeInsets.all(16.w),
       itemBuilder: (context, index) {
-        return BlocProvider(
-          create: (context) => CartProductsDisplayCubit()
-            ..removeProduct(products[index], parentContext),
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) => CartProductsDisplayCubit()
+                ..removeProduct(products[index], parentContext),
+            ),
+            BlocProvider(
+              create: (context) =>
+                  CartProductsDisplayCubit()..displayCartProducts(),
+            ),
+          ],
           child: ProductOrderedCard(
             productOrderedEntity: products[index],
           ),

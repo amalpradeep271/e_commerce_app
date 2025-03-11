@@ -43,82 +43,91 @@ class AddToCart extends StatelessWidget {
           ScaffoldMessenger.of(context).showSnackBar(snackbar);
         }
       },
-      child: BlocBuilder<CartStatusCubit, bool>(
-        builder: (context, isInCart) {
-          log("🖥️ UI Updated: isInCart = $isInCart");
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => CartStatusCubit()..markAsRemoved(),
+          ),
+          BlocProvider(
+            create: (context) =>
+                CartStatusCubit()..checkCartStatus(productEntity.productId),
+          ),
+        ],
+        child: BlocBuilder<CartStatusCubit, bool>(
+          builder: (context, isInCart) {
+            log("🖥️ UI Updated: isInCart =$isInCart ");
 
-          return Padding(
-            padding: const EdgeInsets.all(16),
-            child: BasicReactiveButton(
-              onPressed: () {
-                if (isInCart) {
-                  AppNavigator.push(context, const CartPage());
-                } else {
-                  context
-                      .read<ButtonStateCubit>()
-                      .execute(
-                        usecase: AddToCartUseCase(),
-                        params: AddToCartReq(
-                          productId: productEntity.productId,
-                          productTitle: productEntity.title,
-                          productQuantity:
-                              context.read<ProductQuantityCubit>().state,
-                          productColor: productEntity
-                              .color[context
-                                  .read<ProductColorSelectionCubit>()
-                                  .selectedIndex]
-                              .title,
-                          productSize: productEntity.sizes[context
-                              .read<ProductSizeSelectionCubit>()
-                              .selectedIndex],
-                          productPrice: productEntity.price.toDouble(),
-                          discountPrice: productEntity.discountPrice.toDouble(),
-                          totalPrice: ProductPriceHelper.provideCurrentPrice(
-                                  productEntity) *
-                              context.read<ProductQuantityCubit>().state,
-                          productImage: productEntity.images[0],
-                          createdDate: DateTime.now().toString(),
-                        ),
-                      )
-                      .then(
-                    (value) {
-                      context
-                          .read<CartStatusCubit>()
-                          .markAsAdded(); // ✅ Ensure UI updates
-                    },
-                  );
-                
-                }
-              },
-              content: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  BlocBuilder<ProductQuantityCubit, int>(
-                    builder: (context, state) {
-                      var price = ProductPriceHelper.provideCurrentPrice(
-                              productEntity) *
-                          state;
+            return Padding(
+              padding: const EdgeInsets.all(16),
+              child: BasicReactiveButton(
+                onPressed: () {
+                  if (isInCart) {
+                    AppNavigator.push(context, const CartPage());
+                  } else {
+                    context
+                        .read<ButtonStateCubit>()
+                        .execute(
+                          usecase: AddToCartUseCase(),
+                          params: AddToCartReq(
+                            productId: productEntity.productId,
+                            productTitle: productEntity.title,
+                            productQuantity:
+                                context.read<ProductQuantityCubit>().state,
+                            productColor: productEntity
+                                .color[context
+                                    .read<ProductColorSelectionCubit>()
+                                    .selectedIndex]
+                                .title,
+                            productSize: productEntity.sizes[context
+                                .read<ProductSizeSelectionCubit>()
+                                .selectedIndex],
+                            productPrice: productEntity.price.toDouble(),
+                            discountPrice:
+                                productEntity.discountPrice.toDouble(),
+                            totalPrice: ProductPriceHelper.provideCurrentPrice(
+                                    productEntity) *
+                                context.read<ProductQuantityCubit>().state,
+                            productImage: productEntity.images[0],
+                            createdDate: DateTime.now().toString(),
+                          ),
+                        )
+                        .then(
+                      (value) {
+                        context
+                            .read<CartStatusCubit>()
+                            .markAsAdded(); // ✅ Ensure UI updates
+                      },
+                    );
+                  }
+                },
+                content: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    BlocBuilder<ProductQuantityCubit, int>(
+                      builder: (context, state) {
+                        var price = ProductPriceHelper.provideCurrentPrice(
+                                productEntity) *
+                            state;
 
-                      return Text(
-                        "₹ $price",
-                        style: AppTextStyles.base.w500.whiteColor.s14,
-                      );
-                    },
-                  ),
-                  BlocListener<CartStatusCubit, bool>(
-                    listener: (context, state) {
-
-                    },
-                    child: Text(
-                      isInCart ? 'Go to Cart' : 'Add to Cart',
-                      style: AppTextStyles.base.w500.whiteColor.s14,
+                        return Text(
+                          "₹ $price",
+                          style: AppTextStyles.base.w500.whiteColor.s14,
+                        );
+                      },
                     ),
-                  )
-                ],
+                    BlocListener<CartStatusCubit, bool>(
+                      listener: (context, state) {},
+                      child: Text(
+                        isInCart ? 'Go to Cart' : 'Add to Cart',
+                        style: AppTextStyles.base.w500.whiteColor.s14,
+                      ),
+                    )
+                  ],
+                ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }
