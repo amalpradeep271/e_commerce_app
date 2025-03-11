@@ -5,7 +5,9 @@ import 'package:e_commerce_application/common/widgets/appbar/app_bar.dart';
 import 'package:e_commerce_application/core/configs/assets/app_gifs.dart';
 import 'package:e_commerce_application/core/configs/theme/app_text_theme.dart';
 import 'package:e_commerce_application/domain/product/entity/product_entity.dart';
+import 'package:e_commerce_application/domain/product/usecase/get_favourite_products_usecase.dart';
 import 'package:e_commerce_application/presentation/wishlist/widgets/wishlist_card.dart';
+import 'package:e_commerce_application/service_locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,25 +21,30 @@ class WishlistPage extends StatelessWidget {
       appBar: CustomAppBar(
         title: 'My Favorites',
       ),
-      body: BlocBuilder<ProductsDisplayCubit, ProductsDisplayState>(
-        builder: (context, state) {
-          if (state is ProductsLoading) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          if (state is ProductsLoaded) {
-            return state.products.isEmpty
-                ? Center(child: _wishlistIsEmpty())
-                : _products(state.products);
-          }
-          if (state is LoadProductsFailure) {
-            return const Center(
-              child: Text('Please try again'),
-            );
-          }
-          return Container();
-        },
+      body: BlocProvider(
+        create: (context) =>
+            ProductsDisplayCubit(useCase: sl<GetFavortiesProductsUseCase>())
+              ..displayProducts(),
+        child: BlocBuilder<ProductsDisplayCubit, ProductsDisplayState>(
+          builder: (context, state) {
+            if (state is ProductsLoading) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            if (state is ProductsLoaded) {
+              return state.products.isEmpty
+                  ? Center(child: _wishlistIsEmpty())
+                  : _products(state.products);
+            }
+            if (state is LoadProductsFailure) {
+              return const Center(
+                child: Text('Please try again'),
+              );
+            }
+            return Container();
+          },
+        ),
       ),
     );
   }
