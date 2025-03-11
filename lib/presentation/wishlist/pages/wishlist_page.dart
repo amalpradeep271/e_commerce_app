@@ -1,10 +1,13 @@
 import 'package:e_commerce_application/common/bloc/product/product_display_cubit.dart';
 import 'package:e_commerce_application/common/bloc/product/product_display_state.dart';
 import 'package:e_commerce_application/common/widgets/appbar/app_bar.dart';
+import 'package:e_commerce_application/core/configs/assets/app_gifs.dart';
+import 'package:e_commerce_application/core/configs/theme/app_text_theme.dart';
 import 'package:e_commerce_application/domain/product/entity/product_entity.dart';
 import 'package:e_commerce_application/presentation/wishlist/widgets/wishlist_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class WishlistPage extends StatelessWidget {
   const WishlistPage({super.key});
@@ -23,12 +26,9 @@ class WishlistPage extends StatelessWidget {
             );
           }
           if (state is ProductsLoaded) {
-            if (state.products.isEmpty) {
-              return const Center(
-                child: Text('No Fav Found'),
-              );
-            }
-            return _products(state.products);
+            return state.products.isEmpty
+                ? Center(child: _wishlistIsEmpty())
+                : _products(state.products);
           }
           if (state is LoadProductsFailure) {
             return const Center(
@@ -38,6 +38,27 @@ class WishlistPage extends StatelessWidget {
           return Container();
         },
       ),
+    );
+  }
+
+  Widget _wishlistIsEmpty() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        SizedBox(
+          height: 100.h,
+          width: 100.w,
+          child: Image.asset(AppGifs.wishlistEmpty),
+        ),
+        SizedBox(
+          height: 20.h,
+        ),
+        Text(
+          "Wishlist is empty",
+          textAlign: TextAlign.center,
+          style: AppTextStyles.base.w600.s20,
+        )
+      ],
     );
   }
 

@@ -5,6 +5,7 @@ import 'package:e_commerce_application/core/configs/theme/app_icons.dart';
 import 'package:e_commerce_application/core/configs/theme/app_text_theme.dart';
 import 'package:e_commerce_application/domain/product/usecase/get_favourite_products_usecase.dart';
 import 'package:e_commerce_application/presentation/home/pages/homepage.dart';
+import 'package:e_commerce_application/presentation/order/pages/my_orders_page.dart';
 import 'package:e_commerce_application/presentation/wishlist/pages/wishlist_page.dart';
 import 'package:e_commerce_application/service_locator.dart';
 import 'package:flutter/material.dart';
@@ -40,8 +41,8 @@ class CustomAppBottomNavigationBar extends StatelessWidget {
                 items: const <BottomNavigationBarItem>[
                   BottomNavigationBarItem(
                       icon: Icon(AppIcons.home), label: 'Home'),
-                  // BottomNavigationBarItem(
-                  //     icon: Icon(AppIcons.orders), label: 'Orders'),
+                  BottomNavigationBarItem(
+                      icon: Icon(AppIcons.orders), label: 'Orders'),
                   // BottomNavigationBarItem(
                   //     icon: Icon(AppIcons.notification), label: 'Notification'),
                   BottomNavigationBarItem(
@@ -76,7 +77,7 @@ class CustomAppBottomNavigationBar extends StatelessWidget {
               index: tabIndex,
               children: const [
                 HomePage(),
-                // OrderPage(),
+                MyOrdersPage(),
                 // NotificationPage(),
                 WishlistPage(),
               ],
