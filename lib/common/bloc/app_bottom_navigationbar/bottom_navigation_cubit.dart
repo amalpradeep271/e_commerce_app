@@ -7,7 +7,7 @@ class BottomNavigationCubit extends Cubit<int> {
 
   void changeTabIndex(int index, BuildContext context) {
     emit(index);
-    if (index == 1) {
+    if (index == 2) {
       context.read<ProductsDisplayCubit>().displayProducts(showLoading: false);
     }
   }

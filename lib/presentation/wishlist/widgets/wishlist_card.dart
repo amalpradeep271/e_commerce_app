@@ -1,4 +1,5 @@
 import 'package:e_commerce_application/common/bloc/button/favourite_icon_cubit.dart';
+import 'package:e_commerce_application/common/bloc/product/product_display_cubit.dart';
 import 'package:e_commerce_application/common/helper/images/images_display.dart';
 import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
 import 'package:e_commerce_application/core/configs/theme/app_icons.dart';
@@ -10,15 +11,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class WishlistCard extends StatelessWidget {
   const WishlistCard({
     super.key,
-
-    // required this.rating,
     required this.productEntity,
-    // required this.onTap,
   });
   final ProductEntity productEntity;
 
-  // final double rating;
-  // final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -81,16 +77,6 @@ class WishlistCard extends StatelessWidget {
                       const SizedBox(
                         height: 15,
                       ),
-                      // RatingBarIndicator(
-                      //   itemBuilder: (context, index) => const Icon(
-                      //     Icons.star,
-                      //     color: AppColors.kPrimaryColor,
-                      //   ),
-                      //   itemCount: 5,
-                      //   itemSize: 17,
-                      //   direction: Axis.horizontal,
-                      //   rating: rating,
-                      // ),
                     ],
                   ),
                 ),
@@ -105,6 +91,9 @@ class WishlistCard extends StatelessWidget {
             InkWell(
               onTap: () {
                 context.read<FavoriteIconCubit>().onTap(productEntity);
+                context
+                    .read<ProductsDisplayCubit>()
+                    .displayProducts(showLoading: true);
               },
               child: const SizedBox(
                 child: Row(
