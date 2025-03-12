@@ -1,3 +1,4 @@
+import 'package:e_commerce_application/common/bloc/button/favourite_icon_cubit.dart';
 import 'package:e_commerce_application/common/bloc/product/product_display_cubit.dart';
 import 'package:e_commerce_application/common/bloc/product/product_display_state.dart';
 import 'package:e_commerce_application/common/widgets/appbar/app_bar.dart';
@@ -67,8 +68,11 @@ class WishlistPage extends StatelessWidget {
       itemCount: products.length,
       padding: const EdgeInsets.all(16),
       itemBuilder: (BuildContext context, int index) {
-        return WishlistCard(
-          productEntity: products[index],
+        return BlocProvider(
+          create: (context) => FavoriteIconCubit()..onTap(products[index]),
+          child: WishlistCard(
+            productEntity: products[index],
+          ),
         );
       },
     );

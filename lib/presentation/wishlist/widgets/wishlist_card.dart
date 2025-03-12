@@ -1,9 +1,12 @@
+import 'package:e_commerce_application/common/bloc/button/favourite_icon_cubit.dart';
+import 'package:e_commerce_application/common/bloc/product/product_display_cubit.dart';
 import 'package:e_commerce_application/common/helper/images/images_display.dart';
 import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
 import 'package:e_commerce_application/core/configs/theme/app_icons.dart';
 import 'package:e_commerce_application/core/configs/theme/app_text_theme.dart';
 import 'package:e_commerce_application/domain/product/entity/product_entity.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class WishlistCard extends StatelessWidget {
   const WishlistCard({
@@ -86,7 +89,12 @@ class WishlistCard extends StatelessWidget {
               color: AppColors.productGray,
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                context.read<FavoriteIconCubit>().onTap(productEntity);
+                context
+                    .read<ProductsDisplayCubit>()
+                    .displayProducts(showLoading: true);
+              },
               child: const SizedBox(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
