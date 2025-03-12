@@ -1,10 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:e_commerce_application/common/bloc/product/product_display_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:e_commerce_application/common/bloc/button/favourite_icon_cubit.dart';
-import 'package:e_commerce_application/common/bloc/product/product_display_cubit.dart';
 import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
 import 'package:e_commerce_application/domain/product/entity/product_entity.dart';
 
@@ -22,9 +22,9 @@ class FavoriteButton extends StatelessWidget {
     return IconButton(
       onPressed: () {
         context.read<FavoriteIconCubit>().onTap(productEntity);
-        // context
-        //     .read<ProductsDisplayCubit>(  )
-        //     .displayProducts(showLoading: false);
+        context
+            .read<ProductsDisplayCubit>()
+            .displayProducts(showLoading: false);
       },
       icon: Container(
         height: 40.h,

@@ -4,7 +4,6 @@ import 'package:e_commerce_application/common/helper/navigator/app_navigator.dar
 import 'package:e_commerce_application/common/widgets/product/product_card.dart';
 import 'package:e_commerce_application/common/widgets/product/product_heading.dart';
 import 'package:e_commerce_application/domain/product/entity/product_entity.dart';
-import 'package:e_commerce_application/domain/product/usecase/get_favourite_products_usecase.dart';
 import 'package:e_commerce_application/domain/product/usecase/get_topselling_usecase.dart';
 import 'package:e_commerce_application/presentation/all_products/pages/all_products_page.dart';
 import 'package:e_commerce_application/service_locator.dart';
@@ -74,13 +73,8 @@ class TopSelling extends StatelessWidget {
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (_, index) {
-          return BlocProvider(
-            create: (context) =>
-                ProductsDisplayCubit(useCase: sl<GetFavortiesProductsUseCase>())
-                  ..displayProducts(),
-            child: ProductCard(
-              productEntity: products[index],
-            ),
+          return ProductCard(
+            productEntity: products[index],
           );
         },
       ),
