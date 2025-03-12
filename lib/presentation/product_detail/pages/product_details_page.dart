@@ -63,7 +63,7 @@ class ProductDetailsPage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: SingleChildScrollView(
                 child: Column(
-                  spacing: 8,
+                  // spacing: 8,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     ProductImages(productEntity: productEntity),

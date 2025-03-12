@@ -5,19 +5,19 @@ class AppColors {
 
   static const Color kPrimaryColor = Color(0xFFE5951F);
 
-  static MaterialColor appPrimarySwatch =
-      MaterialColor(kPrimaryColor.toARGB32(), <int, Color>{
-    50: kPrimaryColor.withValues(alpha: 0.1),
-    100: kPrimaryColor.withValues(alpha: 0.2),
-    200: kPrimaryColor.withValues(alpha: 0.3),
-    300: kPrimaryColor.withValues(alpha: 0.4),
-    400: kPrimaryColor.withValues(alpha: 0.5),
-    500: kPrimaryColor.withValues(alpha: 0.6),
-    600: kPrimaryColor.withValues(alpha: 0.7),
-    700: kPrimaryColor.withValues(alpha: 0.8),
-    800: kPrimaryColor.withValues(alpha: 0.9),
-    900: kPrimaryColor.withValues(alpha: 1.0),
-  });
+  // static MaterialColor appPrimarySwatch =
+  //     MaterialColor(kPrimaryColor.toARGB32(), <int, Color>{
+  //   50: kPrimaryColor.withValues(alpha: 0.1),
+  //   100: kPrimaryColor.withValues(alpha: 0.2),
+  //   200: kPrimaryColor.withValues(alpha: 0.3),
+  //   300: kPrimaryColor.withValues(alpha: 0.4),
+  //   400: kPrimaryColor.withValues(alpha: 0.5),
+  //   500: kPrimaryColor.withValues(alpha: 0.6),
+  //   600: kPrimaryColor.withValues(alpha: 0.7),
+  //   700: kPrimaryColor.withValues(alpha: 0.8),
+  //   800: kPrimaryColor.withValues(alpha: 0.9),
+  //   900: kPrimaryColor.withValues(alpha: 1.0),
+  // });
 
   static const Color white = Colors.white;
   static const Color black = Colors.black;
