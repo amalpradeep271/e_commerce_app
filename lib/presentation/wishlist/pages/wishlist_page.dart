@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:e_commerce_application/common/bloc/button/favourite_icon_cubit.dart';
 import 'package:e_commerce_application/common/bloc/product/product_display_cubit.dart';
 import 'package:e_commerce_application/common/bloc/product/product_display_state.dart';
@@ -21,6 +23,8 @@ class WishlistPage extends StatelessWidget {
       ),
       body: BlocBuilder<ProductsDisplayCubit, ProductsDisplayState>(
         builder: (context, state) {
+          log("WishlistPage BlocBuilder is rebuilding!"); // Add this line
+
           if (state is ProductsLoading) {
             return const Center(
               child: CircularProgressIndicator(),
@@ -28,7 +32,9 @@ class WishlistPage extends StatelessWidget {
           }
           if (state is ProductsLoaded) {
             return state.products.isEmpty
-                ? Center(child: _wishlistIsEmpty())
+                ? Center(
+                    child: _wishlistIsEmpty(),
+                  )
                 : _products(state.products);
           }
           if (state is LoadProductsFailure) {
@@ -69,8 +75,11 @@ class WishlistPage extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       itemBuilder: (BuildContext context, int index) {
         return BlocProvider(
-          create: (context) => FavoriteIconCubit()..onTap(products[index]),
+          create: (context) => FavoriteIconCubit(products[index].productId)
+            ..isFavorite(products[index].productId),
           child: WishlistCard(
+            key: ValueKey(products[index].productId), // Add this line
+
             productEntity: products[index],
           ),
         );

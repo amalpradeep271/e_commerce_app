@@ -44,10 +44,10 @@ class ProductDetailsPage extends StatelessWidget {
             create: (context) => ButtonStateCubit()), // For Add to Cart
         BlocProvider(
             create: (context) => ButtonStateCubit()), // For Submit Review
-        BlocProvider(
-          create: (context) =>
-              FavoriteIconCubit()..isFavorite(productEntity.productId),
-        ),
+        // BlocProvider(
+        //   create: (context) =>
+        //       FavoriteIconCubit()..isFavorite(productEntity.productId),
+        // ),
       ],
       child: Scaffold(
         appBar: CustomAppBar(

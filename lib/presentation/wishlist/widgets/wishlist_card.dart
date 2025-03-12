@@ -1,5 +1,4 @@
 import 'package:e_commerce_application/common/bloc/button/favourite_icon_cubit.dart';
-import 'package:e_commerce_application/common/bloc/product/product_display_cubit.dart';
 import 'package:e_commerce_application/common/helper/images/images_display.dart';
 import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
 import 'package:e_commerce_application/core/configs/theme/app_icons.dart';
@@ -91,9 +90,6 @@ class WishlistCard extends StatelessWidget {
             InkWell(
               onTap: () {
                 context.read<FavoriteIconCubit>().onTap(productEntity);
-                context
-                    .read<ProductsDisplayCubit>()
-                    .displayProducts(showLoading: true);
               },
               child: const SizedBox(
                 child: Row(

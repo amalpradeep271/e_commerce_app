@@ -20,7 +20,7 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-          FavoriteIconCubit()..isFavorite(productEntity.productId),
+          FavoriteIconCubit(productEntity.productId)..isFavorite(productEntity.productId),
       child: Stack(
         children: [
           GestureDetector(

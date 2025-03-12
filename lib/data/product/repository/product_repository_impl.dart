@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:e_commerce_application/data/product/model/product_model.dart';
 import 'package:e_commerce_application/data/product/source/product_firebase_service.dart';
@@ -94,9 +96,12 @@ class ProductRepositoryImpl extends ProductRepository {
     return returnedData.fold((error) {
       return Left(error);
     }, (data) {
-      return Right(List.from(data)
+      log("Firebase Favorites Data: $data"); // Add this line
+      var entities = List.from(data)
           .map((e) => ProductModel.fromMap(e).toEntity())
-          .toList());
+          .toList();
+      log("Transformed Favorites Data: ${entities.map((e) => e.productId).toList()}"); // Add this line
+      return Right(entities);
     });
   }
 }
