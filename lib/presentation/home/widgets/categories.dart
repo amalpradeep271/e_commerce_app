@@ -18,11 +18,11 @@ import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
 import 'package:e_commerce_application/core/configs/theme/app_text_theme.dart';
 import 'package:e_commerce_application/domain/category/entity/category_entity.dart';
 import 'package:e_commerce_application/presentation/categories_products/pages/categories_products_page.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shimmer/shimmer.dart';
 
 class Categories extends StatelessWidget {
   const Categories({super.key});
@@ -41,7 +41,19 @@ class Categories extends StatelessWidget {
           child: BlocBuilder<CategoriesDisplayCubit, CategoriesDisplayState>(
             builder: (context, state) {
               if (state is CategoriesLoading) {
-                return const CupertinoActivityIndicator();
+                return SizedBox(
+                  height: 40.h,
+                  child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 3,
+                    separatorBuilder: (context, index) => SizedBox(width: 15.w),
+                    itemBuilder: (context, index) => Shimmer.fromColors(
+                        baseColor: const Color.fromARGB(255, 218, 221, 227),
+                        highlightColor: AppColors.colorDivider,
+                        child: _categoryButton(
+                            onTap: () {}, buttonImage: "", butttontitle: "")),
+                  ),
+                );
               }
               if (state is CategoriesLoaded) {
                 return _categories(state.categories);

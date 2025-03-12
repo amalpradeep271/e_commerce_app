@@ -32,8 +32,7 @@ class HomePage extends StatelessWidget {
         backgroundColor: AppColors.transparent,
         actionIconData2: AppIcons.cart,
         onAction2Pressed: () => AppNavigator.push(context, const CartPage()),
-        // itemcount: controller.itemcount.value,
-        // isLoading: controller.isLoading.value,
+    
       ),
       body: SingleChildScrollView(
           child: Padding(
