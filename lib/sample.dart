@@ -1,5 +1,7 @@
 import 'package:e_commerce_application/common/helper/images/images_display.dart';
 import 'package:e_commerce_application/domain/product/entity/product_entity.dart';
+import 'package:e_commerce_application/presentation/wishlist/bloc/wishlist_cubit.dart';
+import 'package:e_commerce_application/presentation/wishlist/bloc/wishlist_state.dart';
 import 'package:e_commerce_application/sample_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -217,11 +219,14 @@ class WishlistPage extends StatelessWidget {
 
                   return ListTile(
                     leading: Image.network(
-                        ImageDisplayHelper.generateSingleProductImageURL(
-                            product.images.first),
-                        width: 50,
-                        height: 50,
-                        fit: BoxFit.cover),
+                      product.images.isNotEmpty
+                          ? ImageDisplayHelper.generateSingleProductImageURL(
+                              product.images.first)
+                          : 'https://via.placeholder.com/50', // Default placeholder image
+                      width: 50,
+                      height: 50,
+                      fit: BoxFit.cover,
+                    ),
                     title: Text(product.title),
                     subtitle: Text('${product.price}'),
                     trailing: IconButton(

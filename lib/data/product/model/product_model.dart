@@ -37,24 +37,30 @@ class ProductModel {
 
   factory ProductModel.fromMap(Map<String, dynamic> map) {
     return ProductModel(
-      categoryId: map['categoryId'] as String,
-      color: List<ProductColorModel>.from(
-        map['colors'].map(
-          (e) => ProductColorModel.fromMap(e),
-        ),
-      ),
-      createdDate: map['createdDate'] as Timestamp,
-      discountPrice: map['discountPrice'] as num,
-      gender: map['gender'] as num,
-      images: List<String>.from(map['images'].map((e) => e.toString())),
-      price: map['price'] as num,
-      productId: map['productId'] as String,
-      sizes: List<String>.from(map['sizes'].map((e) => e.toString())),
-      salesNumber: map['salesNumber'] as num,
-      title: map['title'] as String,
-      description: map['description'] as String,
-      dimensions: map['dimensions'] as String,
-      manufactureInformation: map['manufacture information'] as String,
+      categoryId:
+          map['categoryId'] as String? ?? '', // Fallback to empty string
+      color: (map['colors'] as List<dynamic>?)
+              ?.map((e) => ProductColorModel.fromMap(e))
+              .toList() ??
+          [], // Default to empty list if null
+      createdDate: map['createdDate'] as Timestamp? ?? Timestamp.now(),
+      discountPrice: map['discountPrice'] as num? ?? 0,
+      gender: map['gender'] as num? ?? 0,
+      images: (map['images'] as List<dynamic>?)
+              ?.map((e) => e.toString())
+              .toList() ??
+          [],
+      price: map['price'] as num? ?? 0,
+      productId: map['productId'] as String? ?? '',
+      sizes:
+          (map['sizes'] as List<dynamic>?)?.map((e) => e.toString()).toList() ??
+              [],
+      salesNumber: map['salesNumber'] as num? ?? 0,
+      title: map['title'] as String? ?? 'Unknown Product',
+      description: map['description'] as String? ?? 'No description available',
+      dimensions: map['dimensions'] as String? ?? 'Unknown',
+      manufactureInformation:
+          map['manufacture information'] as String? ?? 'N/A',
     );
   }
 

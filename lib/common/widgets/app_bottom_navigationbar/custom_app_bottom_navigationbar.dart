@@ -3,16 +3,24 @@ import 'package:e_commerce_application/common/bloc/product/product_display_cubit
 import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
 import 'package:e_commerce_application/core/configs/theme/app_icons.dart';
 import 'package:e_commerce_application/core/configs/theme/app_text_theme.dart';
-import 'package:e_commerce_application/domain/product/usecase/get_favourite_products_usecase.dart';
+import 'package:e_commerce_application/domain/category/usecase/get_category_usecase.dart';
+import 'package:e_commerce_application/domain/product/usecase/get_newin_usecase.dart';
+import 'package:e_commerce_application/domain/product/usecase/get_topselling_usecase.dart';
 import 'package:e_commerce_application/presentation/home/pages/homepage.dart';
 import 'package:e_commerce_application/presentation/order/pages/my_orders_page.dart';
+import 'package:e_commerce_application/presentation/wishlist/bloc/wishlist_cubit.dart';
 import 'package:e_commerce_application/presentation/wishlist/pages/wishlist_page.dart';
 import 'package:e_commerce_application/service_locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomAppBottomNavigationBar extends StatelessWidget {
-  const CustomAppBottomNavigationBar({super.key});
+  CustomAppBottomNavigationBar({super.key});
+  final List<Widget> pages = [
+    const HomePage(),
+    const MyOrdersPage(),
+    const WishlistPage(),
+  ];
 
   Widget buildBottomNavigationMenu(BuildContext context) {
     return Padding(
@@ -23,16 +31,18 @@ class CustomAppBottomNavigationBar extends StatelessWidget {
           decoration: const BoxDecoration(
             gradient: AppColors.navigationBarColor,
           ),
-          child: BlocBuilder<BottomNavigationCubit, int>(
+          child: BlocBuilder<BottomNavigationCubit, BottomNavItem>(
             builder: (context, tabIndex) {
               return BottomNavigationBar(
                 type: BottomNavigationBarType.fixed,
                 showUnselectedLabels: true,
                 showSelectedLabels: true,
-                onTap: (index) => context
-                    .read<BottomNavigationCubit>()
-                    .changeTabIndex(index, context),
-                currentIndex: tabIndex,
+                onTap: (index) {
+                  context
+                      .read<BottomNavigationCubit>()
+                      .changeTabIndex(BottomNavItem.values[index]);
+                },
+                currentIndex: tabIndex.index,
                 backgroundColor: AppColors.kPrimaryColor,
                 unselectedItemColor: AppColors.neutral3,
                 selectedItemColor: AppColors.white,
@@ -43,8 +53,7 @@ class CustomAppBottomNavigationBar extends StatelessWidget {
                       icon: Icon(AppIcons.home), label: 'Home'),
                   BottomNavigationBarItem(
                       icon: Icon(AppIcons.orders), label: 'Orders'),
-                  // BottomNavigationBarItem(
-                  //     icon: Icon(AppIcons.notification), label: 'Notification'),
+                 
                   BottomNavigationBarItem(
                       icon: Icon(Icons.favorite), label: 'Wishlist'),
                 ],
@@ -65,23 +74,26 @@ class CustomAppBottomNavigationBar extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) =>
-              ProductsDisplayCubit(useCase: sl<GetFavortiesProductsUseCase>())
+              ProductsDisplayCubit(useCase: sl<GetTopSellingUseCase>())
                 ..displayProducts(showLoading: false),
         ),
+        BlocProvider(
+          create: (context) =>
+              ProductsDisplayCubit(useCase: sl<GetNewInUseCase>())
+                ..displayProducts(showLoading: false),
+        ),
+        BlocProvider(
+          create: (context) =>
+              ProductsDisplayCubit(useCase: sl<GetCategoryUseCase>())
+                ..displayProducts(showLoading: false),
+        ),
+        BlocProvider(create: (context) => WishlistCubit()..loadWishlist()),
       ],
       child: Scaffold(
         bottomNavigationBar: buildBottomNavigationMenu(context),
-        body: BlocBuilder<BottomNavigationCubit, int>(
+        body: BlocBuilder<BottomNavigationCubit, BottomNavItem>(
           builder: (context, tabIndex) {
-            return IndexedStack(
-              index: tabIndex,
-              children: const [
-                HomePage(),
-                MyOrdersPage(),
-                // NotificationPage(),
-                WishlistPage(),
-              ],
-            );
+            return pages[tabIndex.index];
           },
         ),
       ),

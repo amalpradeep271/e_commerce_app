@@ -6,6 +6,7 @@ import 'package:e_commerce_application/common/widgets/product/product_heading.da
 import 'package:e_commerce_application/domain/product/entity/product_entity.dart';
 import 'package:e_commerce_application/domain/product/usecase/get_newin_usecase.dart';
 import 'package:e_commerce_application/presentation/all_products/pages/all_new_products_page.dart';
+import 'package:e_commerce_application/presentation/wishlist/bloc/wishlist_cubit.dart';
 import 'package:e_commerce_application/service_locator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,10 +25,17 @@ class NewIn extends StatelessWidget {
         SizedBox(
           height: 20.h,
         ),
-        BlocProvider(
-          create: (context) =>
-              ProductsDisplayCubit(useCase: sl<GetNewInUseCase>())
-                ..displayProducts(),
+        MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) =>
+                  ProductsDisplayCubit(useCase: sl<GetNewInUseCase>())
+                    ..displayProducts(),
+            ),
+            BlocProvider(
+          create: (context) => WishlistCubit()..loadWishlist(),
+        ),
+          ],
           child: BlocBuilder<ProductsDisplayCubit, ProductsDisplayState>(
             builder: (context, state) {
               if (state is ProductsLoading) {

@@ -12,8 +12,7 @@ class OrderPlacedPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Future.delayed(const Duration(seconds: 5), () {
       if (context.mounted) {
-        AppNavigator.pushAndRemove(
-            context, const CustomAppBottomNavigationBar());
+        AppNavigator.pushAndRemove(context, CustomAppBottomNavigationBar());
       }
     });
     return Scaffold(
@@ -52,7 +51,7 @@ class OrderPlacedPage extends StatelessWidget {
                       title: 'Finish',
                       onPressed: () {
                         AppNavigator.pushAndRemove(
-                            context, const CustomAppBottomNavigationBar());
+                            context, CustomAppBottomNavigationBar());
                       })
                 ],
               ),

@@ -7,6 +7,7 @@ import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
 import 'package:e_commerce_application/domain/product/entity/product_entity.dart';
 import 'package:e_commerce_application/domain/product/usecase/get_topselling_usecase.dart';
 import 'package:e_commerce_application/presentation/all_products/pages/all_products_page.dart';
+import 'package:e_commerce_application/presentation/wishlist/bloc/wishlist_cubit.dart';
 import 'package:e_commerce_application/service_locator.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -27,10 +28,17 @@ class TopSelling extends StatelessWidget {
         SizedBox(
           height: 20.h,
         ),
-        BlocProvider(
-          create: (context) =>
-              ProductsDisplayCubit(useCase: sl<GetTopSellingUseCase>())
-                ..displayProducts(),
+        MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) =>
+                  ProductsDisplayCubit(useCase: sl<GetTopSellingUseCase>())
+                    ..displayProducts(),
+            ),
+            BlocProvider(
+          create: (context) => WishlistCubit()..loadWishlist(),
+        ),
+          ],
           child: BlocBuilder<ProductsDisplayCubit, ProductsDisplayState>(
             builder: (context, state) {
               if (state is ProductsLoading) {

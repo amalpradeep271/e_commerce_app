@@ -1,13 +1,17 @@
 import 'dart:developer';
-
-import 'package:e_commerce_application/common/bloc/button/favourite_icon_cubit.dart';
 import 'package:e_commerce_application/common/bloc/product/product_display_cubit.dart';
-import 'package:e_commerce_application/common/bloc/product/product_display_state.dart';
 import 'package:e_commerce_application/common/widgets/appbar/app_bar.dart';
 import 'package:e_commerce_application/core/configs/assets/app_gifs.dart';
 import 'package:e_commerce_application/core/configs/theme/app_text_theme.dart';
+import 'package:e_commerce_application/domain/category/usecase/get_category_usecase.dart';
 import 'package:e_commerce_application/domain/product/entity/product_entity.dart';
+import 'package:e_commerce_application/domain/product/usecase/get_newin_usecase.dart';
+import 'package:e_commerce_application/domain/product/usecase/get_topselling_usecase.dart';
+import 'package:e_commerce_application/presentation/wishlist/bloc/wishlist_cubit.dart';
+import 'package:e_commerce_application/presentation/wishlist/bloc/wishlist_state.dart';
 import 'package:e_commerce_application/presentation/wishlist/widgets/wishlist_card.dart';
+import 'package:e_commerce_application/service_locator.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -17,33 +21,55 @@ class WishlistPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(
-        title: 'My Favorites',
-      ),
-      body: BlocBuilder<ProductsDisplayCubit, ProductsDisplayState>(
-        builder: (context, state) {
-          log("WishlistPage BlocBuilder is rebuilding!"); // Add this line
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => WishlistCubit()..loadWishlist(),
+        ),
+        BlocProvider(
+          create: (context) =>
+              ProductsDisplayCubit(useCase: sl<GetTopSellingUseCase>())
+                ..displayProducts(),
+        ),
+        BlocProvider(
+          create: (context) =>
+              ProductsDisplayCubit(useCase: sl<GetNewInUseCase>())
+                ..displayProducts(),
+        ),
+        BlocProvider(
+          create: (context) =>
+              ProductsDisplayCubit(useCase: sl<GetCategoryUseCase>())
+                ..displayProducts(),
+        ),
+      ],
+      child: Scaffold(
+        appBar: CustomAppBar(
+          title: 'My Favorites',
+        ),
+        body: BlocBuilder<WishlistCubit, WishlistState>(
+          builder: (context, state) {
+            log("WishlistPage BlocBuilder is rebuilding!"); // Add this line
 
-          if (state is ProductsLoading) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          if (state is ProductsLoaded) {
-            return state.products.isEmpty
-                ? Center(
-                    child: _wishlistIsEmpty(),
-                  )
-                : _products(state.products);
-          }
-          if (state is LoadProductsFailure) {
-            return const Center(
-              child: Text('Please try again'),
-            );
-          }
-          return Container();
-        },
+            if (state is WishlistLoading) {
+              return const Center(
+                child: CupertinoActivityIndicator(),
+              );
+            }
+            if (state is WishlistLoaded) {
+              return state.wishlistedItems.isEmpty
+                  ? Center(
+                      child: _wishlistIsEmpty(),
+                    )
+                  : _products(state.wishlistedItems);
+            }
+            if (state is WishlistError) {
+              return const Center(
+                child: Text('Please try again'),
+              );
+            }
+            return Container();
+          },
+        ),
       ),
     );
   }
@@ -74,14 +100,8 @@ class WishlistPage extends StatelessWidget {
       itemCount: products.length,
       padding: const EdgeInsets.all(16),
       itemBuilder: (BuildContext context, int index) {
-        return BlocProvider(
-          create: (context) => FavoriteIconCubit(products[index].productId)
-            ..isFavorite(products[index].productId),
-          child: WishlistCard(
-            key: ValueKey(products[index].productId), // Add this line
-
-            productEntity: products[index],
-          ),
+        return WishlistCard(
+          productEntity: products[index],
         );
       },
     );

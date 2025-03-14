@@ -51,7 +51,7 @@ class SignupPage extends StatelessWidget {
             }
             if (state is ButtonSuccessState) {
               AppNavigator.pushAndRemove(
-                  context, const CustomAppBottomNavigationBar());
+                  context,  CustomAppBottomNavigationBar());
             }
           },
           child: SingleChildScrollView(

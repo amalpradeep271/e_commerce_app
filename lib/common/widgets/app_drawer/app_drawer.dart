@@ -36,7 +36,7 @@ class CustomAppDrawer extends StatelessWidget {
       DrawerTileData(AppIcons.home, "Home", (context) {
         AppNavigator.pushAndRemove(
           context,
-          const CustomAppBottomNavigationBar(),
+          CustomAppBottomNavigationBar(),
         );
       }),
       DrawerTileData(Icons.share, "Share App", (context) {}),

@@ -18,8 +18,7 @@ class SplashPage extends StatelessWidget {
           AppNavigator.pushReplacement(context, SigninPage());
         }
         if (state is Authenticated) {
-          AppNavigator.pushReplacement(
-              context, const CustomAppBottomNavigationBar());
+          AppNavigator.pushReplacement(context, CustomAppBottomNavigationBar());
         }
       },
       child: Scaffold(

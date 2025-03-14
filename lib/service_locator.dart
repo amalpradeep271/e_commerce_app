@@ -13,6 +13,8 @@ import 'package:e_commerce_application/data/product/repository/product_repositor
 import 'package:e_commerce_application/data/product/source/product_firebase_service.dart';
 import 'package:e_commerce_application/data/review/repository/review_repository_impl.dart';
 import 'package:e_commerce_application/data/review/source/review_firebase_services.dart';
+import 'package:e_commerce_application/data/wishlist/repository/wishlist_repository_impl.dart';
+import 'package:e_commerce_application/data/wishlist/source/wishlist_firebase_service.dart';
 import 'package:e_commerce_application/domain/auth/repository/auth_repository.dart';
 import 'package:e_commerce_application/domain/auth/usecase/get_ages_usecase.dart';
 import 'package:e_commerce_application/domain/auth/usecase/get_user_usecase.dart';
@@ -42,7 +44,9 @@ import 'package:e_commerce_application/domain/product/usecase/get_topselling_use
 import 'package:e_commerce_application/domain/product/usecase/is_favourite_usecase.dart';
 import 'package:e_commerce_application/domain/review/repository/review_repository.dart';
 import 'package:e_commerce_application/domain/review/usecase/add_to_review_usecase.dart';
-import 'package:e_commerce_application/domain/review/usecase/get_review_usecase.dart';
+import 'package:e_commerce_application/domain/wishlist/repository/wishlist_repository.dart';
+import 'package:e_commerce_application/domain/wishlist/usecase/get_wishlist_usecase.dart';
+import 'package:e_commerce_application/domain/wishlist/usecase/toggle_wishlist_usecase.dart';
 import 'package:get_it/get_it.dart';
 
 final sl = GetIt.instance;
@@ -57,6 +61,7 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<CartFirebaseServices>(CartFirebaseServicesImpl());
   sl.registerSingleton<OrderFirebaseService>(OrderFirebaseServiceImpl());
   sl.registerSingleton<ReviewFirebaseService>(ReviewFirebaseServiceImpl());
+  sl.registerSingleton<WishlistFireBaseService>(WishlistFirebaseServiceImpl());
 
 //Repositories
 
@@ -67,7 +72,8 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<CartRepository>(CartRepositoryImpl());
   sl.registerSingleton<OrderRepository>(OrderRepositoryImpl());
   sl.registerSingleton<ReviewRepository>(ReviewRepositoryImpl());
-
+  sl.registerSingleton<WishlistRepository>(WishlistRepositoryImpl());
+  
 //Usecases
   sl.registerSingleton<SignUpUseCase>(SignUpUseCase());
   sl.registerSingleton<GetAgesUseCase>(GetAgesUseCase());
@@ -94,7 +100,8 @@ Future<void> initializeDependencies() async {
       GetFavortiesProductsUseCase());
   sl.registerSingleton<GetOrdersUseCase>(GetOrdersUseCase());
   sl.registerSingleton<AddReviewUseCase>(AddReviewUseCase());
-  sl.registerSingleton<GetReviewsUsecase>(GetReviewsUsecase());
+  sl.registerSingleton<ToggleWishlistUseCase>(ToggleWishlistUseCase());
+  sl.registerSingleton<GetWishlistUseCase>(GetWishlistUseCase());
   sl.registerSingleton<IsProductInCartUsecase>(IsProductInCartUsecase());
   sl.registerFactory(
       () => ProductsDisplayCubit(useCase: sl<GetFavortiesProductsUseCase>()));

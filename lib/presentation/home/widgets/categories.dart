@@ -18,6 +18,7 @@ import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
 import 'package:e_commerce_application/core/configs/theme/app_text_theme.dart';
 import 'package:e_commerce_application/domain/category/entity/category_entity.dart';
 import 'package:e_commerce_application/presentation/categories_products/pages/categories_products_page.dart';
+import 'package:e_commerce_application/presentation/wishlist/bloc/wishlist_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -36,8 +37,16 @@ class Categories extends StatelessWidget {
         SizedBox(
           height: 20.h,
         ),
-        BlocProvider(
-          create: (context) => CategoriesDisplayCubit()..displayCategories(),
+        MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) =>
+                  CategoriesDisplayCubit()..displayCategories(),
+            ),
+            BlocProvider(
+              create: (context) => WishlistCubit()..loadWishlist(),
+            ),
+          ],
           child: BlocBuilder<CategoriesDisplayCubit, CategoriesDisplayState>(
             builder: (context, state) {
               if (state is CategoriesLoading) {

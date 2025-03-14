@@ -1,16 +1,23 @@
+import 'package:e_commerce_application/common/bloc/product/product_display_cubit.dart';
 import 'package:e_commerce_application/common/helper/images/images_display.dart';
 import 'package:e_commerce_application/common/helper/navigator/app_navigator.dart';
 import 'package:e_commerce_application/common/widgets/app_drawer/app_drawer.dart';
 import 'package:e_commerce_application/common/widgets/appbar/app_bar.dart';
 import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
 import 'package:e_commerce_application/core/configs/theme/app_icons.dart';
+import 'package:e_commerce_application/domain/category/usecase/get_category_usecase.dart';
+import 'package:e_commerce_application/domain/product/usecase/get_newin_usecase.dart';
+import 'package:e_commerce_application/domain/product/usecase/get_topselling_usecase.dart';
 import 'package:e_commerce_application/presentation/cart/pages/cart_page.dart';
 import 'package:e_commerce_application/presentation/home/bloc/banners/banners_display_cubit.dart';
 import 'package:e_commerce_application/presentation/home/bloc/banners/banners_display_state.dart';
+import 'package:e_commerce_application/presentation/home/bloc/categories/categories_display_cubit.dart';
 import 'package:e_commerce_application/presentation/home/widgets/banner_carousel_slider.dart';
 import 'package:e_commerce_application/presentation/home/widgets/categories.dart';
 import 'package:e_commerce_application/presentation/home/widgets/new_in.dart';
 import 'package:e_commerce_application/presentation/home/widgets/top_selling.dart';
+import 'package:e_commerce_application/presentation/wishlist/bloc/wishlist_cubit.dart';
+import 'package:e_commerce_application/service_locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -32,15 +39,40 @@ class HomePage extends StatelessWidget {
         backgroundColor: AppColors.transparent,
         actionIconData2: AppIcons.cart,
         onAction2Pressed: () => AppNavigator.push(context, const CartPage()),
-    
       ),
       body: SingleChildScrollView(
           child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           children: [
-            BlocProvider(
-              create: (context) => BannersDisplayCubit()..displayBanners(),
+            MultiBlocProvider(
+              providers: [
+                BlocProvider(
+                  create: (context) => BannersDisplayCubit()..displayBanners(),
+                ),
+                BlocProvider(
+                  create: (context) => WishlistCubit()..loadWishlist(),
+                ),
+                BlocProvider(
+                  create: (context) =>
+                      CategoriesDisplayCubit()..displayCategories(),
+                ),
+                BlocProvider(
+                  create: (context) =>
+                      ProductsDisplayCubit(useCase: sl<GetNewInUseCase>())
+                        ..displayProducts(),
+                ),
+                BlocProvider(
+                  create: (context) =>
+                      ProductsDisplayCubit(useCase: sl<GetTopSellingUseCase>())
+                        ..displayProducts(),
+                ),
+                BlocProvider(
+                  create: (context) =>
+                      ProductsDisplayCubit(useCase: sl<GetCategoryUseCase>())
+                        ..displayProducts(),
+                ),
+              ],
               child: BlocBuilder<BannersDisplayCubit, BannersDisplayState>(
                 builder: (context, state) {
                   if (state is BannersLoading) {

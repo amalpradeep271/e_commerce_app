@@ -3,10 +3,8 @@ import 'package:e_commerce_application/common/helper/navigator/app_navigator.dar
 import 'package:e_commerce_application/common/widgets/app_button/favourite_button.dart';
 import 'package:e_commerce_application/core/configs/theme/app_text_theme.dart';
 import 'package:e_commerce_application/domain/product/entity/product_entity.dart';
-import 'package:e_commerce_application/common/bloc/button/favourite_icon_cubit.dart';
 import 'package:e_commerce_application/presentation/product_detail/pages/product_details_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProductCard extends StatelessWidget {
@@ -18,76 +16,71 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) =>
-          FavoriteIconCubit(productEntity.productId)..isFavorite(productEntity.productId),
-      child: Stack(
-        children: [
-          GestureDetector(
-              onTap: () {
-                AppNavigator.push(
-                  context,
-                  ProductDetailsPage(
-                    productEntity: productEntity,
-                  ),
-                );
-              },
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    height: 190.h,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5.r),
-                      image: DecorationImage(
-                        image: NetworkImage(
-                          ImageDisplayHelper.generateProductImageURL(
-                            productEntity.images[0],
-                          ),
+    return Stack(
+      children: [
+        GestureDetector(
+            onTap: () {
+              AppNavigator.push(
+                context,
+                ProductDetailsPage(
+                  productEntity: productEntity,
+                ),
+              );
+            },
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  height: 190.h,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5.r),
+                    image: DecorationImage(
+                      image: NetworkImage(
+                        ImageDisplayHelper.generateProductImageURL(
+                          productEntity.images[0],
                         ),
-                        fit: BoxFit.fill,
                       ),
+                      fit: BoxFit.fill,
                     ),
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    productEntity.title,
-                    overflow: TextOverflow.ellipsis,
-                    style: AppTextStyles.base.w500.s15,
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        productEntity.discountPrice == 0
-                            ? "₹ ${productEntity.price}"
-                            : "₹ ${productEntity.discountPrice}",
-                        style: AppTextStyles.base.w700.s15,
-                      ),
-                      SizedBox(
-                        width: 10.w,
-                      ),
-                      Text(
-                        productEntity.discountPrice == 0
-                            ? ''
-                            : "₹ ${productEntity.price}",
-                        style:
-                            AppTextStyles.base.s15.greyColor.w300.lineThrough,
-                      ),
-                    ],
-                  )
-                ],
-              )),
-          Align(
-            alignment: Alignment.topRight,
-            child: FavoriteButton(
-              iconSize: 18.sp,
-              productEntity: productEntity,
-            ),
-          )
-        ],
-      ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  productEntity.title,
+                  overflow: TextOverflow.ellipsis,
+                  style: AppTextStyles.base.w500.s15,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      productEntity.discountPrice == 0
+                          ? "₹ ${productEntity.price}"
+                          : "₹ ${productEntity.discountPrice}",
+                      style: AppTextStyles.base.w700.s15,
+                    ),
+                    SizedBox(
+                      width: 10.w,
+                    ),
+                    Text(
+                      productEntity.discountPrice == 0
+                          ? ''
+                          : "₹ ${productEntity.price}",
+                      style: AppTextStyles.base.s15.greyColor.w300.lineThrough,
+                    ),
+                  ],
+                )
+              ],
+            )),
+        Align(
+          alignment: Alignment.topRight,
+          child: FavoriteButton(
+            iconSize: 18.sp,
+            productEntity: productEntity,
+          ),
+        )
+      ],
     );
   }
 }

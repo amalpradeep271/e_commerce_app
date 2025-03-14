@@ -2,6 +2,7 @@ import 'package:e_commerce_application/common/bloc/product/product_display_state
 import 'package:e_commerce_application/common/widgets/appbar/app_bar.dart';
 import 'package:e_commerce_application/common/widgets/product/product_card.dart';
 import 'package:e_commerce_application/domain/product/entity/product_entity.dart';
+import 'package:e_commerce_application/presentation/wishlist/bloc/wishlist_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,10 +27,17 @@ class CategoryProductsPage extends StatelessWidget {
       appBar: CustomAppBar(
         title: title,
       ),
-      body: BlocProvider(
-        create: (context) =>
-            ProductsDisplayCubit(useCase: sl<GetProductsByCategoryIdUseCase>())
+      body: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => ProductsDisplayCubit(
+                useCase: sl<GetProductsByCategoryIdUseCase>())
               ..displayProducts(params: categoryEntity.categoryId),
+          ),
+          BlocProvider(
+          create: (context) => WishlistCubit()..loadWishlist(),
+        ),
+        ],
         child: BlocBuilder<ProductsDisplayCubit, ProductsDisplayState>(
           builder: (context, state) {
             if (state is ProductsLoading) {
