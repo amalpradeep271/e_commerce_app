@@ -10,8 +10,8 @@
 // import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'package:e_commerce_application/common/bloc/categories/categories_display_cubit.dart';
-import 'package:e_commerce_application/common/bloc/categories/categories_display_state.dart';
+import 'package:e_commerce_application/presentation/home/bloc/categories/categories_display_cubit.dart';
+import 'package:e_commerce_application/presentation/home/bloc/categories/categories_display_state.dart';
 import 'package:e_commerce_application/common/helper/images/images_display.dart';
 import 'package:e_commerce_application/common/helper/navigator/app_navigator.dart';
 import 'package:e_commerce_application/core/configs/theme/app_colors.dart';

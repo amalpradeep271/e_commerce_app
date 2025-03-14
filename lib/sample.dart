@@ -19,8 +19,15 @@ class BottomNavCubit extends Cubit<BottomNavItem> {
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => WishlistCubit()..loadWishlist(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => WishlistCubit()..loadWishlist(),
+        ),
+        BlocProvider(
+          create: (context) => ProductCubit()..fetchProducts(),
+        ),
+      ],
       child: Scaffold(
         body: SafeArea(
           child: Column(
@@ -88,8 +95,15 @@ class HomePage extends StatelessWidget {
 class AllProductsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ProductCubit()..fetchProducts(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => ProductCubit()..fetchProducts(),
+        ),
+        BlocProvider(
+          create: (context) => WishlistCubit()..loadWishlist(),
+        ),
+      ],
       child: Scaffold(
         appBar: AppBar(title: Text("All Products")),
         body: BlocBuilder<ProductCubit, ProductState>(
@@ -159,6 +173,7 @@ class ProductCard extends StatelessWidget {
                   ),
                   onPressed: () {
                     context.read<WishlistCubit>().toggleWishlist(product);
+                    // context.read<WishlistCubit>().loadWishlist();
                   },
                 );
               },
@@ -173,46 +188,56 @@ class ProductCard extends StatelessWidget {
 class WishlistPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Wishlist')),
-      body: BlocBuilder<WishlistCubit, WishlistState>(
-        builder: (context, state) {
-          if (state is WishlistLoading) {
-            return Center(child: CircularProgressIndicator());
-          } else if (state is WishlistError) {
-            return Center(child: Text(state.message));
-          } else if (state is WishlistLoaded) {
-            if (state.wishlistedItems.isEmpty) {
-              return Center(child: Text('No items in wishlist'));
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => WishlistCubit()..loadWishlist(),
+        ),
+        BlocProvider(
+          create: (context) => ProductCubit()..fetchProducts(),
+        ),
+      ],
+      child: Scaffold(
+        appBar: AppBar(title: Text('Wishlist')),
+        body: BlocBuilder<WishlistCubit, WishlistState>(
+          builder: (context, state) {
+            if (state is WishlistLoading) {
+              return Center(child: CircularProgressIndicator());
+            } else if (state is WishlistError) {
+              return Center(child: Text(state.message));
+            } else if (state is WishlistLoaded) {
+              if (state.wishlistedItems.isEmpty) {
+                return Center(child: Text('No items in wishlist'));
+              }
+
+              return ListView.builder(
+                itemCount: state.wishlistedItems.length,
+                itemBuilder: (context, index) {
+                  final product = state.wishlistedItems[index];
+
+                  return ListTile(
+                    leading: Image.network(
+                        ImageDisplayHelper.generateSingleProductImageURL(
+                            product.images.first),
+                        width: 50,
+                        height: 50,
+                        fit: BoxFit.cover),
+                    title: Text(product.title),
+                    subtitle: Text('${product.price}'),
+                    trailing: IconButton(
+                      icon: Icon(Icons.favorite, color: Colors.red),
+                      onPressed: () {
+                        context.read<WishlistCubit>().toggleWishlist(product);
+                      },
+                    ),
+                  );
+                },
+              );
             }
 
-            return ListView.builder(
-              itemCount: state.wishlistedItems.length,
-              itemBuilder: (context, index) {
-                final product = state.wishlistedItems[index];
-
-                return ListTile(
-                  leading: Image.network(
-                      ImageDisplayHelper.generateSingleProductImageURL(
-                          product.images.first),
-                      width: 50,
-                      height: 50,
-                      fit: BoxFit.cover),
-                  title: Text(product.title),
-                  subtitle: Text('\$${product.price}'),
-                  trailing: IconButton(
-                    icon: Icon(Icons.favorite, color: Colors.red),
-                    onPressed: () {
-                      context.read<WishlistCubit>().toggleWishlist(product);
-                    },
-                  ),
-                );
-              },
-            );
-          }
-
-          return Center(child: Text('Unexpected State'));
-        },
+            return Center(child: Text('Unexpected State'));
+          },
+        ),
       ),
     );
   }

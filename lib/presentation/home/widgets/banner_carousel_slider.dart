@@ -1,7 +1,7 @@
 // ignore_for_file: no_wildcard_variable_uses
 
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:e_commerce_application/presentation/home/bloc/banner_carousel_cubit.dart';
+import 'package:e_commerce_application/presentation/home/bloc/banners/banner_carousel_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

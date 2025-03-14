@@ -1,5 +1,5 @@
 import 'package:e_commerce_application/domain/home/usecase/get_banners_usecase.dart';
-import 'package:e_commerce_application/presentation/home/bloc/banners_display_state.dart';
+import 'package:e_commerce_application/presentation/home/bloc/banners/banners_display_state.dart';
 import 'package:e_commerce_application/service_locator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
