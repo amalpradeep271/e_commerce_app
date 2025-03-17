@@ -6,15 +6,12 @@ class PaymentProcessing extends PaymentState {}
 
 class PaymentSuccess extends PaymentState {
   final String paymentId;
-  PaymentSuccess(this.paymentId);
+  PaymentSuccess({required this.paymentId});
 }
 
 class PaymentFailure extends PaymentState {
-  final String error;
-  PaymentFailure(this.error);
+  final String errorMessage;
+  PaymentFailure({required this.errorMessage});
 }
 
-class PaymentExternalWallet extends PaymentState {
-  final String walletName;
-  PaymentExternalWallet(this.walletName);
-}
+class OrderPlacedSuccessfully extends PaymentState {}

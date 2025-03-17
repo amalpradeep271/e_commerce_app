@@ -1,23 +1,15 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:e_commerce_application/presentation/cart/bloc/payment_cubit.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:uuid/uuid.dart';
-
-import 'package:e_commerce_application/common/bloc/button/button_state.dart';
 import 'package:e_commerce_application/common/bloc/button/button_state_cubit.dart';
 import 'package:e_commerce_application/common/helper/cart/cart_helper.dart';
 import 'package:e_commerce_application/common/helper/navigator/app_navigator.dart';
 import 'package:e_commerce_application/common/widgets/app_button/basic_reactive_button.dart';
 import 'package:e_commerce_application/common/widgets/appbar/app_bar.dart';
-import 'package:e_commerce_application/data/order/model/order_registration_req_model.dart';
 import 'package:e_commerce_application/domain/cart/entity/product_ordered_entity.dart';
-import 'package:e_commerce_application/domain/order/entity/order_status_entity.dart';
-import 'package:e_commerce_application/domain/order/usecase/order_registration_usecase.dart';
+import 'package:e_commerce_application/presentation/cart/bloc/payment_cubit.dart';
+import 'package:e_commerce_application/presentation/cart/bloc/payment_state.dart';
 import 'package:e_commerce_application/presentation/cart/pages/order_placed_page.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CheckOutPage extends StatelessWidget {
   final List<ProductOrderedEntity> products;
@@ -36,109 +28,88 @@ class CheckOutPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
-        title: 'Checkout',
-      ),
+      appBar: CustomAppBar(title: 'Checkout'),
       body: MultiBlocProvider(
         providers: [
-          BlocProvider(
-            create: (context) => ButtonStateCubit(),
-          ),
+          BlocProvider(create: (context) => ButtonStateCubit()),
+          BlocProvider(create: (context) => PaymentCubit()),
         ],
-        child: BlocListener<ButtonStateCubit, ButtonState>(
+        child: BlocConsumer<PaymentCubit, PaymentState>(
           listener: (context, state) {
-            if (state is ButtonSuccessState) {
+            if (state is PaymentSuccess) {
+              context.read<PaymentCubit>().placeOrder(
+                    shippingAddress: _addressCon.text,
+                    products: products,
+                    shipping: shipping,
+                    tax: tax,
+                  );
+            } else if (state is PaymentFailure) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text(state.errorMessage)),
+              );
+            } else if (state is OrderPlacedSuccessfully) {
               AppNavigator.pushAndRemove(context, const OrderPlacedPage());
             }
-
-            if (state is ButtonFailureState) {
-              var snackbar = SnackBar(
-                content: Text(state.errorMessage),
-                behavior: SnackBarBehavior.floating,
-              );
-              ScaffoldMessenger.of(context).showSnackBar(snackbar);
-            }
           },
-          child: Padding(
-            padding: EdgeInsets.all(16.w),
-            child: Builder(builder: (context) {
-              return Column(
+          builder: (context, state) {
+            return Padding(
+              padding: EdgeInsets.all(16.w),
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  _addressField(context),
+                  _addressField(),
                   BasicReactiveButton(
-                      content: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              '//${CartHelper.calculateCartSubtotal(products) + shipping + tax}',
-                              style: const TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16),
-                            ),
-                            const Text(
-                              'Place Order',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 16),
-                            )
-                          ],
+                    content: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          '₹ ${CartHelper.calculateCartSubtotal(products) + shipping + tax}',
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
                         ),
-                      ),
-                      onPressed: () {
-                        context.read<PaymentCubit>().openCheckout(
-                            CartHelper.calculateCartSubtotal(products) +
+                        const Text(
+                          'Place Order',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ],
+                    ),
+                    onPressed: () {
+                      if (_addressCon.text.isEmpty) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                              content: Text('Enter shipping address')),
+                        );
+                        return;
+                      }
+
+                      context.read<PaymentCubit>().makePayment(
+                            amount: CartHelper.calculateCartSubtotal(products) +
                                 shipping +
-                                tax);
-                        // var uuid = const Uuid();
-                        // List<OrderStatusEntity> orderStatusList = [
-                        //   OrderStatusEntity(
-                        //       createdDate: Timestamp.fromDate(DateTime.now()),
-                        //       done: true,
-                        //       title: 'Order Placed'),
-                        //   OrderStatusEntity(
-                        //       createdDate: Timestamp.fromDate(DateTime.now()),
-                        //       done: false,
-                        //       title: 'Order Confirmed'),
-                        //   OrderStatusEntity(
-                        //       createdDate: Timestamp.fromDate(DateTime.now()),
-                        //       done: false,
-                        //       title: 'Shipped'),
-                        //   OrderStatusEntity(
-                        //       createdDate: Timestamp.fromDate(DateTime.now()),
-                        //       done: false,
-                        //       title: 'Delivered'),
-                        // ];
-                        // context.read<ButtonStateCubit>().execute(
-                        //       usecase: OrderRegistrationUseCase(),
-                        //       params: OrderRegistrationReqModel(
-                        //         code: '#${uuid.v4().substring(0, 7)}',
-                        //         products: products,
-                        //         createdDate: DateTime.now().toString(),
-                        //         itemCount: products.length,
-                        //         totalPrice:
-                        //             CartHelper.calculateCartSubtotal(products) +
-                        //                 shipping +
-                        //                 tax,
-                        //         shippingAddress: _addressCon.text,
-                        //         orderStatus: orderStatusList,
-                        //       ),
-                        //     );
-                      })
+                                tax,
+                            shippingAddress: _addressCon.text,
+                            products: products,
+                            shipping: shipping,
+                            tax: tax,
+                          );
+                    },
+                  ),
                 ],
-              );
-            }),
-          ),
+              ),
+            );
+          },
         ),
       ),
     );
   }
 
-  Widget _addressField(BuildContext context) {
+  Widget _addressField() {
     return TextField(
       controller: _addressCon,
       minLines: 2,
