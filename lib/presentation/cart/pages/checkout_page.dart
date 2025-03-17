@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:e_commerce_application/presentation/cart/bloc/payment_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -38,13 +39,16 @@ class CheckOutPage extends StatelessWidget {
       appBar: CustomAppBar(
         title: 'Checkout',
       ),
-      body: BlocProvider(
-        create: (context) => ButtonStateCubit(),
+      body: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => ButtonStateCubit(),
+          ),
+        ],
         child: BlocListener<ButtonStateCubit, ButtonState>(
           listener: (context, state) {
             if (state is ButtonSuccessState) {
               AppNavigator.pushAndRemove(context, const OrderPlacedPage());
-             
             }
 
             if (state is ButtonFailureState) {
@@ -69,7 +73,7 @@ class CheckOutPage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              '\$${CartHelper.calculateCartSubtotal(products) + shipping + tax}',
+                              '//${CartHelper.calculateCartSubtotal(products) + shipping + tax}',
                               style: const TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
@@ -86,40 +90,44 @@ class CheckOutPage extends StatelessWidget {
                         ),
                       ),
                       onPressed: () {
-                        var uuid = const Uuid();
-                        List<OrderStatusEntity> orderStatusList = [
-                          OrderStatusEntity(
-                              createdDate: Timestamp.fromDate(DateTime.now()),
-                              done: true,
-                              title: 'Order Placed'),
-                          OrderStatusEntity(
-                              createdDate: Timestamp.fromDate(DateTime.now()),
-                              done: false,
-                              title: 'Order Confirmed'),
-                          OrderStatusEntity(
-                              createdDate: Timestamp.fromDate(DateTime.now()),
-                              done: false,
-                              title: 'Shipped'),
-                          OrderStatusEntity(
-                              createdDate: Timestamp.fromDate(DateTime.now()),
-                              done: false,
-                              title: 'Delivered'),
-                        ];
-                        context.read<ButtonStateCubit>().execute(
-                              usecase: OrderRegistrationUseCase(),
-                              params: OrderRegistrationReqModel(
-                                code: '#${uuid.v4().substring(0, 7)}',
-                                products: products,
-                                createdDate: DateTime.now().toString(),
-                                itemCount: products.length,
-                                totalPrice:
-                                    CartHelper.calculateCartSubtotal(products) +
-                                        shipping +
-                                        tax,
-                                shippingAddress: _addressCon.text,
-                                orderStatus: orderStatusList,
-                              ),
-                            );
+                        context.read<PaymentCubit>().openCheckout(
+                            CartHelper.calculateCartSubtotal(products) +
+                                shipping +
+                                tax);
+                        // var uuid = const Uuid();
+                        // List<OrderStatusEntity> orderStatusList = [
+                        //   OrderStatusEntity(
+                        //       createdDate: Timestamp.fromDate(DateTime.now()),
+                        //       done: true,
+                        //       title: 'Order Placed'),
+                        //   OrderStatusEntity(
+                        //       createdDate: Timestamp.fromDate(DateTime.now()),
+                        //       done: false,
+                        //       title: 'Order Confirmed'),
+                        //   OrderStatusEntity(
+                        //       createdDate: Timestamp.fromDate(DateTime.now()),
+                        //       done: false,
+                        //       title: 'Shipped'),
+                        //   OrderStatusEntity(
+                        //       createdDate: Timestamp.fromDate(DateTime.now()),
+                        //       done: false,
+                        //       title: 'Delivered'),
+                        // ];
+                        // context.read<ButtonStateCubit>().execute(
+                        //       usecase: OrderRegistrationUseCase(),
+                        //       params: OrderRegistrationReqModel(
+                        //         code: '#${uuid.v4().substring(0, 7)}',
+                        //         products: products,
+                        //         createdDate: DateTime.now().toString(),
+                        //         itemCount: products.length,
+                        //         totalPrice:
+                        //             CartHelper.calculateCartSubtotal(products) +
+                        //                 shipping +
+                        //                 tax,
+                        //         shippingAddress: _addressCon.text,
+                        //         orderStatus: orderStatusList,
+                        //       ),
+                        //     );
                       })
                 ],
               );

@@ -37,13 +37,6 @@ class CartProductsDisplayCubit extends Cubit<CartProductsDisplayState> {
     }, (data) {
       log("✅ Product removed successfully!");
       displayCartProducts(); // ✅ Refresh UI after removal
-      // final cartStatusCubit = context.read<CartStatusCubit>();
-
-      // log("🗑️ Calling markAsRemoved()...");
-      // cartStatusCubit.markAsRemoved();
-
-      // log("🔄 Checking cart status again...");
-      // cartStatusCubit.checkCartStatus(product.productId);
     });
   }
 }
