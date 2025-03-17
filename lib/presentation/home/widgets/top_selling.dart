@@ -36,24 +36,34 @@ class TopSelling extends StatelessWidget {
                     ..displayProducts(),
             ),
             BlocProvider(
-          create: (context) => WishlistCubit()..loadWishlist(),
-        ),
+              create: (context) => WishlistCubit()..loadWishlist(),
+            ),
           ],
           child: BlocBuilder<ProductsDisplayCubit, ProductsDisplayState>(
             builder: (context, state) {
               if (state is ProductsLoading) {
                 return SizedBox(
-                  height: 200.h,
-                  child: ListView.separated(
-                    scrollDirection: Axis.horizontal,
+                  height: 280.h,
+                  child: GridView.builder(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 10,
+                      crossAxisSpacing: 10.0,
+                      mainAxisExtent: 300,
+                    ),
+                    physics: const NeverScrollableScrollPhysics(),
                     itemCount: 2,
-                    separatorBuilder: (context, index) => SizedBox(width: 15.w),
                     itemBuilder: (context, index) => Shimmer.fromColors(
                         baseColor: const Color.fromARGB(255, 218, 221, 227),
                         highlightColor: AppColors.colorDivider,
-                        child: const SizedBox(
+                        child: Container(
                           height: 150,
                           width: 80,
+                          decoration: BoxDecoration(
+                            color: AppColors.white,
+                            borderRadius: BorderRadius.circular(5),
+                          ),
                         )),
                   ),
                 );

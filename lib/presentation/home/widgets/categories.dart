@@ -57,10 +57,16 @@ class Categories extends StatelessWidget {
                     itemCount: 3,
                     separatorBuilder: (context, index) => SizedBox(width: 15.w),
                     itemBuilder: (context, index) => Shimmer.fromColors(
-                        baseColor: const Color.fromARGB(255, 218, 221, 227),
-                        highlightColor: AppColors.colorDivider,
-                        child: _categoryButton(
-                            onTap: () {}, buttonImage: "", butttontitle: "")),
+                      baseColor: const Color.fromARGB(255, 218, 221, 227),
+                      highlightColor: AppColors.colorDivider,
+                      child: Container(
+                        width: 120,
+                        decoration: BoxDecoration(
+                          gradient: AppColors.categoryLinercolor,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                      ),
+                    ),
                   ),
                 );
               }

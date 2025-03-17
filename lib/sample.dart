@@ -269,7 +269,10 @@ class BottomNavBarApp extends StatelessWidget {
 }
 
 class BottomNavScreen extends StatelessWidget {
-  final List<Widget> pages = [HomePage(), WishlistPage()];
+  final List<Widget> pages = [
+    HomePage(),
+    WishlistPage(),
+  ];
 
   @override
   Widget build(BuildContext context) {

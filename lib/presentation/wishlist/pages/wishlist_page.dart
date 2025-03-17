@@ -48,7 +48,7 @@ class WishlistPage extends StatelessWidget {
         ),
         body: BlocBuilder<WishlistCubit, WishlistState>(
           builder: (context, state) {
-            log("WishlistPage BlocBuilder is rebuilding!"); // Add this line
+            log("WishlistPage BlocBuilder is rebuilding!");
 
             if (state is WishlistLoading) {
               return const Center(
