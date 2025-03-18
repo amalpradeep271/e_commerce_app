@@ -1,4 +1,7 @@
+import 'package:e_commerce_application/common/bloc/internet_connectivity/internet_connectivity_cubit.dart';
+import 'package:e_commerce_application/common/bloc/internet_connectivity/internet_connectivity_state.dart';
 import 'package:e_commerce_application/common/widgets/appbar/app_bar.dart';
+import 'package:e_commerce_application/common/widgets/no_internet_screen/no_internet_screen.dart';
 import 'package:e_commerce_application/core/configs/assets/app_images.dart';
 import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
 import 'package:e_commerce_application/core/configs/theme/app_text_theme.dart';
@@ -19,11 +22,18 @@ class AllReviewPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(
-        title: "All Reviews",
-      ),
-      body: reviewbody(),
+    return BlocBuilder<ConnectivityCubit, ConnectivityState>(
+      builder: (context, state) {
+        if (state is ConnectivityDisconnected) {
+          return const NoInternetScreen();
+        }
+        return Scaffold(
+          appBar: CustomAppBar(
+            title: "All Reviews",
+          ),
+          body: reviewbody(),
+        );
+      },
     );
   }
 

@@ -1,4 +1,7 @@
+import 'package:e_commerce_application/common/bloc/internet_connectivity/internet_connectivity_cubit.dart';
+import 'package:e_commerce_application/common/bloc/internet_connectivity/internet_connectivity_state.dart';
 import 'package:e_commerce_application/common/widgets/appbar/app_bar.dart';
+import 'package:e_commerce_application/common/widgets/no_internet_screen/no_internet_screen.dart';
 import 'package:e_commerce_application/core/configs/assets/app_gifs.dart';
 import 'package:e_commerce_application/core/configs/theme/app_text_theme.dart';
 import 'package:e_commerce_application/domain/cart/entity/product_ordered_entity.dart';
@@ -17,51 +20,59 @@ class CartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(
-        title: 'Cart',
-      ),
-      body: MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (context) =>
-                CartProductsDisplayCubit()..displayCartProducts(),
+    return BlocBuilder<ConnectivityCubit, ConnectivityState>(
+      builder: (context, state) {
+        if (state is ConnectivityDisconnected) {
+          return const NoInternetScreen();
+        }
+        return Scaffold(
+          appBar: CustomAppBar(
+            title: 'Cart',
           ),
-          BlocProvider(
-            create: (context) => PaymentCubit(),
+          body: MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) =>
+                    CartProductsDisplayCubit()..displayCartProducts(),
+              ),
+              BlocProvider(
+                create: (context) => PaymentCubit(),
+              ),
+            ],
+            child:
+                BlocBuilder<CartProductsDisplayCubit, CartProductsDisplayState>(
+              builder: (context, state) {
+                if (state is CartProductsLoading) {
+                  return const Center(
+                    child: CupertinoActivityIndicator(),
+                  );
+                }
+                if (state is CartProductsLoaded) {
+                  return state.products.isEmpty
+                      ? Center(child: _cartIsEmpty())
+                      : Stack(
+                          children: [
+                            _products(state.products, context),
+                            Align(
+                              alignment: Alignment.bottomCenter,
+                              child: Checkout(
+                                products: state.products,
+                              ),
+                            )
+                          ],
+                        );
+                }
+                if (state is LoadCartProductsFailure) {
+                  return Center(
+                    child: Text(state.errorMessage),
+                  );
+                }
+                return Container();
+              },
+            ),
           ),
-        ],
-        child: BlocBuilder<CartProductsDisplayCubit, CartProductsDisplayState>(
-          builder: (context, state) {
-            if (state is CartProductsLoading) {
-              return const Center(
-                child: CupertinoActivityIndicator(),
-              );
-            }
-            if (state is CartProductsLoaded) {
-              return state.products.isEmpty
-                  ? Center(child: _cartIsEmpty())
-                  : Stack(
-                      children: [
-                        _products(state.products, context),
-                        Align(
-                          alignment: Alignment.bottomCenter,
-                          child: Checkout(
-                            products: state.products,
-                          ),
-                        )
-                      ],
-                    );
-            }
-            if (state is LoadCartProductsFailure) {
-              return Center(
-                child: Text(state.errorMessage),
-              );
-            }
-            return Container();
-          },
-        ),
-      ),
+        );
+      },
     );
   }
 

@@ -3,7 +3,6 @@ import 'package:e_commerce_application/common/bloc/internet_connectivity/interne
 import 'package:e_commerce_application/common/bloc/product/product_display_cubit.dart';
 import 'package:e_commerce_application/common/helper/images/images_display.dart';
 import 'package:e_commerce_application/common/helper/navigator/app_navigator.dart';
-import 'package:e_commerce_application/common/widgets/app_drawer/app_drawer.dart';
 import 'package:e_commerce_application/common/widgets/appbar/app_bar.dart';
 import 'package:e_commerce_application/common/widgets/no_internet_screen/no_internet_screen.dart';
 import 'package:e_commerce_application/core/configs/theme/app_colors.dart';

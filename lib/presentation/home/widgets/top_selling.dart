@@ -6,7 +6,7 @@ import 'package:e_commerce_application/common/widgets/product/product_heading.da
 import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
 import 'package:e_commerce_application/domain/product/entity/product_entity.dart';
 import 'package:e_commerce_application/domain/product/usecase/get_topselling_usecase.dart';
-import 'package:e_commerce_application/presentation/all_products/pages/all_products_page.dart';
+import 'package:e_commerce_application/presentation/all_products/pages/all_top_selling_products_page.dart';
 import 'package:e_commerce_application/presentation/wishlist/bloc/wishlist_cubit.dart';
 import 'package:e_commerce_application/service_locator.dart';
 import 'package:flutter/cupertino.dart';
@@ -85,7 +85,7 @@ class TopSelling extends StatelessWidget {
       allProductClick: () {
         AppNavigator.push(
           context,
-          const AllProductsPage(
+          const AllTopSellingProductsPage(
             title: "Top Selling",
           ),
         );

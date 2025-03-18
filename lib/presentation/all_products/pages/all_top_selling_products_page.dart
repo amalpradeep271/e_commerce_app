@@ -5,15 +5,15 @@ import 'package:e_commerce_application/common/bloc/product/product_display_state
 import 'package:e_commerce_application/common/widgets/appbar/app_bar.dart';
 import 'package:e_commerce_application/common/widgets/no_internet_screen/no_internet_screen.dart';
 import 'package:e_commerce_application/common/widgets/product/product_card.dart';
-import 'package:e_commerce_application/domain/product/usecase/get_newin_usecase.dart';
+import 'package:e_commerce_application/domain/product/usecase/get_topselling_usecase.dart';
 import 'package:e_commerce_application/presentation/wishlist/bloc/wishlist_cubit.dart';
 import 'package:e_commerce_application/service_locator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class AllNewProductsPage extends StatelessWidget {
-  const AllNewProductsPage({
+class AllTopSellingProductsPage extends StatelessWidget {
+  const AllTopSellingProductsPage({
     super.key,
     required this.title,
   });
@@ -22,9 +22,9 @@ class AllNewProductsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ConnectivityCubit, ConnectivityState>(
       builder: (context, state) {
-          if (state is ConnectivityDisconnected) {
-            return const NoInternetScreen();
-          }
+        if (state is ConnectivityDisconnected) {
+          return const NoInternetScreen();
+        }
         return Scaffold(
           appBar: CustomAppBar(
             title: title,
@@ -33,7 +33,7 @@ class AllNewProductsPage extends StatelessWidget {
             providers: [
               BlocProvider(
                 create: (context) =>
-                    ProductsDisplayCubit(useCase: sl<GetNewInUseCase>())
+                    ProductsDisplayCubit(useCase: sl<GetTopSellingUseCase>())
                       ..displayProducts(),
               ),
               BlocProvider(
