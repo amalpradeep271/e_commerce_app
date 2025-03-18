@@ -40,16 +40,9 @@ class ProductDetailsPage extends StatelessWidget {
         ),
         BlocProvider(create: (context) => ProductQuantityCubit()),
         BlocProvider(create: (context) => ProductSizeSelectionCubit()),
-
         BlocProvider(create: (context) => ProductColorSelectionCubit()),
-        BlocProvider(
-            create: (context) => ButtonStateCubit()), // For Add to Cart
-        BlocProvider(
-            create: (context) => ButtonStateCubit()), // For Submit Review
-        // BlocProvider(
-        //   create: (context) =>
-        //       FavoriteIconCubit()..isFavorite(productEntity.productId),
-        // ),
+        BlocProvider(create: (context) => ButtonStateCubit()),
+        BlocProvider(create: (context) => ButtonStateCubit()),
       ],
       child: BlocBuilder<ConnectivityCubit, ConnectivityState>(
         builder: (context, state) {
@@ -115,8 +108,7 @@ class ProductDetailsPage extends StatelessWidget {
                           expandedtext: productEntity.dimensions,
                         ),
                         BlocProvider(
-                          create: (context) =>
-                              ButtonStateCubit(), // Separate Cubit for Review
+                          create: (context) => ButtonStateCubit(),
                           child: ReviewForm(productEntity: productEntity),
                         ),
                       ],
