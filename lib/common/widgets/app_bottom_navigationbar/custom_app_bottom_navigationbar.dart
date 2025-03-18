@@ -1,5 +1,9 @@
 import 'package:e_commerce_application/common/bloc/app_bottom_navigationbar/bottom_navigation_cubit.dart';
+import 'package:e_commerce_application/common/bloc/internet_connectivity/internet_connectivity_cubit.dart';
+import 'package:e_commerce_application/common/bloc/internet_connectivity/internet_connectivity_state.dart';
 import 'package:e_commerce_application/common/bloc/product/product_display_cubit.dart';
+import 'package:e_commerce_application/common/widgets/app_drawer/app_drawer.dart';
+import 'package:e_commerce_application/common/widgets/no_internet_screen/no_internet_screen.dart';
 import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
 import 'package:e_commerce_application/core/configs/theme/app_icons.dart';
 import 'package:e_commerce_application/core/configs/theme/app_text_theme.dart';
@@ -53,7 +57,6 @@ class CustomAppBottomNavigationBar extends StatelessWidget {
                       icon: Icon(AppIcons.home), label: 'Home'),
                   BottomNavigationBarItem(
                       icon: Icon(AppIcons.orders), label: 'Orders'),
-                 
                   BottomNavigationBarItem(
                       icon: Icon(Icons.favorite), label: 'Wishlist'),
                 ],
@@ -89,13 +92,29 @@ class CustomAppBottomNavigationBar extends StatelessWidget {
         ),
         BlocProvider(create: (context) => WishlistCubit()..loadWishlist()),
       ],
-      child: Scaffold(
-        bottomNavigationBar: buildBottomNavigationMenu(context),
-        body: BlocBuilder<BottomNavigationCubit, BottomNavItem>(
-          builder: (context, tabIndex) {
-            return pages[tabIndex.index];
-          },
-        ),
+      child: BlocBuilder<ConnectivityCubit, ConnectivityState>(
+        builder: (context, state) {
+          if (state is ConnectivityDisconnected) {
+            return const NoInternetScreen();
+          }
+          return Stack(
+            children: [
+              Scaffold(
+                key: GlobalKey<
+                    ScaffoldState>(), // Ensure scaffold key for drawer access
+                drawer:
+                    const CustomAppDrawer(), // ✅ Ensure drawer is part of Scaffold
+
+                body: BlocBuilder<BottomNavigationCubit, BottomNavItem>(
+                  builder: (context, tabIndex) {
+                    return pages[tabIndex.index];
+                  },
+                ),
+                bottomNavigationBar: buildBottomNavigationMenu(context),
+              ),
+            ],
+          );
+        },
       ),
     );
   }

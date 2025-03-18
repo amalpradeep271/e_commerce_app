@@ -1,3 +1,4 @@
+import 'package:e_commerce_application/common/bloc/internet_connectivity/internet_connectivity_cubit.dart';
 import 'package:e_commerce_application/core/configs/theme/app_theme.dart';
 import 'package:e_commerce_application/firebase_options.dart';
 import 'package:e_commerce_application/presentation/spalsh/bloc/splash_cubit.dart';
@@ -15,7 +16,12 @@ Future<void> main() async {
   );
 
   await initializeDependencies();
-  runApp(const MyApp());
+  runApp(
+    BlocProvider(
+      create: (context) => ConnectivityCubit(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

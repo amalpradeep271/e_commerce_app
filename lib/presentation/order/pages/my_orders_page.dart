@@ -1,5 +1,8 @@
+import 'package:e_commerce_application/common/bloc/internet_connectivity/internet_connectivity_cubit.dart';
+import 'package:e_commerce_application/common/bloc/internet_connectivity/internet_connectivity_state.dart';
 import 'package:e_commerce_application/common/helper/navigator/app_navigator.dart';
 import 'package:e_commerce_application/common/widgets/appbar/app_bar.dart';
+import 'package:e_commerce_application/common/widgets/no_internet_screen/no_internet_screen.dart';
 import 'package:e_commerce_application/core/configs/assets/app_gifs.dart';
 import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
 import 'package:e_commerce_application/core/configs/theme/app_text_theme.dart';
@@ -17,33 +20,40 @@ class MyOrdersPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: CustomAppBar(
-          title: 'My Orders',
-        ),
-        body: BlocProvider(
-            create: (context) => OrdersDisplayCubit()..displayOrders(),
-            child: BlocBuilder<OrdersDisplayCubit, OrdersDisplayState>(
-              builder: (context, state) {
-                if (state is OrdersLoading) {
-                  return const Center(
-                    child: CupertinoActivityIndicator(),
-                  );
-                }
-                if (state is OrdersLoaded) {
-                  return state.orders.isEmpty
-                      ? Center(child: _orderIsEmpty())
-                      : _orders(state.orders);
-                }
+    return BlocBuilder<ConnectivityCubit, ConnectivityState>(
+      builder: (context, state) {
+          if (state is ConnectivityDisconnected) {
+            return const NoInternetScreen();
+          }
+        return Scaffold(
+            appBar: CustomAppBar(
+              title: 'My Orders',
+            ),
+            body: BlocProvider(
+                create: (context) => OrdersDisplayCubit()..displayOrders(),
+                child: BlocBuilder<OrdersDisplayCubit, OrdersDisplayState>(
+                  builder: (context, state) {
+                    if (state is OrdersLoading) {
+                      return const Center(
+                        child: CupertinoActivityIndicator(),
+                      );
+                    }
+                    if (state is OrdersLoaded) {
+                      return state.orders.isEmpty
+                          ? Center(child: _orderIsEmpty())
+                          : _orders(state.orders);
+                    }
 
-                if (state is LoadOrdersFailure) {
-                  return Center(
-                    child: Text(state.errorMessage),
-                  );
-                }
-                return Container();
-              },
-            )));
+                    if (state is LoadOrdersFailure) {
+                      return Center(
+                        child: Text(state.errorMessage),
+                      );
+                    }
+                    return Container();
+                  },
+                )));
+      },
+    );
   }
 
   Widget _orderIsEmpty() {

@@ -1,6 +1,9 @@
 import 'dart:developer';
+import 'package:e_commerce_application/common/bloc/internet_connectivity/internet_connectivity_cubit.dart';
+import 'package:e_commerce_application/common/bloc/internet_connectivity/internet_connectivity_state.dart';
 import 'package:e_commerce_application/common/bloc/product/product_display_cubit.dart';
 import 'package:e_commerce_application/common/widgets/appbar/app_bar.dart';
+import 'package:e_commerce_application/common/widgets/no_internet_screen/no_internet_screen.dart';
 import 'package:e_commerce_application/core/configs/assets/app_gifs.dart';
 import 'package:e_commerce_application/core/configs/theme/app_text_theme.dart';
 import 'package:e_commerce_application/domain/category/usecase/get_category_usecase.dart';
@@ -42,34 +45,41 @@ class WishlistPage extends StatelessWidget {
                 ..displayProducts(),
         ),
       ],
-      child: Scaffold(
-        appBar: CustomAppBar(
-          title: 'My Favorites',
-        ),
-        body: BlocBuilder<WishlistCubit, WishlistState>(
-          builder: (context, state) {
-            log("WishlistPage BlocBuilder is rebuilding!");
+      child: BlocBuilder<ConnectivityCubit, ConnectivityState>(
+        builder: (context, state) {
+          if (state is ConnectivityDisconnected) {
+            return const NoInternetScreen();
+          }
+          return Scaffold(
+            appBar: CustomAppBar(
+              title: 'My Favorites',
+            ),
+            body: BlocBuilder<WishlistCubit, WishlistState>(
+              builder: (context, state) {
+                log("WishlistPage BlocBuilder is rebuilding!");
 
-            if (state is WishlistLoading) {
-              return const Center(
-                child: CupertinoActivityIndicator(),
-              );
-            }
-            if (state is WishlistLoaded) {
-              return state.wishlistedItems.isEmpty
-                  ? Center(
-                      child: _wishlistIsEmpty(),
-                    )
-                  : _products(state.wishlistedItems);
-            }
-            if (state is WishlistError) {
-              return const Center(
-                child: Text('Please try again'),
-              );
-            }
-            return Container();
-          },
-        ),
+                if (state is WishlistLoading) {
+                  return const Center(
+                    child: CupertinoActivityIndicator(),
+                  );
+                }
+                if (state is WishlistLoaded) {
+                  return state.wishlistedItems.isEmpty
+                      ? Center(
+                          child: _wishlistIsEmpty(),
+                        )
+                      : _products(state.wishlistedItems);
+                }
+                if (state is WishlistError) {
+                  return const Center(
+                    child: Text('Please try again'),
+                  );
+                }
+                return Container();
+              },
+            ),
+          );
+        },
       ),
     );
   }

@@ -1,8 +1,11 @@
+import 'package:e_commerce_application/common/bloc/internet_connectivity/internet_connectivity_cubit.dart';
+import 'package:e_commerce_application/common/bloc/internet_connectivity/internet_connectivity_state.dart';
 import 'package:e_commerce_application/common/bloc/product/product_display_cubit.dart';
 import 'package:e_commerce_application/common/helper/images/images_display.dart';
 import 'package:e_commerce_application/common/helper/navigator/app_navigator.dart';
 import 'package:e_commerce_application/common/widgets/app_drawer/app_drawer.dart';
 import 'package:e_commerce_application/common/widgets/appbar/app_bar.dart';
+import 'package:e_commerce_application/common/widgets/no_internet_screen/no_internet_screen.dart';
 import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
 import 'package:e_commerce_application/core/configs/theme/app_icons.dart';
 import 'package:e_commerce_application/domain/category/usecase/get_category_usecase.dart';
@@ -29,112 +32,122 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      drawer: const CustomAppDrawer(),
-      appBar: CustomAppBar(
-        onTap: () async {
-          // await controller.getSearchData();
-        },
-        searchBox: true,
-        backgroundColor: AppColors.transparent,
-        actionIconData2: AppIcons.cart,
-        onAction2Pressed: () => AppNavigator.push(context, const CartPage()),
-      ),
-      body: SingleChildScrollView(
-          child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          children: [
-            MultiBlocProvider(
-              providers: [
-                BlocProvider(
-                  create: (context) => BannersDisplayCubit()..displayBanners(),
-                ),
-                BlocProvider(
-                  create: (context) => WishlistCubit()..loadWishlist(),
-                ),
-                BlocProvider(
-                  create: (context) =>
-                      CategoriesDisplayCubit()..displayCategories(),
-                ),
-                BlocProvider(
-                  create: (context) =>
-                      ProductsDisplayCubit(useCase: sl<GetNewInUseCase>())
+    return BlocBuilder<ConnectivityCubit, ConnectivityState>(
+      builder: (context, state) {
+        if (state is ConnectivityDisconnected) {
+          return const NoInternetScreen();
+        }
+        return Scaffold(
+          appBar: CustomAppBar(
+            onTap: () async {
+              // await controller.getSearchData();
+            },
+            leadingIconData: Icons.menu,
+            onLeadingPressed: () => Scaffold.of(context).openDrawer(),
+            searchBox: true,
+            backgroundColor: AppColors.transparent,
+            actionIconData2: AppIcons.cart,
+            onAction2Pressed: () =>
+                AppNavigator.push(context, const CartPage()),
+          ),
+          body: SingleChildScrollView(
+              child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              children: [
+                MultiBlocProvider(
+                  providers: [
+                    BlocProvider(
+                      create: (context) =>
+                          BannersDisplayCubit()..displayBanners(),
+                    ),
+                    BlocProvider(
+                      create: (context) => WishlistCubit()..loadWishlist(),
+                    ),
+                    BlocProvider(
+                      create: (context) =>
+                          CategoriesDisplayCubit()..displayCategories(),
+                    ),
+                    BlocProvider(
+                      create: (context) =>
+                          ProductsDisplayCubit(useCase: sl<GetNewInUseCase>())
+                            ..displayProducts(),
+                    ),
+                    BlocProvider(
+                      create: (context) => ProductsDisplayCubit(
+                          useCase: sl<GetTopSellingUseCase>())
                         ..displayProducts(),
-                ),
-                BlocProvider(
-                  create: (context) =>
-                      ProductsDisplayCubit(useCase: sl<GetTopSellingUseCase>())
+                    ),
+                    BlocProvider(
+                      create: (context) => ProductsDisplayCubit(
+                          useCase: sl<GetCategoryUseCase>())
                         ..displayProducts(),
-                ),
-                BlocProvider(
-                  create: (context) =>
-                      ProductsDisplayCubit(useCase: sl<GetCategoryUseCase>())
-                        ..displayProducts(),
-                ),
-              ],
-              child: BlocBuilder<BannersDisplayCubit, BannersDisplayState>(
-                builder: (context, state) {
-                  if (state is BannersLoading) {
-                    return Shimmer.fromColors(
-                      baseColor: const Color.fromARGB(255, 218, 221, 227),
-                      highlightColor: AppColors.colorDivider,
-                      child: Container(
-                        margin: EdgeInsets.only(
-                            top: 30.h, bottom: 10.h, left: 10.w),
-                        height: 200.h, // Same height as banner slider
-                        width: double.infinity,
-                        decoration: const BoxDecoration(
-                          color: AppColors.white,
-                        ),
-                      ),
-                    );
-                  }
-                  if (state is BannersLoaded) {
-                    return BannerCarouselSlider(
-                      height: 200.h,
-                      autoPlay: true,
-                      itemBuilder: (context, index, _) {
-                        return Padding(
-                          padding: EdgeInsets.only(
-                            top: 30.h,
-                            bottom: 10.h,
-                            left: 10.w,
-                          ),
-                          child: SizedBox(
-                            height: 100,
+                    ),
+                  ],
+                  child: BlocBuilder<BannersDisplayCubit, BannersDisplayState>(
+                    builder: (context, state) {
+                      if (state is BannersLoading) {
+                        return Shimmer.fromColors(
+                          baseColor: const Color.fromARGB(255, 218, 221, 227),
+                          highlightColor: AppColors.colorDivider,
+                          child: Container(
+                            margin: EdgeInsets.only(
+                                top: 30.h, bottom: 10.h, left: 10.w),
+                            height: 200.h, // Same height as banner slider
                             width: double.infinity,
-                            child: Image.network(
-                              ImageDisplayHelper.generateBannerImageURL(
-                                state.banners[index].bannerImage,
-                              ),
-                              fit: BoxFit.cover,
-                              errorBuilder: (context, error, _) {
-                                return const Center(
-                                  child: Text(
-                                    "Image not available",
-                                  ),
-                                );
-                              },
+                            decoration: const BoxDecoration(
+                              color: AppColors.white,
                             ),
                           ),
                         );
-                      },
-                      itemCount: state.banners.length,
-                    );
-                  }
-                  return Container();
-                },
-              ),
+                      }
+                      if (state is BannersLoaded) {
+                        return BannerCarouselSlider(
+                          height: 200.h,
+                          autoPlay: true,
+                          itemBuilder: (context, index, _) {
+                            return Padding(
+                              padding: EdgeInsets.only(
+                                top: 30.h,
+                                bottom: 10.h,
+                                left: 10.w,
+                              ),
+                              child: SizedBox(
+                                height: 100,
+                                width: double.infinity,
+                                child: Image.network(
+                                  ImageDisplayHelper.generateBannerImageURL(
+                                    state.banners[index].bannerImage,
+                                  ),
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (context, error, _) {
+                                    return const Center(
+                                      child: Text(
+                                        "Image not available",
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            );
+                          },
+                          itemCount: state.banners.length,
+                        );
+                      }
+                      return Container();
+                    },
+                  ),
+                ),
+                const Categories(),
+                SizedBox(height: 24.h),
+                const TopSelling(),
+                SizedBox(height: 24.h),
+                const NewIn(),
+              ],
             ),
-            const Categories(),
-            SizedBox(height: 24.h),
-            const TopSelling(),
-            SizedBox(height: 24.h),
-            const NewIn(),
-          ],
-        ),
-      )),
+          )),
+        );
+      },
     );
   }
 }

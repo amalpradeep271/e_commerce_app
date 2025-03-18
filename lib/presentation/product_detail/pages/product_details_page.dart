@@ -1,6 +1,9 @@
 import 'package:e_commerce_application/common/bloc/button/button_state_cubit.dart';
+import 'package:e_commerce_application/common/bloc/internet_connectivity/internet_connectivity_cubit.dart';
+import 'package:e_commerce_application/common/bloc/internet_connectivity/internet_connectivity_state.dart';
 import 'package:e_commerce_application/common/helper/navigator/app_navigator.dart';
 import 'package:e_commerce_application/common/widgets/appbar/app_bar.dart';
+import 'package:e_commerce_application/common/widgets/no_internet_screen/no_internet_screen.dart';
 import 'package:e_commerce_application/core/configs/theme/app_icons.dart';
 import 'package:e_commerce_application/presentation/cart/pages/cart_page.dart';
 import 'package:e_commerce_application/presentation/product_detail/bloc/product_color_selection_cubit.dart';
@@ -48,74 +51,82 @@ class ProductDetailsPage extends StatelessWidget {
         //       FavoriteIconCubit()..isFavorite(productEntity.productId),
         // ),
       ],
-      child: Scaffold(
-        appBar: CustomAppBar(
-          actionIconData2: AppIcons.cart,
-          onAction2Pressed: () => AppNavigator.push(context, const CartPage()),
-        ),
-        bottomNavigationBar: AddToCart(
-          productEntity: productEntity,
-        ),
-        body: ListView(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: SingleChildScrollView(
-                child: Column(
-                  spacing: 8,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ProductImages(productEntity: productEntity),
-                    ProductTitle(productEntity: productEntity),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: BlocBuilder<ConnectivityCubit, ConnectivityState>(
+        builder: (context, state) {
+          if (state is ConnectivityDisconnected) {
+            return const NoInternetScreen();
+          }
+          return Scaffold(
+            appBar: CustomAppBar(
+              actionIconData2: AppIcons.cart,
+              onAction2Pressed: () =>
+                  AppNavigator.push(context, const CartPage()),
+            ),
+            bottomNavigationBar: AddToCart(
+              productEntity: productEntity,
+            ),
+            body: ListView(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      spacing: 8,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        ProductPrice(productEntity: productEntity),
-                        ProductQuantity(productEntity: productEntity),
+                        ProductImages(productEntity: productEntity),
+                        ProductTitle(productEntity: productEntity),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            ProductPrice(productEntity: productEntity),
+                            ProductQuantity(productEntity: productEntity),
+                          ],
+                        ),
+                        const RatingBars(rating: 3),
+                        ProductColors(productEntity: productEntity),
+                        ProductSizes(productEntity: productEntity),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Text(
+                          productEntity.description,
+                        ),
+                        const SizedBox(
+                          height: 30,
+                        ),
+                        DropDownWidget(
+                          heading: "Manufacturer Information",
+                          collapsedtext: "",
+                          expandedtext: productEntity.manufactureInformation,
+                        ),
+                        const DropDownWidget(
+                          heading: "Disclaimer",
+                          collapsedtext: "",
+                          expandedtext:
+                              "The image is for representation purposes only. The packaging you receive might vary.",
+                        ),
+                        DropDownWidget(
+                          heading: "Product Dimensions",
+                          collapsedtext: "",
+                          expandedtext: productEntity.dimensions,
+                        ),
+                        BlocProvider(
+                          create: (context) =>
+                              ButtonStateCubit(), // Separate Cubit for Review
+                          child: ReviewForm(productEntity: productEntity),
+                        ),
                       ],
                     ),
-                    const RatingBars(rating: 3),
-                    ProductColors(productEntity: productEntity),
-                    ProductSizes(productEntity: productEntity),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Text(
-                      productEntity.description,
-                    ),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    DropDownWidget(
-                      heading: "Manufacturer Information",
-                      collapsedtext: "",
-                      expandedtext: productEntity.manufactureInformation,
-                    ),
-                    const DropDownWidget(
-                      heading: "Disclaimer",
-                      collapsedtext: "",
-                      expandedtext:
-                          "The image is for representation purposes only. The packaging you receive might vary.",
-                    ),
-                    DropDownWidget(
-                      heading: "Product Dimensions",
-                      collapsedtext: "",
-                      expandedtext: productEntity.dimensions,
-                    ),
-                    BlocProvider(
-                      create: (context) =>
-                          ButtonStateCubit(), // Separate Cubit for Review
-                      child: ReviewForm(productEntity: productEntity),
-                    ),
-                  ],
+                  ),
                 ),
-              ),
+              ],
             ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }

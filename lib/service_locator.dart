@@ -13,6 +13,8 @@ import 'package:e_commerce_application/data/product/repository/product_repositor
 import 'package:e_commerce_application/data/product/source/product_firebase_service.dart';
 import 'package:e_commerce_application/data/review/repository/review_repository_impl.dart';
 import 'package:e_commerce_application/data/review/source/review_firebase_services.dart';
+import 'package:e_commerce_application/data/user/repository/user_repository_impl.dart';
+import 'package:e_commerce_application/data/user/source/user_firebase_services.dart';
 import 'package:e_commerce_application/data/wishlist/repository/wishlist_repository_impl.dart';
 import 'package:e_commerce_application/data/wishlist/source/wishlist_firebase_service.dart';
 import 'package:e_commerce_application/domain/auth/repository/auth_repository.dart';
@@ -44,6 +46,7 @@ import 'package:e_commerce_application/domain/product/usecase/get_topselling_use
 import 'package:e_commerce_application/domain/product/usecase/is_favourite_usecase.dart';
 import 'package:e_commerce_application/domain/review/repository/review_repository.dart';
 import 'package:e_commerce_application/domain/review/usecase/add_to_review_usecase.dart';
+import 'package:e_commerce_application/domain/user/repository/user_repository.dart';
 import 'package:e_commerce_application/domain/user/usecase/upload_user_image_usecase.dart';
 import 'package:e_commerce_application/domain/wishlist/repository/wishlist_repository.dart';
 import 'package:e_commerce_application/domain/wishlist/usecase/get_wishlist_usecase.dart';
@@ -57,6 +60,7 @@ Future<void> initializeDependencies() async {
 
   sl.registerSingleton<AuthFirebaseService>(AuthFirebaseServiceImpl());
   sl.registerSingleton<BannerFirebaseService>(BannerFirebaseServiceImpl());
+  sl.registerSingleton<UserFirebaseService>(UserFirebaseServiceImpl());
   sl.registerSingleton<CategoryFireBaseService>(CategoryFireBaseServiceImpl());
   sl.registerSingleton<ProductFirebaseService>(ProductFirebaseServiceImpl());
   sl.registerSingleton<CartFirebaseServices>(CartFirebaseServicesImpl());
@@ -68,6 +72,7 @@ Future<void> initializeDependencies() async {
 
   sl.registerSingleton<AuthRepository>(AuthRepositoryImpl());
   sl.registerSingleton<BannerRepository>(BannerRepositoryImpl());
+  sl.registerSingleton<UserRepository>(UserRepositoryImpl());
   sl.registerSingleton<CategoryRepository>(CategoryRepositoryImpl());
   sl.registerSingleton<ProductRepository>(ProductRepositoryImpl());
   sl.registerSingleton<CartRepository>(CartRepositoryImpl());
