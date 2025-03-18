@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 import 'package:e_commerce_application/data/auth/models/user.dart';
 import 'package:e_commerce_application/data/user/source/user_firebase_services.dart';
@@ -18,5 +20,10 @@ class UserRepositoryImpl extends UserRepository {
         );
       },
     );
+  }
+
+  @override
+  Future<Either<String, String>> uploadProfileImage(File imageFile) async {
+    return await sl<UserFirebaseService>().uploadProfileImage(imageFile);
   }
 }

@@ -1,5 +1,4 @@
 import 'package:e_commerce_application/common/bloc/button/button_state_cubit.dart';
-import 'package:e_commerce_application/common/bloc/button/favourite_icon_cubit.dart';
 import 'package:e_commerce_application/common/helper/navigator/app_navigator.dart';
 import 'package:e_commerce_application/common/widgets/appbar/app_bar.dart';
 import 'package:e_commerce_application/core/configs/theme/app_icons.dart';
