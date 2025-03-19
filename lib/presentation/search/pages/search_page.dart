@@ -1,6 +1,5 @@
 import 'package:e_commerce_application/common/bloc/product/product_display_cubit.dart';
 import 'package:e_commerce_application/common/bloc/product/product_display_state.dart';
-import 'package:e_commerce_application/common/widgets/appbar/app_bar.dart';
 import 'package:e_commerce_application/common/widgets/product/product_card.dart';
 import 'package:e_commerce_application/core/configs/assets/app_vectors.dart';
 import 'package:e_commerce_application/domain/product/entity/product_entity.dart';
