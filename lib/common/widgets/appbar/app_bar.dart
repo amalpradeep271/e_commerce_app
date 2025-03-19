@@ -45,29 +45,30 @@ class CustomAppBar extends AppBar {
               : searchBox == true
                   ? SizedBox(
                       width: 250.w,
-                      child:
-                       TextFormField(
-                        cursorHeight: 16,
-                        cursorWidth: 1,
-                        decoration: InputDecoration(
-                          fillColor: AppColors.whiteGrey.withAlpha(127),
-                          filled: true,
-                          border: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              borderRadius: BorderRadius.circular(5)),
-                          contentPadding:
-                              const EdgeInsets.only(bottom: 7, left: 15),
-                          hintText: "Search",
-                          hintStyle: AppTextStyles.getAppTextStyleCustomized(
-                              textWeight: FontWeight.w400,
-                              textColor: AppColors.black.withAlpha(128),
-                              textSize: 14.sp),
-                          suffixIcon: GestureDetector(
-                              onTap: onTap,
-                              child: const Icon(
-                                AppIcons.search,
-                                size: 20,
-                              ),),
+                      child: GestureDetector(
+                        onTap: onTap,
+                        child: TextFormField(
+                          enabled: false,
+                          cursorHeight: 16,
+                          cursorWidth: 1,
+                          decoration: InputDecoration(
+                            fillColor: AppColors.whiteGrey.withAlpha(127),
+                            filled: true,
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide.none,
+                                borderRadius: BorderRadius.circular(5)),
+                            contentPadding:
+                                const EdgeInsets.only(bottom: 7, left: 15),
+                            hintText: "Search",
+                            hintStyle: AppTextStyles.getAppTextStyleCustomized(
+                                textWeight: FontWeight.w400,
+                                textColor: AppColors.black.withAlpha(128),
+                                textSize: 14.sp),
+                            suffixIcon: const Icon(
+                              AppIcons.search,
+                              size: 20,
+                            ),
+                          ),
                         ),
                       ),
                     )

@@ -5,6 +5,7 @@ import 'package:e_commerce_application/common/helper/navigator/app_navigator.dar
 import 'package:e_commerce_application/common/widgets/appbar/app_bar.dart';
 import 'package:e_commerce_application/common/widgets/no_internet_screen/no_internet_screen.dart';
 import 'package:e_commerce_application/core/configs/theme/app_icons.dart';
+import 'package:e_commerce_application/presentation/cart/bloc/cart_status_cubit.dart';
 import 'package:e_commerce_application/presentation/cart/pages/cart_page.dart';
 import 'package:e_commerce_application/presentation/product_detail/bloc/product_color_selection_cubit.dart';
 import 'package:e_commerce_application/presentation/product_detail/bloc/product_image_view_cubit.dart';
@@ -43,6 +44,7 @@ class ProductDetailsPage extends StatelessWidget {
         BlocProvider(create: (context) => ProductColorSelectionCubit()),
         BlocProvider(create: (context) => ButtonStateCubit()),
         BlocProvider(create: (context) => ButtonStateCubit()),
+        BlocProvider(create: (context) => CartStatusCubit()),
       ],
       child: BlocBuilder<ConnectivityCubit, ConnectivityState>(
         builder: (context, state) {

@@ -18,6 +18,7 @@ import 'package:e_commerce_application/presentation/home/widgets/banner_carousel
 import 'package:e_commerce_application/presentation/home/widgets/categories.dart';
 import 'package:e_commerce_application/presentation/home/widgets/new_in.dart';
 import 'package:e_commerce_application/presentation/home/widgets/top_selling.dart';
+import 'package:e_commerce_application/presentation/search/pages/search_page.dart';
 import 'package:e_commerce_application/presentation/wishlist/bloc/wishlist_cubit.dart';
 import 'package:e_commerce_application/service_locator.dart';
 import 'package:flutter/material.dart';
@@ -40,6 +41,7 @@ class HomePage extends StatelessWidget {
           appBar: CustomAppBar(
             onTap: () async {
               // await controller.getSearchData();
+              AppNavigator.push(context, const SearchPage());
             },
             leadingIconData: Icons.menu,
             onLeadingPressed: () => Scaffold.of(context).openDrawer(),
