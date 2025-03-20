@@ -7,7 +7,11 @@ class BannersDisplayCubit extends Cubit<BannersDisplayState> {
   BannersDisplayCubit() : super(BannersLoading());
 
   void displayBanners() async {
+    if (isClosed) return;
+
     var returnedData = await sl<GetBannersUsecase>().call();
+    if (isClosed) return;
+
     returnedData.fold(
       (error) {
         emit(BannersLoadFailure());
