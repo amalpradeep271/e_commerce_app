@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:e_commerce_application/common/bloc/button/button_state.dart';
 import 'package:e_commerce_application/common/bloc/textfield/password_visibility_cubit.dart';
 import 'package:e_commerce_application/common/helper/navigator/app_navigator.dart';
@@ -41,6 +43,7 @@ class SignupPage extends StatelessWidget {
         child: BlocListener<ButtonStateCubit, ButtonState>(
           listener: (context, state) {
             if (state is ButtonFailureState) {
+              log('Signup Error: ${state.errorMessage}');
               var snackbar = SnackBar(
                 content: Text(
                   state.errorMessage,
@@ -51,7 +54,7 @@ class SignupPage extends StatelessWidget {
             }
             if (state is ButtonSuccessState) {
               AppNavigator.pushAndRemove(
-                  context,  CustomAppBottomNavigationBar());
+                  context, CustomAppBottomNavigationBar());
             }
           },
           child: SingleChildScrollView(
@@ -182,7 +185,6 @@ class SignupPage extends StatelessWidget {
                     usecase: SignUpUseCase(),
                     params: signUpReq,
                   );
-              AppNavigator.pushReplacement(context, SigninPage());
             }
           },
           title: "Sign Up",

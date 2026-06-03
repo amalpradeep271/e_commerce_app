@@ -14,6 +14,7 @@ import 'package:e_commerce_application/presentation/home/pages/homepage.dart';
 import 'package:e_commerce_application/presentation/order/pages/my_orders_page.dart';
 import 'package:e_commerce_application/presentation/wishlist/bloc/wishlist_cubit.dart';
 import 'package:e_commerce_application/presentation/wishlist/pages/wishlist_page.dart';
+import 'package:e_commerce_application/common/bloc/app_drawer/user_info_display_cubit.dart';
 import 'package:e_commerce_application/service_locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -91,6 +92,9 @@ class CustomAppBottomNavigationBar extends StatelessWidget {
                 ..displayProducts(showLoading: false),
         ),
         BlocProvider(create: (context) => WishlistCubit()..loadWishlist()),
+        BlocProvider(
+          create: (context) => UserInfoDisplayCubit()..displayUserInfo(),
+        ),
       ],
       child: BlocBuilder<ConnectivityCubit, ConnectivityState>(
         builder: (context, state) {

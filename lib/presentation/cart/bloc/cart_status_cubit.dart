@@ -6,11 +6,13 @@ import 'package:e_commerce_application/domain/cart/usecase/is_product_in_cart_us
    CartStatusCubit() : super(false);
  
    void checkCartStatus(String productId) async {
+     if (isClosed) return;
      var result = await sl<IsProductInCartUsecase>().call(params: productId);
+     if (isClosed) return;
      result.fold((error) {
-       emit(false);
+       if (!isClosed) emit(false);
      }, (isInCart) {
-       emit(isInCart);
+       if (!isClosed) emit(isInCart);
      });
    }
  

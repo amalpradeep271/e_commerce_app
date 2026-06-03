@@ -1,11 +1,10 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_commerce_application/data/product/model/product_color_model.dart';
 import 'package:e_commerce_application/domain/product/entity/product_entity.dart';
 
 class ProductModel {
   final String categoryId;
   final List<ProductColorModel> color;
-  final Timestamp createdDate;
+  final DateTime createdDate;
   final num discountPrice;
   final num gender;
   final List<String> images;
@@ -36,6 +35,13 @@ class ProductModel {
   });
 
   factory ProductModel.fromMap(Map<String, dynamic> map) {
+    DateTime parsedCreatedDate;
+    if (map['createdDate'] is String) {
+      parsedCreatedDate = DateTime.parse(map['createdDate'] as String);
+    } else {
+      parsedCreatedDate = DateTime.now();
+    }
+
     return ProductModel(
       categoryId:
           map['categoryId'] as String? ?? '', // Fallback to empty string
@@ -43,7 +49,7 @@ class ProductModel {
               ?.map((e) => ProductColorModel.fromMap(e))
               .toList() ??
           [], // Default to empty list if null
-      createdDate: map['createdDate'] as Timestamp? ?? Timestamp.now(),
+      createdDate: parsedCreatedDate,
       discountPrice: map['discountPrice'] as num? ?? 0,
       gender: map['gender'] as num? ?? 0,
       images: (map['images'] as List<dynamic>?)
@@ -68,7 +74,7 @@ class ProductModel {
     return <String, dynamic>{
       'categoryId': categoryId,
       'colors': color.map((e) => e.toMap()).toList(),
-      'createdDate': createdDate,
+      'createdDate': createdDate.toIso8601String(),
       'discountPrice': discountPrice,
       'gender': gender,
       'images': images.map((e) => e.toString()).toList(),

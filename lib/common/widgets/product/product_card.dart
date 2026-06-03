@@ -6,6 +6,8 @@ import 'package:e_commerce_application/domain/product/entity/product_entity.dart
 import 'package:e_commerce_application/presentation/product_detail/pages/product_details_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:shimmer/shimmer.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({
@@ -30,17 +32,26 @@ class ProductCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
+                SizedBox(
                   height: 190.h,
-                  decoration: BoxDecoration(
+                  width: double.infinity,
+                  child: ClipRRect(
                     borderRadius: BorderRadius.circular(5.r),
-                    image: DecorationImage(
-                      image: NetworkImage(
-                        ImageDisplayHelper.generateProductImageURL(
-                          productEntity.images[0],
-                        ),
+                    child: CachedNetworkImage(
+                      imageUrl: ImageDisplayHelper.generateProductImageURL(
+                        productEntity.images[0],
                       ),
                       fit: BoxFit.fill,
+                      placeholder: (context, url) => Shimmer.fromColors(
+                        baseColor: const Color.fromARGB(255, 218, 221, 227),
+                        highlightColor: const Color.fromARGB(255, 240, 242, 245),
+                        child: Container(
+                          color: Colors.white,
+                        ),
+                      ),
+                      errorWidget: (context, url, error) => const Center(
+                        child: Icon(Icons.error),
+                      ),
                     ),
                   ),
                 ),

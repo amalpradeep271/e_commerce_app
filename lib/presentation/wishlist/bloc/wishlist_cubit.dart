@@ -9,8 +9,10 @@ class WishlistCubit extends Cubit<WishlistState> {
   WishlistCubit() : super(WishlistLoading());
 
   void loadWishlist() async {
+    if (isClosed) return;
     emit(WishlistLoading());
     var result = await sl<GetWishlistUseCase>().call();
+    if (isClosed) return;
     result.fold(
       (error) => emit(WishlistError(error)),
       (data) => emit(WishlistLoaded(data)),
@@ -18,7 +20,9 @@ class WishlistCubit extends Cubit<WishlistState> {
   }
 
   void toggleWishlist(ProductEntity product) async {
+    if (isClosed) return;
     var result = await sl<ToggleWishlistUseCase>().call(params: product);
+    if (isClosed) return;
     result.fold(
       (error) => emit(WishlistError(error)),
       (_) => loadWishlist(),

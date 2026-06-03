@@ -5,9 +5,9 @@ import 'package:e_commerce_application/domain/order/repository/order_repository.
 import 'package:e_commerce_application/service_locator.dart';
 
 class OrderRegistrationUseCase
-    implements UseCase<Either, OrderRegistrationReqModel> {
+    implements UseCase<Either<String, String>, OrderRegistrationReqModel> {
   @override
-  Future<Either> call({OrderRegistrationReqModel? params}) async {
+  Future<Either<String, String>> call({OrderRegistrationReqModel? params}) async {
     return sl<OrderRepository>().orderRegistration(params!);
   }
 }

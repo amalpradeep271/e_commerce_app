@@ -1,8 +1,8 @@
 import 'package:e_commerce_application/common/bloc/internet_connectivity/internet_connectivity_cubit.dart';
 import 'package:e_commerce_application/core/configs/theme/app_theme.dart';
 import 'package:e_commerce_application/firebase_options.dart';
-import 'package:e_commerce_application/presentation/spalsh/bloc/splash_cubit.dart';
-import 'package:e_commerce_application/presentation/spalsh/pages/splash_page.dart';
+import 'package:e_commerce_application/presentation/splash/bloc/splash_cubit.dart';
+import 'package:e_commerce_application/presentation/splash/pages/splash_page.dart';
 import 'package:e_commerce_application/service_locator.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';

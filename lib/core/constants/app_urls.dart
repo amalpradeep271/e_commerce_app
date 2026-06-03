@@ -1,3 +1,4 @@
+// Legacy Firebase Storage URLs - no longer used. Images are now served via the NestJS API backend.
 class AppUrl {
   static const storageBase =
       'https://firebasestorage.googleapis.com/v0/b/e-commerce-app-fe3ed.appspot.com/o/';

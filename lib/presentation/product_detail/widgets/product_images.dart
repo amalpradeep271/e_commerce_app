@@ -10,7 +10,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProductImages extends StatelessWidget {
   final ProductEntity productEntity;
-  final CarouselSliderController carosuelController =
+  final CarouselSliderController carouselController =
       CarouselSliderController();
 
   ProductImages({
@@ -27,7 +27,7 @@ class ProductImages extends StatelessWidget {
             BlocBuilder<ProductImageViewCubit, int>(
               builder: (context, selectedIndex) {
                 return CarouselSlider.builder(
-                  carouselController: carosuelController,
+                  carouselController: carouselController,
                   itemCount: productEntity.images.length,
                   itemBuilder: (context, index, _) {
                     return Padding(
@@ -83,7 +83,7 @@ class ProductImages extends StatelessWidget {
                               context
                                   .read<ProductImageViewCubit>()
                                   .selectImage(index);
-                              carosuelController
+                              carouselController
                                   .animateToPage(index); // Update carousel
                             },
                             child: Card(

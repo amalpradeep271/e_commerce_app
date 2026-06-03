@@ -3,11 +3,9 @@ import 'package:e_commerce_application/core/usecase/usecase.dart';
 import 'package:e_commerce_application/domain/cart/repository/cart_repository.dart';
 import 'package:e_commerce_application/service_locator.dart';
 
-class IsProductInCartUsecase  implements UseCase<Either,String>{
+class IsProductInCartUsecase implements UseCase<Either<String, bool>, String> {
   @override
-  Future<Either> call({String? params}) {
+  Future<Either<String, bool>> call({String? params}) async {
     return sl<CartRepository>().isProductInCart(params!);
-
   }
-  
 }

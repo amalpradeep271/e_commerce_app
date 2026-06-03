@@ -37,6 +37,7 @@ class SigninPage extends StatelessWidget {
           child: BlocListener<ButtonStateCubit, ButtonState>(
             listener: (context, state) {
               if (state is ButtonFailureState) {
+                debugPrint('Signin Error: ${state.errorMessage}');
                 var snackbar = SnackBar(
                   content: Text(
                     state.errorMessage,

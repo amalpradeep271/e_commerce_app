@@ -1,10 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_commerce_application/domain/product/entity/color_entity.dart';
 
 class ProductEntity {
   final String categoryId;
   final List<ProductColorEntity> color;
-  final Timestamp createdDate;
+  final DateTime createdDate;
   final num discountPrice;
   final num gender;
   final List<String> images;

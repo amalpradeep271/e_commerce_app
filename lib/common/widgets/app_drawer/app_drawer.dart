@@ -12,11 +12,16 @@ import 'package:e_commerce_application/presentation/auth/pages/signin_page.dart'
 import 'package:e_commerce_application/common/bloc/app_drawer/user_info_display_cubit.dart';
 import 'package:e_commerce_application/common/bloc/app_drawer/user_info_display_state.dart';
 import 'package:e_commerce_application/service_locator.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:e_commerce_application/core/network/api_client.dart';
+import 'package:e_commerce_application/domain/auth/repository/auth_repository.dart';
+import 'package:e_commerce_application/domain/product/repository/product_repository.dart';
+import 'package:e_commerce_application/domain/category/repository/category_repository.dart';
+import 'package:e_commerce_application/domain/home/repository/banner_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shimmer/shimmer.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DrawerTileData {
   final IconData icon;
@@ -45,12 +50,9 @@ class CustomAppDrawer extends StatelessWidget {
       }),
     ];
 
-    return BlocProvider(
-      create: (context) => UserInfoDisplayCubit()..displayUserInfo(),
-      child: SizedBox(
-        width: 500,
-        child: drawerWidget(context, arrayOfListTiles),
-      ),
+    return SizedBox(
+      width: 500,
+      child: drawerWidget(context, arrayOfListTiles),
     );
   }
 
@@ -77,7 +79,11 @@ class CustomAppDrawer extends StatelessWidget {
             children: [
               InkWell(
                 onTap: () async {
-                  await FirebaseAuth.instance.signOut();
+                  await sl<ApiClient>().clearToken();
+                  sl<AuthRepository>().clearUserCache();
+                  sl<ProductRepository>().clearCache();
+                  sl<CategoryRepository>().clearCache();
+                  sl<BannerRepository>().clearCache();
                   if (context.mounted) {
                     AppNavigator.pushAndRemove(
                       context,
@@ -136,8 +142,37 @@ class CustomAppDrawer extends StatelessWidget {
                       BlocBuilder<UserInfoDisplayCubit, UserInfoDisaplyState>(
                     builder: (context, state) {
                       if (state is UserInfoDisaplyLoading) {
-                        return const Center(
-                            child: CupertinoActivityIndicator());
+                        return Shimmer.fromColors(
+                          baseColor: const Color.fromARGB(255, 218, 221, 227),
+                          highlightColor: AppColors.colorDivider,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              const CircleAvatar(
+                                radius: 55,
+                                backgroundColor: AppColors.white,
+                              ),
+                              const SizedBox(height: 10),
+                              Container(
+                                height: 16.h,
+                                width: 120.w,
+                                decoration: BoxDecoration(
+                                  color: AppColors.white,
+                                  borderRadius: BorderRadius.circular(4),
+                                ),
+                              ),
+                              const SizedBox(height: 5),
+                              Container(
+                                height: 12.h,
+                                width: 180.w,
+                                decoration: BoxDecoration(
+                                  color: AppColors.white,
+                                  borderRadius: BorderRadius.circular(4),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
                       }
                       if (state is UserInfoDisaplyLoaded) {
                         return Column(

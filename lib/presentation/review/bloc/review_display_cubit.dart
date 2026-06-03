@@ -7,13 +7,15 @@ class ReviewsDisplayCubit extends Cubit<ReviewsDisplayState> {
   ReviewsDisplayCubit() : super(ReviewsLoading());
 
   void displayReviews(dynamic params) async {
+    if (isClosed) return;
     var returnedData = await sl<GetReviewsUsecase>().call(params: params);
+    if (isClosed) return;
     returnedData.fold(
       (error) {
-        emit(ReviewsLoadFailure());
+        if (!isClosed) emit(ReviewsLoadFailure());
       },
       (data) {
-        emit(ReviewsLoaded(reviews: data));
+        if (!isClosed) emit(ReviewsLoaded(reviews: data));
       },
     );
   }

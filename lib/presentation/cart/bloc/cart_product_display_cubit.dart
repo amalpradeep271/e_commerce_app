@@ -13,13 +13,15 @@ class CartProductsDisplayCubit extends Cubit<CartProductsDisplayState> {
   CartProductsDisplayCubit() : super(CartProductsLoading());
 
   void displayCartProducts() async {
+    if (isClosed) return;
     var returnedData = await sl<GetCartProductsUseCase>().call();
+    if (isClosed) return;
     returnedData.fold(
       (error) {
-        emit(LoadCartProductsFailure(errorMessage: error));
+        if (!isClosed) emit(LoadCartProductsFailure(errorMessage: error));
       },
       (data) {
-        emit(CartProductsLoaded(products: data));
+        if (!isClosed) emit(CartProductsLoaded(products: data));
       },
     );
   }
@@ -28,19 +30,23 @@ class CartProductsDisplayCubit extends Cubit<CartProductsDisplayState> {
       ProductOrderedEntity product, BuildContext context) async {
     log("🛑 Removing product: ${product.id}");
 
+    if (isClosed) return;
     emit(CartProductsLoading());
     var returnedData =
         await sl<RemoveCartProductsUseCase>().call(params: product.id);
+    if (isClosed) return;
 
     returnedData.fold((error) {
       log("❌ Failed to remove product: $error");
-      emit(LoadCartProductsFailure(errorMessage: error));
+      if (!isClosed) emit(LoadCartProductsFailure(errorMessage: error));
     }, (data) {
       log("✅ Product removed successfully!");
       displayCartProducts();
-      context
-          .read<CartStatusCubit>()
-          .checkCartStatus(product.productId); // ✅ Refresh UI after removal
+      if (context.mounted) {
+        context
+            .read<CartStatusCubit>()
+            .checkCartStatus(product.productId); // ✅ Refresh UI after removal
+      }
     });
   }
 }

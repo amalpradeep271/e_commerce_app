@@ -1,14 +1,3 @@
-// import 'package:e_commerce_application/common/bloc/categories/categories_display_cubit.dart';
-// import 'package:e_commerce_application/common/bloc/categories/categories_display_state.dart';
-// import 'package:e_commerce_application/common/helper/images/images_display.dart';
-// import 'package:e_commerce_application/common/helper/navigator/app_navigator.dart';
-// import 'package:e_commerce_application/domain/category/entity/category_entity.dart';
-// import 'package:e_commerce_application/presentation/All_categories/pages/all_categories_page.dart';
-// import 'package:e_commerce_application/presentation/categories_products/pages/categories_products_page.dart';
-// import 'package:flutter/cupertino.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:e_commerce_application/presentation/home/bloc/categories/categories_display_cubit.dart';
 import 'package:e_commerce_application/presentation/home/bloc/categories/categories_display_state.dart';
@@ -18,12 +7,12 @@ import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
 import 'package:e_commerce_application/core/configs/theme/app_text_theme.dart';
 import 'package:e_commerce_application/domain/category/entity/category_entity.dart';
 import 'package:e_commerce_application/presentation/categories_products/pages/categories_products_page.dart';
-import 'package:e_commerce_application/presentation/wishlist/bloc/wishlist_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:e_commerce_application/common/widgets/please_try_again/please_try_again_widget.dart';
 
 class Categories extends StatelessWidget {
   const Categories({super.key});
@@ -37,45 +26,43 @@ class Categories extends StatelessWidget {
         SizedBox(
           height: 20.h,
         ),
-        MultiBlocProvider(
-          providers: [
-            BlocProvider(
-              create: (context) =>
-                  CategoriesDisplayCubit()..displayCategories(),
-            ),
-            BlocProvider(
-              create: (context) => WishlistCubit()..loadWishlist(),
-            ),
-          ],
-          child: BlocBuilder<CategoriesDisplayCubit, CategoriesDisplayState>(
-            builder: (context, state) {
-              if (state is CategoriesLoading) {
-                return SizedBox(
-                  height: 40.h,
-                  child: ListView.separated(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 3,
-                    separatorBuilder: (context, index) => SizedBox(width: 15.w),
-                    itemBuilder: (context, index) => Shimmer.fromColors(
-                      baseColor: const Color.fromARGB(255, 218, 221, 227),
-                      highlightColor: AppColors.colorDivider,
-                      child: Container(
-                        width: 120,
-                        decoration: BoxDecoration(
-                          gradient: AppColors.categoryLinercolor,
-                          borderRadius: BorderRadius.circular(5),
-                        ),
+        BlocBuilder<CategoriesDisplayCubit, CategoriesDisplayState>(
+          builder: (context, state) {
+            if (state is CategoriesLoading) {
+              return SizedBox(
+                height: 40.h,
+                child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 3,
+                  separatorBuilder: (context, index) => SizedBox(width: 15.w),
+                  itemBuilder: (context, index) => Shimmer.fromColors(
+                    baseColor: const Color.fromARGB(255, 218, 221, 227),
+                    highlightColor: AppColors.colorDivider,
+                    child: Container(
+                      width: 120,
+                      decoration: BoxDecoration(
+                        gradient: AppColors.categoryLinercolor,
+                        borderRadius: BorderRadius.circular(5),
                       ),
                     ),
                   ),
-                );
-              }
-              if (state is CategoriesLoaded) {
-                return _categories(state.categories);
-              }
-              return Container();
-            },
-          ),
+                ),
+              );
+            }
+            if (state is CategoriesLoaded) {
+              return _categories(state.categories);
+            }
+            if (state is CategoriesLoadFailure) {
+              return PleaseTryAgainWidget(
+                errorMessage: "Failed to load categories",
+                onRetry: () {
+                  context.read<CategoriesDisplayCubit>().displayCategories();
+                },
+                isFullScreen: false,
+              );
+            }
+            return Container();
+          },
         )
       ],
     );
@@ -112,7 +99,7 @@ class Categories extends StatelessWidget {
                 );
               },
               buttonImage: categories[index].image,
-              butttontitle: categories[index].title,
+              buttonTitle: categories[index].title,
             );
           },
           separatorBuilder: (context, index) => SizedBox(width: 15.w),
@@ -120,10 +107,10 @@ class Categories extends StatelessWidget {
     );
   }
 
-  _categoryButton({
+  Widget _categoryButton({
     required VoidCallback onTap,
     required String buttonImage,
-    required String butttontitle,
+    required String buttonTitle,
   }) {
     return InkWell(
       onTap: () {
@@ -139,14 +126,26 @@ class Categories extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              SvgPicture.network(
-                ImageDisplayHelper.generateCategoryImageURL(buttonImage),
-                width: 25,
-                height: 25,
-              ),
-              SizedBox(
+              buttonImage.toLowerCase().contains('.svg')
+                  ? SvgPicture.network(
+                      ImageDisplayHelper.generateCategoryImageURL(buttonImage),
+                      width: 25,
+                      height: 25,
+                    )
+                  : Image.network(
+                      ImageDisplayHelper.generateCategoryImageURL(buttonImage),
+                      width: 25,
+                      height: 25,
+                      fit: BoxFit.cover,
+                      errorBuilder: (_, __, ___) => const Icon(
+                        Icons.category,
+                        size: 25,
+                      ),
+                    ),
+              Expanded(
                 child: Text(
-                  butttontitle,
+                  buttonTitle,
+                  textAlign: TextAlign.center,
                   overflow: TextOverflow.ellipsis,
                   style: AppTextStyles.base.w400.s15,
                 ),

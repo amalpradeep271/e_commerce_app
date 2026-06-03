@@ -14,14 +14,14 @@ class BannerCarouselSlider extends StatelessWidget {
     required this.autoPlay,
     required this.height,
     this.initialPage,
-    this.carosuelController,
+    this.carouselController,
   });
   final int itemCount;
   final Widget Function(BuildContext, int, int) itemBuilder;
   final bool autoPlay;
   final double height;
   final int? initialPage;
-  final CarouselSliderController? carosuelController;
+  final CarouselSliderController? carouselController;
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -29,7 +29,7 @@ class BannerCarouselSlider extends StatelessWidget {
       child: BlocBuilder<CarouselCubit, int>(
         builder: (context, state) {
           return CarouselSlider.builder(
-            carouselController: carosuelController,
+            carouselController: carouselController,
             itemCount: itemCount,
             itemBuilder: (context, index, _) {
               return itemBuilder(context, index, _);

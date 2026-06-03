@@ -1,22 +1,22 @@
 import 'package:e_commerce_application/common/bloc/product/product_display_cubit.dart';
 import 'package:e_commerce_application/data/auth/repository/auth_repository_impl.dart';
-import 'package:e_commerce_application/data/auth/source/auth_firebase_service.dart';
+import 'package:e_commerce_application/data/auth/source/auth_api_service.dart';
 import 'package:e_commerce_application/data/cart/repository/cart_repository_impl.dart';
-import 'package:e_commerce_application/data/cart/source/cart_firebase_services.dart';
+import 'package:e_commerce_application/data/cart/source/cart_api_services.dart';
 import 'package:e_commerce_application/data/category/repository/category_repository_impl.dart';
-import 'package:e_commerce_application/data/category/source/category_firebase_service.dart';
+import 'package:e_commerce_application/data/category/source/category_api_service.dart';
 import 'package:e_commerce_application/data/home/repository/banner_repository_impl.dart';
-import 'package:e_commerce_application/data/home/source/banner_firebase_service.dart';
+import 'package:e_commerce_application/data/home/source/banner_api_service.dart';
 import 'package:e_commerce_application/data/order/repository/order_repository_impl.dart';
-import 'package:e_commerce_application/data/order/source/order_firebase_service.dart';
+import 'package:e_commerce_application/data/order/source/order_api_service.dart';
 import 'package:e_commerce_application/data/product/repository/product_repository_impl.dart';
-import 'package:e_commerce_application/data/product/source/product_firebase_service.dart';
+import 'package:e_commerce_application/data/product/source/product_api_service.dart';
 import 'package:e_commerce_application/data/review/repository/review_repository_impl.dart';
-import 'package:e_commerce_application/data/review/source/review_firebase_services.dart';
+import 'package:e_commerce_application/data/review/source/review_api_services.dart';
 import 'package:e_commerce_application/data/user/repository/user_repository_impl.dart';
-import 'package:e_commerce_application/data/user/source/user_firebase_services.dart';
+import 'package:e_commerce_application/data/user/source/user_api_services.dart';
 import 'package:e_commerce_application/data/wishlist/repository/wishlist_repository_impl.dart';
-import 'package:e_commerce_application/data/wishlist/source/wishlist_firebase_service.dart';
+import 'package:e_commerce_application/data/wishlist/source/wishlist_api_service.dart';
 import 'package:e_commerce_application/domain/auth/repository/auth_repository.dart';
 import 'package:e_commerce_application/domain/auth/usecase/get_ages_usecase.dart';
 import 'package:e_commerce_application/domain/auth/usecase/get_user_usecase.dart';
@@ -51,22 +51,26 @@ import 'package:e_commerce_application/domain/user/usecase/upload_user_image_use
 import 'package:e_commerce_application/domain/wishlist/repository/wishlist_repository.dart';
 import 'package:e_commerce_application/domain/wishlist/usecase/get_wishlist_usecase.dart';
 import 'package:e_commerce_application/domain/wishlist/usecase/toggle_wishlist_usecase.dart';
+import 'package:e_commerce_application/core/network/api_client.dart';
 import 'package:get_it/get_it.dart';
 
 final sl = GetIt.instance;
 
 Future<void> initializeDependencies() async {
+  // Api Client
+  sl.registerSingleton<ApiClient>(ApiClient());
+
 //Services
 
-  sl.registerSingleton<AuthFirebaseService>(AuthFirebaseServiceImpl());
-  sl.registerSingleton<BannerFirebaseService>(BannerFirebaseServiceImpl());
-  sl.registerSingleton<UserFirebaseService>(UserFirebaseServiceImpl());
-  sl.registerSingleton<CategoryFireBaseService>(CategoryFireBaseServiceImpl());
-  sl.registerSingleton<ProductFirebaseService>(ProductFirebaseServiceImpl());
-  sl.registerSingleton<CartFirebaseServices>(CartFirebaseServicesImpl());
-  sl.registerSingleton<OrderFirebaseService>(OrderFirebaseServiceImpl());
-  sl.registerSingleton<ReviewFirebaseService>(ReviewFirebaseServiceImpl());
-  sl.registerSingleton<WishlistFireBaseService>(WishlistFirebaseServiceImpl());
+  sl.registerSingleton<AuthApiService>(AuthApiServiceImpl());
+  sl.registerSingleton<BannerApiService>(BannerApiServiceImpl());
+  sl.registerSingleton<UserApiService>(UserApiServiceImpl());
+  sl.registerSingleton<CategoryApiService>(CategoryApiServiceImpl());
+  sl.registerSingleton<ProductApiService>(ProductApiServiceImpl());
+  sl.registerSingleton<CartApiService>(CartApiServiceImpl());
+  sl.registerSingleton<OrderApiService>(OrderApiServiceImpl());
+  sl.registerSingleton<ReviewApiService>(ReviewApiServiceImpl());
+  sl.registerSingleton<WishlistApiService>(WishlistApiServiceImpl());
 
 //Repositories
 
