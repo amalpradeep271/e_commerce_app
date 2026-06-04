@@ -30,8 +30,11 @@ class AuthApiServiceImpl extends AuthApiService {
       final data = json.decode(response.body);
 
       if (response.statusCode == 201 || response.statusCode == 200) {
-        if (data['token'] != null) {
-          await _apiClient.saveToken(data['token']);
+        if (data['accessToken'] != null && data['refreshToken'] != null) {
+          await _apiClient.saveTokens(
+            accessToken: data['accessToken'] as String,
+            refreshToken: data['refreshToken'] as String,
+          );
         }
         return const Right('Sign up was successfull');
       } else {
@@ -53,8 +56,11 @@ class AuthApiServiceImpl extends AuthApiService {
       final data = json.decode(response.body);
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        if (data['token'] != null) {
-          await _apiClient.saveToken(data['token']);
+        if (data['accessToken'] != null && data['refreshToken'] != null) {
+          await _apiClient.saveTokens(
+            accessToken: data['accessToken'] as String,
+            refreshToken: data['refreshToken'] as String,
+          );
         }
         return const Right('Sign in was successfull');
       } else {

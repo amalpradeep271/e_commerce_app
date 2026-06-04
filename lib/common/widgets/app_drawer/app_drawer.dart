@@ -79,7 +79,7 @@ class CustomAppDrawer extends StatelessWidget {
             children: [
               InkWell(
                 onTap: () async {
-                  await sl<ApiClient>().clearToken();
+                  await sl<ApiClient>().clearTokens();
                   sl<AuthRepository>().clearUserCache();
                   sl<ProductRepository>().clearCache();
                   sl<CategoryRepository>().clearCache();
