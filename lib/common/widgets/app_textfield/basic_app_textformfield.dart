@@ -19,30 +19,51 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
     return BlocBuilder<PasswordVisibilityCubit, bool>(
       builder: (context, isObscured) {
         return TextFormField(
           controller: controller,
           obscureText: isPassword ? isObscured : false,
+          style: TextStyle(
+            fontSize: 15,
+            color: isDark ? Colors.white : Colors.black,
+          ),
           decoration: InputDecoration(
             hintText: hintText,
-            contentPadding: const EdgeInsets.symmetric(horizontal: 20.0),
+            hintStyle: const TextStyle(color: Colors.grey, fontSize: 14),
+            contentPadding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 16.0),
+            filled: true,
+            fillColor: isDark ? const Color(0xFF1E293B) : const Color(0xFFF9FAFB),
             border: OutlineInputBorder(
-              borderSide: const BorderSide(
-                color: AppColors.lightGray,
+              borderSide: BorderSide(
+                color: isDark ? const Color(0xFF334155) : Colors.grey.shade300,
+                width: 1.0,
               ),
-              borderRadius: BorderRadius.circular(25.0), // Added curve
+              borderRadius: BorderRadius.circular(16.0),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: isDark ? const Color(0xFF334155) : Colors.grey.shade300,
+                width: 1.0,
+              ),
+              borderRadius: BorderRadius.circular(16.0),
             ),
             focusedBorder: OutlineInputBorder(
-              borderSide:
-                  const BorderSide(color: AppColors.kPrimaryColor, width: 3.0),
-              borderRadius: BorderRadius.circular(25.0), // Added curve
-              // Thicker border when focused
+              borderSide: const BorderSide(
+                color: AppColors.kPrimaryColor,
+                width: 1.5,
+              ),
+              borderRadius: BorderRadius.circular(16.0),
             ),
             suffixIcon: isPassword
                 ? IconButton(
                     icon: Icon(
                       isObscured ? Icons.visibility_off : Icons.visibility,
+                      color: Colors.grey,
+                      size: 20,
                     ),
                     onPressed: () {
                       context

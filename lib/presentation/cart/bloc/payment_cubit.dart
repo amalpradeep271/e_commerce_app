@@ -63,6 +63,7 @@ class PaymentCubit extends Cubit<PaymentState> {
     required List<ProductOrderedEntity> products,
     required dynamic shipping,
     required dynamic tax,
+    double? totalPrice,
   }) {
     var uuid = const Uuid();
     List<OrderStatusEntity> orderStatusList = [
@@ -89,7 +90,7 @@ class PaymentCubit extends Cubit<PaymentState> {
       products: products,
       createdDate: DateTime.now().toString(),
       itemCount: products.length,
-      totalPrice: CartHelper.calculateCartSubtotal(products) + shipping + tax,
+      totalPrice: totalPrice ?? (CartHelper.calculateCartSubtotal(products) + shipping + tax),
       shippingAddress: shippingAddress,
       orderStatus: orderStatusList,
     );

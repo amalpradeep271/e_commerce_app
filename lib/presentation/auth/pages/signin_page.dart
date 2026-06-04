@@ -2,7 +2,7 @@ import 'package:e_commerce_application/common/bloc/button/button_state.dart';
 import 'package:e_commerce_application/common/bloc/button/button_state_cubit.dart';
 import 'package:e_commerce_application/common/bloc/textfield/password_visibility_cubit.dart';
 import 'package:e_commerce_application/common/helper/navigator/app_navigator.dart';
-import 'package:e_commerce_application/common/widgets/app_bottom_navigationbar/custom_app_bottom_navigationbar.dart';
+import 'package:e_commerce_application/presentation/home/pages/main_page.dart';
 import 'package:e_commerce_application/common/widgets/app_button/basic_reactive_button.dart';
 import 'package:e_commerce_application/common/widgets/app_textfield/basic_app_textformfield.dart';
 import 'package:e_commerce_application/core/configs/assets/app_images.dart';
@@ -48,7 +48,7 @@ class SigninPage extends StatelessWidget {
               }
               if (state is ButtonSuccessState) {
                 AppNavigator.pushAndRemove(
-                    context,  CustomAppBottomNavigationBar());
+                    context,  MainPage());
               }
             },
             child: loginbody(context),

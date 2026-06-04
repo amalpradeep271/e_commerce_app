@@ -117,25 +117,29 @@ class _HomePageState extends State<HomePage> {
                                   itemBuilder: (context, index, _) {
                                     return Padding(
                                       padding: EdgeInsets.only(
-                                        top: 30.h,
+                                        top: 20.h,
                                         bottom: 10.h,
                                         left: 10.w,
+                                        right: 10.w,
                                       ),
-                                      child: SizedBox(
-                                        height: 100,
-                                        width: double.infinity,
-                                        child: Image.network(
-                                          ImageDisplayHelper.generateBannerImageURL(
-                                            state.banners[index].bannerImage,
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(16.r),
+                                        child: SizedBox(
+                                          height: 170.h,
+                                          width: double.infinity,
+                                          child: Image.network(
+                                            ImageDisplayHelper.generateBannerImageURL(
+                                              state.banners[index].bannerImage,
+                                            ),
+                                            fit: BoxFit.cover,
+                                            errorBuilder: (context, error, _) {
+                                              return const Center(
+                                                child: Text(
+                                                  "Image not available",
+                                                ),
+                                              );
+                                            },
                                           ),
-                                          fit: BoxFit.cover,
-                                          errorBuilder: (context, error, _) {
-                                            return const Center(
-                                              child: Text(
-                                                "Image not available",
-                                              ),
-                                            );
-                                          },
                                         ),
                                       ),
                                     );

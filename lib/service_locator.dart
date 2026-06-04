@@ -54,6 +54,39 @@ import 'package:e_commerce_application/domain/wishlist/usecase/toggle_wishlist_u
 import 'package:e_commerce_application/core/network/api_client.dart';
 import 'package:get_it/get_it.dart';
 
+// New Address imports
+import 'package:e_commerce_application/data/address/source/address_api_service.dart';
+import 'package:e_commerce_application/domain/address/repository/address_repository.dart';
+import 'package:e_commerce_application/data/address/repository/address_repository_impl.dart';
+import 'package:e_commerce_application/domain/address/usecase/get_addresses_usecase.dart';
+import 'package:e_commerce_application/domain/address/usecase/add_address_usecase.dart';
+import 'package:e_commerce_application/domain/address/usecase/update_address_usecase.dart';
+import 'package:e_commerce_application/domain/address/usecase/delete_address_usecase.dart';
+import 'package:e_commerce_application/presentation/address/bloc/address_cubit.dart';
+
+// New Coupon imports
+import 'package:e_commerce_application/data/coupon/source/coupon_api_service.dart';
+import 'package:e_commerce_application/domain/coupon/repository/coupon_repository.dart';
+import 'package:e_commerce_application/data/coupon/repository/coupon_repository_impl.dart';
+import 'package:e_commerce_application/domain/coupon/usecase/validate_coupon_usecase.dart';
+import 'package:e_commerce_application/presentation/cart/bloc/coupon_cubit.dart';
+
+// New Notification imports
+import 'package:e_commerce_application/data/notification/source/notification_api_service.dart';
+import 'package:e_commerce_application/domain/notification/repository/notification_repository.dart';
+import 'package:e_commerce_application/data/notification/repository/notification_repository_impl.dart';
+import 'package:e_commerce_application/domain/notification/usecase/get_notifications_usecase.dart';
+import 'package:e_commerce_application/domain/notification/usecase/mark_as_read_usecase.dart';
+import 'package:e_commerce_application/presentation/notification/bloc/notification_cubit.dart';
+
+// New Order Tracking imports
+import 'package:e_commerce_application/domain/order/usecase/get_order_tracking_usecase.dart';
+import 'package:e_commerce_application/presentation/order/bloc/order_tracking_cubit.dart';
+
+// New Profile imports
+import 'package:e_commerce_application/domain/user/usecase/get_user_usecase.dart';
+import 'package:e_commerce_application/presentation/settings/bloc/profile_cubit.dart';
+
 final sl = GetIt.instance;
 
 Future<void> initializeDependencies() async {
@@ -72,6 +105,11 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<ReviewApiService>(ReviewApiServiceImpl());
   sl.registerSingleton<WishlistApiService>(WishlistApiServiceImpl());
 
+  // Register new services
+  sl.registerSingleton<AddressApiService>(AddressApiServiceImpl());
+  sl.registerSingleton<CouponApiService>(CouponApiServiceImpl());
+  sl.registerSingleton<NotificationApiService>(NotificationApiServiceImpl());
+
 //Repositories
 
   sl.registerSingleton<AuthRepository>(AuthRepositoryImpl());
@@ -83,6 +121,11 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<OrderRepository>(OrderRepositoryImpl());
   sl.registerSingleton<ReviewRepository>(ReviewRepositoryImpl());
   sl.registerSingleton<WishlistRepository>(WishlistRepositoryImpl());
+
+  // Register new repositories
+  sl.registerSingleton<AddressRepository>(AddressRepositoryImpl());
+  sl.registerSingleton<CouponRepository>(CouponRepositoryImpl());
+  sl.registerSingleton<NotificationRepository>(NotificationRepositoryImpl());
 
 //Usecases
   sl.registerSingleton<SignUpUseCase>(SignUpUseCase());
@@ -116,6 +159,25 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<ToggleWishlistUseCase>(ToggleWishlistUseCase());
   sl.registerSingleton<GetWishlistUseCase>(GetWishlistUseCase());
   sl.registerSingleton<IsProductInCartUsecase>(IsProductInCartUsecase());
+
+  // Register new usecases
+  sl.registerSingleton<GetAddressesUseCase>(GetAddressesUseCase());
+  sl.registerSingleton<AddAddressUseCase>(AddAddressUseCase());
+  sl.registerSingleton<UpdateAddressUseCase>(UpdateAddressUseCase());
+  sl.registerSingleton<DeleteAddressUseCase>(DeleteAddressUseCase());
+  sl.registerSingleton<ValidateCouponUseCase>(ValidateCouponUseCase());
+  sl.registerSingleton<GetNotificationsUseCase>(GetNotificationsUseCase());
+  sl.registerSingleton<MarkAsReadUseCase>(MarkAsReadUseCase());
+  sl.registerSingleton<GetOrderTrackingUseCase>(GetOrderTrackingUseCase());
+  sl.registerSingleton<GetUserProfileUseCase>(GetUserProfileUseCase());
+
+  // Register cubits as factories
+  sl.registerFactory(() => AddressCubit());
+  sl.registerFactory(() => CouponCubit());
+  sl.registerFactory(() => NotificationCubit());
+  sl.registerFactory(() => OrderTrackingCubit());
+  sl.registerFactory(() => ProfileCubit());
+
   sl.registerFactory(
       () => ProductsDisplayCubit(useCase: sl<GetFavortiesProductsUseCase>()));
 }

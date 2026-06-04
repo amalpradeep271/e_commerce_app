@@ -6,6 +6,7 @@ import 'package:e_commerce_application/service_locator.dart';
 abstract class OrderApiService {
   Future<Either<String, dynamic>> orderRegistration(OrderRegistrationReqModel order);
   Future<Either<String, dynamic>> getOrders();
+  Future<Either<String, dynamic>> getOrderTracking(String orderId);
 }
 
 class OrderApiServiceImpl extends OrderApiService {
@@ -19,5 +20,10 @@ class OrderApiServiceImpl extends OrderApiService {
   @override
   Future<Either<String, dynamic>> getOrders() async {
     return _apiClient.getRequest('/orders');
+  }
+
+  @override
+  Future<Either<String, dynamic>> getOrderTracking(String orderId) async {
+    return _apiClient.getRequest('/orders/$orderId/track');
   }
 }

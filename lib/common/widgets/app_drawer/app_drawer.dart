@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:e_commerce_application/common/helper/navigator/app_navigator.dart';
-import 'package:e_commerce_application/common/widgets/app_bottom_navigationbar/custom_app_bottom_navigationbar.dart';
+import 'package:e_commerce_application/presentation/home/pages/main_page.dart';
 import 'package:e_commerce_application/core/configs/assets/app_images.dart';
 import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
 import 'package:e_commerce_application/core/configs/theme/app_icons.dart';
@@ -40,7 +40,7 @@ class CustomAppDrawer extends StatelessWidget {
       DrawerTileData(AppIcons.home, "Home", (context) {
         AppNavigator.pushAndRemove(
           context,
-          CustomAppBottomNavigationBar(),
+          MainPage(),
         );
       }),
       DrawerTileData(Icons.share, "Share App", (context) {}),

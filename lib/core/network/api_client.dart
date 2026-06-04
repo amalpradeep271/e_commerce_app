@@ -14,7 +14,7 @@ class ApiClient {
       return 'http://localhost:3000/v1';
     }
     // Use your PC's local network IP so it works on both physical devices (over Wi-Fi) and emulators.
-    return 'http://192.168.1.11:3000/v1';
+    return 'http://192.168.1.10:3000/v1';
   }
 
   final FlutterSecureStorage _storage = const FlutterSecureStorage();
@@ -139,6 +139,36 @@ class ApiClient {
     return response;
   }
 
+  Future<http.Response> put(String path, Map<String, dynamic> body) async {
+    final url = Uri.parse('$baseUrl$path');
+    var headers = await _getHeaders();
+    var response = await http.put(url, headers: headers, body: json.encode(body));
+
+    if (response.statusCode == 401) {
+      final success = await refreshAccessToken();
+      if (success) {
+        headers = await _getHeaders();
+        response = await http.put(url, headers: headers, body: json.encode(body));
+      }
+    }
+    return response;
+  }
+
+  Future<http.Response> patch(String path, Map<String, dynamic> body) async {
+    final url = Uri.parse('$baseUrl$path');
+    var headers = await _getHeaders();
+    var response = await http.patch(url, headers: headers, body: json.encode(body));
+
+    if (response.statusCode == 401) {
+      final success = await refreshAccessToken();
+      if (success) {
+        headers = await _getHeaders();
+        response = await http.patch(url, headers: headers, body: json.encode(body));
+      }
+    }
+    return response;
+  }
+
   Future<http.Response> delete(String path) async {
     final url = Uri.parse('$baseUrl$path');
     var headers = await _getHeaders();
@@ -186,6 +216,42 @@ class ApiClient {
       }
     } catch (e) {
       debugPrint('ApiClient POST Error on path $path: $e');
+      return const Left('Please try again');
+    }
+  }
+
+  Future<Either<String, dynamic>> putRequest(String path, Map<String, dynamic> body) async {
+    try {
+      final response = await put(path, body);
+      final data = json.decode(response.body);
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return Right(data);
+      } else {
+        final message = (data is Map && data['message'] != null)
+            ? data['message'].toString()
+            : 'Please try again';
+        return Left(message);
+      }
+    } catch (e) {
+      debugPrint('ApiClient PUT Error on path $path: $e');
+      return const Left('Please try again');
+    }
+  }
+
+  Future<Either<String, dynamic>> patchRequest(String path, Map<String, dynamic> body) async {
+    try {
+      final response = await patch(path, body);
+      final data = json.decode(response.body);
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return Right(data);
+      } else {
+        final message = (data is Map && data['message'] != null)
+            ? data['message'].toString()
+            : 'Please try again';
+        return Left(message);
+      }
+    } catch (e) {
+      debugPrint('ApiClient PATCH Error on path $path: $e');
       return const Left('Please try again');
     }
   }

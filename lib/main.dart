@@ -3,6 +3,7 @@ import 'package:e_commerce_application/core/configs/theme/app_theme.dart';
 import 'package:e_commerce_application/firebase_options.dart';
 import 'package:e_commerce_application/presentation/splash/bloc/splash_cubit.dart';
 import 'package:e_commerce_application/presentation/splash/pages/splash_page.dart';
+import 'package:e_commerce_application/presentation/settings/bloc/theme_cubit.dart';
 import 'package:e_commerce_application/service_locator.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -17,8 +18,11 @@ Future<void> main() async {
 
   await initializeDependencies();
   runApp(
-    BlocProvider(
-      create: (context) => ConnectivityCubit(),
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => ConnectivityCubit()),
+        BlocProvider(create: (context) => ThemeCubit()),
+      ],
       child: const MyApp(),
     ),
   );
@@ -35,11 +39,17 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       child: BlocProvider(
         create: (context) => SplashCubit()..appStarted(),
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Khadi Irinjalakuda',
-          theme: AppTheme.lightTheme,
-          home: const SplashPage(),
+        child: BlocBuilder<ThemeCubit, ThemeMode>(
+          builder: (context, themeMode) {
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              title: 'Khadi Irinjalakuda',
+              theme: AppTheme.lightTheme,
+              darkTheme: AppTheme.appTheme,
+              themeMode: themeMode,
+              home: const SplashPage(),
+            );
+          },
         ),
       ),
     );
