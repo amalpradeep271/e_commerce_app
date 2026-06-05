@@ -1,0 +1,383 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>E-Commerce Design System</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom scrollbar for preview containers */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary": "#ffffff",
+                      "surface-container-highest": "#e6e0e9",
+                      "on-error-container": "#93000a",
+                      "on-primary-fixed": "#22005d",
+                      "on-surface": "#1d1b20",
+                      "on-tertiary-container": "#503d00",
+                      "surface-bright": "#fdf7ff",
+                      "on-primary-container": "#e0d2ff",
+                      "on-tertiary-fixed": "#241a00",
+                      "tertiary-fixed-dim": "#e7c365",
+                      "primary-fixed": "#e9ddff",
+                      "on-tertiary-fixed-variant": "#594400",
+                      "surface-container-low": "#f8f2fa",
+                      "surface": "#fdf7ff",
+                      "surface-dim": "#ded8e0",
+                      "on-secondary-fixed-variant": "#4b4263",
+                      "primary-fixed-dim": "#cfbcff",
+                      "secondary-container": "#e1d4fd",
+                      "surface-variant": "#e6e0e9",
+                      "secondary-fixed": "#e9ddff",
+                      "outline": "#7a7582",
+                      "on-primary": "#ffffff",
+                      "inverse-surface": "#322f35",
+                      "on-secondary": "#ffffff",
+                      "surface-container": "#f2ecf4",
+                      "surface-tint": "#6750a4",
+                      "primary": "#4f378a",
+                      "error-container": "#ffdad6",
+                      "surface-container-lowest": "#ffffff",
+                      "inverse-on-surface": "#f5eff7",
+                      "on-surface-variant": "#494551",
+                      "tertiary": "#765b00",
+                      "background": "#fdf7ff",
+                      "error": "#ba1a1a",
+                      "on-primary-fixed-variant": "#4f378a",
+                      "on-secondary-fixed": "#1f1635",
+                      "secondary": "#63597c",
+                      "primary-container": "#6750a4",
+                      "tertiary-fixed": "#ffdf93",
+                      "outline-variant": "#cbc4d2",
+                      "on-error": "#ffffff",
+                      "on-background": "#1d1b20",
+                      "on-secondary-container": "#645a7d",
+                      "surface-container-high": "#ece6ee",
+                      "secondary-fixed-dim": "#cdc0e9",
+                      "tertiary-container": "#c9a74d",
+                      "inverse-primary": "#cfbcff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "5xl": "48px",
+                      "3xl": "32px",
+                      "md": "12px",
+                      "lg": "16px",
+                      "2xl": "24px",
+                      "xl": "20px",
+                      "sm": "8px",
+                      "4xl": "40px",
+                      "xs": "4px"
+              },
+              "fontSize": {
+                      "caption": ["11px", {"lineHeight": "14px", "fontWeight": "400"}],
+                      "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "title-lg": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                      "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface-container-lowest dark:bg-inverse-surface min-h-screen p-lg flex flex-col items-center gap-2xl">
+<!-- Header -->
+<header class="w-full max-w-4xl text-center">
+<h1 class="font-display-lg text-display-lg text-on-surface dark:text-inverse-on-surface mb-xs">E-Commerce Brand Anchors</h1>
+<p class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant">Visual Design System Specification</p>
+</header>
+<!-- Side-by-Side Canvas -->
+<div class="flex flex-col lg:flex-row gap-xl w-full max-w-7xl">
+<!-- Light Theme Side -->
+<div class="flex-1 bg-surface border border-outline-variant rounded-xl overflow-hidden shadow-sm">
+<div class="bg-surface-container-high px-lg py-md border-b border-outline-variant flex justify-between items-center">
+<span class="font-label-lg text-label-lg text-primary">LIGHT THEME</span>
+<span class="text-on-surface-variant font-caption text-caption">#FDF7FF</span>
+</div>
+<div class="p-lg space-y-3xl h-[800px] overflow-y-auto no-scrollbar">
+<!-- Colors -->
+<section>
+<h3 class="font-label-md text-label-md text-outline mb-md uppercase tracking-wider">Color Palette</h3>
+<div class="grid grid-cols-3 gap-md">
+<div class="space-y-xs">
+<div class="h-12 w-full bg-primary rounded-lg"></div>
+<span class="block font-caption text-caption text-on-surface">Primary</span>
+</div>
+<div class="space-y-xs">
+<div class="h-12 w-full bg-secondary rounded-lg"></div>
+<span class="block font-caption text-caption text-on-surface">Secondary</span>
+</div>
+<div class="space-y-xs">
+<div class="h-12 w-full bg-tertiary-container rounded-lg"></div>
+<span class="block font-caption text-caption text-on-surface">Accent</span>
+</div>
+<div class="space-y-xs">
+<div class="h-12 w-full bg-surface border border-outline-variant rounded-lg"></div>
+<span class="block font-caption text-caption text-on-surface">Surface</span>
+</div>
+<div class="space-y-xs">
+<div class="h-12 w-full bg-error rounded-lg"></div>
+<span class="block font-caption text-caption text-on-surface">Error</span>
+</div>
+<div class="space-y-xs">
+<div class="h-12 w-full bg-primary-container rounded-lg"></div>
+<span class="block font-caption text-caption text-on-surface">Success</span>
+</div>
+</div>
+</section>
+<!-- Typography -->
+<section>
+<h3 class="font-label-md text-label-md text-outline mb-md uppercase tracking-wider">Typography Scale</h3>
+<div class="space-y-md">
+<p class="font-display-lg text-display-lg text-on-surface">Headline Large</p>
+<p class="font-headline-md text-headline-md text-on-surface">Headline Medium</p>
+<p class="font-body-lg text-body-lg text-on-surface">Body Large Text</p>
+<p class="font-caption text-caption text-on-surface-variant">Caption / Overline Style</p>
+</div>
+</section>
+<!-- Buttons -->
+<section>
+<h3 class="font-label-md text-label-md text-outline mb-md uppercase tracking-wider">Buttons (12px Radius)</h3>
+<div class="flex flex-wrap gap-md">
+<button class="px-lg py-md bg-[#008080] text-white font-label-lg text-label-lg rounded-[12px] active:scale-95 transition-transform">Primary Filled</button>
+<button class="px-lg py-md border border-secondary text-secondary font-label-lg text-label-lg rounded-[12px]">Secondary Outlined</button>
+<button class="px-lg py-md text-on-surface-variant font-label-lg text-label-lg rounded-[12px]">Ghost Button</button>
+<button class="px-lg py-md bg-error text-on-error font-label-lg text-label-lg rounded-[12px]">Destructive</button>
+</div>
+</section>
+<!-- Inputs -->
+<section>
+<h3 class="font-label-md text-label-md text-outline mb-md uppercase tracking-wider">Form Elements</h3>
+<div class="space-y-md">
+<div class="space-y-xs">
+<label class="font-label-md text-label-md text-on-surface-variant">Default Input</label>
+<input class="w-full px-lg py-md border border-outline-variant rounded-[12px] bg-surface focus:ring-2 focus:ring-primary focus:outline-none transition-all" placeholder="Enter text..." type="text">
+</div>
+<div class="space-y-xs">
+<label class="font-label-md text-label-md text-error">Error State</label>
+<input class="w-full px-lg py-md border border-error rounded-[12px] bg-surface focus:outline-none text-error" type="text" value="Invalid input">
+</div>
+</div>
+</section>
+<!-- Product Card -->
+<section>
+<h3 class="font-label-md text-label-md text-outline mb-md uppercase tracking-wider">Product Card (16px Radius)</h3>
+<div class="max-w-[240px] bg-surface border border-outline-variant rounded-[16px] overflow-hidden shadow-sm">
+<div class="relative h-40 bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="A minimalist white designer watch positioned centrally on a clean light grey surface. The lighting is soft and diffused, highlighting the smooth curves and premium materials. The overall aesthetic is clean, corporate modern, and highly sophisticated with a focus on product clarity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBY0lQXluKHffkSVnwArvNg3OqYaWZAwOeTtbbbxpDRUr1wi-gfkGzGm3k-xtmmzU15LG037Wk1JAqoF-k9iS8TqbEVhl9BiUuaVYdECpdmfj12cJ0x2uB7aq92GC4niAAd0i0UbvZmI4U5XvHFl7wNjKU6AlN2qMZn_YpoKruZNNz84WHKO4I9CUSs_tIk2uuz1_vQ-5tB832MZQgTSHaCOEzwLMybR2IXgcMTRgYz6hjMjmU4u_4aEBEgDpfDFPjLAYfZF3INbyo">
+<span class="absolute top-md left-md px-md py-xs bg-tertiary-container text-on-tertiary-container font-label-md text-label-md rounded-full">New</span>
+<button class="absolute top-md right-md p-xs bg-surface/80 rounded-full text-error">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+</div>
+<div class="p-lg">
+<span class="font-label-md text-label-md text-secondary bg-secondary-container/20 px-sm py-xs rounded-full">Fashion</span>
+<h4 class="font-title-lg text-title-lg text-on-surface mt-xs">Premium Watch</h4>
+<p class="font-label-lg text-label-lg text-primary mt-xs">$199.00</p>
+</div>
+</div>
+</section>
+<!-- Navigation Preview -->
+<section class="space-y-md">
+<h3 class="font-label-md text-label-md text-outline mb-md uppercase tracking-wider">Navigation Shell</h3>
+<div class="border border-outline-variant rounded-lg overflow-hidden">
+<!-- Top Bar -->
+<div class="bg-surface h-12 flex items-center justify-between px-lg border-b border-outline-variant">
+<span class="material-symbols-outlined text-on-surface">menu</span>
+<span class="font-headline-md text-headline-md font-bold text-on-surface">E-Commerce</span>
+<span class="material-symbols-outlined text-on-surface">shopping_cart</span>
+</div>
+<!-- Content Spacer -->
+<div class="h-20 bg-surface-container"></div>
+<!-- Bottom Bar -->
+<div class="bg-surface/80 backdrop-blur-md h-16 flex justify-around items-center border-t border-outline-variant">
+<div class="flex flex-col items-center text-primary font-bold">
+<span class="material-symbols-outlined">home</span>
+<span class="text-[10px]">Home</span>
+</div>
+<div class="flex flex-col items-center text-on-surface-variant">
+<span class="material-symbols-outlined">search</span>
+<span class="text-[10px]">Search</span>
+</div>
+<div class="flex flex-col items-center text-on-surface-variant">
+<span class="material-symbols-outlined">shopping_bag</span>
+<span class="text-[10px]">Cart</span>
+</div>
+<div class="flex flex-col items-center text-on-surface-variant">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px]">Profile</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+<!-- Dark Theme Side -->
+<div class="flex-1 bg-surface-dim border border-outline rounded-xl overflow-hidden shadow-xl dark">
+<div class="bg-surface-variant/20 px-lg py-md border-b border-outline flex justify-between items-center">
+<span class="font-label-lg text-label-lg text-primary-fixed-dim">DARK THEME</span>
+<span class="text-outline-variant font-caption text-caption">#1D1B20</span>
+</div>
+<div class="p-lg space-y-3xl h-[800px] overflow-y-auto no-scrollbar bg-[#1D1B20]">
+<!-- Colors -->
+<section>
+<h3 class="font-label-md text-label-md text-outline-variant mb-md uppercase tracking-wider">Color Palette</h3>
+<div class="grid grid-cols-3 gap-md">
+<div class="space-y-xs">
+<div class="h-12 w-full bg-primary-fixed-dim rounded-lg"></div>
+<span class="block font-caption text-caption text-inverse-on-surface">Primary</span>
+</div>
+<div class="space-y-xs">
+<div class="h-12 w-full bg-secondary-fixed-dim rounded-lg"></div>
+<span class="block font-caption text-caption text-inverse-on-surface">Secondary</span>
+</div>
+<div class="space-y-xs">
+<div class="h-12 w-full bg-tertiary-fixed-dim rounded-lg"></div>
+<span class="block font-caption text-caption text-inverse-on-surface">Accent</span>
+</div>
+<div class="space-y-xs">
+<div class="h-12 w-full bg-surface-dim border border-outline rounded-lg"></div>
+<span class="block font-caption text-caption text-inverse-on-surface">Surface</span>
+</div>
+<div class="space-y-xs">
+<div class="h-12 w-full bg-error rounded-lg"></div>
+<span class="block font-caption text-caption text-inverse-on-surface">Error</span>
+</div>
+<div class="space-y-xs">
+<div class="h-12 w-full bg-primary-container rounded-lg"></div>
+<span class="block font-caption text-caption text-inverse-on-surface">Success</span>
+</div>
+</div>
+</section>
+<!-- Typography -->
+<section>
+<h3 class="font-label-md text-label-md text-outline-variant mb-md uppercase tracking-wider">Typography Scale</h3>
+<div class="space-y-md">
+<p class="font-display-lg text-display-lg text-inverse-on-surface">Headline Large</p>
+<p class="font-headline-md text-headline-md text-inverse-on-surface">Headline Medium</p>
+<p class="font-body-lg text-body-lg text-inverse-on-surface">Body Large Text</p>
+<p class="font-caption text-caption text-surface-variant">Caption / Overline Style</p>
+</div>
+</section>
+<!-- Buttons -->
+<section>
+<h3 class="font-label-md text-label-md text-outline-variant mb-md uppercase tracking-wider">Buttons (12px Radius)</h3>
+<div class="flex flex-wrap gap-md">
+<button class="px-lg py-md bg-primary-fixed-dim text-on-primary-fixed font-label-lg text-label-lg rounded-[12px] active:scale-95 transition-transform">Primary Filled</button>
+<button class="px-lg py-md border border-secondary-fixed-dim text-secondary-fixed-dim font-label-lg text-label-lg rounded-[12px]">Secondary Outlined</button>
+<button class="px-lg py-md text-surface-variant font-label-lg text-label-lg rounded-[12px]">Ghost Button</button>
+<button class="px-lg py-md bg-error text-on-error font-label-lg text-label-lg rounded-[12px]">Destructive</button>
+</div>
+</section>
+<!-- Inputs -->
+<section>
+<h3 class="font-label-md text-label-md text-outline-variant mb-md uppercase tracking-wider">Form Elements</h3>
+<div class="space-y-md">
+<div class="space-y-xs">
+<label class="font-label-md text-label-md text-surface-variant">Default Input</label>
+<input class="w-full px-lg py-md border border-outline rounded-[12px] bg-surface-dim text-inverse-on-surface focus:ring-2 focus:ring-primary-fixed-dim focus:outline-none transition-all" placeholder="Enter text..." type="text">
+</div>
+<div class="space-y-xs">
+<label class="font-label-md text-label-md text-error">Error State</label>
+<input class="w-full px-lg py-md border border-error rounded-[12px] bg-surface-dim focus:outline-none text-error" type="text" value="Invalid input">
+</div>
+</div>
+</section>
+<!-- Product Card -->
+<section>
+<h3 class="font-label-md text-label-md text-outline-variant mb-md uppercase tracking-wider">Product Card (16px Radius)</h3>
+<div class="max-w-[240px] bg-surface-dim border border-outline rounded-[16px] overflow-hidden shadow-lg">
+<div class="relative h-40 bg-surface-variant/10">
+<img class="w-full h-full object-cover" data-alt="A vibrant red performance running shoe set against a dark, moody background with subtle atmospheric smoke. High-contrast studio lighting emphasizes the texture of the fabric and the sharp design lines. The image exudes energy, technology, and premium athletic style, perfectly fitting a high-end dark-themed e-commerce interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGlVxHsH0Dhos_EOO8WXy7JNQTopuAJ0bj0znINgX9qnjYE6bpnoDJIWB9lcwRI_v33WJ0Kt4IyE80s0vO1hPkWx53qTSNcb99ip22uyPpFxjTSmVzD2vjnVk6k9334-XjhU2zqFIIZ-5kvDEmxR9p59-U_0KsynZ4AqBxuGyKgyVivj9mmvsGU7RZWvox7k30VYmqK6BX500_0Hw2AUNWFhUH0S3PY2wVxD5bD_mh5cP4pJo4PeOet0DAUQzkjBjUJ2wXAJYhtRs">
+<span class="absolute top-md left-md px-md py-xs bg-tertiary-fixed-dim text-on-tertiary-fixed font-label-md text-label-md rounded-full">New</span>
+<button class="absolute top-md right-md p-xs bg-inverse-surface/60 rounded-full text-error">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+</div>
+<div class="p-lg">
+<span class="font-label-md text-label-md text-secondary-fixed-dim bg-secondary-fixed-dim/10 px-sm py-xs rounded-full">Sports</span>
+<h4 class="font-title-lg text-title-lg text-inverse-on-surface mt-xs">Aero Runner</h4>
+<p class="font-label-lg text-label-lg text-primary-fixed-dim mt-xs">$145.00</p>
+</div>
+</div>
+</section>
+<!-- Navigation Preview -->
+<section class="space-y-md">
+<h3 class="font-label-md text-label-md text-outline-variant mb-md uppercase tracking-wider">Navigation Shell</h3>
+<div class="border border-outline rounded-lg overflow-hidden">
+<!-- Top Bar -->
+<div class="bg-surface-dim h-12 flex items-center justify-between px-lg border-b border-outline">
+<span class="material-symbols-outlined text-inverse-on-surface">menu</span>
+<span class="font-headline-md text-headline-md font-bold text-inverse-on-surface">E-Commerce</span>
+<span class="material-symbols-outlined text-inverse-on-surface">shopping_cart</span>
+</div>
+<!-- Content Spacer -->
+<div class="h-20 bg-surface-variant/10"></div>
+<!-- Bottom Bar -->
+<div class="bg-surface-dim/80 backdrop-blur-md h-16 flex justify-around items-center border-t border-outline">
+<div class="flex flex-col items-center text-primary-fixed-dim font-bold">
+<span class="material-symbols-outlined">home</span>
+<span class="text-[10px]">Home</span>
+</div>
+<div class="flex flex-col items-center text-surface-variant">
+<span class="material-symbols-outlined">search</span>
+<span class="text-[10px]">Search</span>
+</div>
+<div class="flex flex-col items-center text-surface-variant">
+<span class="material-symbols-outlined">shopping_bag</span>
+<span class="text-[10px]">Cart</span>
+</div>
+<div class="flex flex-col items-center text-surface-variant">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px]">Profile</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</div>
+<!-- Footer Action -->
+<div class="mb-4xl">
+<button class="px-3xl py-lg bg-primary text-on-primary rounded-full font-label-lg text-label-lg shadow-lg hover:opacity-90 transition-all flex items-center gap-md" onclick="document.documentElement.classList.toggle('dark')">
+<span class="material-symbols-outlined">contrast</span>
+            Toggle Viewport Theme
+        </button>
+</div>
+</body></html>

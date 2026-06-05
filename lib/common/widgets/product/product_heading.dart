@@ -1,5 +1,5 @@
-import 'package:e_commerce_application/core/configs/theme/app_text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProductHeading extends StatelessWidget {
   const ProductHeading({
@@ -13,18 +13,27 @@ class ProductHeading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
           productHeading,
-          style: AppTextStyles.base.w500.s16,
+          style: TextStyle(
+            fontSize: 18.sp,
+            fontWeight: FontWeight.bold,
+            color: colorScheme.onSurface,
+          ),
         ),
         TextButton(
           onPressed: allProductClick,
           child: Text(
-            "See all",
-            style: AppTextStyles.base.w500.s14.blackColor,
+            "See All",
+            style: TextStyle(
+              fontSize: 14.sp,
+              fontWeight: FontWeight.bold,
+              color: colorScheme.primary,
+            ),
           ),
         )
       ],

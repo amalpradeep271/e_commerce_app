@@ -1,8 +1,6 @@
 import 'package:e_commerce_application/common/helper/images/images_display.dart';
 import 'package:e_commerce_application/common/helper/navigator/app_navigator.dart';
 import 'package:e_commerce_application/common/widgets/app_button/favourite_button.dart';
-import 'package:e_commerce_application/core/configs/theme/app_text_theme.dart';
-import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
 import 'package:e_commerce_application/domain/product/entity/product_entity.dart';
 import 'package:e_commerce_application/presentation/product_detail/pages/product_details_page.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +17,7 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final colorScheme = Theme.of(context).colorScheme;
 
     return Stack(
       children: [
@@ -34,17 +32,15 @@ class ProductCard extends StatelessWidget {
           },
           child: Container(
             decoration: BoxDecoration(
-              color: isDark ? const Color(0xFF1E293B) : Colors.white,
+              color: colorScheme.surface,
               borderRadius: BorderRadius.circular(16.r),
               border: Border.all(
-                color: isDark
-                    ? Colors.white.withValues(alpha: 0.05)
-                    : Colors.grey.shade100,
+                color: colorScheme.surfaceContainerHighest,
                 width: 1.0,
               ),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.03),
+                  color: colorScheme.shadow.withValues(alpha: 0.05),
                   blurRadius: 10,
                   offset: const Offset(0, 4),
                 ),
@@ -66,8 +62,8 @@ class ProductCard extends StatelessWidget {
                       fit: BoxFit.cover,
                       width: double.infinity,
                       placeholder: (context, url) => Shimmer.fromColors(
-                        baseColor: const Color.fromARGB(255, 218, 221, 227),
-                        highlightColor: const Color.fromARGB(255, 240, 242, 245),
+                        baseColor: colorScheme.surfaceContainerHighest,
+                        highlightColor: colorScheme.surface,
                         child: Container(
                           color: Colors.white,
                         ),
@@ -86,7 +82,11 @@ class ProductCard extends StatelessWidget {
                       Text(
                         productEntity.title,
                         overflow: TextOverflow.ellipsis,
-                        style: AppTextStyles.base.w500.s14,
+                        style: TextStyle(
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w500,
+                          color: colorScheme.onSurfaceVariant,
+                        ),
                       ),
                       SizedBox(height: 4.h),
                       Row(
@@ -98,14 +98,19 @@ class ProductCard extends StatelessWidget {
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 14.sp,
-                              color: AppColors.kPrimaryColor,
+                              color: colorScheme.primary,
                             ),
                           ),
                           if (productEntity.discountPrice != 0) ...[
                             SizedBox(width: 8.w),
                             Text(
                               "₹ ${productEntity.price}",
-                              style: AppTextStyles.base.s12.greyColor.w300.lineThrough,
+                              style: TextStyle(
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.w300,
+                                color: colorScheme.outline,
+                                decoration: TextDecoration.lineThrough,
+                              ),
                             ),
                           ],
                         ],

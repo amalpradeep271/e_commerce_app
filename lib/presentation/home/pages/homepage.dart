@@ -4,8 +4,6 @@ import 'package:e_commerce_application/common/helper/images/images_display.dart'
 import 'package:e_commerce_application/common/helper/navigator/app_navigator.dart';
 import 'package:e_commerce_application/common/widgets/appbar/app_bar.dart';
 import 'package:e_commerce_application/common/widgets/no_internet_screen/no_internet_screen.dart';
-import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
-import 'package:e_commerce_application/core/configs/theme/app_icons.dart';
 import 'package:e_commerce_application/presentation/cart/pages/cart_page.dart';
 import 'package:e_commerce_application/presentation/home/bloc/banners/banners_display_cubit.dart';
 import 'package:e_commerce_application/presentation/home/bloc/banners/banners_display_state.dart';
@@ -73,14 +71,16 @@ class _HomePageState extends State<HomePage> {
               return Scaffold(
                 appBar: CustomAppBar(
                   onTap: () async {
-                    // await controller.getSearchData();
                     AppNavigator.push(context, const SearchPage());
                   },
+                  title: "E-Commerce",
                   leadingIconData: Icons.menu,
+                  leadingIconColor: Theme.of(context).colorScheme.onSurface,
                   onLeadingPressed: () => Scaffold.of(context).openDrawer(),
-                  searchBox: true,
-                  backgroundColor: AppColors.transparent,
-                  actionIconData2: AppIcons.cart,
+                  searchBox: false,
+                  backgroundColor: Colors.transparent,
+                  actionIconData2: Icons.shopping_cart_outlined,
+                  actionIconColor: Theme.of(context).colorScheme.onSurface,
                   onAction2Pressed: () =>
                       AppNavigator.push(context, const CartPage()),
                 ),
@@ -90,22 +90,82 @@ class _HomePageState extends State<HomePage> {
                     key: _refreshKey,
                     physics: const AlwaysScrollableScrollPhysics(),
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      padding: EdgeInsets.symmetric(horizontal: 20.w),
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          SizedBox(height: 16.h),
+                          // New Search Bar Design
+                          Row(
+                            children: [
+                              Expanded(
+                                child: GestureDetector(
+                                  onTap: () {
+                                    AppNavigator.push(context, const SearchPage());
+                                  },
+                                  child: Container(
+                                    height: 50.h,
+                                    padding: EdgeInsets.symmetric(horizontal: 16.w),
+                                    decoration: BoxDecoration(
+                                      color: Theme.of(context).colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
+                                      borderRadius: BorderRadius.circular(16.r),
+                                      border: Border.all(
+                                        color: Theme.of(context).colorScheme.outlineVariant,
+                                      ),
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Icon(Icons.search, color: Theme.of(context).colorScheme.outline),
+                                        SizedBox(width: 12.w),
+                                        Text(
+                                          "Search products...",
+                                          style: TextStyle(
+                                            color: Theme.of(context).colorScheme.outline,
+                                            fontSize: 14.sp,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(width: 12.w),
+                              Container(
+                                height: 50.h,
+                                width: 50.w,
+                                decoration: BoxDecoration(
+                                  color: Theme.of(context).colorScheme.primary,
+                                  borderRadius: BorderRadius.circular(16.r),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.3),
+                                      blurRadius: 10,
+                                      offset: const Offset(0, 4),
+                                    ),
+                                  ],
+                                ),
+                                child: IconButton(
+                                  onPressed: () {
+                                    // TODO: Implement Filter action
+                                  },
+                                  icon: const Icon(Icons.filter_list, color: Colors.white),
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 24.h),
                           BlocBuilder<BannersDisplayCubit, BannersDisplayState>(
                             builder: (context, state) {
                               if (state is BannersLoading) {
                                 return Shimmer.fromColors(
-                                  baseColor: const Color.fromARGB(255, 218, 221, 227),
-                                  highlightColor: AppColors.colorDivider,
+                                  baseColor: Theme.of(context).colorScheme.surfaceContainerHighest,
+                                  highlightColor: Theme.of(context).colorScheme.surface,
                                   child: Container(
-                                    margin: EdgeInsets.only(
-                                        top: 30.h, bottom: 10.h, left: 10.w),
-                                    height: 200.h, // Same height as banner slider
+                                    height: 200.h,
                                     width: double.infinity,
-                                    decoration: const BoxDecoration(
-                                      color: AppColors.white,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(16.r),
                                     ),
                                   ),
                                 );
@@ -115,31 +175,23 @@ class _HomePageState extends State<HomePage> {
                                   height: 200.h,
                                   autoPlay: true,
                                   itemBuilder: (context, index, _) {
-                                    return Padding(
-                                      padding: EdgeInsets.only(
-                                        top: 20.h,
-                                        bottom: 10.h,
-                                        left: 10.w,
-                                        right: 10.w,
-                                      ),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(16.r),
-                                        child: SizedBox(
-                                          height: 170.h,
-                                          width: double.infinity,
-                                          child: Image.network(
-                                            ImageDisplayHelper.generateBannerImageURL(
-                                              state.banners[index].bannerImage,
-                                            ),
-                                            fit: BoxFit.cover,
-                                            errorBuilder: (context, error, _) {
-                                              return const Center(
-                                                child: Text(
-                                                  "Image not available",
-                                                ),
-                                              );
-                                            },
+                                    return ClipRRect(
+                                      borderRadius: BorderRadius.circular(24.r),
+                                      child: SizedBox(
+                                        height: 200.h,
+                                        width: double.infinity,
+                                        child: Image.network(
+                                          ImageDisplayHelper.generateBannerImageURL(
+                                            state.banners[index].bannerImage,
                                           ),
+                                          fit: BoxFit.cover,
+                                          errorBuilder: (context, error, _) {
+                                            return const Center(
+                                              child: Text(
+                                                "Image not available",
+                                              ),
+                                            );
+                                          },
                                         ),
                                       ),
                                     );
@@ -159,11 +211,13 @@ class _HomePageState extends State<HomePage> {
                               return Container();
                             },
                           ),
+                          SizedBox(height: 24.h),
                           const Categories(),
                           SizedBox(height: 24.h),
                           const TopSelling(),
                           SizedBox(height: 24.h),
                           const NewIn(),
+                          SizedBox(height: 100.h), // padding for bottom nav bar
                         ],
                       ),
                     ),

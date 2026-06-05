@@ -37,10 +37,17 @@ class CustomAppBar extends AppBar {
           backgroundColor: backgroundColor ?? AppColors.cream,
           elevation: elevation ?? 0,
           title: title != null
-              ? Text(
-                  title,
-                  style:
-                      AppTextStyles.getAppTextStyleCustomized(textSize: 20.h),
+              ? Builder(
+                  builder: (context) {
+                    return Text(
+                      title,
+                      style: TextStyle(
+                        fontSize: titleSize ?? 20.h,
+                        fontWeight: FontWeight.bold,
+                        color: titleColor ?? Theme.of(context).colorScheme.primary,
+                      ),
+                    );
+                  }
                 )
               : searchBox == true
                   ? SizedBox(

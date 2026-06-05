@@ -14,7 +14,7 @@ class ApiClient {
       return 'http://localhost:3000/v1';
     }
     // Use your PC's local network IP so it works on both physical devices (over Wi-Fi) and emulators.
-    return 'http://192.168.1.10:3000/v1';
+    return 'http://192.168.1.11:3000/v1';
   }
 
   final FlutterSecureStorage _storage = const FlutterSecureStorage();

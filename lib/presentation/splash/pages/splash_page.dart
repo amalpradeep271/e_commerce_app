@@ -4,7 +4,6 @@ import 'package:e_commerce_application/core/configs/assets/app_images.dart';
 import 'package:e_commerce_application/presentation/auth/pages/signin_page.dart';
 import 'package:e_commerce_application/presentation/splash/bloc/splash_cubit.dart';
 import 'package:e_commerce_application/presentation/splash/bloc/splash_state.dart';
-import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -45,6 +44,7 @@ class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateM
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final colorScheme = Theme.of(context).colorScheme;
 
     return BlocListener<SplashCubit, SplashState>(
       listener: (context, state) {
@@ -67,53 +67,78 @@ class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateM
               end: Alignment.bottomCenter,
               colors: isDark
                   ? [
-                      const Color(0xFF0F172A),
-                      const Color(0xFF0F766E).withValues(alpha: 0.2),
-                      const Color(0xFF0F172A),
+                      colorScheme.surface,
+                      colorScheme.primaryContainer.withValues(alpha: 0.2),
+                      colorScheme.surface,
                     ]
                   : [
-                      Colors.white,
-                      const Color(0xFFCCFBF1).withValues(alpha: 0.3),
-                      Colors.white,
+                      colorScheme.surface,
+                      colorScheme.primaryContainer.withValues(alpha: 0.3),
+                      colorScheme.surface,
                     ],
             ),
           ),
-          child: Center(
-            child: FadeTransition(
-              opacity: _fadeAnimation,
-              child: ScaleTransition(
-                scale: _scaleAnimation,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      AppImages.logo,
-                      width: 140,
-                      height: 140,
+          child: Stack(
+            children: [
+              Center(
+                child: FadeTransition(
+                  opacity: _fadeAnimation,
+                  child: ScaleTransition(
+                    scale: _scaleAnimation,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          AppImages.logo,
+                          width: 140,
+                          height: 140,
+                        ),
+                        const SizedBox(height: 24),
+                        Text(
+                          'Khadi Irinjalakuda',
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            color: colorScheme.primary,
+                            letterSpacing: 1.2,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          'Premium E-Commerce Experience',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: colorScheme.onSurfaceVariant,
+                            letterSpacing: 0.5,
+                          ),
+                        ),
+                      ],
                     ),
-                    const SizedBox(height: 24),
-                    Text(
-                      'Khadi Irinjalakuda',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: isDark ? Colors.white : AppColors.kPrimaryColor,
-                        letterSpacing: 1.2,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      'Premium E-Commerce Experience',
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: isDark ? Colors.grey[400] : Colors.grey[600],
-                        letterSpacing: 0.5,
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               ),
-            ),
+              Positioned(
+                bottom: 60,
+                left: 0,
+                right: 0,
+                child: Center(
+                  child: FadeTransition(
+                    opacity: _fadeAnimation,
+                    child: SizedBox(
+                      width: 120,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(4),
+                        child: LinearProgressIndicator(
+                          color: colorScheme.primary,
+                          backgroundColor: colorScheme.surfaceContainerHighest,
+                          minHeight: 4,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),

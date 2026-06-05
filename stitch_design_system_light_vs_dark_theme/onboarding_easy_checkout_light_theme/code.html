@@ -1,0 +1,208 @@
+<!DOCTYPE html><html class="light" lang="en" style="width: 390px; height: 884px; overflow: hidden; position: relative;"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Easy Checkout Onboarding</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #FFFFFF;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .illustration-float {
+            animation: floating 3s ease-in-out infinite;
+        }
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        /* Custom scroll behavior */
+        ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-error": "#ffffff",
+                      "on-tertiary-fixed-variant": "#594400",
+                      "error": "#ba1a1a",
+                      "on-tertiary-container": "#503d00",
+                      "outline-variant": "#cbc4d2",
+                      "tertiary-fixed-dim": "#e7c365",
+                      "secondary-container": "#e1d4fd",
+                      "on-background": "#1d1b20",
+                      "surface-variant": "#e6e0e9",
+                      "secondary-fixed": "#e9ddff",
+                      "on-secondary-fixed-variant": "#4b4263",
+                      "on-primary-container": "#e0d2ff",
+                      "on-primary-fixed": "#22005d",
+                      "inverse-primary": "#cfbcff",
+                      "on-secondary-container": "#645a7d",
+                      "secondary-fixed-dim": "#cdc0e9",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-container-low": "#f8f2fa",
+                      "surface-tint": "#6750a4",
+                      "surface-container": "#f2ecf4",
+                      "on-primary-fixed-variant": "#4f378a",
+                      "inverse-on-surface": "#f5eff7",
+                      "on-tertiary": "#ffffff",
+                      "tertiary-fixed": "#ffdf93",
+                      "surface": "#fdf7ff",
+                      "outline": "#7a7582",
+                      "inverse-surface": "#322f35",
+                      "error-container": "#ffdad6",
+                      "surface-bright": "#fdf7ff",
+                      "primary-fixed": "#e9ddff",
+                      "on-primary": "#ffffff",
+                      "primary-container": "#6750a4",
+                      "on-secondary-fixed": "#1f1635",
+                      "background": "#fdf7ff",
+                      "surface-dim": "#ded8e0",
+                      "tertiary": "#765b00",
+                      "surface-container-high": "#ece6ee",
+                      "on-tertiary-fixed": "#241a00",
+                      "on-secondary": "#ffffff",
+                      "primary": "#4f378a",
+                      "on-surface-variant": "#494551",
+                      "secondary": "#63597c",
+                      "primary-fixed-dim": "#cfbcff",
+                      "on-error-container": "#93000a",
+                      "surface-container-highest": "#e6e0e9",
+                      "on-surface": "#1d1b20",
+                      "tertiary-container": "#c9a74d",
+                      "brand-teal": "#0F766E",
+                      "brand-gray-dark": "#1F2937",
+                      "brand-gray-medium": "#6B7280",
+                      "brand-gray-light": "#E5E7EB"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "3xl": "32px",
+                      "5xl": "48px",
+                      "2xl": "24px",
+                      "xs": "4px",
+                      "sm": "8px",
+                      "lg": "16px",
+                      "4xl": "40px",
+                      "xl": "20px",
+                      "md": "12px"
+              },
+              "fontSize": {
+                      "title-lg": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                      "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "600"}],
+                      "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                      "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+      </script>
+</head>
+<body class="bg-white text-on-surface antialiased overflow-hidden">
+<!-- Top Navigation Bar -->
+<header class="w-full top-0 sticky bg-surface flex items-center justify-between px-lg h-16 border-b border-outline-variant">
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-primary hover:bg-surface-variant/50 transition-colors duration-200">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<span class="font-title-lg text-title-lg text-primary">Step 1 of 3</span>
+<div class="w-10"></div> <!-- Spacer for centering -->
+</header>
+<main class="flex flex-col items-center justify-center min-h-[calc(100vh-144px)] px-lg pb-4xl">
+<!-- Illustration Section -->
+<div class="w-full max-w-sm aspect-square flex items-center justify-center mb-5xl illustration-float">
+<div class="relative w-full h-full flex items-center justify-center">
+<!-- Decorative background elements -->
+<div class="absolute w-64 h-64 bg-secondary-container/30 rounded-full blur-3xl"></div>
+<img alt="Shopping cart onboarding illustration" class="relative z-10 w-full h-auto object-contain" src="https://lh3.googleusercontent.com/aida/AP1WRLs6yEdC5f9CY_SG3yk2rvsv9l05qiFlvVeoleV0fXH4PhoX5S0vbiMCq0ChZ7IjXZvPTN_HYZ3lAZp3Udl-ERFtOZN7nQ9QWQt1ExmxshSzkX7wtcux9hITvDfbTZpmsFFNpk4CpFMS9magmfDgct5WUlhmy9Ml4YcwS3lsyFxjTsBS_MQwy1aPzROsoW6x9V-2jQk_u_1Edio4JHTppWGN2ge8icPyHcGibIDWDIoDbcC3xfTYQbR8218">
+</div>
+</div>
+<!-- Text Content -->
+<div class="text-center max-w-md">
+<h1 class="font-display-lg text-display-lg text-brand-gray-dark mb-md">
+                Seamless Checkout
+            </h1>
+<p class="font-body-lg text-body-lg text-brand-gray-medium px-md leading-relaxed">
+                Apply coupons, save addresses, and pay securely with our streamlined payment experience.
+            </p>
+</div>
+<!-- Features Grid (Micro-interaction context) -->
+<div class="mt-4xl grid grid-cols-3 gap-lg w-full max-w-sm">
+<div class="flex flex-col items-center gap-xs">
+<div class="w-12 h-12 rounded-2xl bg-surface-container flex items-center justify-center text-brand-teal mb-xs">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">local_offer</span>
+</div>
+<span class="font-label-md text-label-md text-brand-gray-medium">Coupons</span>
+</div>
+<div class="flex flex-col items-center gap-xs">
+<div class="w-12 h-12 rounded-2xl bg-surface-container flex items-center justify-center text-brand-teal mb-xs">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">location_on</span>
+</div>
+<span class="font-label-md text-label-md text-brand-gray-medium">Address</span>
+</div>
+<div class="flex flex-col items-center gap-xs">
+<div class="w-12 h-12 rounded-2xl bg-surface-container flex items-center justify-center text-brand-teal mb-xs">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">shield_lock</span>
+</div>
+<span class="font-label-md text-label-md text-brand-gray-medium">Secure</span>
+</div>
+</div>
+</main>
+<!-- Footer Action Area -->
+<footer class="fixed bottom-0 w-full px-lg pb-safe bg-white/80 backdrop-blur-md">
+<div class="flex flex-col items-center gap-2xl mb-2xl">
+<!-- Progress Dots -->
+<div class="flex gap-sm">
+<div class="w-2 h-2 rounded-full bg-brand-gray-light"></div>
+<div class="w-6 h-2 rounded-full bg-brand-teal transition-all duration-300"></div>
+<div class="w-2 h-2 rounded-full bg-brand-gray-light"></div>
+</div>
+<!-- Primary Action -->
+<button class="w-full max-w-sm bg-brand-teal text-white font-label-lg text-label-lg py-xl rounded-xl shadow-lg shadow-brand-teal/20 active:scale-95 transition-all duration-150 flex items-center justify-center gap-sm" onclick="handleNext()">
+                Next
+                <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<!-- Skip Option -->
+<button class="text-brand-gray-medium font-label-md text-label-md hover:text-brand-gray-dark transition-colors">
+                Skip for now
+            </button>
+</div>
+</footer>
+<script>
+        function handleNext() {
+            // Simple micro-interaction for the button
+            const btn = document.querySelector('button.bg-brand-teal');
+            btn.innerHTML = '<span class="material-symbols-outlined animate-spin">progress_activity</span>';
+            setTimeout(() => {
+                btn.innerHTML = 'Next <span class="material-symbols-outlined">arrow_forward</span>';
+            }, 800);
+        }
+
+        // Add subtle parallax effect on mouse move
+        document.addEventListener('mousemove', (e) => {
+            const illustration = document.querySelector('.illustration-float');
+            const xAxis = (window.innerWidth / 2 - e.pageX) / 45;
+            const yAxis = (window.innerHeight / 2 - e.pageY) / 45;
+            illustration.style.transform = `translate(${xAxis}px, ${yAxis}px)`;
+        });
+    </script>
+<div id="snapdom-sandbox" data-snapdom-sandbox="true" aria-hidden="true" style="position: absolute; left: -9999px; top: -9999px; width: 0px; height: 0px; overflow: hidden;"></div></body></html>

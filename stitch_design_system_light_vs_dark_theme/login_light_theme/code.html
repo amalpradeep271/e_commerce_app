@@ -1,0 +1,186 @@
+<!DOCTYPE html><html class="dark" lang="en" style="width: 390px; height: 884px; overflow: hidden; position: relative;"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Login - ShopPremium</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bg-gradient-subtle {
+            background: linear-gradient(180deg, #FFFFFF 0%, #F0FDFA 100%);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-error-container": "#93000a",
+                      "surface-dim": "#ded8e0",
+                      "primary": "#4f378a",
+                      "on-primary-fixed-variant": "#4f378a",
+                      "tertiary-fixed": "#ffdf93",
+                      "surface-tint": "#6750a4",
+                      "on-secondary-fixed-variant": "#4b4263",
+                      "on-secondary": "#ffffff",
+                      "surface-bright": "#fdf7ff",
+                      "surface-container-lowest": "#ffffff",
+                      "secondary-container": "#e1d4fd",
+                      "outline-variant": "#cbc4d2",
+                      "background": "#fdf7ff",
+                      "inverse-on-surface": "#f5eff7",
+                      "tertiary": "#765b00",
+                      "on-error": "#ffffff",
+                      "secondary-fixed": "#e9ddff",
+                      "outline": "#7a7582",
+                      "on-background": "#1d1b20",
+                      "on-tertiary": "#ffffff",
+                      "on-secondary-container": "#645a7d",
+                      "on-secondary-fixed": "#1f1635",
+                      "tertiary-fixed-dim": "#e7c365",
+                      "error-container": "#ffdad6",
+                      "primary-fixed": "#e9ddff",
+                      "on-tertiary-fixed": "#241a00",
+                      "on-primary-fixed": "#22005d",
+                      "inverse-primary": "#cfbcff",
+                      "on-surface-variant": "#494551",
+                      "surface-container-highest": "#e6e0e9",
+                      "secondary": "#63597c",
+                      "tertiary-container": "#c9a74d",
+                      "on-primary": "#ffffff",
+                      "surface-container-low": "#f8f2fa",
+                      "secondary-fixed-dim": "#cdc0e9",
+                      "on-tertiary-fixed-variant": "#594400",
+                      "primary-container": "#6750a4",
+                      "surface-variant": "#e6e0e9",
+                      "inverse-surface": "#322f35",
+                      "error": "#ba1a1a",
+                      "surface-container-high": "#ece6ee",
+                      "surface-container": "#f2ecf4",
+                      "primary-fixed-dim": "#cfbcff",
+                      "on-tertiary-container": "#503d00",
+                      "on-surface": "#1d1b20",
+                      "on-primary-container": "#e0d2ff",
+                      "surface": "#fdf7ff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "2xl": "24px",
+                      "xs": "4px",
+                      "md": "12px",
+                      "xl": "20px",
+                      "lg": "16px",
+                      "4xl": "40px",
+                      "sm": "8px",
+                      "5xl": "48px",
+                      "3xl": "32px"
+              },
+              "fontSize": {
+                      "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "600"}],
+                      "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "title-lg": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "caption": ["11px", {"lineHeight": "14px", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+      </script>
+</head>
+<body class="bg-gradient-subtle min-h-screen flex flex-col justify-center items-center p-lg">
+<!-- Login Card -->
+<main class="w-full max-w-md bg-white rounded-xl shadow-lg overflow-hidden flex flex-col items-center p-2xl">
+<!-- Logo Section -->
+<div class="mb-2xl">
+<img alt="ShopPremium Logo" class="w-[60px] h-[60px] object-contain rounded-md" src="https://lh3.googleusercontent.com/aida/AP1WRLttFuA6AWl4cjTIAFo_W2y7tSmTW0Apkk6S03OAtjtuLqaoWMH4mWUtRB75_M_BXwzkTPjrpCkXmkHluEZB9nYJY6PL1-H0s7cZdX2poxKJIDrUQtNhf36ThPeaFcniqCsuqkU-bbRiXNoxQctqt9qlpwvOgyLIVuAlG6EmeZYuA8LTQEsLLPdwQGFgrCR15hyTF9D3BOwtqspJg2V1x8IKHka5mzyMOmQhP37HCFy2qrbBXim5LN5j7UQ">
+</div>
+<!-- Header Section -->
+<div class="text-center mb-4xl">
+<h1 class="font-headline-lg text-headline-lg text-[#1F2937] mb-xs">Welcome Back</h1>
+<p class="font-body-md text-body-md text-[#6B7280]">Sign in to continue shopping</p>
+</div>
+<!-- Form Section -->
+<form action="#" class="w-full space-y-xl">
+<!-- Email Input -->
+<div class="flex flex-col space-y-xs">
+<label class="font-label-md text-label-md text-on-surface-variant" for="email">Email Address</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-outline text-[20px]">mail</span>
+<input class="w-full pl-4xl pr-md py-md bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all font-body-md text-body-md text-on-background" id="email" placeholder="name@example.com" type="email">
+</div>
+</div>
+<!-- Password Input -->
+<div class="flex flex-col space-y-xs">
+<div class="flex justify-between items-center">
+<label class="font-label-md text-label-md text-on-surface-variant" for="password">Password</label>
+<a class="font-label-lg text-label-lg text-[#0F766E] hover:underline" href="#">Forgot Password?</a>
+</div>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-outline text-[20px]">lock</span>
+<input class="w-full pl-4xl pr-10 py-md bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all font-body-md text-body-md text-on-background" id="password" placeholder="••••••••" type="password">
+<button class="absolute right-md top-1/2 -translate-y-1/2 text-outline hover:text-on-surface-variant" onclick="togglePassword()" type="button">
+<span class="material-symbols-outlined text-[20px]" id="visibility-icon">visibility</span>
+</button>
+</div>
+</div>
+<!-- Sign In Button -->
+<button class="w-full py-md bg-[#0F766E] text-white font-title-lg text-title-lg rounded-full shadow-md hover:bg-[#0d645e] active:scale-95 transition-all duration-200" type="submit">
+                Sign In
+            </button>
+</form>
+<!-- Divider -->
+<div class="w-full flex items-center my-2xl">
+<div class="flex-grow h-[1px] bg-[#E5E7EB]"></div>
+<span class="px-md font-label-md text-label-md text-outline">OR</span>
+<div class="flex-grow h-[1px] bg-[#E5E7EB]"></div>
+</div>
+<!-- Google Sign-In -->
+<button class="w-full flex items-center justify-center space-x-md py-md bg-white border border-[#E5E7EB] rounded-full hover:bg-surface-container-low active:scale-95 transition-all duration-200">
+<svg class="w-5 h-5" viewBox="0 0 24 24">
+<path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
+<path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
+<path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"></path>
+<path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path>
+</svg>
+<span class="font-label-lg text-label-lg text-on-surface-variant">Continue with Google</span>
+</button>
+<!-- Footer -->
+<div class="mt-4xl text-center">
+<p class="font-body-md text-body-md text-outline">
+                Don't have an account? 
+                <a class="text-[#0F766E] font-bold hover:underline" href="#">Sign Up</a>
+</p>
+</div>
+</main>
+<script>
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const visibilityIcon = document.getElementById('visibility-icon');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                visibilityIcon.innerText = 'visibility_off';
+            } else {
+                passwordInput.type = 'password';
+                visibilityIcon.innerText = 'visibility';
+            }
+        }
+    </script>
+<div id="snapdom-sandbox" data-snapdom-sandbox="true" aria-hidden="true" style="position: absolute; left: -9999px; top: -9999px; width: 0px; height: 0px; overflow: hidden;"></div></body></html>

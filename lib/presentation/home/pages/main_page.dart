@@ -5,7 +5,6 @@ import 'package:e_commerce_application/common/bloc/app_bottom_navigationbar/bott
 import 'package:e_commerce_application/common/bloc/internet_connectivity/internet_connectivity_cubit.dart';
 import 'package:e_commerce_application/common/bloc/internet_connectivity/internet_connectivity_state.dart';
 import 'package:e_commerce_application/common/widgets/no_internet_screen/no_internet_screen.dart';
-import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
 import 'package:e_commerce_application/presentation/home/pages/homepage.dart';
 import 'package:e_commerce_application/presentation/order/pages/my_orders_page.dart';
 import 'package:e_commerce_application/presentation/wishlist/pages/wishlist_page.dart';
@@ -85,6 +84,7 @@ class PremiumFloatingNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
     final isDark = theme.brightness == Brightness.dark;
 
     return BlocBuilder<BottomNavigationCubit, BottomNavItem>(
@@ -99,18 +99,16 @@ class PremiumFloatingNavBar extends StatelessWidget {
                 height: 70.h,
                 decoration: BoxDecoration(
                   color: isDark
-                      ? const Color(0xFF1E293B).withValues(alpha: 0.8)
-                      : Colors.white.withValues(alpha: 0.85),
+                      ? colorScheme.surface.withValues(alpha: 0.8)
+                      : colorScheme.surface.withValues(alpha: 0.85),
                   borderRadius: BorderRadius.circular(24.r),
                   border: Border.all(
-                    color: isDark
-                        ? Colors.white.withValues(alpha: 0.1)
-                        : AppColors.kPrimaryColor.withValues(alpha: 0.15),
-                    width: 1.5,
+                    color: colorScheme.outlineVariant.withValues(alpha: 0.5),
+                    width: 1.0,
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withValues(alpha: 0.08),
+                      color: colorScheme.shadow.withValues(alpha: 0.08),
                       blurRadius: 20,
                       offset: const Offset(0, 8),
                     ),
@@ -183,6 +181,7 @@ class _NavBarItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return GestureDetector(
       onTap: onTap,
       behavior: HitTestBehavior.opaque,
@@ -195,13 +194,13 @@ class _NavBarItem extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
             decoration: BoxDecoration(
               color: isActive
-                  ? AppColors.kPrimaryColor.withValues(alpha: 0.12)
+                  ? colorScheme.primary.withValues(alpha: 0.12)
                   : Colors.transparent,
               borderRadius: BorderRadius.circular(16.r),
             ),
             child: Icon(
               isActive ? activeIcon : icon,
-              color: isActive ? AppColors.kPrimaryColor : Colors.grey,
+              color: isActive ? colorScheme.primary : colorScheme.onSurfaceVariant,
               size: 24.r,
             ),
           ),
@@ -211,7 +210,7 @@ class _NavBarItem extends StatelessWidget {
             style: TextStyle(
               fontSize: 10.sp,
               fontWeight: isActive ? FontWeight.w600 : FontWeight.w400,
-              color: isActive ? AppColors.kPrimaryColor : Colors.grey,
+              color: isActive ? colorScheme.primary : colorScheme.onSurfaceVariant,
             ),
           ),
         ],

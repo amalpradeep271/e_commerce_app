@@ -1,10 +1,8 @@
-
 import 'package:e_commerce_application/presentation/home/bloc/categories/categories_display_cubit.dart';
 import 'package:e_commerce_application/presentation/home/bloc/categories/categories_display_state.dart';
 import 'package:e_commerce_application/common/helper/images/images_display.dart';
 import 'package:e_commerce_application/common/helper/navigator/app_navigator.dart';
 import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
-import 'package:e_commerce_application/core/configs/theme/app_text_theme.dart';
 import 'package:e_commerce_application/domain/category/entity/category_entity.dart';
 import 'package:e_commerce_application/presentation/categories_products/pages/categories_products_page.dart';
 import 'package:flutter/material.dart';
@@ -71,12 +69,19 @@ class Categories extends StatelessWidget {
   Widget _title(BuildContext context) {
     return Column(
       children: [
-        SizedBox(
-          height: 14.h,
-        ),
-        Text(
-          "Categories",
-          style: AppTextStyles.base.w500.s16,
+        SizedBox(height: 14.h),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              "Categories",
+              style: TextStyle(
+                fontSize: 18.sp,
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).colorScheme.onSurface,
+              ),
+            ),
+          ],
         ),
       ],
     );
@@ -84,75 +89,97 @@ class Categories extends StatelessWidget {
 
   Widget _categories(List<CategoryEntity> categories) {
     return SizedBox(
-      height: 40.h,
+      height: 100.h,
       child: ListView.separated(
-          scrollDirection: Axis.horizontal,
-          itemBuilder: (context, index) {
-            return _categoryButton(
-              onTap: () {
-                AppNavigator.push(
-                  context,
-                  CategoryProductsPage(
-                    title: categories[index].title,
-                    categoryEntity: categories[index],
-                  ),
-                );
-              },
-              buttonImage: categories[index].image,
-              buttonTitle: categories[index].title,
-            );
-          },
-          separatorBuilder: (context, index) => SizedBox(width: 15.w),
-          itemCount: categories.length),
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          return _categoryButton(
+            context: context,
+            onTap: () {
+              AppNavigator.push(
+                context,
+                CategoryProductsPage(
+                  title: categories[index].title,
+                  categoryEntity: categories[index],
+                ),
+              );
+            },
+            buttonImage: categories[index].image,
+            buttonTitle: categories[index].title,
+          );
+        },
+        separatorBuilder: (context, index) => SizedBox(width: 16.w),
+        itemCount: categories.length,
+      ),
     );
   }
 
   Widget _categoryButton({
+    required BuildContext context,
     required VoidCallback onTap,
     required String buttonImage,
     required String buttonTitle,
   }) {
-    return InkWell(
-      onTap: () {
-        onTap();
-      },
-      child: Container(
-        width: 120,
-        decoration: BoxDecoration(
-            gradient: AppColors.categoryLinercolor,
-            borderRadius: BorderRadius.circular(5)),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 5),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              buttonImage.toLowerCase().contains('.svg')
+    final colorScheme = Theme.of(context).colorScheme;
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            width: 64.w,
+            height: 64.h,
+            decoration: BoxDecoration(
+              color: colorScheme.surface,
+              shape: BoxShape.circle,
+              border: Border.all(
+                color: colorScheme.surfaceContainerHighest,
+                width: 1.0,
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: colorScheme.shadow.withValues(alpha: 0.05),
+                  blurRadius: 4,
+                  offset: const Offset(0, 2),
+                ),
+              ],
+            ),
+            alignment: Alignment.center,
+            child: ClipOval(
+              child: buttonImage.toLowerCase().contains('.svg')
                   ? SvgPicture.network(
                       ImageDisplayHelper.generateCategoryImageURL(buttonImage),
-                      width: 25,
-                      height: 25,
+                      width: 28.w,
+                      height: 28.h,
+                      colorFilter: ColorFilter.mode(
+                        colorScheme.primary,
+                        BlendMode.srcIn,
+                      ),
                     )
                   : Image.network(
                       ImageDisplayHelper.generateCategoryImageURL(buttonImage),
-                      width: 25,
-                      height: 25,
+                      width: 32.w,
+                      height: 32.h,
                       fit: BoxFit.cover,
-                      errorBuilder: (_, __, ___) => const Icon(
+                      errorBuilder: (_, __, ___) => Icon(
                         Icons.category,
-                        size: 25,
+                        size: 28.w,
+                        color: colorScheme.primary,
                       ),
                     ),
-              Expanded(
-                child: Text(
-                  buttonTitle,
-                  textAlign: TextAlign.center,
-                  overflow: TextOverflow.ellipsis,
-                  style: AppTextStyles.base.w400.s15,
-                ),
-              )
-            ],
+            ),
           ),
-        ),
+          SizedBox(height: 8.h),
+          Text(
+            buttonTitle,
+            style: TextStyle(
+              fontSize: 12.sp,
+              fontWeight: FontWeight.w500,
+              color: colorScheme.onSurfaceVariant,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ],
       ),
     );
   }

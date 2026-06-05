@@ -1,0 +1,202 @@
+<!DOCTYPE html><html class="dark" lang="en" style="width: 390px; height: 884px; overflow: hidden; position: relative;"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Track Your Orders - Onboarding</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "on-error": "#ffffff",
+                "on-tertiary-fixed-variant": "#594400",
+                "error": "#ba1a1a",
+                "on-tertiary-container": "#503d00",
+                "outline-variant": "#cbc4d2",
+                "tertiary-fixed-dim": "#e7c365",
+                "secondary-container": "#e1d4fd",
+                "on-background": "#1d1b20",
+                "surface-variant": "#e6e0e9",
+                "secondary-fixed": "#e9ddff",
+                "on-secondary-fixed-variant": "#4b4263",
+                "on-primary-container": "#e0d2ff",
+                "on-primary-fixed": "#22005d",
+                "inverse-primary": "#cfbcff",
+                "on-secondary-container": "#645a7d",
+                "secondary-fixed-dim": "#cdc0e9",
+                "surface-container-lowest": "#ffffff",
+                "surface-container-low": "#f8f2fa",
+                "surface-tint": "#6750a4",
+                "surface-container": "#f2ecf4",
+                "on-primary-fixed-variant": "#4f378a",
+                "inverse-on-surface": "#f5eff7",
+                "on-tertiary": "#ffffff",
+                "tertiary-fixed": "#ffdf93",
+                "surface": "#fdf7ff",
+                "outline": "#7a7582",
+                "inverse-surface": "#322f35",
+                "error-container": "#ffdad6",
+                "surface-bright": "#fdf7ff",
+                "primary-fixed": "#e9ddff",
+                "on-primary": "#ffffff",
+                "primary-container": "#6750a4",
+                "on-secondary-fixed": "#1f1635",
+                "background": "#0F172A",
+                "surface-dim": "#ded8e0",
+                "tertiary": "#765b00",
+                "surface-container-high": "#ece6ee",
+                "on-tertiary-fixed": "#241a00",
+                "on-secondary": "#ffffff",
+                "primary": "#14B8A6",
+                "on-surface-variant": "#94A3B8",
+                "secondary": "#63597c",
+                "primary-fixed-dim": "#cfbcff",
+                "on-error-container": "#93000a",
+                "surface-container-highest": "#e6e0e9",
+                "on-surface": "#F1F5F9",
+                "tertiary-container": "#c9a74d"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "3xl": "32px",
+                "5xl": "48px",
+                "2xl": "24px",
+                "xs": "4px",
+                "sm": "8px",
+                "lg": "16px",
+                "4xl": "40px",
+                "xl": "20px",
+                "md": "12px"
+            },
+            "fontFamily": {
+                "sans": ["Poppins", "sans-serif"]
+            },
+            "fontSize": {
+                "title-lg": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "600"}],
+                "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "caption": ["11px", {"lineHeight": "14px", "fontWeight": "400"}],
+                "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0F172A;
+            color: #F1F5F9;
+        }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.5);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .blob {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, rgba(20, 184, 166, 0.15) 0%, rgba(79, 55, 138, 0.1) 100%);
+            filter: blur(80px);
+            border-radius: 50%;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between overflow-hidden relative">
+<!-- Ambient Decorative Elements -->
+<div class="blob top-[-10%] left-[-20%]"></div>
+<div class="blob bottom-[10%] right-[-20%]"></div>
+<!-- Top AppBar (Simplified Onboarding Navigation) -->
+<header class="w-full top-0 sticky flex items-center justify-between px-lg h-16 z-50">
+<button class="w-10 h-10 flex items-center justify-center transition-colors duration-200 hover:bg-surface-variant/20 rounded-full text-on-surface">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<span class="font-title-lg text-title-lg text-on-surface">Step 3 of 3</span>
+<div class="w-10"></div> <!-- Spacer for centering -->
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex flex-col items-center justify-center px-lg text-center gap-2xl">
+<!-- Illustration Container -->
+<div class="relative w-full max-w-sm aspect-square flex items-center justify-center">
+<!-- Asymmetric Glass Element for Depth -->
+<div class="absolute inset-0 scale-90 translate-x-4 -translate-y-4 rounded-[40px] glass-card rotate-3 opacity-40"></div>
+<div class="relative z-10 w-full rounded-[40px] overflow-hidden">
+<img alt="Track Your Orders Illustration" class="w-full h-full object-cover shadow-2xl" src="https://lh3.googleusercontent.com/aida/AP1WRLusfCEt1IfuKnYFk8Fpc7YMMdm5JKC-bm6t9S1alsUF6SZlpLQwsNBDZ9U-5XyGhNYgA9Ijm9ped4yZorMmV1Q6fGI3sbZURXeQoL1TYoNdkCsIJgkAf00SKzQaoTfVddZfiMC9-A30B7G5DykiizXdfAdP8UBlW_BQDzFT_H8Cw4sJ_TRqKvjWjQb6Npq-cyd7kNjrn89CAkruA1udKX7A7dbpjckWtmB1IdK6TjozJN7oQMS3aQW3aXk">
+</div>
+<!-- Floating Data Point Cards (Micro-interactions vibe) -->
+<div class="absolute -bottom-4 -left-4 glass-card p-md rounded-xl flex items-center gap-sm shadow-xl animate-bounce" style="animation-duration: 4s;">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[16px]" data-icon="local_shipping">local_shipping</span>
+</div>
+<div class="text-left">
+<p class="font-label-md text-label-md text-on-surface">En route</p>
+<p class="font-caption text-caption text-on-surface-variant">Arriving in 15 mins</p>
+</div>
+</div>
+</div>
+<!-- Text Content -->
+<div class="space-y-md max-w-xs">
+<h1 class="font-display-lg text-display-lg text-[#F1F5F9] tracking-tight">Track Your Orders</h1>
+<p class="font-body-lg text-body-lg text-[#94A3B8]">Real-time order tracking from placement to delivery</p>
+</div>
+</main>
+<!-- Bottom Action Section -->
+<footer class="px-lg pb-5xl pt-lg flex flex-col items-center gap-3xl">
+<!-- Progress Dots -->
+<div class="flex items-center gap-sm">
+<div class="w-2 h-2 rounded-full bg-[#334155]"></div>
+<div class="w-2 h-2 rounded-full bg-[#334155]"></div>
+<!-- Active Dot: Wider teal pill -->
+<div class="w-6 h-2 rounded-full bg-[#14B8A6] shadow-[0_0_12px_rgba(20,184,166,0.5)]"></div>
+</div>
+<!-- CTA Button -->
+<div class="w-full max-w-md">
+<button class="w-full py-xl rounded-xl bg-[#14B8A6] text-white font-label-lg text-label-lg shadow-lg shadow-[#14B8A6]/20 active:scale-95 transition-all duration-150 flex items-center justify-center gap-sm group">
+                Get Started
+                <span class="material-symbols-outlined transition-transform duration-200 group-hover:translate-x-1" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</footer>
+<script>
+        // Micro-interaction: Smooth hover effect on button
+        const btn = document.querySelector('button');
+        btn.addEventListener('mousemove', (e) => {
+            const rect = btn.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            btn.style.setProperty('--mouse-x', `${x}px`);
+            btn.style.setProperty('--mouse-y', `${y}px`);
+        });
+
+        // Simple entrance animation
+        document.addEventListener('DOMContentLoaded', () => {
+            const elements = document.querySelectorAll('main > div, footer > div');
+            elements.forEach((el, index) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'all 0.6s cubic-bezier(0.22, 1, 0.36, 1)';
+                setTimeout(() => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, 100 * index);
+            });
+        });
+    </script>
+<div id="snapdom-sandbox" data-snapdom-sandbox="true" aria-hidden="true" style="position: absolute; left: -9999px; top: -9999px; width: 0px; height: 0px; overflow: hidden;"></div></body></html>
