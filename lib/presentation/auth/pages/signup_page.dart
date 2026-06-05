@@ -14,7 +14,6 @@ import 'package:e_commerce_application/presentation/auth/pages/signin_page.dart'
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../common/bloc/button/button_state_cubit.dart';
 
 class SignupPage extends StatelessWidget {
@@ -65,7 +64,7 @@ class SignupPage extends StatelessWidget {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: isDark
-                    ? [colorScheme.surface, colorScheme.surfaceContainerHighest]
+                    ? [colorScheme.surface, colorScheme.surfaceVariant]
                     : [Colors.white, const Color(0xFFF0FDFA)],
               ),
             ),
