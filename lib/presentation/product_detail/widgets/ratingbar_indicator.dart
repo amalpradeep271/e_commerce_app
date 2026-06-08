@@ -1,4 +1,3 @@
-import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
@@ -10,7 +9,7 @@ final double rating;
     return RatingBarIndicator(
       itemBuilder: (context, index) => const Icon(
         Icons.star,
-        color: AppColors.kPrimaryColor,
+        color: Colors.amber,
       ),
       itemCount: 5,
       itemSize:20,

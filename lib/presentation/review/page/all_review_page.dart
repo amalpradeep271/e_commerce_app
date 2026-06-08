@@ -3,7 +3,6 @@ import 'package:e_commerce_application/common/bloc/internet_connectivity/interne
 import 'package:e_commerce_application/common/widgets/appbar/app_bar.dart';
 import 'package:e_commerce_application/common/widgets/no_internet_screen/no_internet_screen.dart';
 import 'package:e_commerce_application/core/configs/assets/app_images.dart';
-import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
 import 'package:e_commerce_application/core/configs/theme/app_text_theme.dart';
 import 'package:e_commerce_application/domain/product/entity/product_entity.dart';
 import 'package:e_commerce_application/presentation/review/bloc/review_display_cubit.dart';
@@ -50,8 +49,13 @@ class AllReviewPage extends StatelessWidget {
           }
           if (state is ReviewsLoaded) {
             if (state.reviews.isEmpty) {
-              return const Center(
-                child: Text('No Reviews Yet'),
+              return Center(
+                child: Text(
+                  'No Reviews Yet',
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
+                ),
               );
             }
             return Padding(
@@ -63,7 +67,9 @@ class AllReviewPage extends StatelessWidget {
                     children: [
                       Text(
                         "People Said",
-                        style: AppTextStyles.base.w700,
+                        style: AppTextStyles.base.w700.copyWith(
+                          color: Theme.of(context).colorScheme.onSurface,
+                        ),
                       ),
                       Row(
                         children: [
@@ -93,7 +99,9 @@ class AllReviewPage extends StatelessWidget {
                           ),
                           Text(
                             "+${state.reviews.length}",
-                            style: AppTextStyles.base.w600,
+                            style: AppTextStyles.base.w600.copyWith(
+                              color: Theme.of(context).colorScheme.onSurface,
+                            ),
                           )
                         ],
                       )
@@ -127,20 +135,27 @@ class AllReviewPage extends StatelessWidget {
                                   children: [
                                     Text(
                                       state.reviews[index].userName,
-                                      style: AppTextStyles.base.s16.w600,
+                                      style: AppTextStyles.base.s16.w600.copyWith(
+                                        color: Theme.of(context).colorScheme.onSurface,
+                                      ),
                                     ),
                                     Text(
                                       DateFormat('dd MMM yyyy', 'en_US').format(
                                         (state.reviews[index].createdDate)
                                             .toDate(),
                                       ),
-                                      style: AppTextStyles.base.w600.s12,
+                                      style: AppTextStyles.base.w600.s12.copyWith(
+                                        color: Theme.of(context).colorScheme.outline,
+                                      ),
                                     ),
                                     const SizedBox(
                                       height: 10,
                                     ),
                                     Text(
                                       state.reviews[index].review,
+                                      style: TextStyle(
+                                        color: Theme.of(context).colorScheme.onSurface,
+                                      ),
                                     ),
                                     const SizedBox(
                                       height: 10,
@@ -149,7 +164,7 @@ class AllReviewPage extends StatelessWidget {
                                       itemBuilder: (context, index) =>
                                           const Icon(
                                         Icons.star,
-                                        color: AppColors.kPrimaryColor,
+                                        color: Colors.amber,
                                       ),
                                       itemCount: 5,
                                       itemSize: 17,
