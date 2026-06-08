@@ -14,6 +14,7 @@ import 'package:e_commerce_application/presentation/product_detail/widgets/produ
 import 'package:e_commerce_application/presentation/product_detail/widgets/product_quantity.dart';
 import 'package:e_commerce_application/presentation/product_detail/widgets/product_sizes.dart';
 import 'package:e_commerce_application/presentation/review/widget/review_form.dart';
+import 'package:e_commerce_application/presentation/wishlist/bloc/wishlist_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:e_commerce_application/domain/product/entity/product_entity.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -45,6 +46,7 @@ class ProductDetailsPage extends StatelessWidget {
         BlocProvider(create: (context) => ProductColorSelectionCubit()),
         BlocProvider(create: (context) => ButtonStateCubit()),
         BlocProvider(create: (context) => CartStatusCubit()),
+        BlocProvider(create: (context) => WishlistCubit()..loadWishlist()),
       ],
       child: BlocBuilder<ConnectivityCubit, ConnectivityState>(
         builder: (context, state) {
