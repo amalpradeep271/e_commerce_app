@@ -111,81 +111,88 @@ class AllReviewPage extends StatelessWidget {
                     height: 20,
                   ),
                   Expanded(
-                    child: ListView.builder(
-                      itemBuilder: (context, index) {
-                        return Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                CircleAvatar(
-                                  backgroundImage: state
-                                          .reviews[index].userImage.isEmpty
-                                      ? const AssetImage(AppImages.profilemen)
-                                      : NetworkImage(
-                                          state.reviews[index].userImage,
-                                        ),
-                                ),
-                                SizedBox(
-                                  width: 25.w,
-                                ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      state.reviews[index].userName,
-                                      style: AppTextStyles.base.s16.w600.copyWith(
-                                        color: Theme.of(context).colorScheme.onSurface,
-                                      ),
-                                    ),
-                                    Text(
-                                      DateFormat('dd MMM yyyy', 'en_US').format(
-                                        (state.reviews[index].createdDate)
-                                            .toDate(),
-                                      ),
-                                      style: AppTextStyles.base.w600.s12.copyWith(
-                                        color: Theme.of(context).colorScheme.outline,
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                    Text(
-                                      state.reviews[index].review,
-                                      style: TextStyle(
-                                        color: Theme.of(context).colorScheme.onSurface,
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                    RatingBarIndicator(
-                                      itemBuilder: (context, index) =>
-                                          const Icon(
-                                        Icons.star,
-                                        color: Colors.amber,
-                                      ),
-                                      itemCount: 5,
-                                      itemSize: 17,
-                                      direction: Axis.horizontal,
-                                      rating: state.reviews[index].rating,
-                                    ),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            const Divider(),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                          ],
-                        );
+                    child: RefreshIndicator(
+                      onRefresh: () async {
+                        context
+                            .read<ReviewsDisplayCubit>()
+                            .displayReviews(productEntity.productId);
                       },
-                      itemCount: state.reviews.length,
+                      child: ListView.builder(
+                        itemBuilder: (context, index) {
+                          return Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  CircleAvatar(
+                                    backgroundImage: state
+                                            .reviews[index].userImage.isEmpty
+                                        ? const AssetImage(AppImages.profilemen)
+                                        : NetworkImage(
+                                            state.reviews[index].userImage,
+                                          ),
+                                  ),
+                                  SizedBox(
+                                    width: 25.w,
+                                  ),
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        state.reviews[index].userName,
+                                        style: AppTextStyles.base.s16.w600.copyWith(
+                                          color: Theme.of(context).colorScheme.onSurface,
+                                        ),
+                                      ),
+                                      Text(
+                                        DateFormat('dd MMM yyyy', 'en_US').format(
+                                          (state.reviews[index].createdDate)
+                                              .toDate(),
+                                        ),
+                                        style: AppTextStyles.base.w600.s12.copyWith(
+                                          color: Theme.of(context).colorScheme.outline,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      Text(
+                                        state.reviews[index].review,
+                                        style: TextStyle(
+                                          color: Theme.of(context).colorScheme.onSurface,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      RatingBarIndicator(
+                                        itemBuilder: (context, index) =>
+                                            const Icon(
+                                          Icons.star,
+                                          color: Colors.amber,
+                                        ),
+                                        itemCount: 5,
+                                        itemSize: 17,
+                                        direction: Axis.horizontal,
+                                        rating: state.reviews[index].rating,
+                                      ),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              const Divider(),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                            ],
+                          );
+                        },
+                        itemCount: state.reviews.length,
+                      ),
                     ),
                   )
                 ],
