@@ -1,8 +1,5 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
 import 'package:e_commerce_application/presentation/product_detail/bloc/product_size_selection_cubit.dart';
 import 'package:flutter/material.dart';
-
 import 'package:e_commerce_application/domain/product/entity/product_entity.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,48 +13,68 @@ class ProductSizes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 40,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: productEntity.sizes.length,
-        itemBuilder: (context, index) {
-          return BlocBuilder<ProductSizeSelectionCubit, int>(
-            builder: (context, state) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 5),
-                child: GestureDetector(
-                  onTap: () {
-                    context
-                        .read<ProductSizeSelectionCubit>()
-                        .itemSelection(index);
-                  },
-                  child: Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: state == index
-                            ? AppColors.kPrimaryColor
-                            : AppColors.grey,
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+    final colorScheme = theme.colorScheme;
+    final activeThemeColor = isDark ? const Color(0xFF14B8A6) : const Color(0xFF006970);
+    final borderUnselectedColor = isDark ? const Color(0xFF334155) : const Color(0xFFE2E8F0);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "Select Size",
+          style: TextStyle(
+            fontSize: 14.sp,
+            fontWeight: FontWeight.bold,
+            color: colorScheme.onSurface,
+          ),
+        ),
+        SizedBox(height: 8.h),
+        SizedBox(
+          height: 42.h,
+          child: ListView.separated(
+            scrollDirection: Axis.horizontal,
+            itemCount: productEntity.sizes.length,
+            separatorBuilder: (context, index) => SizedBox(width: 10.w),
+            itemBuilder: (context, index) {
+              return BlocBuilder<ProductSizeSelectionCubit, int>(
+                builder: (context, state) {
+                  final isSelected = state == index;
+                  return GestureDetector(
+                    onTap: () {
+                      context.read<ProductSizeSelectionCubit>().itemSelection(index);
+                    },
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+                      decoration: BoxDecoration(
+                        color: isSelected ? activeThemeColor : Colors.transparent,
+                        border: Border.all(
+                          color: isSelected ? activeThemeColor : borderUnselectedColor,
+                          width: 1.5.w,
+                        ),
+                        borderRadius: BorderRadius.circular(12.r),
                       ),
-                      borderRadius: BorderRadius.circular(5.r),
-                    ),
-                    child: Center(
-                      child: Text(
-                        productEntity.sizes[index],
-                        style: const TextStyle(
-                          color: AppColors.black,
+                      child: Center(
+                        child: Text(
+                          productEntity.sizes[index],
+                          style: TextStyle(
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.bold,
+                            color: isSelected
+                                ? (isDark ? Colors.black : Colors.white)
+                                : colorScheme.onSurface,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ),
+                  );
+                },
               );
             },
-          );
-        },
-      ),
+          ),
+        ),
+      ],
     );
   }
 }
