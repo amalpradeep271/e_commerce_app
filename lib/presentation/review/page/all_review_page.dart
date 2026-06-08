@@ -136,51 +136,53 @@ class AllReviewPage extends StatelessWidget {
                                   SizedBox(
                                     width: 25.w,
                                   ),
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        state.reviews[index].userName,
-                                        style: AppTextStyles.base.s16.w600.copyWith(
-                                          color: Theme.of(context).colorScheme.onSurface,
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          state.reviews[index].userName,
+                                          style: AppTextStyles.base.s16.w600.copyWith(
+                                            color: Theme.of(context).colorScheme.onSurface,
+                                          ),
                                         ),
-                                      ),
-                                      Text(
-                                        DateFormat('dd MMM yyyy', 'en_US').format(
-                                          (state.reviews[index].createdDate)
-                                              .toDate(),
+                                        Text(
+                                          DateFormat('dd MMM yyyy', 'en_US').format(
+                                            (state.reviews[index].createdDate)
+                                                .toDate(),
+                                          ),
+                                          style: AppTextStyles.base.w600.s12.copyWith(
+                                            color: Theme.of(context).colorScheme.outline,
+                                          ),
                                         ),
-                                        style: AppTextStyles.base.w600.s12.copyWith(
-                                          color: Theme.of(context).colorScheme.outline,
+                                        const SizedBox(
+                                          height: 10,
                                         ),
-                                      ),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      Text(
-                                        state.reviews[index].review,
-                                        style: TextStyle(
-                                          color: Theme.of(context).colorScheme.onSurface,
+                                        Text(
+                                          state.reviews[index].review,
+                                          style: TextStyle(
+                                            color: Theme.of(context).colorScheme.onSurface,
+                                          ),
                                         ),
-                                      ),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      RatingBarIndicator(
-                                        itemBuilder: (context, index) =>
-                                            const Icon(
-                                          Icons.star,
-                                          color: Colors.amber,
+                                        const SizedBox(
+                                          height: 10,
                                         ),
-                                        itemCount: 5,
-                                        itemSize: 17,
-                                        direction: Axis.horizontal,
-                                        rating: state.reviews[index].rating,
-                                      ),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                    ],
+                                        RatingBarIndicator(
+                                          itemBuilder: (context, index) =>
+                                              const Icon(
+                                            Icons.star,
+                                            color: Colors.amber,
+                                          ),
+                                          itemCount: 5,
+                                          itemSize: 17,
+                                          direction: Axis.horizontal,
+                                          rating: state.reviews[index].rating,
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ],
                               ),
