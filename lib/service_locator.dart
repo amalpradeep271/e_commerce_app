@@ -46,6 +46,7 @@ import 'package:e_commerce_application/domain/product/usecase/get_topselling_use
 import 'package:e_commerce_application/domain/product/usecase/is_favourite_usecase.dart';
 import 'package:e_commerce_application/domain/review/repository/review_repository.dart';
 import 'package:e_commerce_application/domain/review/usecase/add_to_review_usecase.dart';
+import 'package:e_commerce_application/domain/review/usecase/get_review_usecase.dart';
 import 'package:e_commerce_application/domain/user/repository/user_repository.dart';
 import 'package:e_commerce_application/domain/user/usecase/upload_user_image_usecase.dart';
 import 'package:e_commerce_application/domain/wishlist/repository/wishlist_repository.dart';
@@ -156,6 +157,7 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<UploadUserImageUsecase>(UploadUserImageUsecase());
 
   sl.registerSingleton<AddReviewUseCase>(AddReviewUseCase());
+  sl.registerSingleton<GetReviewsUsecase>(GetReviewsUsecase());
   sl.registerSingleton<ToggleWishlistUseCase>(ToggleWishlistUseCase());
   sl.registerSingleton<GetWishlistUseCase>(GetWishlistUseCase());
   sl.registerSingleton<IsProductInCartUsecase>(IsProductInCartUsecase());
