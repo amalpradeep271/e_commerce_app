@@ -1,0 +1,333 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>My Orders - Modern Retail Collective</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#6750a4",
+                        "inverse-primary": "#cfbcff",
+                        "surface-variant": "#e6e0e9",
+                        "on-secondary-fixed-variant": "#4b4263",
+                        "inverse-on-surface": "#f5eff7",
+                        "on-background": "#1d1b20",
+                        "on-primary-fixed-variant": "#4f378a",
+                        "surface-container": "#f2ecf4",
+                        "primary-container": "#6750a4",
+                        "on-secondary-fixed": "#1f1635",
+                        "primary": "#4f378a",
+                        "surface-bright": "#fdf7ff",
+                        "inverse-surface": "#322f35",
+                        "secondary-fixed": "#e9ddff",
+                        "on-tertiary-fixed-variant": "#594400",
+                        "on-primary-container": "#e0d2ff",
+                        "error": "#ba1a1a",
+                        "tertiary": "#765b00",
+                        "on-error-container": "#93000a",
+                        "secondary": "#63597c",
+                        "background": "#fdf7ff",
+                        "secondary-fixed-dim": "#cdc0e9",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#c9a74d",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed": "#241a00",
+                        "on-primary-fixed": "#22005d",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-container": "#503d00",
+                        "tertiary-fixed": "#ffdf93",
+                        "on-error": "#ffffff",
+                        "surface": "#fdf7ff",
+                        "outline": "#7a7582",
+                        "on-surface-variant": "#494551",
+                        "on-secondary-container": "#645a7d",
+                        "surface-container-high": "#ece6ee",
+                        "tertiary-fixed-dim": "#e7c365",
+                        "surface-dim": "#ded8e0",
+                        "primary-fixed-dim": "#cfbcff",
+                        "on-surface": "#1d1b20",
+                        "surface-container-low": "#f8f2fa",
+                        "primary-fixed": "#e9ddff",
+                        "surface-container-highest": "#e6e0e9",
+                        "secondary-container": "#e1d4fd",
+                        "error-container": "#ffdad6",
+                        "outline-variant": "#cbc4d2"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "12px",
+                        "2xl": "16px",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "12px",
+                        "5xl": "48px",
+                        "xl": "20px",
+                        "4xl": "40px",
+                        "xs": "4px",
+                        "2xl": "24px",
+                        "3xl": "32px",
+                        "sm": "8px",
+                        "lg": "16px"
+                    },
+                    "fontSize": {
+                        "title-lg": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "600"}],
+                        "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "caption": ["11px", {"lineHeight": "14px", "fontWeight": "400"}],
+                        "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-slate-200 dark:bg-slate-950 flex flex-col items-center justify-center min-h-screen p-10 gap-10 lg:flex-row overflow-x-auto">
+<!-- LIGHT THEME MOBILE FRAME -->
+<div class="relative w-[390px] h-[844px] bg-white rounded-[3rem] shadow-2xl overflow-hidden border-8 border-slate-800 flex flex-col shrink-0">
+<!-- Top App Bar -->
+<header class="flex items-center justify-between px-lg h-16 w-full bg-white border-b border-outline-variant">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-on-surface">arrow_back</span>
+<h1 class="font-headline-md text-headline-md font-semibold text-on-surface">My Orders</h1>
+</div>
+<span class="material-symbols-outlined text-on-surface">search</span>
+</header>
+<!-- Filter Tabs -->
+<div class="flex overflow-x-auto no-scrollbar px-lg py-md gap-lg bg-white border-b border-outline-variant">
+<button class="shrink-0 font-label-lg text-label-lg text-[#0F766E] border-b-2 border-[#0F766E] pb-1">All</button>
+<button class="shrink-0 font-label-lg text-label-lg text-[#6B7280] pb-1">Active</button>
+<button class="shrink-0 font-label-lg text-label-lg text-[#6B7280] pb-1">Completed</button>
+<button class="shrink-0 font-label-lg text-label-lg text-[#6B7280] pb-1">Cancelled</button>
+</div>
+<!-- Scrollable Content -->
+<main class="flex-1 overflow-y-auto px-lg py-2xl space-y-lg bg-[#F9FAFB]">
+<!-- Order Card 1: Active -->
+<div class="bg-white rounded-2xl p-lg shadow-sm border border-outline-variant space-y-md">
+<div class="flex justify-between items-start">
+<div>
+<p class="font-title-lg text-title-lg text-[#1F2937]">#ORD-12345</p>
+<p class="font-body-md text-body-md text-[#6B7280]">June 1, 2026</p>
+</div>
+<div class="bg-[#8B5CF6] px-sm py-xs rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-white">local_shipping</span>
+<span class="text-[11px] font-bold text-white uppercase tracking-wider">Shipped</span>
+</div>
+</div>
+<div class="flex gap-sm">
+<img alt="Shoes" class="w-14 h-14 rounded-lg object-cover" data-alt="Close up high-quality studio photography of a vibrant red sports running shoe against a clean white background. Professional studio lighting highlights the texture of the fabric and the sleek design of the sole, reflecting a high-end commercial aesthetic. The composition is focused and modern." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEOO_nKauAS6i4YV1YWYlvrBkpJpZ-Sy31mHZRM-UqUpem-8xGoMV5h19byt8iFFmdy1GnYPihd11N2aHuVhNJvCOMQMrchH5WdKckpOdpxjVbbZqGytrhjEwNrg8noXWsMrrEj2kQHuKhi9oT70__6mBxhbTxCx1WoScBZiuomg0yxpCov0zVdpOKjRUqPuUZKbe9vavUimfpDI0tDlBeEbSUE-qFnWx4ysKN6wI8nK1y0zkHhICFW7uZJ2X-6NGIeohgn9DL9Zg">
+<img alt="Watch" class="w-14 h-14 rounded-lg object-cover" data-alt="A minimalist professional product shot of a luxury smartwatch with a matte black finish and a clean digital display. The lighting is soft and diffused, creating subtle highlights on the curved glass face. Set against a neutral gray background for a sophisticated and corporate-modern look." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8KmZbUvknzPklY9Er3nILBfFrcB4ODMR2OZqM4ADWAaYCox1bqy6W-GinJUphcE40ku-c0sUPxQHg6CM6q2cQl-0j99cm2hc0Z0ru3ZNxaRhPq8cD1fm8ReeoD09e8WLgRHXX4uOxL4brOfRO1-w-vKEBarn6zD7EMjLsp6_JrU7kYGVrR3r030cKoULLlD9WaKZJYfeTYbCJQzLumrOYG4-DIZhfmVE0_xtfU_0nOZXTwUY1K2RdiWyWVel7EkyK41GlmWaYYpY">
+<div class="w-14 h-14 rounded-lg bg-surface-container flex items-center justify-center font-label-md text-on-surface-variant">+1</div>
+</div>
+<div class="space-y-xs">
+<div class="flex justify-between items-end">
+<span class="font-body-md text-body-md text-[#6B7280]">Progress</span>
+<span class="font-label-md text-label-md text-[#1F2937]">60%</span>
+</div>
+<div class="h-1.5 w-full bg-[#E5E7EB] rounded-full overflow-hidden">
+<div class="h-full bg-[#0F766E] w-[60%]"></div>
+</div>
+</div>
+<div class="flex justify-between items-center pt-sm">
+<p class="font-headline-md text-headline-md text-[#1F2937]">₹2,197</p>
+<button class="px-lg py-sm rounded-full border border-[#0F766E] text-[#0F766E] font-label-lg text-label-lg active:scale-95 transition-transform">Track Order</button>
+</div>
+</div>
+<!-- Order Card 2: Delivered -->
+<div class="bg-white rounded-2xl p-lg shadow-sm border border-outline-variant space-y-md">
+<div class="flex justify-between items-start">
+<div>
+<p class="font-title-lg text-title-lg text-[#1F2937]">#ORD-12340</p>
+<p class="font-body-md text-body-md text-[#6B7280]">May 28, 2026</p>
+</div>
+<div class="bg-[#10B981] px-sm py-xs rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-white">check_circle</span>
+<span class="text-[11px] font-bold text-white uppercase tracking-wider">Delivered</span>
+</div>
+</div>
+<div class="flex gap-sm">
+<img alt="Headphones" class="w-14 h-14 rounded-lg object-cover" data-alt="Professional studio shot of premium over-ear headphones in charcoal black with metallic accents. The headphones are placed on a reflective white surface with bright, high-key lighting that emphasizes the sleek industrial design. The mood is modern, high-tech, and luxurious." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAC276Rjbe5cX97Lvr4bOEMLBRn74XTPIquboV_WT2y8MYpznTzXQZbMkOJZ6WfccE4_OouteY9btkObbPpT9ZneccxEnGE4ZcmjkiH6LMeMbXHN3EG-B2mlikgdYWxRD4SSx2zb5gsIJx632U90TI_u8GuyrPK6zaVGu5JdlrC9aT22pWa-6wntJpKpJcsDNdCntL6dhNih8yKiFUdJOfFY89f-6t6zVmx9SxmAwnq9M9ffBfJghellwb9sBRwvhsSzguwKiHdjSI">
+</div>
+<div class="flex justify-between items-center pt-sm border-t border-outline-variant mt-sm">
+<p class="font-headline-md text-headline-md text-[#1F2937]">₹4,500</p>
+<div class="flex gap-sm">
+<button class="px-md py-sm rounded-full font-label-lg text-label-lg text-[#6B7280] active:opacity-70 transition-opacity">Rate</button>
+<button class="px-lg py-sm rounded-full bg-[#0F766E] text-white font-label-lg text-label-lg active:scale-95 transition-transform">Reorder</button>
+</div>
+</div>
+</div>
+<!-- Order Card 3: Cancelled -->
+<div class="bg-white rounded-2xl p-lg shadow-sm border border-outline-variant opacity-75">
+<div class="flex justify-between items-start">
+<div>
+<p class="font-title-lg text-title-lg text-[#1F2937]">#ORD-12335</p>
+<p class="font-body-md text-body-md text-[#6B7280]">May 20, 2026</p>
+</div>
+<div class="bg-[#EF4444] px-sm py-xs rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-white">cancel</span>
+<span class="text-[11px] font-bold text-white uppercase tracking-wider">Cancelled</span>
+</div>
+</div>
+<p class="mt-md font-headline-md text-headline-md text-[#1F2937]">₹1,250</p>
+</div>
+</main>
+<!-- Bottom Nav Bar -->
+<nav class="bg-white/80 backdrop-blur-md border-t border-outline-variant h-20 w-full flex justify-around items-center px-lg">
+<div class="flex flex-col items-center text-on-surface-variant"><span class="material-symbols-outlined">home</span><span class="text-[10px]">Home</span></div>
+<div class="flex flex-col items-center text-on-surface-variant"><span class="material-symbols-outlined">search</span><span class="text-[10px]">Shop</span></div>
+<div class="flex flex-col items-center text-[#0F766E] relative after:content-[''] after:absolute after:-bottom-1 after:w-1 after:h-1 after:bg-[#0F766E] after:rounded-full">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">receipt_long</span>
+<span class="text-[10px]">Orders</span>
+</div>
+<div class="flex flex-col items-center text-on-surface-variant"><span class="material-symbols-outlined">favorite</span><span class="text-[10px]">Wishlist</span></div>
+<div class="flex flex-col items-center text-on-surface-variant"><span class="material-symbols-outlined">person</span><span class="text-[10px]">Profile</span></div>
+</nav>
+</div>
+<!-- DARK THEME MOBILE FRAME -->
+<div class="relative w-[390px] h-[844px] bg-[#0F172A] rounded-[3rem] shadow-2xl overflow-hidden border-8 border-slate-800 flex flex-col shrink-0">
+<!-- Top App Bar -->
+<header class="flex items-center justify-between px-lg h-16 w-full bg-[#0F172A] border-b border-[#334155]">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-white">arrow_back</span>
+<h1 class="font-headline-md text-headline-md font-semibold text-white">My Orders</h1>
+</div>
+<span class="material-symbols-outlined text-white">search</span>
+</header>
+<!-- Filter Tabs -->
+<div class="flex overflow-x-auto no-scrollbar px-lg py-md gap-lg bg-[#0F172A] border-b border-[#334155]">
+<button class="shrink-0 font-label-lg text-label-lg text-[#14B8A6] border-b-2 border-[#14B8A6] pb-1">All</button>
+<button class="shrink-0 font-label-lg text-label-lg text-[#94A3B8] pb-1">Active</button>
+<button class="shrink-0 font-label-lg text-label-lg text-[#94A3B8] pb-1">Completed</button>
+<button class="shrink-0 font-label-lg text-label-lg text-[#94A3B8] pb-1">Cancelled</button>
+</div>
+<!-- Scrollable Content -->
+<main class="flex-1 overflow-y-auto px-lg py-2xl space-y-lg bg-[#0F172A]">
+<!-- Order Card 1: Active -->
+<div class="bg-[#1E293B] rounded-2xl p-lg border border-[#334155] space-y-md">
+<div class="flex justify-between items-start">
+<div>
+<p class="font-title-lg text-title-lg text-[#F1F5F9]">#ORD-12345</p>
+<p class="font-body-md text-body-md text-[#94A3B8]">June 1, 2026</p>
+</div>
+<div class="bg-[#A78BFA] px-sm py-xs rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-white" style="font-variation-settings: 'FILL' 1;">local_shipping</span>
+<span class="text-[11px] font-bold text-white uppercase tracking-wider">Shipped</span>
+</div>
+</div>
+<div class="flex gap-sm">
+<img alt="Shoes" class="w-14 h-14 rounded-lg object-cover brightness-90" data-alt="Macro photography of a red sneakers highlighting technical mesh details. Low-key dramatic lighting in a dark room creates deep shadows and vibrant highlights, perfectly suited for a premium dark-mode interface. The aesthetic is edgy, professional, and athletic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUqtfC2lYMt0wBT4WJWjNF_BpyO2cwyWpFi5r9D2ZyNdqoZfLBhu9qYi1AVkOYj6F_KtZ8uZTzENEj4T1oBIbn6Wlt6NM4nwuIw7assXz8hbdnHPxqgpUwF3RcJiI820A68xrU1-wRW_mNaAYxG1887sgQsjvdtxiH8ttvRY3wFYR7LRJYn8YKwr-DrKgo7Uico1NtyNldLAD7hx-IksEzn9ehIQBjk8UENBsq44-70hVG4RuwYh_JrKIt-zT0QMpmMO0pDvLXmCM">
+<img alt="Watch" class="w-14 h-14 rounded-lg object-cover brightness-90" data-alt="A modern smartwatch with a dark titanium finish captured in a moody dark-room studio environment. Subtle rim lighting accentuates the sleek edges of the watch face. The color palette is composed of deep navies and charcoal grays, creating a luxurious and high-end tech feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuALKqHSNwtOuJO_7FQHXTl7txvSYeAJo9SoT5-IyrcP3Plqi7cFJxt4AmwENnYM6hhyxycGCsvwSDPaI7tLeuThFTVl8QcDFM75pN-QTB5slmf5GEq2r-f0A-6qSvQwUw0HU9SC2FTQxRfGXuLtjLwImlY9120GWeZ2U08_v6WeP1f7Ldm0hSANBiLdQlasBQKmZUNjAW-5I_CQOBI5V4rsdCl2UXWDUoAG5_afXLfP1CQu0wxxobH2AcL_GYwkfxMdrHHQntIVIdE">
+<div class="w-14 h-14 rounded-lg bg-[#334155] flex items-center justify-center font-label-md text-[#94A3B8]">+1</div>
+</div>
+<div class="space-y-xs">
+<div class="flex justify-between items-end">
+<span class="font-body-md text-body-md text-[#94A3B8]">Progress</span>
+<span class="font-label-md text-label-md text-[#F1F5F9]">60%</span>
+</div>
+<div class="h-1.5 w-full bg-[#334155] rounded-full overflow-hidden">
+<div class="h-full bg-[#14B8A6] w-[60%]"></div>
+</div>
+</div>
+<div class="flex justify-between items-center pt-sm">
+<p class="font-headline-md text-headline-md text-[#F1F5F9]">₹2,197</p>
+<button class="px-lg py-sm rounded-full border border-[#14B8A6] text-[#14B8A6] font-label-lg text-label-lg active:scale-95 transition-transform">Track Order</button>
+</div>
+</div>
+<!-- Order Card 2: Delivered -->
+<div class="bg-[#1E293B] rounded-2xl p-lg border border-[#334155] space-y-md">
+<div class="flex justify-between items-start">
+<div>
+<p class="font-title-lg text-title-lg text-[#F1F5F9]">#ORD-12340</p>
+<p class="font-body-md text-body-md text-[#94A3B8]">May 28, 2026</p>
+</div>
+<div class="bg-[#34D399] px-sm py-xs rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-white" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-[11px] font-bold text-white uppercase tracking-wider">Delivered</span>
+</div>
+</div>
+<div class="flex gap-sm">
+<img alt="Headphones" class="w-14 h-14 rounded-lg object-cover brightness-90" data-alt="High-end wireless headphones with dark leather ear cushions and a matte black headband. The lighting is cinematic and moody, emphasizing the premium textures. The background is a dark, soft-focus studio setting, maintaining a consistent dark-theme aesthetic for high-end luxury products." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAx9mX4WhPr9uw0yKs3TM45074jVm8-KlyUi-WMo-anamEc7mcNTNBVr1zMgra42DzXnnTDG-ySa3VqnXDUqTnJ_6O8K1Up_AYT-qiVMQusCcPb1HeR98-d5at8J5_lRfFKuTXYXkearPwrrwuHXH2eZQ3ENyGF8Zfq0uTD7vvbLLTnrnkABNdiAezKxpY3W4uV99pWOkt1NjV4_3fl9RwqjuKHIN_rerQw4AE75meo-FgpSCBXccgNPP9HfzlKcWcEPZTwthiABcA">
+</div>
+<div class="flex justify-between items-center pt-sm border-t border-[#334155] mt-sm">
+<p class="font-headline-md text-headline-md text-[#F1F5F9]">₹4,500</p>
+<div class="flex gap-sm">
+<button class="px-md py-sm rounded-full font-label-lg text-label-lg text-[#94A3B8] active:opacity-70 transition-opacity">Rate</button>
+<button class="px-lg py-sm rounded-full bg-[#14B8A6] text-[#0F172A] font-extrabold text-label-lg active:scale-95 transition-transform">Reorder</button>
+</div>
+</div>
+</div>
+<!-- Order Card 3: Cancelled -->
+<div class="bg-[#1E293B] rounded-2xl p-lg border border-[#334155] opacity-60">
+<div class="flex justify-between items-start">
+<div>
+<p class="font-title-lg text-title-lg text-[#F1F5F9]">#ORD-12335</p>
+<p class="font-body-md text-body-md text-[#94A3B8]">May 20, 2026</p>
+</div>
+<div class="bg-[#F87171] px-sm py-xs rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-white" style="font-variation-settings: 'FILL' 1;">cancel</span>
+<span class="text-[11px] font-bold text-white uppercase tracking-wider">Cancelled</span>
+</div>
+</div>
+<p class="mt-md font-headline-md text-headline-md text-[#F1F5F9]">₹1,250</p>
+</div>
+</main>
+<!-- Bottom Nav Bar -->
+<nav class="bg-[#0F172A]/80 backdrop-blur-md border-t border-[#334155] h-20 w-full flex justify-around items-center px-lg">
+<div class="flex flex-col items-center text-[#94A3B8]"><span class="material-symbols-outlined">home</span><span class="text-[10px]">Home</span></div>
+<div class="flex flex-col items-center text-[#94A3B8]"><span class="material-symbols-outlined">search</span><span class="text-[10px]">Shop</span></div>
+<div class="flex flex-col items-center text-[#14B8A6] relative after:content-[''] after:absolute after:-bottom-1 after:w-1 after:h-1 after:bg-[#14B8A6] after:rounded-full">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">receipt_long</span>
+<span class="text-[10px]">Orders</span>
+</div>
+<div class="flex flex-col items-center text-[#94A3B8]"><span class="material-symbols-outlined">favorite</span><span class="text-[10px]">Wishlist</span></div>
+<div class="flex flex-col items-center text-[#94A3B8]"><span class="material-symbols-outlined">person</span><span class="text-[10px]">Profile</span></div>
+</nav>
+</div>
+<script>
+        // Simple ripple-like effect on button clicks for micro-interaction
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const x = e.clientX - e.target.offsetLeft;
+                const y = e.clientY - e.target.offsetTop;
+                
+                let ripples = document.createElement('span');
+                ripples.style.left = x + 'px';
+                ripples.style.top = y + 'px';
+                this.appendChild(ripples);
+
+                setTimeout(() => {
+                    ripples.remove();
+                }, 1000);
+            });
+        });
+    </script>
+</body></html>

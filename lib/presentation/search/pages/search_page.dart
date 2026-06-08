@@ -1,11 +1,13 @@
 import 'package:e_commerce_application/common/bloc/product/product_display_cubit.dart';
 import 'package:e_commerce_application/common/bloc/product/product_display_state.dart';
-import 'package:e_commerce_application/common/widgets/appbar/app_bar.dart';
 import 'package:e_commerce_application/common/widgets/product/product_card.dart';
 import 'package:e_commerce_application/core/configs/assets/app_vectors.dart';
 import 'package:e_commerce_application/domain/product/entity/product_entity.dart';
+import 'package:e_commerce_application/domain/product/usecase/get_newin_usecase.dart';
 import 'package:e_commerce_application/domain/product/usecase/get_products_by_title.dart';
+import 'package:e_commerce_application/domain/product/usecase/get_topselling_usecase.dart';
 import 'package:e_commerce_application/presentation/search/widgets/search_field.dart';
+import 'package:e_commerce_application/presentation/wishlist/bloc/wishlist_cubit.dart';
 import 'package:e_commerce_application/service_locator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -18,26 +20,54 @@ class SearchPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) =>
-          ProductsDisplayCubit(useCase: sl<GetProductsByTitleUseCase>()),
-      child: Scaffold(
-        appBar: BasicAppbar(
-          height: 80,
-          title: SearchField(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) =>
+              ProductsDisplayCubit(useCase: sl<GetProductsByTitleUseCase>()),
         ),
-        body: BlocBuilder<ProductsDisplayCubit, ProductsDisplayState>(
-          builder: (context, state) {
-            if (state is ProductsLoading) {
-              return const Center(child: CupertinoActivityIndicator());
-            }
-            if (state is ProductsLoaded) {
-              return state.products.isEmpty
-                  ? _notFound()
-                  : _products(state.products);
-            }
-            return Container();
-          },
+        BlocProvider(
+          create: (context) =>
+              ProductsDisplayCubit(useCase: sl<GetTopSellingUseCase>())
+                ..displayProducts(),
+        ),
+        BlocProvider(
+          create: (context) =>
+              ProductsDisplayCubit(useCase: sl<GetNewInUseCase>())
+                ..displayProducts(),
+        ),
+        BlocProvider(
+          create: (context) => WishlistCubit()..loadWishlist(),
+        ),
+      ],
+      child: Scaffold(
+        body: SafeArea(
+          child: Column(
+            children: [
+              SizedBox(
+                height: 15.h,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SearchField(),
+              ),
+              Expanded(
+                child: BlocBuilder<ProductsDisplayCubit, ProductsDisplayState>(
+                  builder: (context, state) {
+                    if (state is ProductsLoading) {
+                      return const Center(child: CupertinoActivityIndicator());
+                    }
+                    if (state is ProductsLoaded) {
+                      return state.products.isEmpty
+                          ? _notFound()
+                          : _products(state.products);
+                    }
+                    return Container();
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LuxeShop Onboarding - Light &amp; Dark Comparison</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-primary-fixed": "#22005d",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "on-surface-variant": "#494551",
+                        "secondary-fixed": "#e9ddff",
+                        "outline-variant": "#cbc4d2",
+                        "on-tertiary-fixed-variant": "#594400",
+                        "on-primary-fixed-variant": "#4f378a",
+                        "surface-container-high": "#ece6ee",
+                        "secondary": "#63597c",
+                        "surface-dim": "#ded8e0",
+                        "tertiary-fixed-dim": "#e7c365",
+                        "error": "#ba1a1a",
+                        "on-primary-container": "#e0d2ff",
+                        "tertiary-container": "#c9a74d",
+                        "on-secondary-container": "#645a7d",
+                        "on-secondary": "#ffffff",
+                        "inverse-primary": "#cfbcff",
+                        "on-error-container": "#93000a",
+                        "surface-variant": "#e6e0e9",
+                        "surface-tint": "#6750a4",
+                        "primary-fixed-dim": "#cfbcff",
+                        "surface-container-highest": "#e6e0e9",
+                        "outline": "#7a7582",
+                        "surface": "#fdf7ff",
+                        "inverse-on-surface": "#f5eff7",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed": "#241a00",
+                        "on-tertiary-container": "#503d00",
+                        "on-secondary-fixed": "#1f1635",
+                        "on-background": "#1d1b20",
+                        "surface-container-low": "#f8f2fa",
+                        "tertiary": "#765b00",
+                        "primary": "#4f378a",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed": "#ffdf93",
+                        "primary-fixed": "#e9ddff",
+                        "on-secondary-fixed-variant": "#4b4263",
+                        "secondary-container": "#e1d4fd",
+                        "background": "#fdf7ff",
+                        "secondary-fixed-dim": "#cdc0e9",
+                        "primary-container": "#6750a4",
+                        "inverse-surface": "#322f35",
+                        "on-error": "#ffffff",
+                        "on-surface": "#1d1b20",
+                        "surface-bright": "#fdf7ff",
+                        "surface-container": "#f2ecf4",
+                        "brand-teal": "#14B8A6",
+                        "dark-bg": "#0F172A",
+                        "dark-text": "#F1F5F9"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "3xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "4xl": "40px",
+                        "sm": "8px",
+                        "2xl": "24px",
+                        "xl": "20px",
+                        "3xl": "32px",
+                        "md": "12px",
+                        "lg": "16px",
+                        "5xl": "48px",
+                        "xs": "4px"
+                    },
+                    fontFamily: {
+                        "sans": ["Poppins", "sans-serif"]
+                    },
+                    fontSize: {
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "caption": ["11px", {"lineHeight": "14px", "fontWeight": "400"}],
+                        "title-lg": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "600"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Poppins', sans-serif; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-surface-container-low dark:bg-dark-bg text-on-surface dark:text-dark-text transition-colors duration-500">
+<div class="max-w-7xl mx-auto py-5xl px-lg">
+<!-- Light Theme Section -->
+<section class="mb-5xl">
+<div class="flex items-center gap-md mb-2xl">
+<span class="material-symbols-outlined text-primary text-headline-lg">light_mode</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Light Theme Onboarding</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-2xl">
+<!-- Screen 1 Light -->
+<div class="bg-surface border border-outline-variant rounded-3xl p-2xl flex flex-col items-center text-center shadow-sm relative overflow-hidden min-h-[600px] justify-between">
+<div class="w-full h-72 flex items-center justify-center mb-xl">
+<img alt="Discover Amazing Products Illustration" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOQD1eIA5rxMAHEIWMjDIsHhfylSnQK8HGng6y9saOQrzRSxp4q8_vazTTlhoYwuRKrLAIoSe_d3asgt1TthgzP79LW8IhLW7uybO6LPQrCHX8oCDymO5vrfjNmNeHnXp48xfGgERMA0-GKgbh2oo2I6JOXjSPy4L45EEJRqwWT2SvznMjiFmFgl4g1ScdgbW8JzrDudjNmUV8WcTYwnNiEAyH_5seTIJwhGftrPDUokVW50N4tZio7URxNhUSgbKJuq-P6l9XDD8"/>
+</div>
+<div class="space-y-md">
+<h3 class="font-headline-md text-headline-md text-on-background">Discover Amazing Products</h3>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-[260px] mx-auto">Browse thousands of products from top categories</p>
+</div>
+<div class="flex gap-sm mt-3xl">
+<div class="h-2 w-8 rounded-full bg-primary"></div>
+<div class="h-2 w-2 rounded-full bg-outline-variant"></div>
+<div class="h-2 w-2 rounded-full bg-outline-variant"></div>
+</div>
+<div class="w-full flex justify-end mt-xl">
+<button class="text-primary font-label-lg px-lg py-sm hover:bg-primary/10 rounded-xl transition-colors">Skip</button>
+</div>
+</div>
+<!-- Screen 2 Light -->
+<div class="bg-surface border border-outline-variant rounded-3xl p-2xl flex flex-col items-center text-center shadow-sm relative overflow-hidden min-h-[600px] justify-between">
+<div class="w-full h-72 flex items-center justify-center mb-xl">
+<img alt="Seamless Checkout Illustration" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFks6jJghTqdR96VB54Oe1-7Jby9yUgbI05fc9D6h9HCv4UrO5XLMIESgnzZcRsbT-zVaZoI0I-VFXO_-X1dNStFfWcWq3zipHAyOZQb7Iee9tz_6Fhu56EdCWSi0mjD5G0_SU0A7TGBaheT0USXc8Ya-Q91X96y_I6gEsLc87ZuwPnLzb3OI8KpQPFh3yUutkKgn7r0b2AcJ_9RnHIg8U4WCPpgxfFBrWBqWDzjVWolr79GwpFOr0NZIbUwDzpamHZoSFDiHDz8s"/>
+</div>
+<div class="space-y-md">
+<h3 class="font-headline-md text-headline-md text-on-background">Seamless Checkout</h3>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-[260px] mx-auto">Apply coupons, save addresses, and pay securely</p>
+</div>
+<div class="flex gap-sm mt-3xl">
+<div class="h-2 w-2 rounded-full bg-outline-variant"></div>
+<div class="h-2 w-8 rounded-full bg-primary"></div>
+<div class="h-2 w-2 rounded-full bg-outline-variant"></div>
+</div>
+<div class="w-full flex justify-end mt-xl">
+<button class="text-primary font-label-lg px-lg py-sm hover:bg-primary/10 rounded-xl transition-colors">Skip</button>
+</div>
+</div>
+<!-- Screen 3 Light -->
+<div class="bg-surface border border-outline-variant rounded-3xl p-2xl flex flex-col items-center text-center shadow-sm relative overflow-hidden min-h-[600px] justify-between">
+<div class="w-full h-72 flex items-center justify-center mb-xl">
+<img alt="Track Your Orders Illustration" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPOFwltEJnRrwlFK58Jf00dx40i1rrh52fEfJcd7RAf5f2lxI3pcoaITSKsGKCoJWMiHL7KhlXwmA_NeCAndFI_uZZAGdSirAO-irdTuPfrNFch9cAb-dPHLpdQGQIAeuXvpF2PBeAu931aFiyk4ddrWWIRhGoRucBEhaMxzyKv2VL6COFDhuM2IgoLYKvMXicAfSFNN1jhQLCHUX98h5SkKaJOvPG-zOT5z57tHjmFqENOAqFNvHfT6ne56PEgWFG4rMDeTOr9ds"/>
+</div>
+<div class="space-y-md">
+<h3 class="font-headline-md text-headline-md text-on-background">Track Your Orders</h3>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-[260px] mx-auto">Real-time order tracking from placement to delivery</p>
+</div>
+<div class="flex gap-sm mt-3xl">
+<div class="h-2 w-2 rounded-full bg-outline-variant"></div>
+<div class="h-2 w-2 rounded-full bg-outline-variant"></div>
+<div class="h-2 w-8 rounded-full bg-primary"></div>
+</div>
+<div class="w-full mt-xl">
+<button class="w-full bg-primary text-on-primary font-label-lg py-md rounded-2xl shadow-lg shadow-primary/20 active:scale-95 transition-all">Get Started</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Dark Theme Section -->
+<section class="mt-5xl">
+<div class="flex items-center gap-md mb-2xl">
+<span class="material-symbols-outlined text-brand-teal text-headline-lg">dark_mode</span>
+<h2 class="font-headline-lg text-headline-lg text-dark-text">Dark Theme Onboarding</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-2xl">
+<!-- Screen 1 Dark -->
+<div class="bg-slate-900 border border-slate-800 rounded-3xl p-2xl flex flex-col items-center text-center relative overflow-hidden min-h-[600px] justify-between">
+<div class="w-full h-72 flex items-center justify-center mb-xl">
+<img alt="Discover Amazing Products Illustration" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOQD1eIA5rxMAHEIWMjDIsHhfylSnQK8HGng6y9saOQrzRSxp4q8_vazTTlhoYwuRKrLAIoSe_d3asgt1TthgzP79LW8IhLW7uybO6LPQrCHX8oCDymO5vrfjNmNeHnXp48xfGgERMA0-GKgbh2oo2I6JOXjSPy4L45EEJRqwWT2SvznMjiFmFgl4g1ScdgbW8JzrDudjNmUV8WcTYwnNiEAyH_5seTIJwhGftrPDUokVW50N4tZio7URxNhUSgbKJuq-P6l9XDD8"/>
+</div>
+<div class="space-y-md">
+<h3 class="font-headline-md text-headline-md text-dark-text">Discover Amazing Products</h3>
+<p class="font-body-lg text-body-lg text-slate-400 max-w-[260px] mx-auto">Browse thousands of products from top categories</p>
+</div>
+<div class="flex gap-sm mt-3xl">
+<div class="h-2 w-8 rounded-full bg-brand-teal"></div>
+<div class="h-2 w-2 rounded-full bg-slate-700"></div>
+<div class="h-2 w-2 rounded-full bg-slate-700"></div>
+</div>
+<div class="w-full flex justify-end mt-xl">
+<button class="text-brand-teal font-label-lg px-lg py-sm hover:bg-brand-teal/10 rounded-xl transition-colors">Skip</button>
+</div>
+</div>
+<!-- Screen 2 Dark -->
+<div class="bg-slate-900 border border-slate-800 rounded-3xl p-2xl flex flex-col items-center text-center relative overflow-hidden min-h-[600px] justify-between">
+<div class="w-full h-72 flex items-center justify-center mb-xl">
+<img alt="Seamless Checkout Illustration" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFks6jJghTqdR96VB54Oe1-7Jby9yUgbI05fc9D6h9HCv4UrO5XLMIESgnzZcRsbT-zVaZoI0I-VFXO_-X1dNStFfWcWq3zipHAyOZQb7Iee9tz_6Fhu56EdCWSi0mjD5G0_SU0A7TGBaheT0USXc8Ya-Q91X96y_I6gEsLc87ZuwPnLzb3OI8KpQPFh3yUutkKgn7r0b2AcJ_9RnHIg8U4WCPpgxfFBrWBqWDzjVWolr79GwpFOr0NZIbUwDzpamHZoSFDiHDz8s"/>
+</div>
+<div class="space-y-md">
+<h3 class="font-headline-md text-headline-md text-dark-text">Seamless Checkout</h3>
+<p class="font-body-lg text-body-lg text-slate-400 max-w-[260px] mx-auto">Apply coupons, save addresses, and pay securely</p>
+</div>
+<div class="flex gap-sm mt-3xl">
+<div class="h-2 w-2 rounded-full bg-slate-700"></div>
+<div class="h-2 w-8 rounded-full bg-brand-teal"></div>
+<div class="h-2 w-2 rounded-full bg-slate-700"></div>
+</div>
+<div class="w-full flex justify-end mt-xl">
+<button class="text-brand-teal font-label-lg px-lg py-sm hover:bg-brand-teal/10 rounded-xl transition-colors">Skip</button>
+</div>
+</div>
+<!-- Screen 3 Dark -->
+<div class="bg-slate-900 border border-slate-800 rounded-3xl p-2xl flex flex-col items-center text-center relative overflow-hidden min-h-[600px] justify-between">
+<div class="w-full h-72 flex items-center justify-center mb-xl">
+<img alt="Track Your Orders Illustration" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPOFwltEJnRrwlFK58Jf00dx40i1rrh52fEfJcd7RAf5f2lxI3pcoaITSKsGKCoJWMiHL7KhlXwmA_NeCAndFI_uZZAGdSirAO-irdTuPfrNFch9cAb-dPHLpdQGQIAeuXvpF2PBeAu931aFiyk4ddrWWIRhGoRucBEhaMxzyKv2VL6COFDhuM2IgoLYKvMXicAfSFNN1jhQLCHUX98h5SkKaJOvPG-zOT5z57tHjmFqENOAqFNvHfT6ne56PEgWFG4rMDeTOr9ds"/>
+</div>
+<div class="space-y-md">
+<h3 class="font-headline-md text-headline-md text-dark-text">Track Your Orders</h3>
+<p class="font-body-lg text-body-lg text-slate-400 max-w-[260px] mx-auto">Real-time order tracking from placement to delivery</p>
+</div>
+<div class="flex gap-sm mt-3xl">
+<div class="h-2 w-2 rounded-full bg-slate-700"></div>
+<div class="h-2 w-2 rounded-full bg-slate-700"></div>
+<div class="h-2 w-8 rounded-full bg-brand-teal"></div>
+</div>
+<div class="w-full mt-xl">
+<button class="w-full bg-brand-teal text-slate-900 font-label-lg py-md rounded-2xl shadow-lg shadow-brand-teal/20 active:scale-95 transition-all">Get Started</button>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Floating UI Toggle for demo purposes -->
+<div class="fixed bottom-lg right-lg z-50">
+<button class="bg-white dark:bg-slate-800 p-md rounded-full shadow-2xl border border-outline-variant dark:border-slate-700 flex items-center gap-sm" id="themeToggle">
+<span class="material-symbols-outlined dark:hidden">dark_mode</span>
+<span class="material-symbols-outlined hidden dark:inline">light_mode</span>
+<span class="font-label-lg hidden sm:inline">Switch Theme</span>
+</button>
+</div>
+<script>
+        const themeToggle = document.getElementById('themeToggle');
+        themeToggle.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+        });
+
+        // Add some micro-animations to elements on scroll
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-8');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.rounded-3xl').forEach(card => {
+            card.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-8');
+            observer.observe(card);
+        });
+    </script>
+</body></html>

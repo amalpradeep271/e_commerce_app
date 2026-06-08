@@ -1,0 +1,345 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary": "#ffffff",
+                        "surface-container-high": "#ece6ee",
+                        "primary-container": "#6750a4",
+                        "inverse-on-surface": "#f5eff7",
+                        "tertiary-fixed-dim": "#e7c365",
+                        "surface": "#fdf7ff",
+                        "primary": "#4f378a",
+                        "on-primary": "#ffffff",
+                        "background": "#fdf7ff",
+                        "on-background": "#1d1b20",
+                        "on-surface": "#1d1b20",
+                        "on-surface-variant": "#494551",
+                        "outline": "#7a7582",
+                        "outline-variant": "#cbc4d2",
+                        "secondary": "#63597c",
+                        "error": "#ba1a1a",
+                        "brand-teal": "#0F766E",
+                        "brand-teal-dark": "#14B8A6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "16px",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "sm": "8px",
+                        "md": "12px",
+                        "lg": "16px",
+                        "xl": "20px",
+                        "2xl": "24px",
+                        "3xl": "32px",
+                        "4xl": "40px"
+                    },
+                    "fontFamily": {
+                        "sans": ['Be Vietnam Pro', 'sans-serif'],
+                        "display": ['Be Vietnam Pro', 'sans-serif']
+                    },
+                    "fontSize": {
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "title-lg": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "600"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Be Vietnam Pro', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-slate-100 dark:bg-slate-900 min-h-screen p-8 flex flex-col md:flex-row items-start justify-center gap-12 overflow-x-auto">
+<!-- LIGHT THEME MOCKUP (390x844) -->
+<div class="relative w-[390px] h-[844px] bg-white text-slate-900 shadow-2xl rounded-[3rem] border-[8px] border-slate-800 overflow-hidden flex-shrink-0">
+<!-- Status Bar -->
+<div class="h-10 flex items-center justify-between px-8 pt-4">
+<span class="text-sm font-semibold">9:41</span>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm">signal_cellular_4_bar</span>
+<span class="material-symbols-outlined text-sm">wifi</span>
+<span class="material-symbols-outlined text-sm">battery_full</span>
+</div>
+</div>
+<!-- App Bar -->
+<header class="flex items-center justify-between px-lg h-16 w-full border-b border-outline-variant">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface cursor-pointer">arrow_back</span>
+<h1 class="font-title-lg text-title-lg text-on-surface">My Addresses</h1>
+</div>
+<button class="bg-brand-teal/10 text-brand-teal px-4 py-1.5 rounded-full font-label-lg hover:opacity-80 transition-opacity active:scale-95">
+                Add New
+            </button>
+</header>
+<!-- Scrollable Content -->
+<main class="h-[calc(844px-112px-80px)] overflow-y-auto px-lg py-2xl space-y-lg hide-scrollbar">
+<!-- Address Card 1 (Home - Default) -->
+<div class="p-lg rounded-2xl bg-white border border-outline-variant shadow-sm relative group transition-all hover:shadow-md">
+<div class="flex justify-between items-start mb-md">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-brand-teal" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-lg text-brand-teal">Home</span>
+<span class="ml-2 px-2 py-0.5 bg-green-100 text-green-700 text-[10px] font-bold rounded uppercase tracking-wider">Default</span>
+</div>
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-brand-teal cursor-pointer">edit</span>
+<span class="material-symbols-outlined text-red-500 cursor-pointer">delete</span>
+</div>
+</div>
+<div class="space-y-1">
+<p class="font-label-lg text-slate-900">John Doe</p>
+<p class="font-body-md text-slate-500 leading-relaxed">123 Main Street, Apartment 4B,<br>Kochi, Kerala 682001</p>
+<p class="font-body-md text-slate-500 mt-2">+91 9876543210</p>
+</div>
+</div>
+<!-- Address Card 2 (Work) -->
+<div class="p-lg rounded-2xl bg-white border border-outline-variant shadow-sm relative group transition-all hover:shadow-md">
+<div class="flex justify-between items-start mb-md">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-400">work</span>
+<span class="font-label-lg text-slate-700">Work</span>
+</div>
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-brand-teal cursor-pointer">edit</span>
+<span class="material-symbols-outlined text-red-500 cursor-pointer">delete</span>
+</div>
+</div>
+<div class="space-y-1 mb-md">
+<p class="font-label-lg text-slate-900">John Doe</p>
+<p class="font-body-md text-slate-500 leading-relaxed">Infopark Phase II, SEZ Unit,<br>Kakkanad, Kochi 682030</p>
+<p class="font-body-md text-slate-500 mt-2">+91 9876543210</p>
+</div>
+<button class="text-brand-teal font-label-lg hover:underline transition-all">Set as Default</button>
+</div>
+<!-- Mini Form Section -->
+<div class="mt-4xl pt-4xl border-t border-dashed border-outline-variant">
+<h2 class="font-headline-md text-headline-md mb-lg">Add New Address</h2>
+<div class="space-y-lg">
+<div class="flex gap-sm">
+<div class="px-lg py-sm rounded-full bg-brand-teal text-white font-label-lg">Home</div>
+<div class="px-lg py-sm rounded-full bg-slate-100 text-slate-600 font-label-lg">Work</div>
+<div class="px-lg py-sm rounded-full bg-slate-100 text-slate-600 font-label-lg">Other</div>
+</div>
+<div class="space-y-md">
+<input class="w-full h-12 px-lg rounded-2xl border border-outline-variant focus:border-brand-teal focus:ring-1 focus:ring-brand-teal outline-none transition-all placeholder:text-slate-400 font-body-md" placeholder="Full Name" type="text">
+<input class="w-full h-12 px-lg rounded-2xl border border-outline-variant focus:border-brand-teal focus:ring-1 focus:ring-brand-teal outline-none transition-all placeholder:text-slate-400 font-body-md" placeholder="Phone" type="tel">
+<input class="w-full h-12 px-lg rounded-2xl border border-outline-variant focus:border-brand-teal focus:ring-1 focus:ring-brand-teal outline-none transition-all placeholder:text-slate-400 font-body-md" placeholder="Address Line 1" type="text">
+<div class="flex gap-md">
+<input class="flex-1 h-12 px-lg rounded-2xl border border-outline-variant focus:border-brand-teal focus:ring-1 focus:ring-brand-teal outline-none transition-all placeholder:text-slate-400 font-body-md" placeholder="City" type="text">
+<input class="w-1/3 h-12 px-lg rounded-2xl border border-outline-variant focus:border-brand-teal focus:ring-1 focus:ring-brand-teal outline-none transition-all placeholder:text-slate-400 font-body-md" placeholder="Pin Code" type="text">
+</div>
+</div>
+<div class="flex items-center gap-2 px-1">
+<input class="w-5 h-5 rounded border-outline-variant text-brand-teal focus:ring-brand-teal" id="default-light" type="checkbox">
+<label class="font-label-lg text-slate-600" for="default-light">Set as default</label>
+</div>
+<button class="w-full h-14 bg-brand-teal text-white rounded-2xl font-label-lg active:scale-[0.98] transition-transform shadow-lg shadow-brand-teal/20">
+                        Save Address
+                    </button>
+</div>
+</div>
+</main>
+<!-- Bottom Nav -->
+<nav class="absolute bottom-0 w-full h-20 bg-white/80 backdrop-blur-md border-t border-outline-variant flex justify-around items-center px-lg pb-safe">
+<div class="flex flex-col items-center text-slate-400">
+<span class="material-symbols-outlined">storefront</span>
+<span class="text-[10px] font-medium mt-1">Shop</span>
+</div>
+<div class="flex flex-col items-center text-slate-400">
+<span class="material-symbols-outlined">favorite</span>
+<span class="text-[10px] font-medium mt-1">Wishlist</span>
+</div>
+<div class="flex flex-col items-center text-slate-400">
+<span class="material-symbols-outlined">shopping_bag</span>
+<span class="text-[10px] font-medium mt-1">Cart</span>
+</div>
+<div class="flex flex-col items-center text-brand-teal font-bold">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="text-[10px] mt-1">Profile</span>
+</div>
+</nav>
+</div>
+<!-- DARK THEME MOCKUP (390x844) -->
+<div class="relative w-[390px] h-[844px] bg-[#0F172A] text-[#F1F5F9] shadow-2xl rounded-[3rem] border-[8px] border-slate-800 overflow-hidden flex-shrink-0">
+<!-- Status Bar -->
+<div class="h-10 flex items-center justify-between px-8 pt-4">
+<span class="text-sm font-semibold">9:41</span>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm">signal_cellular_4_bar</span>
+<span class="material-symbols-outlined text-sm">wifi</span>
+<span class="material-symbols-outlined text-sm">battery_full</span>
+</div>
+</div>
+<!-- App Bar -->
+<header class="flex items-center justify-between px-lg h-16 w-full border-b border-[#334155]">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#F1F5F9] cursor-pointer">arrow_back</span>
+<h1 class="font-title-lg text-title-lg text-[#F1F5F9]">My Addresses</h1>
+</div>
+<button class="bg-brand-teal-dark/20 text-brand-teal-dark px-4 py-1.5 rounded-full font-label-lg hover:opacity-80 transition-opacity active:scale-95">
+                Add New
+            </button>
+</header>
+<!-- Scrollable Content -->
+<main class="h-[calc(844px-112px-80px)] overflow-y-auto px-lg py-2xl space-y-lg hide-scrollbar">
+<!-- Address Card 1 (Home - Default) -->
+<div class="p-lg rounded-2xl bg-[#1E293B] border border-[#334155] relative group transition-all hover:bg-[#243147]">
+<div class="flex justify-between items-start mb-md">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-brand-teal-dark" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-lg text-brand-teal-dark">Home</span>
+<span class="ml-2 px-2 py-0.5 bg-green-500/20 text-green-400 text-[10px] font-bold rounded uppercase tracking-wider">Default</span>
+</div>
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-brand-teal-dark cursor-pointer">edit</span>
+<span class="material-symbols-outlined text-red-400 cursor-pointer">delete</span>
+</div>
+</div>
+<div class="space-y-1">
+<p class="font-label-lg text-[#F1F5F9]">John Doe</p>
+<p class="font-body-md text-[#94A3B8] leading-relaxed">123 Main Street, Apartment 4B,<br>Kochi, Kerala 682001</p>
+<p class="font-body-md text-[#94A3B8] mt-2">+91 9876543210</p>
+</div>
+</div>
+<!-- Address Card 2 (Work) -->
+<div class="p-lg rounded-2xl bg-[#1E293B] border border-[#334155] relative group transition-all hover:bg-[#243147]">
+<div class="flex justify-between items-start mb-md">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-500">work</span>
+<span class="font-label-lg text-slate-300">Work</span>
+</div>
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-brand-teal-dark cursor-pointer">edit</span>
+<span class="material-symbols-outlined text-red-400 cursor-pointer">delete</span>
+</div>
+</div>
+<div class="space-y-1 mb-md">
+<p class="font-label-lg text-[#F1F5F9]">John Doe</p>
+<p class="font-body-md text-[#94A3B8] leading-relaxed">Infopark Phase II, SEZ Unit,<br>Kakkanad, Kochi 682030</p>
+<p class="font-body-md text-[#94A3B8] mt-2">+91 9876543210</p>
+</div>
+<button class="text-brand-teal-dark font-label-lg hover:underline transition-all">Set as Default</button>
+</div>
+<!-- Mini Form Section -->
+<div class="mt-4xl pt-4xl border-t border-dashed border-[#334155]">
+<h2 class="font-headline-md text-headline-md mb-lg">Add New Address</h2>
+<div class="space-y-lg">
+<div class="flex gap-sm">
+<div class="px-lg py-sm rounded-full bg-brand-teal-dark text-[#0F172A] font-bold font-label-lg">Home</div>
+<div class="px-lg py-sm rounded-full bg-slate-800 text-slate-400 font-label-lg">Work</div>
+<div class="px-lg py-sm rounded-full bg-slate-800 text-slate-400 font-label-lg">Other</div>
+</div>
+<div class="space-y-md">
+<input class="w-full h-12 px-lg rounded-2xl bg-[#1E293B] border border-[#334155] text-white focus:border-brand-teal-dark focus:ring-1 focus:ring-brand-teal-dark outline-none transition-all placeholder:text-slate-500 font-body-md" placeholder="Full Name" type="text">
+<input class="w-full h-12 px-lg rounded-2xl bg-[#1E293B] border border-[#334155] text-white focus:border-brand-teal-dark focus:ring-1 focus:ring-brand-teal-dark outline-none transition-all placeholder:text-slate-500 font-body-md" placeholder="Phone" type="tel">
+<input class="w-full h-12 px-lg rounded-2xl bg-[#1E293B] border border-[#334155] text-white focus:border-brand-teal-dark focus:ring-1 focus:ring-brand-teal-dark outline-none transition-all placeholder:text-slate-500 font-body-md" placeholder="Address Line 1" type="text">
+<div class="flex gap-md">
+<input class="flex-1 h-12 px-lg rounded-2xl bg-[#1E293B] border border-[#334155] text-white focus:border-brand-teal-dark focus:ring-1 focus:ring-brand-teal-dark outline-none transition-all placeholder:text-slate-500 font-body-md" placeholder="City" type="text">
+<input class="w-1/3 h-12 px-lg rounded-2xl bg-[#1E293B] border border-[#334155] text-white focus:border-brand-teal-dark focus:ring-1 focus:ring-brand-teal-dark outline-none transition-all placeholder:text-slate-500 font-body-md" placeholder="Pin Code" type="text">
+</div>
+</div>
+<div class="flex items-center gap-2 px-1">
+<input class="w-5 h-5 rounded border-[#334155] bg-slate-800 text-brand-teal-dark focus:ring-brand-teal-dark" id="default-dark" type="checkbox">
+<label class="font-label-lg text-slate-400" for="default-dark">Set as default</label>
+</div>
+<button class="w-full h-14 bg-brand-teal-dark text-[#0F172A] rounded-2xl font-bold font-label-lg active:scale-[0.98] transition-transform shadow-lg shadow-brand-teal-dark/10">
+                        Save Address
+                    </button>
+</div>
+</div>
+</main>
+<!-- Bottom Nav -->
+<nav class="absolute bottom-0 w-full h-20 bg-[#0F172A]/80 backdrop-blur-md border-t border-[#334155] flex justify-around items-center px-lg pb-safe">
+<div class="flex flex-col items-center text-slate-500">
+<span class="material-symbols-outlined">storefront</span>
+<span class="text-[10px] font-medium mt-1">Shop</span>
+</div>
+<div class="flex flex-col items-center text-slate-500">
+<span class="material-symbols-outlined">favorite</span>
+<span class="text-[10px] font-medium mt-1">Wishlist</span>
+</div>
+<div class="flex flex-col items-center text-slate-500">
+<span class="material-symbols-outlined">shopping_bag</span>
+<span class="text-[10px] font-medium mt-1">Cart</span>
+</div>
+<div class="flex flex-col items-center text-brand-teal-dark font-bold">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="text-[10px] mt-1">Profile</span>
+</div>
+</nav>
+</div>
+<!-- Floating Legend/Theme Toggle Hint -->
+<div class="fixed bottom-8 bg-white/10 backdrop-blur-xl border border-white/20 px-6 py-3 rounded-full text-white font-label-lg shadow-2xl flex items-center gap-4 z-50">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-white"></div>
+<span>Light View</span>
+</div>
+<div class="h-4 w-px bg-white/20"></div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-slate-900 border border-white/40"></div>
+<span>Dark View</span>
+</div>
+</div>
+<script>
+        // Simple interactive feedback for inputs and buttons
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const originalText = btn.innerText;
+                if(originalText.includes('Save')) {
+                    btn.innerText = 'Saving...';
+                    setTimeout(() => { btn.innerText = originalText; }, 1000);
+                }
+            });
+        });
+
+        // Toggle state for chips
+        document.querySelectorAll('.flex.gap-sm div').forEach(chip => {
+            chip.addEventListener('click', function() {
+                const parent = this.parentElement;
+                const isDark = this.closest('.bg-[#0F172A]');
+                parent.querySelectorAll('div').forEach(c => {
+                    if(isDark) {
+                        c.className = 'px-lg py-sm rounded-full bg-slate-800 text-slate-400 font-label-lg';
+                    } else {
+                        c.className = 'px-lg py-sm rounded-full bg-slate-100 text-slate-600 font-label-lg';
+                    }
+                });
+                if(isDark) {
+                    this.className = 'px-lg py-sm rounded-full bg-brand-teal-dark text-[#0F172A] font-bold font-label-lg';
+                } else {
+                    this.className = 'px-lg py-sm rounded-full bg-brand-teal text-white font-label-lg';
+                }
+            });
+        });
+    </script>
+</body></html>

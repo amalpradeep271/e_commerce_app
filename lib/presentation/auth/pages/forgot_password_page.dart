@@ -1,8 +1,11 @@
 import 'package:e_commerce_application/common/bloc/button/button_state.dart';
 import 'package:e_commerce_application/common/bloc/button/button_state_cubit.dart';
+import 'package:e_commerce_application/common/bloc/textfield/password_visibility_cubit.dart';
 import 'package:e_commerce_application/common/helper/navigator/app_navigator.dart';
 import 'package:e_commerce_application/common/widgets/app_button/basic_reactive_button.dart';
+import 'package:e_commerce_application/common/widgets/app_textfield/basic_app_textformfield.dart';
 import 'package:e_commerce_application/common/widgets/appbar/app_bar.dart';
+import 'package:e_commerce_application/core/configs/theme/app_text_theme.dart';
 import 'package:e_commerce_application/domain/auth/usecase/send_password_reset_email_usecase.dart';
 import 'package:e_commerce_application/presentation/auth/pages/password_reset_email_page.dart';
 import 'package:flutter/material.dart';
@@ -17,9 +20,16 @@ class ForgotPasswordPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const BasicAppbar(),
-      body: BlocProvider(
-        create: (context) => ButtonStateCubit(),
+      appBar: CustomAppBar(),
+      body: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => ButtonStateCubit(),
+          ),
+          BlocProvider(
+            create: (context) => PasswordVisibilityCubit(),
+          ),
+        ],
         child: BlocListener<ButtonStateCubit, ButtonState>(
           listener: (context, state) {
             if (state is ButtonFailureState) {
@@ -34,9 +44,9 @@ class ForgotPasswordPage extends StatelessWidget {
             }
           },
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 40.h),
+            padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 40.h),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 _forgetPasswordText(),
                 SizedBox(height: 20.h),
@@ -52,16 +62,26 @@ class ForgotPasswordPage extends StatelessWidget {
   }
 
   Widget _forgetPasswordText() {
-    return const Text(
-      'Forgot Password',
-      style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+    return Text(
+      'Please enter your email address. You will receive a link to create a new password via email',
+      style: AppTextStyles.base.s16.w600,
+      textAlign: TextAlign.center,
     );
   }
 
   Widget _emailField() {
-    return TextFormField(
+    return CustomTextField(
       controller: _emailController,
-      decoration: const InputDecoration(hintText: 'Enter Email'),
+      hintText: "Email",
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Email cannot be empty';
+        }
+        if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
+          return 'Enter a valid email';
+        }
+        return null;
+      },
     );
   }
 

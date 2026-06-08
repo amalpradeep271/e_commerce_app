@@ -1,0 +1,226 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Sign Up - ShopPremium</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .strength-meter-segment {
+            height: 4px;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+        /* Custom background gradient based on user request but mapping to design system logic where possible */
+        .bg-signup-gradient {
+            background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-error-container": "#93000a",
+                      "surface-dim": "#ded8e0",
+                      "primary": "#4f378a",
+                      "on-primary-fixed-variant": "#4f378a",
+                      "tertiary-fixed": "#ffdf93",
+                      "surface-tint": "#6750a4",
+                      "on-secondary-fixed-variant": "#4b4263",
+                      "on-secondary": "#ffffff",
+                      "surface-bright": "#fdf7ff",
+                      "surface-container-lowest": "#ffffff",
+                      "secondary-container": "#e1d4fd",
+                      "outline-variant": "#cbc4d2",
+                      "background": "#fdf7ff",
+                      "inverse-on-surface": "#f5eff7",
+                      "tertiary": "#765b00",
+                      "on-error": "#ffffff",
+                      "secondary-fixed": "#e9ddff",
+                      "outline": "#7a7582",
+                      "on-background": "#1d1b20",
+                      "on-tertiary": "#ffffff",
+                      "on-secondary-container": "#645a7d",
+                      "on-secondary-fixed": "#1f1635",
+                      "tertiary-fixed-dim": "#e7c365",
+                      "error-container": "#ffdad6",
+                      "primary-fixed": "#e9ddff",
+                      "on-tertiary-fixed": "#241a00",
+                      "on-primary-fixed": "#22005d",
+                      "inverse-primary": "#cfbcff",
+                      "on-surface-variant": "#494551",
+                      "surface-container-highest": "#e6e0e9",
+                      "secondary": "#63597c",
+                      "tertiary-container": "#c9a74d",
+                      "on-primary": "#ffffff",
+                      "surface-container-low": "#f8f2fa",
+                      "secondary-fixed-dim": "#cdc0e9",
+                      "on-tertiary-fixed-variant": "#594400",
+                      "primary-container": "#6750a4",
+                      "surface-variant": "#e6e0e9",
+                      "inverse-surface": "#322f35",
+                      "error": "#ba1a1a",
+                      "surface-container-high": "#ece6ee",
+                      "surface-container": "#f2ecf4",
+                      "primary-fixed-dim": "#cfbcff",
+                      "on-tertiary-container": "#503d00",
+                      "on-surface": "#1d1b20",
+                      "on-primary-container": "#e0d2ff",
+                      "surface": "#fdf7ff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "2xl": "24px",
+                      "xs": "4px",
+                      "md": "12px",
+                      "xl": "20px",
+                      "lg": "16px",
+                      "4xl": "40px",
+                      "sm": "8px",
+                      "5xl": "48px",
+                      "3xl": "32px"
+              },
+              "fontSize": {
+                      "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "600"}],
+                      "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "headline-lg-mobile": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "title-lg": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "caption": ["11px", {"lineHeight": "14px", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+      </script>
+</head>
+<body class="bg-signup-gradient min-h-screen flex items-center justify-center p-lg overflow-x-hidden">
+<!-- Signup Form Content (Transactional - No Shell) -->
+<main class="w-full max-w-md animate-in fade-in duration-700">
+<!-- Logo Section -->
+<div class="flex flex-col items-center mb-2xl">
+<div class="w-24 h-24 mb-xl overflow-hidden rounded-xl">
+<img alt="ShopPremium Brand Logo" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida/AP1WRLttFuA6AWl4cjTIAFo_W2y7tSmTW0Apkk6S03OAtjtuLqaoWMH4mWUtRB75_M_BXwzkTPjrpCkXmkHluEZB9nYJY6PL1-H0s7cZdX2poxKJIDrUQtNhf36ThPeaFcniqCsuqkU-bbRiXNoxQctqt9qlpwvOgyLIVuAlG6EmeZYuA8LTQEsLLPdwQGFgrCR15hyTF9D3BOwtqspJg2V1x8IKHka5mzyMOmQhP37HCFy2qrbBXim5LN5j7UQ">
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-[#F1F5F9] mb-xs">Create Account</h1>
+<p class="font-body-md text-body-md text-[#94A3B8] text-center">Join us for the best shopping experience</p>
+</div>
+<!-- Main Card -->
+<div class="bg-[#1E293B] border border-[#334155] rounded-xl p-2xl shadow-2xl">
+<form action="#" class="space-y-xl" method="POST" onsubmit="event.preventDefault();">
+<!-- Side-by-side Inputs -->
+<div class="grid grid-cols-2 gap-md">
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-[#94A3B8] ml-xs" for="first_name">First Name</label>
+<input class="w-full bg-[#0F172A] border border-[#334155] rounded-lg px-md py-sm text-[#F1F5F9] focus:border-[#4f378a] focus:ring-1 focus:ring-[#4f378a] outline-none transition-all placeholder:text-outline/50" id="first_name" name="first_name" placeholder="John" type="text">
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-[#94A3B8] ml-xs" for="last_name">Last Name</label>
+<input class="w-full bg-[#0F172A] border border-[#334155] rounded-lg px-md py-sm text-[#F1F5F9] focus:border-[#4f378a] focus:ring-1 focus:ring-[#4f378a] outline-none transition-all placeholder:text-outline/50" id="last_name" name="last_name" placeholder="Doe" type="text">
+</div>
+</div>
+<!-- Email Input -->
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-[#94A3B8] ml-xs" for="email">Email</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-outline/60 text-[20px]">mail</span>
+<input class="w-full bg-[#0F172A] border border-[#334155] rounded-lg pl-10 pr-md py-sm text-[#F1F5F9] focus:border-[#4f378a] focus:ring-1 focus:ring-[#4f378a] outline-none transition-all placeholder:text-outline/50" id="email" name="email" placeholder="john.doe@example.com" type="email">
+</div>
+</div>
+<!-- Password Input -->
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-[#94A3B8] ml-xs" for="password">Password</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-outline/60 text-[20px]">lock</span>
+<input class="w-full bg-[#0F172A] border border-[#334155] rounded-lg pl-10 pr-md py-sm text-[#F1F5F9] focus:border-[#4f378a] focus:ring-1 focus:ring-[#4f378a] outline-none transition-all placeholder:text-outline/50" id="password" name="password" oninput="updateStrength(this.value)" placeholder="••••••••" type="password">
+<button class="absolute right-md top-1/2 -translate-y-1/2 text-outline/60 hover:text-[#F1F5F9]" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</div>
+<!-- Strength Indicator -->
+<div class="mt-sm flex gap-xs px-xs">
+<div class="strength-meter-segment flex-1 bg-[#334155]" id="segment-1"></div>
+<div class="strength-meter-segment flex-1 bg-[#334155]" id="segment-2"></div>
+<div class="strength-meter-segment flex-1 bg-[#334155]" id="segment-3"></div>
+<div class="strength-meter-segment flex-1 bg-[#334155]" id="segment-4"></div>
+</div>
+<span class="font-caption text-caption text-[#94A3B8] mt-xs ml-xs" id="strength-text">Enter a secure password</span>
+</div>
+<!-- Sign Up Button -->
+<button class="w-full bg-[#14B8A6] text-white py-md rounded-[16px] font-label-lg text-label-lg hover:brightness-110 active:scale-[0.98] transition-all shadow-lg shadow-[#14B8A6]/20 mt-xl" type="submit">
+                    Sign Up
+                </button>
+</form>
+<!-- Social Sign Up Divider -->
+<div class="flex items-center gap-md my-2xl">
+<div class="flex-1 h-[1px] bg-[#334155]"></div>
+<span class="font-caption text-caption text-[#94A3B8]">OR CONTINUE WITH</span>
+<div class="flex-1 h-[1px] bg-[#334155]"></div>
+</div>
+<!-- Social Buttons -->
+<div class="grid grid-cols-2 gap-md">
+<button class="flex items-center justify-center gap-sm bg-[#0F172A] border border-[#334155] py-sm rounded-lg hover:bg-[#1E293B] transition-colors">
+<img alt="Google" class="w-5 h-5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZ6wb0S_oqq3aVGfLE8mWFMGJUG893X4xUcSpDaj01JTF0S39z5aQQ_TrOiKzapqtlZsQDjGTRrrA4RK-bRMjln4o24LgGUACA3dm3AuC-NiNjhMWIVBjNOglGSOcvyJOKQKaTlCgosJePABlAjps1lHW3ogpGStX5XxBbKQL0PRsqiw5a88xkR-W2ZmuFSDIfV008aSvvxhBomUmxz-5tBgzgXSa0H60TwjVfJsYcAm3L__vARDYd8jTCmQKXiclw_8Zh1EIJoCw">
+<span class="font-label-md text-label-md text-[#F1F5F9]">Google</span>
+</button>
+<button class="flex items-center justify-center gap-sm bg-[#0F172A] border border-[#334155] py-sm rounded-lg hover:bg-[#1E293B] transition-colors">
+<span class="material-symbols-outlined text-[20px] text-[#F1F5F9]">apps</span>
+<span class="font-label-md text-label-md text-[#F1F5F9]">Apple</span>
+</button>
+</div>
+</div>
+<!-- Footer Text -->
+<p class="text-center mt-2xl font-body-md text-body-md text-[#94A3B8]">
+            Already have an account? 
+            <a class="text-[#14B8A6] font-bold hover:underline" href="#">Sign In</a>
+</p>
+</main>
+<script>
+        function updateStrength(password) {
+            const segments = [
+                document.getElementById('segment-1'),
+                document.getElementById('segment-2'),
+                document.getElementById('segment-3'),
+                document.getElementById('segment-4')
+            ];
+            const strengthText = document.getElementById('strength-text');
+            
+            let strength = 0;
+            if (password.length > 0) strength++;
+            if (password.length > 5) strength++;
+            if (password.length > 8 && /[A-Z]/.test(password)) strength++;
+            if (password.length > 10 && /[!@#$%^&*]/.test(password)) strength++;
+
+            const colors = ['#334155', '#EF4444', '#F59E0B', '#10B981', '#14B8A6'];
+            const labels = ['Enter a secure password', 'Weak', 'Fair', 'Good', 'Strong'];
+
+            segments.forEach((seg, i) => {
+                if (i < strength) {
+                    seg.style.backgroundColor = colors[strength];
+                } else {
+                    seg.style.backgroundColor = colors[0];
+                }
+            });
+
+            strengthText.textContent = labels[strength];
+            strengthText.style.color = strength === 0 ? '#94A3B8' : colors[strength];
+        }
+    </script>
+</body></html>

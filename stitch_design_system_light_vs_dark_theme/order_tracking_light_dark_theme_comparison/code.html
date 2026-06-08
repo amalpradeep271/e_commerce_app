@@ -1,0 +1,443 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Track Order Detail</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .pulse-animation {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: .5; transform: scale(1.2); }
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "secondary-fixed-dim": "#cdc0e9",
+                        "on-secondary-container": "#645a7d",
+                        "outline-variant": "#cbc4d2",
+                        "surface-dim": "#ded8e0",
+                        "on-surface-variant": "#494551",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed-dim": "#e7c365",
+                        "on-primary": "#ffffff",
+                        "outline": "#7a7582",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#f2ecf4",
+                        "secondary-fixed": "#e9ddff",
+                        "on-primary-fixed": "#22005d",
+                        "tertiary-fixed": "#ffdf93",
+                        "on-primary-fixed-variant": "#4f378a",
+                        "surface-container-low": "#f8f2fa",
+                        "on-surface": "#1d1b20",
+                        "on-background": "#1d1b20",
+                        "on-tertiary-fixed-variant": "#594400",
+                        "secondary": "#63597c",
+                        "on-tertiary-fixed": "#241a00",
+                        "on-error": "#ffffff",
+                        "inverse-surface": "#322f35",
+                        "primary": "#4f378a",
+                        "on-secondary-fixed": "#1f1635",
+                        "surface": "#fdf7ff",
+                        "secondary-container": "#e1d4fd",
+                        "on-error-container": "#93000a",
+                        "surface-container-high": "#ece6ee",
+                        "on-secondary-fixed-variant": "#4b4263",
+                        "inverse-primary": "#cfbcff",
+                        "surface-variant": "#e6e0e9",
+                        "primary-fixed": "#e9ddff",
+                        "primary-container": "#6750a4",
+                        "primary-fixed-dim": "#cfbcff",
+                        "tertiary-container": "#c9a74d",
+                        "inverse-on-surface": "#f5eff7",
+                        "surface-container-highest": "#e6e0e9",
+                        "surface-tint": "#6750a4",
+                        "background": "#fdf7ff",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-container": "#503d00",
+                        "error": "#ba1a1a",
+                        "surface-bright": "#fdf7ff",
+                        "tertiary": "#765b00",
+                        "on-primary-container": "#e0d2ff",
+                        "on-secondary": "#ffffff"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "xl": "20px",
+                        "sm": "8px",
+                        "5xl": "48px",
+                        "4xl": "40px",
+                        "2xl": "24px",
+                        "lg": "16px",
+                        "3xl": "32px",
+                        "md": "12px",
+                        "xs": "4px"
+                    },
+                    fontSize: {
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "600" }],
+                        "title-lg": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "caption": ["11px", { "lineHeight": "14px", "fontWeight": "400" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "display-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-surface-container-highest flex flex-col md:flex-row items-center justify-center min-h-screen gap-8 p-8 overflow-x-auto">
+<!-- LIGHT THEME MOCKUP -->
+<div class="w-[390px] h-[844px] bg-white text-slate-900 shadow-2xl rounded-[40px] overflow-hidden flex flex-col relative border-8 border-slate-200 shrink-0">
+<!-- Top App Bar Mock -->
+<div class="flex items-center justify-between px-lg h-16 w-full border-b border-slate-100 bg-white sticky top-0 z-10">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-50 transition-colors">
+<span class="material-symbols-outlined text-slate-700">arrow_back</span>
+</button>
+<div class="flex flex-col items-center">
+<span class="font-headline-md text-headline-md text-slate-900">Track Order</span>
+<span class="font-label-md text-label-md text-slate-500 uppercase tracking-widest">#ORD-12345</span>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-50 transition-colors">
+<span class="material-symbols-outlined text-slate-700">search</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto custom-scrollbar bg-white">
+<!-- Header Status -->
+<div class="px-lg pt-2xl pb-3xl flex flex-col items-center text-center">
+<div class="w-24 h-24 bg-teal-50 rounded-full flex items-center justify-center mb-md">
+<span class="material-symbols-outlined text-[48px] text-teal-600">local_shipping</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-slate-900 mb-xs">Your order is on the way!</h2>
+<p class="font-body-md text-body-md text-slate-500">Estimated delivery: Jun 5, 2026</p>
+</div>
+<!-- Timeline Section -->
+<div class="px-lg pb-3xl">
+<div class="space-y-0 relative">
+<!-- Step 1: Placed -->
+<div class="flex gap-md min-h-[64px]">
+<div class="flex flex-col items-center">
+<div class="w-6 h-6 rounded-full bg-emerald-500 flex items-center justify-center z-10">
+<span class="material-symbols-outlined text-white text-[16px]">check</span>
+</div>
+<div class="w-[2px] h-full bg-emerald-500"></div>
+</div>
+<div class="pb-lg">
+<p class="font-label-lg text-label-lg text-slate-900">Order Placed</p>
+<p class="font-caption text-caption text-slate-500">June 1, 2026, 10:30 AM</p>
+</div>
+</div>
+<!-- Step 2: Payment -->
+<div class="flex gap-md min-h-[64px]">
+<div class="flex flex-col items-center">
+<div class="w-6 h-6 rounded-full bg-emerald-500 flex items-center justify-center z-10">
+<span class="material-symbols-outlined text-white text-[16px]">check</span>
+</div>
+<div class="w-[2px] h-full bg-emerald-500"></div>
+</div>
+<div class="pb-lg">
+<p class="font-label-lg text-label-lg text-slate-900">Payment Confirmed</p>
+<p class="font-caption text-caption text-slate-500">June 1, 2026, 10:31 AM</p>
+</div>
+</div>
+<!-- Step 3: Processing -->
+<div class="flex gap-md min-h-[64px]">
+<div class="flex flex-col items-center">
+<div class="w-6 h-6 rounded-full bg-emerald-500 flex items-center justify-center z-10">
+<span class="material-symbols-outlined text-white text-[16px]">check</span>
+</div>
+<div class="w-[2px] h-full bg-emerald-500"></div>
+</div>
+<div class="pb-lg">
+<p class="font-label-lg text-label-lg text-slate-900">Processing</p>
+<p class="font-caption text-caption text-slate-500">June 2, 2026, 9:00 AM</p>
+</div>
+</div>
+<!-- Step 4: Shipped (Current) -->
+<div class="flex gap-md min-h-[64px]">
+<div class="flex flex-col items-center">
+<div class="relative flex items-center justify-center z-10">
+<div class="w-6 h-6 rounded-full bg-teal-700/20 pulse-animation absolute"></div>
+<div class="w-3 h-3 rounded-full bg-teal-700"></div>
+</div>
+<div class="w-[2px] h-full bg-slate-200"></div>
+</div>
+<div class="pb-lg">
+<p class="font-label-lg text-label-lg text-teal-700">Shipped</p>
+<p class="font-caption text-caption text-teal-600">June 3, 2026, 2:15 PM</p>
+</div>
+</div>
+<!-- Step 5: Delivery -->
+<div class="flex gap-md min-h-[64px]">
+<div class="flex flex-col items-center">
+<div class="w-6 h-6 rounded-full bg-slate-200 flex items-center justify-center z-10">
+</div>
+<div class="w-[2px] h-full bg-slate-200"></div>
+</div>
+<div class="pb-lg">
+<p class="font-label-lg text-label-lg text-slate-400">Out for Delivery</p>
+<p class="font-caption text-caption text-slate-400">Pending</p>
+</div>
+</div>
+<!-- Step 6: Delivered -->
+<div class="flex gap-md min-h-[48px]">
+<div class="flex flex-col items-center">
+<div class="w-6 h-6 rounded-full bg-slate-200 flex items-center justify-center z-10">
+</div>
+</div>
+<div class="">
+<p class="font-label-lg text-label-lg text-slate-400">Delivered</p>
+<p class="font-caption text-caption text-slate-400">Pending</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Order Items -->
+<div class="px-lg pb-2xl">
+<h3 class="font-title-lg text-title-lg text-slate-900 mb-md">Order Items</h3>
+<div class="bg-slate-50 rounded-xl p-md flex items-center gap-md border border-slate-100">
+<img alt="Elite Audio Buds" class="w-16 h-16 rounded-lg object-cover bg-white" src="https://lh3.googleusercontent.com/aida/AP1WRLs6yEdC5f9CY_SG3yk2rvsv9l05qiFlvVeoleV0fXH4PhoX5S0vbiMCq0ChZ7IjXZvPTN_HYZ3lAZp3Udl-ERFtOZN7nQ9QWQt1ExmxshSzkX7wtcux9hITvDfbTZpmsFFNpk4CpFMS9magmfDgct5WUlhmy9Ml4YcwS3lsyFxjTsBS_MQwy1aPzROsoW6x9V-2jQk_u_1Edio4JHTppWGN2ge8icPyHcGibIDWDIoDbcC3xfTYQbR8218">
+<div class="flex-1">
+<p class="font-label-lg text-label-lg text-slate-900">Elite Audio Buds</p>
+<p class="font-body-md text-body-md text-slate-500">Qty: 1</p>
+</div>
+<p class="font-title-lg text-title-lg text-primary">₹499</p>
+</div>
+</div>
+<!-- Delivery Address -->
+<div class="px-lg pb-2xl">
+<h3 class="font-title-lg text-title-lg text-slate-900 mb-md">Delivery Address</h3>
+<div class="bg-slate-50 rounded-xl p-md border border-slate-100">
+<div class="flex items-center gap-sm mb-xs">
+<span class="material-symbols-outlined text-slate-400 text-[18px]">home</span>
+<p class="font-label-lg text-label-lg text-slate-900">Home — John Doe</p>
+</div>
+<p class="font-body-md text-body-md text-slate-500 pl-[26px]">123 Main Street, Silicon Valley, CA 94025, USA</p>
+</div>
+</div>
+<!-- Order Summary -->
+<div class="px-lg pb-4xl">
+<h3 class="font-title-lg text-title-lg text-slate-900 mb-md">Order Summary</h3>
+<div class="bg-slate-50 rounded-xl p-md space-y-sm border border-slate-100">
+<div class="flex justify-between font-body-md text-body-md text-slate-600">
+<span>Subtotal</span>
+<span>₹499</span>
+</div>
+<div class="flex justify-between font-body-md text-body-md text-emerald-600">
+<span>Discount</span>
+<span>-₹50</span>
+</div>
+<div class="flex justify-between font-body-md text-body-md text-slate-600">
+<span>Delivery</span>
+<span>₹0</span>
+</div>
+<div class="pt-sm border-t border-slate-200 flex justify-between font-title-lg text-title-lg text-slate-900">
+<span>Total Amount</span>
+<span>₹449</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- DARK THEME MOCKUP -->
+<div class="dark w-[390px] h-[844px] bg-[#0F172A] text-slate-100 shadow-2xl rounded-[40px] overflow-hidden flex flex-col relative border-8 border-slate-800 shrink-0">
+<!-- Top App Bar Mock -->
+<div class="flex items-center justify-between px-lg h-16 w-full border-b border-slate-800 bg-[#0F172A] sticky top-0 z-10">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined text-slate-400">arrow_back</span>
+</button>
+<div class="flex flex-col items-center">
+<span class="font-headline-md text-headline-md text-slate-100">My Orders</span>
+<span class="font-label-md text-label-md text-slate-500 uppercase tracking-widest">#ORD-12345</span>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined text-slate-400">search</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto custom-scrollbar bg-[#0F172A]">
+<!-- Header Status -->
+<div class="px-lg pt-2xl pb-3xl flex flex-col items-center text-center">
+<div class="w-24 h-24 bg-teal-900/20 rounded-full flex items-center justify-center mb-md">
+<span class="material-symbols-outlined text-[48px] text-teal-400" data-weight="fill">local_shipping</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-slate-100 mb-xs">Your order is on the way!</h2>
+<p class="font-body-md text-body-md text-slate-400">Estimated delivery: Jun 5, 2026</p>
+</div>
+<!-- Timeline Section -->
+<div class="px-lg pb-3xl">
+<div class="space-y-0 relative">
+<!-- Step 1: Placed -->
+<div class="flex gap-md min-h-[64px]">
+<div class="flex flex-col items-center">
+<div class="w-6 h-6 rounded-full bg-emerald-400 flex items-center justify-center z-10">
+<span class="material-symbols-outlined text-[#0F172A] text-[16px] font-bold">check</span>
+</div>
+<div class="w-[2px] h-full bg-emerald-400"></div>
+</div>
+<div class="pb-lg">
+<p class="font-label-lg text-label-lg text-slate-100">Order Placed</p>
+<p class="font-caption text-caption text-slate-400">June 1, 2026, 10:30 AM</p>
+</div>
+</div>
+<!-- Step 2: Payment -->
+<div class="flex gap-md min-h-[64px]">
+<div class="flex flex-col items-center">
+<div class="w-6 h-6 rounded-full bg-emerald-400 flex items-center justify-center z-10">
+<span class="material-symbols-outlined text-[#0F172A] text-[16px] font-bold">check</span>
+</div>
+<div class="w-[2px] h-full bg-emerald-400"></div>
+</div>
+<div class="pb-lg">
+<p class="font-label-lg text-label-lg text-slate-100">Payment Confirmed</p>
+<p class="font-caption text-caption text-slate-400">June 1, 2026, 10:31 AM</p>
+</div>
+</div>
+<!-- Step 3: Processing -->
+<div class="flex gap-md min-h-[64px]">
+<div class="flex flex-col items-center">
+<div class="w-6 h-6 rounded-full bg-emerald-400 flex items-center justify-center z-10">
+<span class="material-symbols-outlined text-[#0F172A] text-[16px] font-bold">check</span>
+</div>
+<div class="w-[2px] h-full bg-emerald-400"></div>
+</div>
+<div class="pb-lg">
+<p class="font-label-lg text-label-lg text-slate-100">Processing</p>
+<p class="font-caption text-caption text-slate-400">June 2, 2026, 9:00 AM</p>
+</div>
+</div>
+<!-- Step 4: Shipped (Current) -->
+<div class="flex gap-md min-h-[64px]">
+<div class="flex flex-col items-center">
+<div class="relative flex items-center justify-center z-10">
+<div class="w-6 h-6 rounded-full bg-teal-400/20 pulse-animation absolute"></div>
+<div class="w-3 h-3 rounded-full bg-teal-400"></div>
+</div>
+<div class="w-[2px] h-full bg-slate-700"></div>
+</div>
+<div class="pb-lg">
+<p class="font-label-lg text-label-lg text-teal-400">Shipped</p>
+<p class="font-caption text-caption text-teal-500">June 3, 2026, 2:15 PM</p>
+</div>
+</div>
+<!-- Step 5: Delivery -->
+<div class="flex gap-md min-h-[64px]">
+<div class="flex flex-col items-center">
+<div class="w-6 h-6 rounded-full bg-slate-700 flex items-center justify-center z-10">
+</div>
+<div class="w-[2px] h-full bg-slate-700"></div>
+</div>
+<div class="pb-lg">
+<p class="font-label-lg text-label-lg text-slate-500">Out for Delivery</p>
+<p class="font-caption text-caption text-slate-600">Pending</p>
+</div>
+</div>
+<!-- Step 6: Delivered -->
+<div class="flex gap-md min-h-[48px]">
+<div class="flex flex-col items-center">
+<div class="w-6 h-6 rounded-full bg-slate-700 flex items-center justify-center z-10">
+</div>
+</div>
+<div class="">
+<p class="font-label-lg text-label-lg text-slate-500">Delivered</p>
+<p class="font-caption text-caption text-slate-600">Pending</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Order Items -->
+<div class="px-lg pb-2xl">
+<h3 class="font-title-lg text-title-lg text-slate-100 mb-md">Order Items</h3>
+<div class="bg-[#1E293B] rounded-xl p-md flex items-center gap-md border border-slate-700">
+<img alt="Elite Audio Buds" class="w-16 h-16 rounded-lg object-cover bg-slate-800" src="https://lh3.googleusercontent.com/aida/AP1WRLs6yEdC5f9CY_SG3yk2rvsv9l05qiFlvVeoleV0fXH4PhoX5S0vbiMCq0ChZ7IjXZvPTN_HYZ3lAZp3Udl-ERFtOZN7nQ9QWQt1ExmxshSzkX7wtcux9hITvDfbTZpmsFFNpk4CpFMS9magmfDgct5WUlhmy9Ml4YcwS3lsyFxjTsBS_MQwy1aPzROsoW6x9V-2jQk_u_1Edio4JHTppWGN2ge8icPyHcGibIDWDIoDbcC3xfTYQbR8218">
+<div class="flex-1">
+<p class="font-label-lg text-label-lg text-slate-100">Elite Audio Buds</p>
+<p class="font-body-md text-body-md text-slate-400">Qty: 1</p>
+</div>
+<p class="font-title-lg text-title-lg text-inverse-primary">₹499</p>
+</div>
+</div>
+<!-- Delivery Address -->
+<div class="px-lg pb-2xl">
+<h3 class="font-title-lg text-title-lg text-slate-100 mb-md">Delivery Address</h3>
+<div class="bg-[#1E293B] rounded-xl p-md border border-slate-700">
+<div class="flex items-center gap-sm mb-xs">
+<span class="material-symbols-outlined text-slate-500 text-[18px]">home</span>
+<p class="font-label-lg text-label-lg text-slate-100">Home — John Doe</p>
+</div>
+<p class="font-body-md text-body-md text-slate-400 pl-[26px]">123 Main Street, Silicon Valley, CA 94025, USA</p>
+</div>
+</div>
+<!-- Order Summary -->
+<div class="px-lg pb-4xl">
+<h3 class="font-title-lg text-title-lg text-slate-100 mb-md">Order Summary</h3>
+<div class="bg-[#1E293B] rounded-xl p-md space-y-sm border border-slate-700">
+<div class="flex justify-between font-body-md text-body-md text-slate-400">
+<span>Subtotal</span>
+<span>₹499</span>
+</div>
+<div class="flex justify-between font-body-md text-body-md text-emerald-400">
+<span>Discount</span>
+<span>-₹50</span>
+</div>
+<div class="flex justify-between font-body-md text-body-md text-slate-400">
+<span>Delivery</span>
+<span>₹0</span>
+</div>
+<div class="pt-sm border-t border-slate-700 flex justify-between font-title-lg text-title-lg text-slate-100">
+<span>Total Amount</span>
+<span>₹449</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Persistent Bottom Bar logic (External) -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-lg py-md bg-surface/80 dark:bg-surface/80 backdrop-blur-md shadow-sm border-t border-outline-variant dark:border-outline md:hidden">
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant hover:opacity-80 active:scale-95 transition-transform cursor-pointer">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-md text-label-md">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant hover:opacity-80 active:scale-95 transition-transform cursor-pointer">
+<span class="material-symbols-outlined">search</span>
+<span class="font-label-md text-label-md">Shop</span>
+</div>
+<div class="flex flex-col items-center justify-center text-primary dark:text-inverse-primary relative after:content-[''] after:absolute after:-bottom-1 after:w-1 after:h-1 after:bg-primary after:rounded-full hover:opacity-80 active:scale-95 transition-transform cursor-pointer">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="font-label-md text-label-md">Orders</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant hover:opacity-80 active:scale-95 transition-transform cursor-pointer">
+<span class="material-symbols-outlined">favorite</span>
+<span class="font-label-md text-label-md">Wishlist</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant hover:opacity-80 active:scale-95 transition-transform cursor-pointer">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md">Profile</span>
+</div>
+</nav>
+</body></html>

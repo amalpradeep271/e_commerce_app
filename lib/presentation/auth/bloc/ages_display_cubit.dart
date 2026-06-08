@@ -8,21 +8,25 @@ class AgesDisplayCubit extends Cubit<AgesDisplayState> {
   AgesDisplayCubit() : super(AgesLoading());
 
   void displayAges() async {
-    
+    if (isClosed) return;
     var returnedData = await sl<GetAgesUseCase>().call();
+    if (isClosed) return;
 
     returnedData.fold(
       (message) {
-        emit(
-          AgesLoadFailure(message: message)
-        );
+        if (!isClosed) {
+          emit(
+            AgesLoadFailure(message: message)
+          );
+        }
       },
       (data) {
-        emit(
-          AgesLoaded(ages: data)
-        );
+        if (!isClosed) {
+          emit(
+            AgesLoaded(ages: data)
+          );
+        }
       }
     );
-
   }
 }

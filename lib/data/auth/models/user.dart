@@ -9,7 +9,6 @@ class UserModel {
   final String lastName;
   final String email;
   final String image;
-  final int gender;
 
   UserModel({
     required this.userId,
@@ -17,7 +16,6 @@ class UserModel {
     required this.lastName,
     required this.email,
     required this.image,
-    required this.gender
   });
 
   Map<String, dynamic> toMap() {
@@ -27,7 +25,6 @@ class UserModel {
       'lastName': lastName,
       'email': email,
       'image': image,
-      'gender': gender,
     };
   }
 
@@ -38,7 +35,6 @@ class UserModel {
       lastName: map['lastName'] as String,
       email: map['email'] as String,
       image: map['image'] ?? '',
-      gender: map['gender'] as int,
     );
   }
   
@@ -56,7 +52,6 @@ extension UserXModel on UserModel {
       lastName: lastName, 
       email: email, 
       image: image, 
-      gender: gender
     );
   }
 }

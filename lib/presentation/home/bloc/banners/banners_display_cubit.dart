@@ -1,0 +1,24 @@
+import 'package:e_commerce_application/domain/home/usecase/get_banners_usecase.dart';
+import 'package:e_commerce_application/presentation/home/bloc/banners/banners_display_state.dart';
+import 'package:e_commerce_application/service_locator.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+class BannersDisplayCubit extends Cubit<BannersDisplayState> {
+  BannersDisplayCubit() : super(BannersLoading());
+
+  void displayBanners() async {
+    if (isClosed) return;
+
+    var returnedData = await sl<GetBannersUsecase>().call();
+    if (isClosed) return;
+
+    returnedData.fold(
+      (error) {
+        emit(BannersLoadFailure());
+      },
+      (data) {
+        emit(BannersLoaded(banners: data));
+      },
+    );
+  }
+}

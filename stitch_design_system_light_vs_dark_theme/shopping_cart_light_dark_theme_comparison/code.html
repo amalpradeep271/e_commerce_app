@@ -1,0 +1,404 @@
+<!DOCTYPE html><html class="dark" lang="en" style="width: 390px; height: 1836px; overflow: hidden; position: relative;"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Premium Cart Experience</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "secondary-fixed": "#e9ddff",
+                        "primary-container": "#6750a4",
+                        "surface-variant": "#e6e0e9",
+                        "surface-container-low": "#f8f2fa",
+                        "tertiary-fixed-dim": "#e7c365",
+                        "surface-container-highest": "#e6e0e9",
+                        "primary-fixed": "#e9ddff",
+                        "on-surface-variant": "#494551",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#e0d2ff",
+                        "on-secondary-fixed-variant": "#4b4263",
+                        "on-primary-fixed": "#22005d",
+                        "inverse-primary": "#cfbcff",
+                        "error": "#ba1a1a",
+                        "on-tertiary": "#ffffff",
+                        "inverse-surface": "#322f35",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#c9a74d",
+                        "error-container": "#ffdad6",
+                        "surface-container-lowest": "#ffffff",
+                        "outline": "#7a7582",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed": "#1f1635",
+                        "tertiary-fixed": "#ffdf93",
+                        "surface-dim": "#ded8e0",
+                        "primary-fixed-dim": "#cfbcff",
+                        "on-tertiary-fixed-variant": "#594400",
+                        "secondary": "#63597c",
+                        "surface-bright": "#fdf7ff",
+                        "secondary-container": "#e1d4fd",
+                        "on-tertiary-fixed": "#241a00",
+                        "secondary-fixed-dim": "#cdc0e9",
+                        "surface-container-high": "#ece6ee",
+                        "on-background": "#1d1b20",
+                        "on-tertiary-container": "#503d00",
+                        "background": "#fdf7ff",
+                        "surface": "#fdf7ff",
+                        "tertiary": "#765b00",
+                        "inverse-on-surface": "#f5eff7",
+                        "surface-tint": "#6750a4",
+                        "on-primary-fixed-variant": "#4f378a",
+                        "on-error-container": "#93000a",
+                        "on-surface": "#1d1b20",
+                        "on-secondary-container": "#645a7d",
+                        "outline-variant": "#cbc4d2",
+                        "primary": "#4f378a",
+                        "surface-container": "#f2ecf4"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "lg": "16px",
+                        "sm": "8px",
+                        "4xl": "40px",
+                        "xs": "4px",
+                        "2xl": "24px",
+                        "md": "12px",
+                        "3xl": "32px",
+                        "xl": "20px",
+                        "5xl": "48px"
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    fontSize: {
+                        "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "600"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "title-lg": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "caption": ["11px", {"lineHeight": "14px", "fontWeight": "400"}],
+                        "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Poppins', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-surface-container text-on-surface antialiased overflow-x-hidden">
+<div class="flex flex-col md:flex-row w-full min-h-screen gap-4xl p-lg md:p-4xl justify-center items-start">
+<!-- LIGHT THEME PREVIEW -->
+<div class="w-full max-w-[430px] bg-white text-slate-900 rounded-[40px] shadow-2xl overflow-hidden flex flex-col border border-slate-100 ring-1 ring-slate-200">
+<!-- TopAppBar -->
+<header class="bg-white text-slate-900 border-b border-slate-100 w-full top-0 flex items-center justify-between px-lg h-16 w-full">
+<button class="flex items-center justify-center w-10 h-10 hover:bg-slate-50 transition-colors rounded-full">
+<span class="material-symbols-outlined text-slate-900">arrow_back</span>
+</button>
+<div class="text-center">
+<h1 class="font-headline-md text-headline-md font-bold text-slate-900">My Cart</h1>
+<p class="text-caption text-slate-500">3 items</p>
+</div>
+<button class="flex items-center justify-center w-10 h-10 hover:bg-slate-50 transition-colors rounded-full">
+<span class="material-symbols-outlined text-slate-900">shopping_bag</span>
+</button>
+</header>
+<!-- Scrollable Content -->
+<main class="flex-1 overflow-y-auto p-lg space-y-2xl pb-32">
+<!-- Cart Items -->
+<div class="space-y-md">
+<!-- Item 1 -->
+<div class="bg-white rounded-xl p-md border border-slate-100 shadow-sm flex gap-md">
+<div class="w-20 h-20 bg-slate-50 rounded-lg overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A premium red performance running shoe displayed on a clean white background. High-end product photography with soft shadows and sharp focus on the woven texture of the sneaker. The lighting is bright and airy, reflecting a clean minimalist retail aesthetic. Professional studio setup with a modern luxury feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuARAax3rQnAH8Pf3RlekEoEBolDnHh1h4U1eeNvs69IizRAdqkcrqh31GoR5W3yp7iGZAXJ8uvyRDBB9iHqk10CUY2qbbU4e_ebI5GDk54dU3UELHWHK0YEQHAjWB2uEdj2Zc7xjD0MpuzWvkhYq9ZnircqRmtImtJFeif-UlmlZ2yy9X8JRGQ1Y9BTI1uDh2pmZ2yn8r4i_jWiLQLwGk_SL1FyVNfWMlH05bHvx3eeltbkUsRfg6MAx7YXDCQfpi5vAFQZs2cm9r8">
+</div>
+<div class="flex-1 flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-label-lg text-slate-900">Swift Runner V2</h3>
+<div class="flex items-center gap-xs mt-xs">
+<div class="w-3 h-3 rounded-full bg-red-500"></div>
+<span class="text-caption text-slate-500">Red • Size 42</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-400 text-[20px] cursor-pointer hover:text-red-500 transition-colors">delete</span>
+</div>
+<div class="flex justify-between items-center mt-sm">
+<div class="flex items-center bg-slate-50 border border-slate-200 rounded-lg px-xs py-xs">
+<button class="w-6 h-6 flex items-center justify-center text-slate-600 hover:text-slate-900">-</button>
+<span class="w-8 text-center text-label-md font-bold">1</span>
+<button class="w-6 h-6 flex items-center justify-center text-slate-600 hover:text-slate-900">+</button>
+</div>
+<p class="font-title-lg text-[#0F766E]">₹1,299</p>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="bg-white rounded-xl p-md border border-slate-100 shadow-sm flex gap-md">
+<div class="w-20 h-20 bg-slate-50 rounded-lg overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A sleek minimalist white smartwatch with a silicone strap. The watch face is dark, contrasting with the bright lighting of the scene. The image uses a high-key light mode aesthetic with soft neutral tones and clean lines. Professional e-commerce photography capturing a sophisticated and technologically advanced wearable device." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkREiRIRBxam2IELLBfGZSry-jT-s5nH3k69DmxTpCh4hSI-bGtgdKpI0mQTeSLxnwOlWq95AJF07ug3N6Txx-x1T1V_Dy5VvFzy8HUWnle-VZEOGahIReiTIHxbOj8ke8mkXOfEmG5mtFqoItbj4jcmx69ytroOTFkFmUOlClBttzi5QPgpAmfyF-IacGFGTu5TEsArovxlSGyEvbhAmpo4HacKRMSC4LnANO-hAM5TLN5AtVPsNr3cPmiBS5cWSAvNdlz_m055Q">
+</div>
+<div class="flex-1 flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-label-lg text-slate-900">Pulse Smartwatch</h3>
+<div class="flex items-center gap-xs mt-xs">
+<div class="w-3 h-3 rounded-full bg-slate-200"></div>
+<span class="text-caption text-slate-500">White • One Size</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-400 text-[20px] cursor-pointer hover:text-red-500 transition-colors">delete</span>
+</div>
+<div class="flex justify-between items-center mt-sm">
+<div class="flex items-center bg-slate-50 border border-slate-200 rounded-lg px-xs py-xs">
+<button class="w-6 h-6 flex items-center justify-center text-slate-600 hover:text-slate-900">-</button>
+<span class="w-8 text-center text-label-md font-bold">1</span>
+<button class="w-6 h-6 flex items-center justify-center text-slate-600 hover:text-slate-900">+</button>
+</div>
+<p class="font-title-lg text-[#0F766E]">₹899</p>
+</div>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="bg-white rounded-xl p-md border border-slate-100 shadow-sm flex gap-md">
+<div class="w-20 h-20 bg-slate-50 rounded-lg overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Modern high-fidelity black headphones with gold accents, resting on a smooth surface. The lighting is crisp and highlights the premium materials and ergonomic design. The composition is clean and minimalist, following a professional retail photography style. The image exudes quality, comfort, and advanced audio engineering." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1OfZCC4YMm4C5aLUT3okR3wFOfkaTME8ImFmtLGoEpj5O0kIkQkaUxT-HdfxpcuzgFcWqrPRhv09OF3pSyKIxki6gG9OCsZEPD32J9MIsngAq5-aMcjMps79J5w63-f471JnikQ2xUnsmK3FqTkAT_W-RQxNf58FMxhI32zpP2PYwAFb21hj3ZdODA_ouE6CQMXlh_f5RCP1KLN1W1djNbbxaTZ1zVJKsVN4Mx7O2we18kPBYy1tLXcOWf2ltue550GC4qYT4TtQ">
+</div>
+<div class="flex-1 flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-label-lg text-slate-900">Elite Audio Buds</h3>
+<div class="flex items-center gap-xs mt-xs">
+<div class="w-3 h-3 rounded-full bg-slate-900"></div>
+<span class="text-caption text-slate-500">Midnight • Pro</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-400 text-[20px] cursor-pointer hover:text-red-500 transition-colors">delete</span>
+</div>
+<div class="flex justify-between items-center mt-sm">
+<div class="flex items-center bg-slate-50 border border-slate-200 rounded-lg px-xs py-xs">
+<button class="w-6 h-6 flex items-center justify-center text-slate-600 hover:text-slate-900">-</button>
+<span class="w-8 text-center text-label-md font-bold">1</span>
+<button class="w-6 h-6 flex items-center justify-center text-slate-600 hover:text-slate-900">+</button>
+</div>
+<p class="font-title-lg text-[#0F766E]">₹499</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Coupon Section -->
+<div class="space-y-sm">
+<div class="flex gap-sm">
+<div class="flex-1 relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]">confirmation_number</span>
+<input class="w-full pl-10 pr-4 py-3 bg-white border border-slate-200 rounded-xl text-body-md focus:ring-2 focus:ring-[#0F766E]/20 focus:border-[#0F766E] outline-none transition-all" placeholder="Coupon code" type="text">
+</div>
+<button class="bg-[#0F766E] text-white px-6 rounded-xl font-label-lg hover:brightness-110 active:scale-95 transition-all">Apply</button>
+</div>
+<div class="flex items-center gap-xs text-emerald-600 bg-emerald-50 px-3 py-2 rounded-lg animate-pulse">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-label-md">Coupon Applied! ₹500 discount saved.</span>
+</div>
+</div>
+<!-- Order Summary -->
+<div class="bg-slate-50 rounded-2xl p-lg space-y-md border border-slate-100">
+<div class="flex justify-between items-center">
+<span class="text-body-md text-slate-500">Subtotal</span>
+<span class="font-label-lg text-slate-900">₹2,697</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-body-md text-slate-500">Discount</span>
+<span class="font-label-lg text-emerald-600">-₹500</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-body-md text-slate-500">Delivery</span>
+<span class="text-label-md text-emerald-600 font-bold bg-emerald-100 px-2 py-0.5 rounded">FREE</span>
+</div>
+<div class="border-t border-slate-200 pt-md mt-sm flex justify-between items-center">
+<span class="font-title-lg text-slate-900">Total</span>
+<span class="text-[20px] font-bold text-[#0F766E]">₹2,197</span>
+</div>
+</div>
+</main>
+<!-- Bottom NavBar Check / Checkout Button -->
+<div class="p-lg bg-white/80 backdrop-blur-md border-t border-slate-100 fixed bottom-0 left-0 right-0 max-w-[430px] mx-auto">
+<button class="w-full bg-[#0F766E] text-white py-4 rounded-2xl font-label-lg flex items-center justify-center gap-sm shadow-lg shadow-teal-900/10 hover:brightness-110 transition-all">
+                    Proceed to Checkout
+                    <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- DARK THEME PREVIEW -->
+<div class="w-full max-w-[430px] bg-[#0F172A] text-slate-200 rounded-[40px] shadow-2xl overflow-hidden flex flex-col border border-slate-800">
+<!-- TopAppBar -->
+<header class="bg-[#0F172A] text-slate-200 border-b border-slate-800 w-full top-0 flex items-center justify-between px-lg h-16 w-full">
+<button class="flex items-center justify-center w-10 h-10 hover:bg-slate-800 transition-colors rounded-full">
+<span class="material-symbols-outlined text-slate-200">arrow_back</span>
+</button>
+<div class="text-center">
+<h1 class="font-headline-md text-headline-md font-bold text-slate-100">My Cart</h1>
+<p class="text-caption text-slate-400">3 items</p>
+</div>
+<button class="flex items-center justify-center w-10 h-10 hover:bg-slate-800 transition-colors rounded-full">
+<span class="material-symbols-outlined text-slate-200">shopping_bag</span>
+</button>
+</header>
+<!-- Scrollable Content -->
+<main class="flex-1 overflow-y-auto p-lg space-y-2xl pb-32">
+<!-- Cart Items -->
+<div class="space-y-md">
+<!-- Item 1 -->
+<div class="bg-[#1E293B] rounded-xl p-md border border-[#334155] shadow-lg flex gap-md">
+<div class="w-20 h-20 bg-[#0F172A] rounded-lg overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A premium red running shoe captured in a moody, high-contrast dark environment. Subtle rim lighting accentuates the dynamic silhouette of the sneaker against the dark background. The scene is illuminated by cool-toned spotlights that emphasize the technical fabrics and modern design, reflecting a sleek dark-mode retail aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrSBMYuL0kjWYMCO2nvwDjKNfBmlQf2iNZbzPUhpH-TW_p02-2TiQuwiJoh1c8UQcD-ySBfZfG62_S6M_RylVFyliEHJ357iesdRUpNNmEhHY_7gU0AubO9HYHHYIcH9leU4LVzOupGc0pzMFGwk82HnTwID2JFglcpJM9hgX7o03RxSyfkMzkRwWX8lPBMn0KGBflwDVBDxLXzIlhct15oLzJgwX7gEkHRYXmMOjfujeyjnMUkYImRoMmOiSwjNXvVBW1Nm5u-I4">
+</div>
+<div class="flex-1 flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-label-lg text-slate-100">Swift Runner V2</h3>
+<div class="flex items-center gap-xs mt-xs">
+<div class="w-3 h-3 rounded-full bg-red-500"></div>
+<span class="text-caption text-slate-400">Red • Size 42</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-500 text-[20px] cursor-pointer hover:text-red-400 transition-colors">delete</span>
+</div>
+<div class="flex justify-between items-center mt-sm">
+<div class="flex items-center bg-[#0F172A] border border-[#334155] rounded-lg px-xs py-xs">
+<button class="w-6 h-6 flex items-center justify-center text-slate-400 hover:text-white">-</button>
+<span class="w-8 text-center text-label-md font-bold">1</span>
+<button class="w-6 h-6 flex items-center justify-center text-slate-400 hover:text-white">+</button>
+</div>
+<p class="font-title-lg text-[#14B8A6]">₹1,299</p>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="bg-[#1E293B] rounded-xl p-md border border-[#334155] shadow-lg flex gap-md">
+<div class="w-20 h-20 bg-[#0F172A] rounded-lg overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A minimalist white smartwatch glowing softly in a dark, atmospheric setting. The interface of the watch is subtly visible, reflecting a deep teal light. The composition uses dramatic shadows and a futuristic aesthetic, perfectly aligning with a premium dark-themed user interface. The materials appear high-end and polished." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8gbMh_JaMN3HheeFnOeUljW9Uw_Svqnv6hXYaVUGl_nhFAnEt39fWOcih5jyvmjcelBYCW82O_62eqV5WsiPGVqE0D-2FvTX68wEgYdDCBd1XwUTFbr-8K3IvJ03J0y7SKrzOf4gYtx2EFATcmcAbJDPemQqKbejQu1PsnZLpDWwPtD8X0Ve8V6-PGRumHfQkke2_3L3ltNrSBsoT7C0mD4O2L9gfvjQttc6-3S70rjlSJySdqjPrTVyJmaVXNvFGC5HzZq0Q46w">
+</div>
+<div class="flex-1 flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-label-lg text-slate-100">Pulse Smartwatch</h3>
+<div class="flex items-center gap-xs mt-xs">
+<div class="w-3 h-3 rounded-full bg-slate-300"></div>
+<span class="text-caption text-slate-400">White • One Size</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-500 text-[20px] cursor-pointer hover:text-red-400 transition-colors">delete</span>
+</div>
+<div class="flex justify-between items-center mt-sm">
+<div class="flex items-center bg-[#0F172A] border border-[#334155] rounded-lg px-xs py-xs">
+<button class="w-6 h-6 flex items-center justify-center text-slate-400 hover:text-white">-</button>
+<span class="w-8 text-center text-label-md font-bold">1</span>
+<button class="w-6 h-6 flex items-center justify-center text-slate-400 hover:text-white">+</button>
+</div>
+<p class="font-title-lg text-[#14B8A6]">₹899</p>
+</div>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="bg-[#1E293B] rounded-xl p-md border border-[#334155] shadow-lg flex gap-md">
+<div class="w-20 h-20 bg-[#0F172A] rounded-lg overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Professional grade black headphones with subtle metallic details, presented in a dark, low-key lighting scenario. The textures of the leather and high-quality plastics are highlighted by a soft indigo glow. The mood is sophisticated and moody, emphasizing a luxury audio experience within a modern dark-mode digital ecosystem." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCidt-ItsxdcYXQYFsxOsGIy2tu4QQ6uuLyGkQi-y-g5Q3_Y4O2fp_9lkg6C6WrWeCHXT__c1igrkhlhd_-zMlYxGO3U4JsIYUkUljN4gDOd_aijdAlND5GVG5nmwQ2YfN3xA7tPIvnYrSCilSuCbTIvfCYz5uuxUCV7xO_njkWC-jdpYBxDA_Zx0hUY2A3bkmWxjNi9VOKS4ENezs5OR7IzJBZUSGAm1__-n8dbWRkqz4VV_7EXcc4ljO8UPEfpXwIxWfcTUV0Ww">
+</div>
+<div class="flex-1 flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-label-lg text-slate-100">Elite Audio Buds</h3>
+<div class="flex items-center gap-xs mt-xs">
+<div class="w-3 h-3 rounded-full bg-black"></div>
+<span class="text-caption text-slate-400">Midnight • Pro</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-500 text-[20px] cursor-pointer hover:text-red-400 transition-colors">delete</span>
+</div>
+<div class="flex justify-between items-center mt-sm">
+<div class="flex items-center bg-[#0F172A] border border-[#334155] rounded-lg px-xs py-xs">
+<button class="w-6 h-6 flex items-center justify-center text-slate-400 hover:text-white">-</button>
+<span class="w-8 text-center text-label-md font-bold">1</span>
+<button class="w-6 h-6 flex items-center justify-center text-slate-400 hover:text-white">+</button>
+</div>
+<p class="font-title-lg text-[#14B8A6]">₹499</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Coupon Section -->
+<div class="space-y-sm">
+<div class="flex gap-sm">
+<div class="flex-1 relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-[20px]">confirmation_number</span>
+<input class="w-full pl-10 pr-4 py-3 bg-[#1E293B] border border-[#334155] rounded-xl text-slate-100 text-body-md focus:ring-2 focus:ring-[#14B8A6]/20 focus:border-[#14B8A6] outline-none transition-all placeholder:text-slate-500" placeholder="Coupon code" type="text">
+</div>
+<button class="bg-[#14B8A6] text-[#0F172A] px-6 rounded-xl font-label-lg font-bold hover:brightness-110 active:scale-95 transition-all">Apply</button>
+</div>
+<div class="flex items-center gap-xs text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-3 py-2 rounded-lg animate-pulse">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-label-md">Coupon Applied! ₹500 discount saved.</span>
+</div>
+</div>
+<!-- Order Summary -->
+<div class="bg-[#1E293B] rounded-2xl p-lg space-y-md border border-[#334155]">
+<div class="flex justify-between items-center">
+<span class="text-body-md text-slate-400">Subtotal</span>
+<span class="font-label-lg text-slate-200">₹2,697</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-body-md text-slate-400">Discount</span>
+<span class="font-label-lg text-emerald-400">-₹500</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-body-md text-slate-400">Delivery</span>
+<span class="text-label-md text-emerald-400 font-bold bg-emerald-400/20 px-2 py-0.5 rounded">FREE</span>
+</div>
+<div class="border-t border-[#334155] pt-md mt-sm flex justify-between items-center">
+<span class="font-title-lg text-slate-200">Total</span>
+<span class="text-[20px] font-bold text-[#14B8A6]">₹2,197</span>
+</div>
+</div>
+</main>
+<!-- Bottom NavBar Checkout Button -->
+<div class="p-lg bg-[#0F172A]/80 backdrop-blur-md border-t border-slate-800 fixed bottom-0 left-0 right-0 max-w-[430px] mx-auto">
+<button class="w-full bg-[#14B8A6] text-[#0F172A] py-4 rounded-2xl font-label-lg font-bold flex items-center justify-center gap-sm shadow-xl shadow-teal-500/10 hover:brightness-110 transition-all">
+                    Proceed to Checkout
+                    <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Background Decoration for Atmosphere -->
+<div class="fixed top-0 left-0 w-full h-full -z-10 overflow-hidden pointer-events-none opacity-40">
+<div class="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-primary-container/20 rounded-full blur-[120px]"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-tertiary-container/20 rounded-full blur-[120px]"></div>
+</div>
+<script>
+        // Micro-interactions
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                btn.style.transform = 'scale(0.96)';
+                setTimeout(() => {
+                    btn.style.transform = '';
+                }, 100);
+            });
+        });
+    </script>
+<div id="snapdom-sandbox" data-snapdom-sandbox="true" aria-hidden="true" style="position: absolute; left: -9999px; top: -9999px; width: 0px; height: 0px; overflow: hidden;"></div></body></html>

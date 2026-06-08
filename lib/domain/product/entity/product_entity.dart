@@ -1,10 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_commerce_application/domain/product/entity/color_entity.dart';
 
 class ProductEntity {
   final String categoryId;
   final List<ProductColorEntity> color;
-  final Timestamp createdDate;
+  final DateTime createdDate;
   final num discountPrice;
   final num gender;
   final List<String> images;
@@ -13,8 +12,16 @@ class ProductEntity {
   final List<String> sizes;
   final String title;
   final num salesNumber;
+  final String description;
+  final String dimensions;
+  final String manufactureInformation;
+  final double rating;
+  final int ratingCount;
 
   ProductEntity({
+    required this.description,
+    required this.dimensions,
+    required this.manufactureInformation,
     required this.categoryId,
     required this.color,
     required this.createdDate,
@@ -26,5 +33,7 @@ class ProductEntity {
     required this.sizes,
     required this.title,
     required this.salesNumber,
+    this.rating = 0.0,
+    this.ratingCount = 0,
   });
 }

@@ -1,4 +1,4 @@
-import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
+import 'package:e_commerce_application/core/configs/theme/app_text_theme.dart';
 import 'package:e_commerce_application/domain/product/entity/product_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,16 +12,21 @@ class ProductPrice extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.w),
-      child: Text(
-        "₹ ${productEntity.discountPrice != 0 ? productEntity.discountPrice : productEntity.price}",
-        style: const TextStyle(
-          fontWeight: FontWeight.bold,
-          color: AppColors.primary,
-          fontSize: 18,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "₹${productEntity.discountPrice != 0 ? productEntity.discountPrice : productEntity.price}",
+          style: AppTextStyles.base.s24.w600,
         ),
-      ),
+        SizedBox(
+          width: 5.w,
+        ),
+        Text(
+          "(Inclusive of all taxes )",
+          style: AppTextStyles.base.s12,
+        )
+      ],
     );
   }
 }

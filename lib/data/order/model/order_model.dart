@@ -1,5 +1,5 @@
 import 'package:e_commerce_application/data/order/model/order_status_model.dart';
-import 'package:e_commerce_application/data/order/model/product_ordered_model.dart';
+import 'package:e_commerce_application/data/cart/model/product_ordered_model.dart';
 import 'package:e_commerce_application/domain/order/entity/order_entity.dart';
 
 class OrderModel {

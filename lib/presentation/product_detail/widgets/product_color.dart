@@ -1,7 +1,6 @@
-import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
-import 'package:e_commerce_application/domain/product/entity/product_entity.dart';
 import 'package:e_commerce_application/presentation/product_detail/bloc/product_color_selection_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:e_commerce_application/domain/product/entity/product_entity.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -11,113 +10,76 @@ class ProductColors extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height / 2,
-      padding: EdgeInsets.all(16.w),
-      decoration: BoxDecoration(
-        color: AppColors.background,
-        borderRadius: BorderRadius.only(
-          topRight: Radius.circular(16.r),
-          topLeft: Radius.circular(16.r),
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+    final colorScheme = theme.colorScheme;
+    final activeRingColor = isDark ? const Color(0xFF14B8A6) : const Color(0xFF4F378A);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "Color",
+          style: TextStyle(
+            fontSize: 14.sp,
+            fontWeight: FontWeight.bold,
+            color: colorScheme.onSurface,
+          ),
         ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SizedBox(
-            height: 40.h,
-            child: Stack(
-              children: [
-                const Center(
-                  child: Text(
-                    'Color',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.bottomRight,
-                  child: IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: const Icon(Icons.close)),
-                )
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 20.h,
-          ),
-          Expanded(
-            child: ListView.separated(
-              shrinkWrap: true,
-              itemBuilder: (context, index) {
-                return BlocBuilder<ProductColorSelectionCubit, int>(
-                  builder: (context, state) => GestureDetector(
+        SizedBox(height: 8.h),
+        SizedBox(
+          height: 38.h,
+          child: ListView.separated(
+            scrollDirection: Axis.horizontal,
+            itemCount: productEntity.color.length,
+            separatorBuilder: (context, index) => SizedBox(width: 12.w),
+            itemBuilder: (context, index) {
+              final col = productEntity.color[index];
+              // Parse RGB colors
+              final r = col.rgb[0].toInt();
+              final g = col.rgb[1].toInt();
+              final b = col.rgb[2].toInt();
+              final dotColor = Color.fromARGB(255, r, g, b);
+
+              return BlocBuilder<ProductColorSelectionCubit, int>(
+                builder: (context, selectedIndex) {
+                  final isSelected = selectedIndex == index;
+                  return GestureDetector(
                     onTap: () {
-                      context
-                          .read<ProductColorSelectionCubit>()
-                          .itemSelection(index);
-                      Navigator.pop(context);
+                      context.read<ProductColorSelectionCubit>().itemSelection(index);
                     },
                     child: Container(
-                      height: 60.h,
-                      padding: EdgeInsets.symmetric(horizontal: 16.w),
+                      width: 36.w,
+                      height: 36.h,
                       decoration: BoxDecoration(
-                        color: state == index
-                            ? AppColors.primary
-                            : AppColors.secondBackground,
-                        borderRadius: BorderRadius.circular(50.r),
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: isSelected ? activeRingColor : Colors.transparent,
+                          width: 2.w,
+                        ),
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            productEntity.color[index].title,
-                            style: const TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 16),
+                      padding: EdgeInsets.all(3.r), // spacing gap for double-ring
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: dotColor,
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            // Add a subtle border for white color so it stands out on white bg
+                            color: (r > 240 && g > 240 && b > 240)
+                                ? Colors.grey.shade300
+                                : Colors.transparent,
+                            width: 1.w,
                           ),
-                          Row(
-                            children: [
-                              Container(
-                                height: 20.h,
-                                width: 20.w,
-                                decoration: BoxDecoration(
-                                  color: Color.fromRGBO(
-                                      productEntity.color[index].rgb[0].toInt(),
-                                      productEntity.color[index].rgb[1].toInt(),
-                                      productEntity.color[index].rgb[2].toInt(),
-                                      1),
-                                  shape: BoxShape.circle,
-                                ),
-                              ),
-                              SizedBox(
-                                width: 15.w,
-                              ),
-                              state == index
-                                  ? const Icon(
-                                      Icons.check,
-                                      size: 30,
-                                    )
-                                  : Container(
-                                      width: 30.w,
-                                    )
-                            ],
-                          ),
-                        ],
+                        ),
                       ),
                     ),
-                  ),
-                );
-              },
-              separatorBuilder: (context, index) => SizedBox(
-                height: 20.h,
-              ),
-              itemCount: productEntity.color.length,
-            ),
+                  );
+                },
+              );
+            },
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

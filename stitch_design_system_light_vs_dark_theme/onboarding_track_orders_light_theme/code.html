@@ -1,0 +1,192 @@
+<!DOCTYPE html><html class="light" lang="en" style="width: 390px; height: 884px; overflow: hidden; position: relative;"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Track Your Orders - Onboarding</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-error": "#ffffff",
+                      "on-tertiary-fixed-variant": "#594400",
+                      "error": "#ba1a1a",
+                      "on-tertiary-container": "#503d00",
+                      "outline-variant": "#cbc4d2",
+                      "tertiary-fixed-dim": "#e7c365",
+                      "secondary-container": "#e1d4fd",
+                      "on-background": "#1d1b20",
+                      "surface-variant": "#e6e0e9",
+                      "secondary-fixed": "#e9ddff",
+                      "on-secondary-fixed-variant": "#4b4263",
+                      "on-primary-container": "#e0d2ff",
+                      "on-primary-fixed": "#22005d",
+                      "inverse-primary": "#cfbcff",
+                      "on-secondary-container": "#645a7d",
+                      "secondary-fixed-dim": "#cdc0e9",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-container-low": "#f8f2fa",
+                      "surface-tint": "#6750a4",
+                      "surface-container": "#f2ecf4",
+                      "on-primary-fixed-variant": "#4f378a",
+                      "inverse-on-surface": "#f5eff7",
+                      "on-tertiary": "#ffffff",
+                      "tertiary-fixed": "#ffdf93",
+                      "surface": "#fdf7ff",
+                      "outline": "#7a7582",
+                      "inverse-surface": "#322f35",
+                      "error-container": "#ffdad6",
+                      "surface-bright": "#fdf7ff",
+                      "primary-fixed": "#e9ddff",
+                      "on-primary": "#ffffff",
+                      "primary-container": "#6750a4",
+                      "on-secondary-fixed": "#1f1635",
+                      "background": "#fdf7ff",
+                      "surface-dim": "#ded8e0",
+                      "tertiary": "#765b00",
+                      "surface-container-high": "#ece6ee",
+                      "on-tertiary-fixed": "#241a00",
+                      "on-secondary": "#ffffff",
+                      "primary": "#4f378a",
+                      "on-surface-variant": "#494551",
+                      "secondary": "#63597c",
+                      "primary-fixed-dim": "#cfbcff",
+                      "on-error-container": "#93000a",
+                      "surface-container-highest": "#e6e0e9",
+                      "on-surface": "#1d1b20",
+                      "tertiary-container": "#c9a74d",
+                      "brand-teal": "#0F766E",
+                      "brand-gray-dark": "#1F2937",
+                      "brand-gray-medium": "#6B7280",
+                      "brand-gray-light": "#E5E7EB"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "3xl": "32px",
+                      "5xl": "48px",
+                      "2xl": "24px",
+                      "xs": "4px",
+                      "sm": "8px",
+                      "lg": "16px",
+                      "4xl": "40px",
+                      "xl": "20px",
+                      "md": "12px"
+              },
+              "fontFamily": {
+                "sans": ["Poppins", "sans-serif"]
+              },
+              "fontSize": {
+                      "title-lg": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                      "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "600"}],
+                      "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                      "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "caption": ["11px", {"lineHeight": "14px", "fontWeight": "400"}],
+                      "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+      </script>
+<style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #FFFFFF;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen text-on-surface">
+<!-- Top App Bar (Restricted Shell - "Back" action implies temporary departure) -->
+<header class="w-full top-0 sticky bg-surface flex items-center justify-between px-lg h-16 border-b border-outline-variant z-10">
+<button aria-label="Go back" class="p-md rounded-full transition-colors duration-200 hover:bg-surface-variant/50 active:scale-95">
+<span class="material-symbols-outlined text-primary">arrow_back</span>
+</button>
+<h1 class="font-title-lg text-title-lg text-primary">Step 3 of 3</h1>
+<div class="w-10"></div> <!-- Spacer for center alignment -->
+</header>
+<main class="flex-1 flex flex-col items-center justify-center px-lg pb-4xl text-center max-w-md mx-auto w-full">
+<!-- Illustration Section with Ambient Shadow -->
+<div class="relative w-full aspect-square mb-3xl flex items-center justify-center">
+<div class="absolute inset-0 bg-primary/5 rounded-full blur-3xl scale-75"></div>
+<img alt="Real-time delivery tracking illustration" class="relative z-10 w-full h-full object-contain drop-shadow-2xl animate-pulse-subtle" src="https://lh3.googleusercontent.com/aida/AP1WRLusfCEt1IfuKnYFk8Fpc7YMMdm5JKC-bm6t9S1alsUF6SZlpLQwsNBDZ9U-5XyGhNYgA9Ijm9ped4yZorMmV1Q6fGI3sbZURXeQoL1TYoNdkCsIJgkAf00SKzQaoTfVddZfiMC9-A30B7G5DykiizXdfAdP8UBlW_BQDzFT_H8Cw4sJ_TRqKvjWjQb6Npq-cyd7kNjrn89CAkruA1udKX7A7dbpjckWtmB1IdK6TjozJN7oQMS3aQW3aXk">
+</div>
+<!-- Content Section -->
+<div class="space-y-md mb-4xl">
+<h2 class="font-display-lg text-display-lg text-brand-gray-dark tracking-tight">
+                Track Your Orders
+            </h2>
+<p class="font-body-lg text-body-lg text-brand-gray-medium max-w-[280px] mx-auto">
+                Real-time order tracking from placement to delivery
+            </p>
+</div>
+<!-- Onboarding Progress Dots -->
+<div class="flex gap-sm mb-5xl">
+<div class="h-1.5 w-1.5 rounded-full bg-brand-gray-light"></div>
+<div class="h-1.5 w-1.5 rounded-full bg-brand-gray-light"></div>
+<div class="h-1.5 w-8 rounded-full bg-brand-teal transition-all duration-300"></div>
+</div>
+<!-- Call to Action -->
+<div class="w-full px-lg">
+<button class="w-full h-14 bg-brand-teal text-white font-label-lg text-label-lg rounded-xl shadow-lg shadow-brand-teal/20 transition-all duration-200 active:scale-95 flex items-center justify-center gap-sm group" onclick="this.classList.add('scale-95')">
+                Get Started
+                <span class="material-symbols-outlined transition-transform duration-200 group-hover:translate-x-1">arrow_forward</span>
+</button>
+<button class="mt-md w-full h-10 text-brand-gray-medium font-label-md text-label-md hover:text-brand-gray-dark transition-colors">
+                Skip for now
+            </button>
+</div>
+</main>
+<!-- Micro-interaction Scripts -->
+<script>
+        // Subtle entrance animations
+        document.addEventListener('DOMContentLoaded', () => {
+            const mainContent = document.querySelector('main');
+            mainContent.style.opacity = '0';
+            mainContent.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                mainContent.style.transition = 'all 0.6s cubic-bezier(0.22, 1, 0.36, 1)';
+                mainContent.style.opacity = '1';
+                mainContent.style.transform = 'translateY(0)';
+            }, 100);
+        });
+
+        // Add a subtle parallax effect to the image on mouse move (desktop only)
+        if (window.innerWidth > 768) {
+            document.addEventListener('mousemove', (e) => {
+                const img = document.querySelector('img');
+                const xAxis = (window.innerWidth / 2 - e.pageX) / 45;
+                const yAxis = (window.innerHeight / 2 - e.pageY) / 45;
+                img.style.transform = `translate(${xAxis}px, ${yAxis}px)`;
+            });
+        }
+    </script>
+<style>
+        @keyframes pulse-subtle {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+        .animate-pulse-subtle {
+            animation: pulse-subtle 4s ease-in-out infinite;
+        }
+    </style>
+<div id="snapdom-sandbox" data-snapdom-sandbox="true" aria-hidden="true" style="position: absolute; left: -9999px; top: -9999px; width: 0px; height: 0px; overflow: hidden;"></div></body></html>

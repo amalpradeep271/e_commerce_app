@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LuxeCommerce Onboarding Comparison</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface-bright": "#fdf7ff",
+            "primary-fixed-dim": "#cfbcff",
+            "on-tertiary-fixed-variant": "#594400",
+            "secondary": "#63597c",
+            "surface-dim": "#ded8e0",
+            "on-tertiary-container": "#503d00",
+            "background": "#fdf7ff",
+            "on-background": "#1d1b20",
+            "surface-container-high": "#ece6ee",
+            "secondary-container": "#e1d4fd",
+            "on-tertiary-fixed": "#241a00",
+            "secondary-fixed-dim": "#cdc0e9",
+            "tertiary": "#765b00",
+            "inverse-on-surface": "#f5eff7",
+            "surface": "#fdf7ff",
+            "surface-container": "#f2ecf4",
+            "outline-variant": "#cbc4d2",
+            "primary": "#4f378a",
+            "on-surface": "#1d1b20",
+            "on-secondary-container": "#645a7d",
+            "surface-tint": "#6750a4",
+            "on-primary-fixed-variant": "#4f378a",
+            "on-error-container": "#93000a",
+            "surface-variant": "#e6e0e9",
+            "surface-container-low": "#f8f2fa",
+            "primary-container": "#6750a4",
+            "secondary-fixed": "#e9ddff",
+            "primary-fixed": "#e9ddff",
+            "on-surface-variant": "#494551",
+            "on-secondary": "#ffffff",
+            "on-primary-container": "#e0d2ff",
+            "tertiary-fixed-dim": "#e7c365",
+            "surface-container-highest": "#e6e0e9",
+            "on-primary": "#ffffff",
+            "tertiary-container": "#c9a74d",
+            "inverse-primary": "#cfbcff",
+            "error": "#ba1a1a",
+            "on-tertiary": "#ffffff",
+            "inverse-surface": "#322f35",
+            "on-secondary-fixed-variant": "#4b4263",
+            "on-primary-fixed": "#22005d",
+            "on-secondary-fixed": "#1f1635",
+            "tertiary-fixed": "#ffdf93",
+            "on-error": "#ffffff",
+            "outline": "#7a7582",
+            "error-container": "#ffdad6",
+            "surface-container-lowest": "#ffffff"
+          },
+          borderRadius: {
+            "DEFAULT": "4px",
+            "lg": "8px",
+            "xl": "12px",
+            "2xl": "16px",
+            "full": "9999px"
+          },
+          spacing: {
+            "lg": "16px",
+            "sm": "8px",
+            "4xl": "40px",
+            "xs": "4px",
+            "2xl": "24px",
+            "md": "12px",
+            "3xl": "32px",
+            "xl": "20px",
+            "5xl": "48px"
+          },
+          fontFamily: {
+            'display': ['Poppins', 'sans-serif'],
+            'body': ['Poppins', 'sans-serif']
+          },
+          fontSize: {
+            "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "600" }],
+            "title-lg": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+            "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "caption": ["11px", { "lineHeight": "14px", "fontWeight": "400" }],
+            "display-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f3f4f6; /* Neutral page bg for comparison view */
+    }
+    .phone-canvas {
+      width: 390px;
+      height: 844px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      border: 8px solid #1f2937;
+      border-radius: 40px;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+  </style>
+</head>
+<body class="flex flex-col items-center py-5xl gap-5xl">
+<!-- LIGHT THEME VERSION -->
+<!-- DARK THEME VERSION -->
+<section class="flex flex-col items-center gap-lg">
+<div class="phone-canvas bg-[#0F172A]">
+<!-- Status Bar Placeholder -->
+<div class="h-10 w-full flex justify-between items-center px-lg py-sm">
+<span class="text-[14px] font-bold text-[#F1F5F9]">9:41</span>
+<div class="flex gap-xs items-center">
+<span class="material-symbols-outlined text-[18px] text-[#F1F5F9]">signal_cellular_4_bar</span>
+<span class="material-symbols-outlined text-[18px] text-[#F1F5F9]">wifi</span>
+<span class="material-symbols-outlined text-[18px] text-[#F1F5F9]">battery_full</span>
+</div>
+</div>
+<div class="flex flex-col h-full px-lg pt-4xl">
+<!-- Illustration Area -->
+<div class="flex-grow flex items-center justify-center p-lg">
+<img alt="Person browsing products illustration" class="w-full max-h-[350px] object-contain brightness-90 transform hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida/AP1WRLs_Qo6ArNCOV21UG5XZC4fIpip0mLPMcWfBzte9iKSPS7p8YEBlXxDLavTwNpl85AeIsY_oO_RjgXnk1NPVKE7FsC5euJPBeFnyO3KxJ3IJScRAJm34a454JVqnSbbKnoinq_WS0wSOX-vjrAID-36-2MbtEP85HxD796r-6doEexsTUyhkeRBxnVIDqoDvIRUwVEfUjmcBVk7wdbFIT241xai0uE70I18njVIjdCmVyKSKZRu5UuucRrQ"/>
+</div>
+<!-- Content Area -->
+<div class="pb-5xl text-center space-y-md">
+<h1 class="text-[#F1F5F9] font-headline-lg text-headline-lg">Discover Amazing Products</h1>
+<p class="text-[#94A3B8] font-body-md text-body-md max-w-[280px] mx-auto">Browse thousands of products from top categories</p>
+<!-- Progress Dots -->
+<div class="flex justify-center gap-sm pt-lg">
+<div class="w-2.5 h-2.5 rounded-full bg-[#14B8A6]"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-[#334155]"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-[#334155]"></div>
+</div>
+<!-- Action -->
+<div class="pt-2xl">
+<button class="w-full bg-[#14B8A6] text-white py-lg rounded-xl font-label-lg text-label-lg shadow-xl shadow-[#14B8A6]/20 active:scale-95 transition-all">
+              Next
+            </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Interactive script for demo purpose -->
+<script>
+    document.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('mousedown', () => {
+        btn.classList.add('scale-95');
+      });
+      btn.addEventListener('mouseup', () => {
+        btn.classList.remove('scale-95');
+      });
+    });
+
+    // Subtle floating animation for images
+    const images = document.querySelectorAll('img');
+    let angle = 0;
+    function animate() {
+      angle += 0.02;
+      const y = Math.sin(angle) * 5;
+      images.forEach(img => {
+        img.style.transform = `translateY(${y}px)`;
+      });
+      requestAnimationFrame(animate);
+    }
+    animate();
+  </script>
+</body></html>

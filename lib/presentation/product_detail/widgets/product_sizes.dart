@@ -1,11 +1,8 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:e_commerce_application/presentation/product_detail/bloc/product_size_selection_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:e_commerce_application/domain/product/entity/product_entity.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
-import 'package:e_commerce_application/domain/product/entity/product_entity.dart';
 
 class ProductSizes extends StatelessWidget {
   final ProductEntity productEntity;
@@ -16,90 +13,68 @@ class ProductSizes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height / 2,
-      padding: EdgeInsets.all(16.w),
-      decoration: BoxDecoration(
-          color: AppColors.background,
-          borderRadius: BorderRadius.only(
-              topRight: Radius.circular(16.r), topLeft: Radius.circular(16.r))),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SizedBox(
-            height: 40.h,
-            child: Stack(
-              children: [
-                const Center(
-                  child: Text(
-                    'Size',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.bottomRight,
-                  child: IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: const Icon(Icons.close)),
-                )
-              ],
-            ),
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+    final colorScheme = theme.colorScheme;
+    final activeThemeColor = isDark ? const Color(0xFF14B8A6) : const Color(0xFF006970);
+    final borderUnselectedColor = isDark ? const Color(0xFF334155) : const Color(0xFFE2E8F0);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "Select Size",
+          style: TextStyle(
+            fontSize: 14.sp,
+            fontWeight: FontWeight.bold,
+            color: colorScheme.onSurface,
           ),
-          SizedBox(height: 20.h),
-          Expanded(
-            child: ListView.separated(
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return BlocBuilder<ProductSizeSelectionCubit, int>(
-                    builder: (context, state) => GestureDetector(
-                      onTap: () {
-                        context
-                            .read<ProductSizeSelectionCubit>()
-                            .itemSelection(index);
-                        Navigator.pop(context);
-                      },
-                      child: Container(
-                        height: 60.h,
-                        padding: EdgeInsets.symmetric(horizontal: 16.w),
-                        decoration: BoxDecoration(
-                            color: state == index
-                                ? AppColors.primary
-                                : AppColors.secondBackground,
-                            borderRadius: BorderRadius.circular(50.r)),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 15),
-                              child: Text(
-                                productEntity.sizes[index],
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                ),
-                              ),
-                            ),
-                            state == index
-                                ? const Icon(
-                                    Icons.check,
-                                    size: 30,
-                                  )
-                                : Container(
-                                    width: 30,
-                                  )
-                          ],
+        ),
+        SizedBox(height: 8.h),
+        SizedBox(
+          height: 42.h,
+          child: ListView.separated(
+            scrollDirection: Axis.horizontal,
+            itemCount: productEntity.sizes.length,
+            separatorBuilder: (context, index) => SizedBox(width: 10.w),
+            itemBuilder: (context, index) {
+              return BlocBuilder<ProductSizeSelectionCubit, int>(
+                builder: (context, state) {
+                  final isSelected = state == index;
+                  return GestureDetector(
+                    onTap: () {
+                      context.read<ProductSizeSelectionCubit>().itemSelection(index);
+                    },
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+                      decoration: BoxDecoration(
+                        color: isSelected ? activeThemeColor : Colors.transparent,
+                        border: Border.all(
+                          color: isSelected ? activeThemeColor : borderUnselectedColor,
+                          width: 1.5.w,
+                        ),
+                        borderRadius: BorderRadius.circular(12.r),
+                      ),
+                      child: Center(
+                        child: Text(
+                          productEntity.sizes[index],
+                          style: TextStyle(
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.bold,
+                            color: isSelected
+                                ? (isDark ? Colors.black : Colors.white)
+                                : colorScheme.onSurface,
+                          ),
                         ),
                       ),
                     ),
                   );
                 },
-                separatorBuilder: (context, index) => SizedBox(height: 20.h),
-                itemCount: productEntity.sizes.length),
+              );
+            },
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

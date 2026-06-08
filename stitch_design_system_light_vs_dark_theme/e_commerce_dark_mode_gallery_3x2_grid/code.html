@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-error": "#ffffff",
+                      "outline": "#7a7582",
+                      "secondary-fixed": "#e9ddff",
+                      "on-tertiary": "#ffffff",
+                      "on-background": "#1d1b20",
+                      "inverse-on-surface": "#f5eff7",
+                      "tertiary": "#765b00",
+                      "on-secondary": "#ffffff",
+                      "surface-bright": "#fdf7ff",
+                      "background": "#0F172A",
+                      "surface-container-lowest": "#ffffff",
+                      "secondary-container": "#e1d4fd",
+                      "outline-variant": "#334155",
+                      "on-error-container": "#93000a",
+                      "surface-dim": "#ded8e0",
+                      "primary": "#14B8A6",
+                      "on-primary-fixed-variant": "#4f378a",
+                      "tertiary-fixed": "#ffdf93",
+                      "on-secondary-fixed-variant": "#4b4263",
+                      "surface-tint": "#6750a4",
+                      "surface-container": "#1E293B",
+                      "primary-fixed-dim": "#cfbcff",
+                      "on-tertiary-container": "#503d00",
+                      "on-surface": "#F1F5F9",
+                      "surface": "#1E293B",
+                      "on-primary-container": "#e0d2ff",
+                      "secondary-fixed-dim": "#cdc0e9",
+                      "on-tertiary-fixed-variant": "#594400",
+                      "surface-variant": "#e6e0e9",
+                      "inverse-surface": "#0F172A",
+                      "primary-container": "#14B8A6",
+                      "surface-container-high": "#ece6ee",
+                      "error": "#ba1a1a",
+                      "surface-container-highest": "#e6e0e9",
+                      "secondary": "#63597c",
+                      "on-surface-variant": "#94A3B8",
+                      "tertiary-container": "#c9a74d",
+                      "on-primary": "#ffffff",
+                      "surface-container-low": "#f8f2fa",
+                      "on-secondary-fixed": "#1f1635",
+                      "on-secondary-container": "#645a7d",
+                      "error-container": "#ffdad6",
+                      "tertiary-fixed-dim": "#e7c365",
+                      "primary-fixed": "#e9ddff",
+                      "on-tertiary-fixed": "#241a00",
+                      "on-primary-fixed": "#22005d",
+                      "inverse-primary": "#cfbcff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "12px",
+                      "2xl": "16px",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xl": "20px",
+                      "sm": "8px",
+                      "lg": "16px",
+                      "4xl": "40px",
+                      "5xl": "48px",
+                      "3xl": "32px",
+                      "2xl": "24px",
+                      "xs": "4px",
+                      "md": "12px"
+              },
+              "fontSize": {
+                      "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "600"}],
+                      "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "title-lg": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "caption": ["11px", {"lineHeight": "14px", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen selection:bg-primary selection:text-white">
+<main class="max-w-7xl mx-auto px-lg py-4xl">
+<!-- Header Section -->
+<header class="mb-4xl text-center">
+<h1 class="font-display-lg text-display-lg text-primary mb-md">LuxeShop UI Showcase</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">
+                A premium Dark Mode experience designed for high-end retail. Featuring sophisticated depth, vivid highlights, and a focus on product aesthetics.
+            </p>
+</header>
+<!-- Grid Container -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3xl">
+<!-- 1. HOME SCREEN -->
+<section class="relative group aspect-[9/19.5] bg-inverse-surface rounded-[40px] border-[8px] border-surface-container overflow-hidden shadow-2xl">
+<div class="h-full flex flex-col relative overflow-y-auto hide-scrollbar">
+<!-- Top Bar -->
+<div class="fixed top-0 w-full z-10 px-lg h-16 flex justify-between items-center bg-inverse-surface/80 backdrop-blur-md">
+<span class="font-display-lg text-headline-md font-bold text-primary">LuxeShop</span>
+<div class="flex gap-md">
+<span class="material-symbols-outlined text-on-surface" data-icon="search">search</span>
+<span class="material-symbols-outlined text-on-surface" data-icon="shopping_bag">shopping_bag</span>
+</div>
+</div>
+<!-- Hero Section -->
+<div class="mt-16 p-lg">
+<div class="relative rounded-2xl overflow-hidden aspect-[4/3] mb-lg">
+<img class="w-full h-full object-cover" data-alt="A premium red designer sneaker floating in a dark, atmospheric studio. High-contrast cinematic lighting with a soft cyan glow from the bottom. Minimalist setting with deep shadows and sharp highlights on the leather texture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB50ZGjEqw6p_QP0fdF0Fs0P_XmQu3f259NeY7E35FjyY5Bj6EZKjFF699f0AGmrFzt3W4KvBMYSjhCevEilfkgzJxU_zmNfMOfM0EIV73YU2D68ZxhhvXaxcy7o_MFhnABagnLcI0Wis2kcLaIbjldyAxWxn9Xs4NNw3_WQOy_0TRju_Wc9qHNUyngRkpgnNNTsumSSACQloiWyo4084zXi7L8FBZ7QKw1Q5RaAvAP6FqJYnWveNvX3wU1RzByfhpww1-UCtOEUIQ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-md">
+<span class="bg-primary text-white font-label-lg px-md py-xs rounded-full">New Arrival</span>
+</div>
+</div>
+<h2 class="font-headline-md text-headline-md mb-xs">Summer Collection</h2>
+<p class="font-body-md text-on-surface-variant mb-lg">Curated essentials for the season.</p>
+<!-- Grid Products -->
+<div class="grid grid-cols-2 gap-md">
+<div class="bg-surface rounded-xl p-xs border border-outline-variant">
+<img class="rounded-lg mb-xs aspect-square object-cover" data-alt="A high-end white minimalist wristwatch displayed on a dark grey slate surface. The lighting is soft and top-down, creating gentle shadows. The aesthetic is clean, corporate, and luxury." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCA8zI2fHKKW1OljbYTK5CSNhdEMJPNk47WcqkImjdWC7juXbTxcolbeeD9lhd_VvCiQi-mEkqLGzxgqjd_fxcW2W0rjRY7YACiXFlKLs8CAz-7ESfl7ZLuVIBrKDj2Jdzuaix2EJ5ZmVCMWFAy23eWj7lN6nVzSKCWnmf1DJkx6krNQw7cFrxVIRJJUE8X6o-Z6j67yUneZ0NVxCeNkoGa5fOIA0c8ZL3OELPz-GhAroS4ViuNcO5TKbD1Kjt0FNbRhnUQDTc2lpk"/>
+<p class="font-label-lg px-xs">Classic Chrono</p>
+<p class="font-label-md text-primary px-xs pb-xs">$299.00</p>
+</div>
+<div class="bg-surface rounded-xl p-xs border border-outline-variant">
+<img class="rounded-lg mb-xs aspect-square object-cover" data-alt="Premium black over-ear noise-canceling headphones in a dark studio setting. Teal neon accents reflect off the polished surfaces. Professional audio gear aesthetic with a moody, high-tech atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTnBGfvMKID8JXIfm-PyJwwScc9EqW94109P-FMBSbWdyS2FpzNlD46eOBCFBg_AG97EE19h8GwI5XI97D5Gu3NPJqY_J6snjdRyVCtjAB-xILGaq0hG5ZoTKHXw9K24rQ7GhNBcrZ_mbZp7doJi5zpzH6ucNf-TyrvH2EN-iinmZv9mM87ZnkDVX_hL3LoSZThABo_jdhkdXsSZRj9ryMv8h8F2sCU4byuALnL38dXMSYZYLKKOyoMvKkzuVElIbRoaYCy6HOwBA"/>
+<p class="font-label-lg px-xs">Pro Studio</p>
+<p class="font-label-md text-primary px-xs pb-xs">$450.00</p>
+</div>
+</div>
+</div>
+<!-- Status Overlay Label -->
+<div class="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/80 px-lg py-xs rounded-full border border-white/10 z-50 pointer-events-none">
+<span class="text-white text-caption uppercase tracking-widest font-bold">1. Home</span>
+</div>
+</div>
+</section>
+<!-- 2. PRODUCT DETAIL -->
+<section class="relative group aspect-[9/19.5] bg-inverse-surface rounded-[40px] border-[8px] border-surface-container overflow-hidden shadow-2xl">
+<div class="h-full flex flex-col relative overflow-y-auto hide-scrollbar pb-32">
+<div class="relative h-[400px]">
+<img class="w-full h-full object-cover" data-alt="Luxury designer handbag in emerald green leather, set against a dark textured background. Dramatic side lighting emphasizes the fine stitching and gold hardware. The mood is sophisticated and expensive." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZDuO0wJvT2Xz0FMhnGyfUXlvQxjePSAMbWDTsfGrOI7NM4dHvsE53qFA0-FplbZHGd5e0J3yoAuq0bl9Fi2INTJe_bXXLyjx7x7-zT3zygTcSagMOGEHMDBQhQ-p_P6hwyCzOmsj7KVh512z8gQ7kY9bTyaR6tx2dEG2SCYzE_mQJM_KRSem7P1K2it_--P22X-UuPwdDg81FqNpSl0648eXylXVekzOBcrx5s7gXhg-_QArpVbjnWaIo8tbKZBi2mNjqEW0eDF4"/>
+<div class="absolute top-6 left-6 flex gap-lg">
+<div class="w-10 h-10 rounded-full glass flex items-center justify-center">
+<span class="material-symbols-outlined text-white" data-icon="arrow_back">arrow_back</span>
+</div>
+</div>
+<div class="absolute top-6 right-6 flex gap-lg">
+<div class="w-10 h-10 rounded-full glass flex items-center justify-center">
+<span class="material-symbols-outlined text-white" data-icon="favorite">favorite</span>
+</div>
+</div>
+</div>
+<div class="p-lg">
+<div class="flex justify-between items-start mb-md">
+<div>
+<h2 class="font-display-lg text-headline-lg">Luxe Emerald Tote</h2>
+<p class="font-body-md text-on-surface-variant">Handcrafted Italian Leather</p>
+</div>
+<span class="font-headline-md text-primary">$1,250</span>
+</div>
+<p class="font-body-md text-on-surface-variant mb-xl leading-relaxed">
+                            A timeless silhouette meeting modern craftsmanship. Features premium pebble-grain leather and signature gold-plated hardware.
+                        </p>
+<div class="mb-xl">
+<p class="font-label-lg mb-md">Select Color</p>
+<div class="flex gap-md">
+<div class="w-8 h-8 rounded-full bg-emerald-700 ring-2 ring-primary ring-offset-2 ring-offset-inverse-surface"></div>
+<div class="w-8 h-8 rounded-full bg-slate-800 border border-outline-variant"></div>
+<div class="w-8 h-8 rounded-full bg-stone-500 border border-outline-variant"></div>
+</div>
+</div>
+</div>
+<!-- Bottom Action Bar -->
+<div class="absolute bottom-0 w-full p-lg glass flex gap-md z-20">
+<button class="flex-1 bg-primary text-white font-label-lg py-4 rounded-2xl shadow-lg shadow-primary/20 transition-transform active:scale-95">Add to Bag</button>
+</div>
+<!-- Status Overlay Label -->
+<div class="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/80 px-lg py-xs rounded-full border border-white/10 z-50 pointer-events-none">
+<span class="text-white text-caption uppercase tracking-widest font-bold">2. Details</span>
+</div>
+</div>
+</section>
+<!-- 3. CART -->
+<section class="relative group aspect-[9/19.5] bg-inverse-surface rounded-[40px] border-[8px] border-surface-container overflow-hidden shadow-2xl">
+<div class="h-full flex flex-col relative">
+<div class="p-lg pt-12">
+<h2 class="font-display-lg text-headline-lg mb-xl">Your Cart</h2>
+<div class="space-y-lg">
+<div class="flex gap-md bg-surface p-md rounded-2xl border border-outline-variant">
+<img class="w-20 h-20 rounded-xl object-cover" data-alt="Red sneaker detailed close up on dark background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMbsF4rmUoZ_d4xlgd1u_VluTQy5ewlL3IJTLq8gnR35NmKa-ogvPPBDQWa3twQN4GQKJNvSIJFDcZdm3ROL9m5gOYBVI0I_-qEpVVlVou5raQYQu5V-UTvDaWakEip55Jundxa9IXHYh3zL0PCPG5p_OuI7ME9asM98DlSQWyXdz0Mzw2VIYmHUzgK79Yoedg3IR9kfl9YzK6fRzA01rqT769mto9NPHFdoBN6l-ZxmUTVU-z808DCjPdIsfwbjJt1QclA7FDZ2g"/>
+<div class="flex-1">
+<div class="flex justify-between">
+<p class="font-label-lg">Speed Runner X</p>
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]" data-icon="close">close</span>
+</div>
+<p class="font-caption text-on-surface-variant">Size: 42 • Red</p>
+<div class="flex justify-between items-end mt-xs">
+<p class="font-label-lg text-primary">$180.00</p>
+<div class="flex items-center gap-md bg-inverse-surface px-md py-xs rounded-lg">
+<span class="material-symbols-outlined text-on-surface text-[16px]" data-icon="remove">remove</span>
+<span class="font-label-md">1</span>
+<span class="material-symbols-outlined text-on-surface text-[16px]" data-icon="add">add</span>
+</div>
+</div>
+</div>
+</div>
+<div class="flex gap-md bg-surface p-md rounded-2xl border border-outline-variant">
+<img class="w-20 h-20 rounded-xl object-cover" data-alt="White watch close up." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3tkrcV-Comng8kEYi4SAM-46uOkmLWUBJqxD3NKLJVVG6D4PU2mV1fq5XKXbxkqxhqq2CpkKFQ4WRy3lYmfpPGh7YhOlfWcJpGNersKUXHl_LGKy6EF9boxUaI5-S2CEzBvxo0jJCpOZfxYKTJGDXPXy3pjIfR9ZUxzhT_W32nOaEnDnxECnIQSYdYUG7GZs2sIF920dcOdF1o0FUvYTzjvdNHm7EladL9sQkgXh7wIbNXkiEVoO_611J_Mla2iz-Av5-ScSyDTc"/>
+<div class="flex-1">
+<div class="flex justify-between">
+<p class="font-label-lg">Classic Chrono</p>
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]" data-icon="close">close</span>
+</div>
+<p class="font-caption text-on-surface-variant">Silver • Steel</p>
+<div class="flex justify-between items-end mt-xs">
+<p class="font-label-lg text-primary">$299.00</p>
+<div class="flex items-center gap-md bg-inverse-surface px-md py-xs rounded-lg">
+<span class="material-symbols-outlined text-on-surface text-[16px]" data-icon="remove">remove</span>
+<span class="font-label-md">1</span>
+<span class="material-symbols-outlined text-on-surface text-[16px]" data-icon="add">add</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Checkout Footer -->
+<div class="mt-auto p-lg bg-surface border-t border-outline-variant rounded-t-[32px]">
+<div class="space-y-sm mb-lg">
+<div class="flex justify-between font-body-md text-on-surface-variant">
+<span>Subtotal</span>
+<span>$479.00</span>
+</div>
+<div class="flex justify-between font-body-md text-on-surface-variant">
+<span>Shipping</span>
+<span class="text-primary">Free</span>
+</div>
+<div class="flex justify-between font-headline-md mt-sm pt-sm border-t border-outline-variant">
+<span>Total</span>
+<span>$479.00</span>
+</div>
+</div>
+<button class="w-full bg-primary text-white font-label-lg py-4 rounded-2xl shadow-lg transition-all active:scale-95 flex justify-between px-lg items-center">
+<span>Checkout</span>
+<span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+<!-- Status Overlay Label -->
+<div class="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/80 px-lg py-xs rounded-full border border-white/10 z-50 pointer-events-none">
+<span class="text-white text-caption uppercase tracking-widest font-bold">3. Cart</span>
+</div>
+</div>
+</section>
+<!-- 4. PROFILE / SETTINGS -->
+<section class="relative group aspect-[9/19.5] bg-inverse-surface rounded-[40px] border-[8px] border-surface-container overflow-hidden shadow-2xl">
+<div class="h-full flex flex-col relative overflow-y-auto hide-scrollbar">
+<div class="p-lg pt-12 flex flex-col items-center">
+<div class="relative mb-lg">
+<div class="w-32 h-32 rounded-full border-4 border-primary p-1">
+<img class="w-full h-full rounded-full object-cover" data-alt="Professional female portrait with modern styling. Minimalist background in soft dark tones, moody lighting emphasizing the profile. Premium executive aesthetic for a user profile." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsWGnb_5GzT5uGL_XjbhsHPLYiAvwSxrBBgT3OnHVu_wkb6kHWSEVN33gsBJyYJV4pOm2U6kyL6I43639NId0NMzxdmnyPufMU31lZPDP8blwbjKw8kmtmHUdGUR749hyugzipaCkhuP60zlQwOLeolUdFv16UqXpgwfzJ_OVU6hTXJDizs8tQ9MrtUUNwd46UUGIDqndj1JyyTsuXJv743FKawdN7WQpvF5NWMG82cmY6XFvmZzEydcgPE5H9GzRiVas2R0mAcK4"/>
+</div>
+<div class="absolute bottom-0 right-0 bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center ring-4 ring-inverse-surface">
+<span class="material-symbols-outlined text-[18px]" data-icon="edit">edit</span>
+</div>
+</div>
+<h2 class="font-headline-lg text-headline-lg">Alex Morgan</h2>
+<p class="font-body-md text-on-surface-variant">alex.morgan@premium.com</p>
+<div class="mt-xl bg-primary/10 px-lg py-xs rounded-full border border-primary/20">
+<span class="text-primary font-label-md">Elite Member</span>
+</div>
+</div>
+<div class="p-lg space-y-md">
+<div class="flex items-center justify-between p-md bg-surface rounded-2xl border border-outline-variant">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-primary" data-icon="person">person</span>
+<span class="font-label-lg">Personal Details</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="chevron_right">chevron_right</span>
+</div>
+<div class="flex items-center justify-between p-md bg-surface rounded-2xl border border-outline-variant">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-primary" data-icon="shopping_bag">shopping_bag</span>
+<span class="font-label-lg">Order History</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="chevron_right">chevron_right</span>
+</div>
+<div class="flex items-center justify-between p-md bg-surface rounded-2xl border border-outline-variant">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-primary" data-icon="payments">payments</span>
+<span class="font-label-lg">Payment Methods</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="chevron_right">chevron_right</span>
+</div>
+<div class="flex items-center justify-between p-md bg-surface rounded-2xl border border-outline-variant">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-primary" data-icon="settings">settings</span>
+<span class="font-label-lg">Account Settings</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
+<div class="p-lg mt-auto pb-12">
+<button class="w-full text-error font-label-lg py-4 border border-error/30 rounded-2xl">Sign Out</button>
+</div>
+<!-- Status Overlay Label -->
+<div class="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/80 px-lg py-xs rounded-full border border-white/10 z-50 pointer-events-none">
+<span class="text-white text-caption uppercase tracking-widest font-bold">4. Profile</span>
+</div>
+</div>
+</section>
+<!-- 5. ORDER TRACKING -->
+<section class="relative group aspect-[9/19.5] bg-inverse-surface rounded-[40px] border-[8px] border-surface-container overflow-hidden shadow-2xl">
+<div class="h-full flex flex-col relative overflow-y-auto hide-scrollbar">
+<div class="p-lg pt-12">
+<div class="flex items-center gap-md mb-xl">
+<span class="material-symbols-outlined text-on-surface" data-icon="arrow_back">arrow_back</span>
+<h2 class="font-headline-md">Track Order</h2>
+</div>
+<!-- Order Status Card -->
+<div class="bg-surface rounded-2xl p-lg border border-outline-variant mb-xl">
+<div class="flex justify-between items-center mb-xl">
+<div>
+<p class="font-caption text-on-surface-variant uppercase">Order ID</p>
+<p class="font-label-lg">#LX-99021</p>
+</div>
+<div class="text-right">
+<p class="font-caption text-on-surface-variant uppercase">Est. Arrival</p>
+<p class="font-label-lg text-primary">Dec 24, 2023</p>
+</div>
+</div>
+<!-- Stepper -->
+<div class="relative space-y-xl">
+<div class="absolute left-[11px] top-0 bottom-0 w-[2px] bg-outline-variant"></div>
+<div class="flex items-start gap-xl relative">
+<div class="w-6 h-6 rounded-full bg-primary flex items-center justify-center z-10">
+<span class="material-symbols-outlined text-white text-[14px]" data-icon="check" style="font-variation-settings: 'wght' 700;">check</span>
+</div>
+<div>
+<p class="font-label-lg">Order Confirmed</p>
+<p class="font-caption text-on-surface-variant">Dec 20, 10:30 AM</p>
+</div>
+</div>
+<div class="flex items-start gap-xl relative">
+<div class="w-6 h-6 rounded-full bg-primary flex items-center justify-center z-10">
+<span class="material-symbols-outlined text-white text-[14px]" data-icon="check" style="font-variation-settings: 'wght' 700;">check</span>
+</div>
+<div>
+<p class="font-label-lg">Shipped</p>
+<p class="font-caption text-on-surface-variant">Dec 21, 02:15 PM</p>
+</div>
+</div>
+<div class="flex items-start gap-xl relative">
+<div class="w-6 h-6 rounded-full bg-primary flex items-center justify-center z-10 ring-4 ring-primary/20">
+<div class="w-2 h-2 bg-white rounded-full"></div>
+</div>
+<div>
+<p class="font-label-lg text-primary">Out for Delivery</p>
+<p class="font-caption text-on-surface-variant">Dec 22, 09:00 AM</p>
+</div>
+</div>
+<div class="flex items-start gap-xl relative opacity-40">
+<div class="w-6 h-6 rounded-full bg-outline-variant flex items-center justify-center z-10"></div>
+<div>
+<p class="font-label-lg">Delivered</p>
+<p class="font-caption text-on-surface-variant">Expected Today</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Map Preview -->
+<div class="rounded-2xl overflow-hidden h-40 relative">
+<img class="w-full h-full object-cover grayscale brightness-50" data-alt="A stylized digital map shown on a mobile screen in dark mode. The map shows urban streets with a bright glowing teal route highlighted. Soft ambient glows at the location markers. Modern data visualization aesthetic." data-location="New York City" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0_1fgxG_rJ0oXuUskYYgkyFPvuLZHS2m5QvgJgDyGGjXVNlsQ9n5Ok-8uY0YgDYgKuvLjTIbcsiMxXV6-3v-UmxJIJxW-GUJ2uVyyngxNIoSzd2aiMI3ArE1OgZUHoVJk3jQs2JrdcxE76wuBIkCn4Kxk3BmeAKtUQG5zykPTwrPWZ6UEsfzyaOg90geIpAi1weQpiL1UR0dIS8KNCrFFd7vThYrdMgrZyYjvFoc-dW5qpJfgqNzkhlgxUxJ9ouu2h0lA3gPPw08"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white animate-pulse">
+<span class="material-symbols-outlined" data-icon="local_shipping">local_shipping</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Status Overlay Label -->
+<div class="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/80 px-lg py-xs rounded-full border border-white/10 z-50 pointer-events-none">
+<span class="text-white text-caption uppercase tracking-widest font-bold">5. Tracking</span>
+</div>
+</div>
+</section>
+<!-- 6. NOTIFICATIONS -->
+<section class="relative group aspect-[9/19.5] bg-inverse-surface rounded-[40px] border-[8px] border-surface-container overflow-hidden shadow-2xl">
+<div class="h-full flex flex-col relative overflow-y-auto hide-scrollbar">
+<div class="p-lg pt-12">
+<div class="flex justify-between items-center mb-xl">
+<h2 class="font-display-lg text-headline-lg">Notifications</h2>
+<span class="text-primary font-label-md">Mark all read</span>
+</div>
+<div class="space-y-md">
+<div class="p-md bg-surface-container border-l-4 border-primary rounded-r-2xl">
+<div class="flex gap-md">
+<div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="local_mall">local_mall</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between">
+<p class="font-label-lg">Order Delivered!</p>
+<span class="text-caption text-on-surface-variant">2m ago</span>
+</div>
+<p class="font-body-md text-on-surface-variant mt-xs">Your package for order #LX-99021 has been delivered to your front door.</p>
+</div>
+</div>
+</div>
+<div class="p-md bg-surface rounded-2xl border border-outline-variant">
+<div class="flex gap-md">
+<div class="w-12 h-12 bg-secondary-container/10 rounded-xl flex items-center justify-center text-secondary-fixed">
+<span class="material-symbols-outlined" data-icon="percent">percent</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between">
+<p class="font-label-lg">Flash Sale Alert</p>
+<span class="text-caption text-on-surface-variant">1h ago</span>
+</div>
+<p class="font-body-md text-on-surface-variant mt-xs">20% off all premium accessories for the next 4 hours only! Don't miss out.</p>
+</div>
+</div>
+</div>
+<div class="p-md bg-surface rounded-2xl border border-outline-variant">
+<div class="flex gap-md">
+<div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between">
+<p class="font-label-lg">Back in Stock</p>
+<span class="text-caption text-on-surface-variant">5h ago</span>
+</div>
+<p class="font-body-md text-on-surface-variant mt-xs">A wishlist item "Luxe Emerald Tote" is back in stock. Shop before it's gone!</p>
+</div>
+</div>
+</div>
+<div class="p-md bg-surface rounded-2xl border border-outline-variant">
+<div class="flex gap-md">
+<div class="w-12 h-12 bg-on-surface-variant/10 rounded-xl flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="security">security</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between">
+<p class="font-label-lg">Security Update</p>
+<span class="text-caption text-on-surface-variant">Yesterday</span>
+</div>
+<p class="font-body-md text-on-surface-variant mt-xs">Your password was successfully updated as requested. Please contact support if this wasn't you.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Status Overlay Label -->
+<div class="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/80 px-lg py-xs rounded-full border border-white/10 z-50 pointer-events-none">
+<span class="text-white text-caption uppercase tracking-widest font-bold">6. Notifications</span>
+</div>
+</div>
+</section>
+</div>
+<!-- Global Navigation Mockup (Floating) -->
+<div class="fixed bottom-8 left-1/2 -translate-x-1/2 w-full max-w-sm px-lg z-[100] md:flex hidden">
+<div class="glass w-full h-20 rounded-[32px] flex items-center justify-around px-lg shadow-2xl border border-white/10">
+<div class="flex flex-col items-center gap-xs text-primary">
+<span class="material-symbols-outlined" data-icon="home" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-md">Home</span>
+</div>
+<div class="flex flex-col items-center gap-xs text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="font-label-md">Explore</span>
+</div>
+<div class="relative">
+<div class="bg-primary w-14 h-14 rounded-2xl flex items-center justify-center -translate-y-6 shadow-lg shadow-primary/40 ring-4 ring-inverse-surface">
+<span class="material-symbols-outlined text-white" data-icon="shopping_cart">shopping_cart</span>
+</div>
+</div>
+<div class="flex flex-col items-center gap-xs text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+<span class="font-label-md">Saved</span>
+</div>
+<div class="flex flex-col items-center gap-xs text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-md">Profile</span>
+</div>
+</div>
+</div>
+</main>
+<script>
+        // Simple interactivity for the cards
+        document.querySelectorAll('section').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.classList.add('ring-2', 'ring-primary/50', 'scale-[1.02]');
+                card.style.transition = 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.classList.remove('ring-2', 'ring-primary/50', 'scale-[1.02]');
+            });
+        });
+
+        // Micro-interaction for buttons
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                btn.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    btn.style.transform = 'scale(1)';
+                }, 150);
+            });
+        });
+    </script>
+</body></html>
