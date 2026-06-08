@@ -95,7 +95,7 @@ class AddToCart extends StatelessWidget {
                           "\$${totalPrice.toStringAsFixed(2)}",
                           style: TextStyle(
                             fontSize: 18.sp,
-                            fontWeight: FontWeight.extrabold,
+                            fontWeight: FontWeight.w800,
                             color: colorScheme.onSurface,
                           ),
                         );

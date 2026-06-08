@@ -142,7 +142,7 @@ class ProductDetailsPage extends StatelessWidget {
                                       : "\$${productEntity.price.toStringAsFixed(2)}",
                                   style: TextStyle(
                                     fontSize: 20.sp,
-                                    fontWeight: FontWeight.extrabold,
+                                    fontWeight: FontWeight.w800,
                                     color: activeThemeColor,
                                   ),
                                 ),

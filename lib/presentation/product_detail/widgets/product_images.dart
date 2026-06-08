@@ -20,7 +20,7 @@ class ProductImages extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
-    final activeBorderColor = isDark ? const Color(0xFF14B8A6) : const Color(0xFF4F378A);
+    final activeBorderColor = isDark ? const Color(0xFF14B8A6) : const Color(0xFF006970);
 
     return Stack(
       children: [
