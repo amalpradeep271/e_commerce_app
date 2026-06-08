@@ -214,18 +214,8 @@ class _HomePageState extends State<HomePage> {
                                 itemCount: state.banners.length,
                                 itemBuilder: (context, index, _) {
                                   final banner = state.banners[index];
-                                  final subtitleText = banner.subtitle ??
-                                      (index == 0
-                                          ? (isDark
-                                              ? "LIMITED OFFER"
-                                              : "SUMMER COLLECTION")
-                                          : (isDark
-                                              ? "SPECIAL DEAL"
-                                              : "NEW ARRIVALS"));
-                                  final titleText = banner.title ??
-                                      (index == 0
-                                          ? "50% OFF\nSummer Sale"
-                                          : "30% OFF\nWinter Sale");
+                                  final subtitleText = banner.subtitle ?? '';
+                                  final titleText = banner.title ?? '';
 
                                   return Container(
                                     margin:
