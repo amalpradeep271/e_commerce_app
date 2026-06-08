@@ -1,11 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:e_commerce_application/common/bloc/button/favourite_icon_state.dart';
+import 'package:e_commerce_application/presentation/wishlist/bloc/wishlist_cubit.dart';
+import 'package:e_commerce_application/presentation/wishlist/bloc/wishlist_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import 'package:e_commerce_application/common/bloc/button/favourite_icon_cubit.dart';
-import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
 import 'package:e_commerce_application/domain/product/entity/product_entity.dart';
 
 class FavoriteButton extends StatelessWidget {
@@ -19,22 +17,38 @@ class FavoriteButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-      onPressed: () {
-        context.read<FavoriteIconCubit>().onTap(productEntity);
+    return GestureDetector(
+      onTap: () {
+        context.read<WishlistCubit>().toggleWishlist(productEntity);
       },
-      icon: Container(
-        height: 40.h,
-        width: 40.w,
-        decoration: const BoxDecoration(
+      child: Container(
+        height: 32.h,
+        width: 32.w,
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.surface.withValues(alpha: 0.85),
           shape: BoxShape.circle,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.08),
+              blurRadius: 6,
+              offset: const Offset(0, 2),
+            ),
+          ],
         ),
-        child: BlocBuilder<FavoriteIconCubit, FavoriteIconState>(
-          builder: (context, state) => Icon(
-            state.isFavorite ? Icons.favorite : Icons.favorite_outline,
-            size: iconSize,
-            color: AppColors.red,
-          ),
+        alignment: Alignment.center,
+        child: BlocBuilder<WishlistCubit, WishlistState>(
+          builder: (context, state) {
+            bool isWishlisted = false;
+            if (state is WishlistLoaded) {
+              isWishlisted = state.wishlistedItems
+                  .any((p) => p.productId == productEntity.productId);
+            }
+            return Icon(
+              isWishlisted ? Icons.favorite : Icons.favorite_outline,
+              size: iconSize,
+              color: isWishlisted ? Colors.red : Theme.of(context).colorScheme.onSurface,
+            );
+          },
         ),
       ),
     );

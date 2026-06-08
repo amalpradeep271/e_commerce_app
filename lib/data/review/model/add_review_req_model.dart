@@ -22,11 +22,11 @@ class AddReviewReqModel {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'productId': productId,
-      'review': review,
       'rating': rating,
-      'createdDate': createdDate,
-      'userName': userName,
-      'userImage': userImage,
+      'reviewContent': review,
+      'creatorName': userName,
+      'creatorImage': userImage,
+      'createdDate': createdDate.toDate().toIso8601String(),
     };
   }
 

@@ -13,7 +13,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:e_commerce_application/common/bloc/button/button_state_cubit.dart';
 import 'package:e_commerce_application/common/widgets/app_button/basic_text_button.dart';
-import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
 import 'package:e_commerce_application/core/configs/theme/app_text_theme.dart';
 import 'package:e_commerce_application/data/review/model/add_review_req_model.dart';
 import 'package:e_commerce_application/domain/product/entity/product_entity.dart';
@@ -67,7 +66,9 @@ class ReviewForm extends StatelessWidget {
                   children: [
                     Text(
                       "Reviews",
-                      style: AppTextStyles.base.s16.w600,
+                      style: AppTextStyles.base.s16.w600.copyWith(
+                        color: Theme.of(context).colorScheme.onSurface,
+                      ),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -80,7 +81,9 @@ class ReviewForm extends StatelessWidget {
                       },
                       child: Text(
                         "All Reviews",
-                        style: AppTextStyles.base.s16.w600,
+                        style: AppTextStyles.base.s16.w600.copyWith(
+                          color: Theme.of(context).colorScheme.onSurface,
+                        ),
                       ),
                     ),
                   ],
@@ -93,7 +96,7 @@ class ReviewForm extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return const Icon(
                       Icons.star,
-                      color: AppColors.kPrimaryColor,
+                      color: Colors.amber,
                     );
                   },
                   onRatingUpdate: (newRating) {

@@ -1,14 +1,11 @@
-import 'package:e_commerce_application/common/bloc/product/product_display_cubit.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class BottomNavigationCubit extends Cubit<int> {
-  BottomNavigationCubit() : super(0);
+enum BottomNavItem { home, orders, wishlist, settings }
 
-  void changeTabIndex(int index, BuildContext context) {
-    emit(index);
-    if (index == 2) {
-      context.read<ProductsDisplayCubit>().displayProducts(showLoading: false);
-    }
+class BottomNavigationCubit extends Cubit<BottomNavItem> {
+  BottomNavigationCubit() : super(BottomNavItem.home);
+
+  void changeTabIndex(BottomNavItem item) {
+    emit(item);
   }
 }

@@ -1,5 +1,5 @@
 import 'package:e_commerce_application/common/helper/navigator/app_navigator.dart';
-import 'package:e_commerce_application/common/widgets/app_bottom_navigationbar/custom_app_bottom_navigationbar.dart';
+import 'package:e_commerce_application/presentation/home/pages/main_page.dart';
 import 'package:e_commerce_application/common/widgets/app_button/basic_app_button.dart';
 import 'package:e_commerce_application/core/configs/assets/app_images.dart';
 import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
@@ -12,8 +12,7 @@ class OrderPlacedPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Future.delayed(const Duration(seconds: 5), () {
       if (context.mounted) {
-        AppNavigator.pushAndRemove(
-            context, const CustomAppBottomNavigationBar());
+        AppNavigator.pushAndRemove(context, MainPage());
       }
     });
     return Scaffold(
@@ -52,7 +51,7 @@ class OrderPlacedPage extends StatelessWidget {
                       title: 'Finish',
                       onPressed: () {
                         AppNavigator.pushAndRemove(
-                            context, const CustomAppBottomNavigationBar());
+                            context, MainPage());
                       })
                 ],
               ),

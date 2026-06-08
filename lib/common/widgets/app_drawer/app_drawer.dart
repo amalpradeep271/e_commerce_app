@@ -1,23 +1,27 @@
 import 'dart:io';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_commerce_application/common/helper/navigator/app_navigator.dart';
-import 'package:e_commerce_application/common/widgets/app_bottom_navigationbar/custom_app_bottom_navigationbar.dart';
+import 'package:e_commerce_application/presentation/home/pages/main_page.dart';
 import 'package:e_commerce_application/core/configs/assets/app_images.dart';
 import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
 import 'package:e_commerce_application/core/configs/theme/app_icons.dart';
 import 'package:e_commerce_application/core/configs/theme/app_text_theme.dart';
+import 'package:e_commerce_application/domain/user/usecase/upload_user_image_usecase.dart';
 import 'package:e_commerce_application/presentation/agreements/pages/privacy_policy_page.dart';
 import 'package:e_commerce_application/presentation/agreements/pages/terms_and_condition_pages.dart';
 import 'package:e_commerce_application/presentation/auth/pages/signin_page.dart';
 import 'package:e_commerce_application/common/bloc/app_drawer/user_info_display_cubit.dart';
 import 'package:e_commerce_application/common/bloc/app_drawer/user_info_display_state.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:e_commerce_application/service_locator.dart';
+import 'package:e_commerce_application/core/network/api_client.dart';
+import 'package:e_commerce_application/domain/auth/repository/auth_repository.dart';
+import 'package:e_commerce_application/domain/product/repository/product_repository.dart';
+import 'package:e_commerce_application/domain/category/repository/category_repository.dart';
+import 'package:e_commerce_application/domain/home/repository/banner_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shimmer/shimmer.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DrawerTileData {
   final IconData icon;
@@ -36,24 +40,19 @@ class CustomAppDrawer extends StatelessWidget {
       DrawerTileData(AppIcons.home, "Home", (context) {
         AppNavigator.pushAndRemove(
           context,
-          const CustomAppBottomNavigationBar(),
+          MainPage(),
         );
       }),
       DrawerTileData(Icons.share, "Share App", (context) {}),
-      DrawerTileData(AppIcons.contact, "Contact Us", (context) {
-        // Implement Contact Us Navigation
-      }),
+      DrawerTileData(AppIcons.contact, "Contact Us", (context) {}),
       DrawerTileData(AppIcons.privacypolicy, "Privacy Policy", (context) {
         AppNavigator.push(context, const PrivacyPolicyPage());
       }),
     ];
 
-    return BlocProvider(
-      create: (context) => UserInfoDisplayCubit()..displayUserInfo(),
-      child: SizedBox(
-        width: 500,
-        child: drawerWidget(context, arrayOfListTiles),
-      ),
+    return SizedBox(
+      width: 500,
+      child: drawerWidget(context, arrayOfListTiles),
     );
   }
 
@@ -80,7 +79,11 @@ class CustomAppDrawer extends StatelessWidget {
             children: [
               InkWell(
                 onTap: () async {
-                  await FirebaseAuth.instance.signOut();
+                  await sl<ApiClient>().clearTokens();
+                  sl<AuthRepository>().clearUserCache();
+                  sl<ProductRepository>().clearCache();
+                  sl<CategoryRepository>().clearCache();
+                  sl<BannerRepository>().clearCache();
                   if (context.mounted) {
                     AppNavigator.pushAndRemove(
                       context,
@@ -139,15 +142,44 @@ class CustomAppDrawer extends StatelessWidget {
                       BlocBuilder<UserInfoDisplayCubit, UserInfoDisaplyState>(
                     builder: (context, state) {
                       if (state is UserInfoDisaplyLoading) {
-                        return const Center(
-                            child: CupertinoActivityIndicator());
+                        return Shimmer.fromColors(
+                          baseColor: const Color.fromARGB(255, 218, 221, 227),
+                          highlightColor: AppColors.colorDivider,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              const CircleAvatar(
+                                radius: 55,
+                                backgroundColor: AppColors.white,
+                              ),
+                              const SizedBox(height: 10),
+                              Container(
+                                height: 16.h,
+                                width: 120.w,
+                                decoration: BoxDecoration(
+                                  color: AppColors.white,
+                                  borderRadius: BorderRadius.circular(4),
+                                ),
+                              ),
+                              const SizedBox(height: 5),
+                              Container(
+                                height: 12.h,
+                                width: 180.w,
+                                decoration: BoxDecoration(
+                                  color: AppColors.white,
+                                  borderRadius: BorderRadius.circular(4),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
                       }
                       if (state is UserInfoDisaplyLoaded) {
                         return Column(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             GestureDetector(
-                              onTap: () => _pickImage(context),
+                              onTap: () => pickAndUploadImage(context),
                               child: CircleAvatar(
                                 backgroundImage: state.user.image.isEmpty
                                     ? const AssetImage(AppImages.profilemen)
@@ -187,7 +219,6 @@ class CustomAppDrawer extends StatelessWidget {
                     iconSize: 22,
                     onPressed: () {
                       Navigator.pop(context);
-                      // Close Drawer Action
                     },
                     icon: const Icon(
                       Icons.close,
@@ -223,7 +254,7 @@ class CustomAppDrawer extends StatelessWidget {
     );
   }
 
-  Future<void> _pickImage(BuildContext context) async {
+  Future<void> pickAndUploadImage(BuildContext context) async {
     final ImagePicker picker = ImagePicker();
     final XFile? pickedFile =
         await picker.pickImage(source: ImageSource.gallery);
@@ -231,43 +262,18 @@ class CustomAppDrawer extends StatelessWidget {
     if (pickedFile != null) {
       File imageFile = File(pickedFile.path);
       if (context.mounted) {
-        await _uploadImage(context, imageFile);
-      }
-    }
-  }
-
-  Future<void> _uploadImage(BuildContext context, File imageFile) async {
-    try {
-      String userId = FirebaseAuth.instance.currentUser!.uid;
-      String fileName = 'users/$userId/profile.jpg';
-
-      // Upload to Firebase Storage
-      Reference ref = FirebaseStorage.instance.ref().child(fileName);
-      UploadTask uploadTask = ref.putFile(imageFile);
-      TaskSnapshot taskSnapshot = await uploadTask;
-
-      // Get download URL
-      String imageUrl = await taskSnapshot.ref.getDownloadURL();
-
-      // Update Firestore document
-      await FirebaseFirestore.instance.collection('Users').doc(userId).update({
-        'image': imageUrl,
-      });
-      if (context.mounted) {
-        // Notify Bloc to reload user data
-
-        context.read<UserInfoDisplayCubit>().displayUserInfo();
-
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Profile image updated successfully')),
-        );
-      }
-    } catch (e) {
-      if (context.mounted) {
-        // Notify Bloc to reload user data
-
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Error uploading image')),
+        var result = await sl<UploadUserImageUsecase>().call(params: imageFile);
+        result.fold(
+          (error) => ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(error)),
+          ),
+          (imageUrl) {
+            context.read<UserInfoDisplayCubit>().displayUserInfo();
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                  content: Text('Profile image updated successfully')),
+            );
+          },
         );
       }
     }

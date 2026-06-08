@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error": "#ffffff",
+                        "outline": "#7a7582",
+                        "secondary-fixed": "#e9ddff",
+                        "on-tertiary": "#ffffff",
+                        "on-background": "#1d1b20",
+                        "inverse-on-surface": "#f5eff7",
+                        "tertiary": "#765b00",
+                        "on-secondary": "#ffffff",
+                        "surface-bright": "#fdf7ff",
+                        "background": "#fdf7ff",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#e1d4fd",
+                        "outline-variant": "#cbc4d2",
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#ded8e0",
+                        "primary": "#4f378a",
+                        "on-primary-fixed-variant": "#4f378a",
+                        "tertiary-fixed": "#ffdf93",
+                        "on-secondary-fixed-variant": "#4b4263",
+                        "surface-tint": "#6750a4",
+                        "surface-container": "#f2ecf4",
+                        "primary-fixed-dim": "#cfbcff",
+                        "on-tertiary-container": "#503d00",
+                        "on-surface": "#1d1b20",
+                        "surface": "#fdf7ff",
+                        "on-primary-container": "#e0d2ff",
+                        "secondary-fixed-dim": "#cdc0e9",
+                        "on-tertiary-fixed-variant": "#594400",
+                        "surface-variant": "#e6e0e9",
+                        "inverse-surface": "#322f35",
+                        "primary-container": "#6750a4",
+                        "surface-container-high": "#ece6ee",
+                        "error": "#ba1a1a",
+                        "surface-container-highest": "#e6e0e9",
+                        "secondary": "#63597c",
+                        "on-surface-variant": "#494551",
+                        "tertiary-container": "#c9a74d",
+                        "on-primary": "#ffffff",
+                        "surface-container-low": "#f8f2fa",
+                        "on-secondary-fixed": "#1f1635",
+                        "on-secondary-container": "#645a7d",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed-dim": "#e7c365",
+                        "primary-fixed": "#e9ddff",
+                        "on-tertiary-fixed": "#241a00",
+                        "on-primary-fixed": "#22005d",
+                        "inverse-primary": "#cfbcff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "20px",
+                        "sm": "8px",
+                        "lg": "16px",
+                        "4xl": "40px",
+                        "5xl": "48px",
+                        "3xl": "32px",
+                        "2xl": "24px",
+                        "xs": "4px",
+                        "md": "12px"
+                    },
+                    "fontSize": {
+                        "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "600"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "title-lg": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "caption": ["11px", {"lineHeight": "14px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface-container-lowest font-body-md text-on-surface antialiased">
+<!-- Comparison View Wrapper -->
+<div class="flex flex-col md:flex-row min-h-screen">
+<!-- LIGHT THEME VERSION -->
+<section class="flex-1 bg-white border-r border-outline-variant relative pb-32">
+<!-- App Bar -->
+<header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md px-lg h-16 flex items-center justify-between">
+<div class="flex items-center gap-md">
+<button class="p-sm rounded-full hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-on-surface">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md text-on-surface">Men's Wear</h1>
+</div>
+<div class="flex items-center gap-xs">
+<button class="p-sm rounded-full hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-on-surface">search</span>
+</button>
+<button class="p-sm rounded-full hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-on-surface">shopping_bag</span>
+</button>
+</div>
+</header>
+<main class="px-lg pt-md">
+<!-- Filter Header -->
+<div class="flex items-center justify-between mb-lg">
+<span class="font-label-md text-label-md text-on-surface-variant">156 products</span>
+<div class="flex gap-sm">
+<button class="flex items-center gap-xs px-md py-xs rounded-full border border-outline-variant hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[18px]">sort</span>
+<span class="font-label-md text-label-md">Sort</span>
+</button>
+<button class="flex items-center gap-xs px-md py-xs rounded-full border border-outline-variant hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+<span class="font-label-md text-label-md">Filter</span>
+</button>
+</div>
+</div>
+<!-- Category Chips -->
+<div class="flex gap-sm overflow-x-auto hide-scrollbar mb-2xl">
+<button class="px-lg py-sm rounded-full bg-[#0F766E] text-white font-label-lg text-label-lg whitespace-nowrap shadow-sm">All Items</button>
+<button class="px-lg py-sm rounded-full bg-surface-variant text-on-surface-variant font-label-lg text-label-lg whitespace-nowrap hover:bg-outline-variant transition-colors">T-Shirts</button>
+<button class="px-lg py-sm rounded-full bg-surface-variant text-on-surface-variant font-label-lg text-label-lg whitespace-nowrap hover:bg-outline-variant transition-colors">Outerwear</button>
+<button class="px-lg py-sm rounded-full bg-surface-variant text-on-surface-variant font-label-lg text-label-lg whitespace-nowrap hover:bg-outline-variant transition-colors">Jeans</button>
+<button class="px-lg py-sm rounded-full bg-surface-variant text-on-surface-variant font-label-lg text-label-lg whitespace-nowrap hover:bg-outline-variant transition-colors">Footwear</button>
+</div>
+<!-- Product Grid -->
+<div class="grid grid-cols-2 gap-md">
+<!-- Product Card 1 -->
+<div class="group flex flex-col">
+<div class="relative aspect-[3/4] rounded-xl overflow-hidden mb-sm bg-surface-variant">
+<img alt="Product" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A male model wearing a premium minimalist navy blue blazer and white t-shirt, standing in a brightly lit architectural space with clean lines. High-end fashion photography with soft shadows and professional lighting. The aesthetic is clean, corporate modern, and sophisticated." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiGnTtESkvluEwx_qqDsTGXHCHYZp43NIG9W4PU4whFWraWdd_g3-HYSZKckfnOpMIvGzCCIEYabgC7MA3BItzapqI7G2V79qbjuI-JX8T_sWDT_TLw8ovWFV0-XUEOXnPtsXpx302YY5MCJi3gdNzFpWBx3OFgEfSDfhVcw4S5Eoyp38eFXAPiX8LWgZPuvRmlcYHp-S58zqkCNj31IbY95eTnUl5F-BW_Y9Eq5vyiCXCzwbE-rgtGUD42u9RK7oDP_m6A-U66O0"/>
+<button class="absolute top-sm right-sm w-10 h-10 flex items-center justify-center rounded-full bg-white/80 backdrop-blur-sm shadow-sm active:scale-90 transition-all">
+<span class="material-symbols-outlined text-[20px] text-on-surface-variant">favorite</span>
+</button>
+</div>
+<h3 class="font-title-lg text-title-lg text-on-surface truncate">Architect Blazer</h3>
+<div class="flex items-center gap-xs mt-xs">
+<span class="material-symbols-outlined text-[16px] text-tertiary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-md text-label-md text-on-surface-variant">4.8</span>
+</div>
+<p class="font-label-lg text-label-lg text-[#0F766E] mt-xs">$189.00</p>
+</div>
+<!-- Product Card 2 -->
+<div class="group flex flex-col">
+<div class="relative aspect-[3/4] rounded-xl overflow-hidden mb-sm bg-surface-variant">
+<img alt="Product" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Modern high-quality sage green casual jacket displayed against a minimal beige studio background. The lighting is diffused and professional, highlighting the texture of the fabric. Soft utility aesthetic for a premium lifestyle brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMwbk-VJ8Z1YRumOwE6X6Au9dZd8T0Nt5U-SdOs7Z34XoALg_SpqB8cYNWIH0SbhVyIYAA8MU7s3RYJ2CvUTQnu8nrImzU886-v2hFWJK2fZUgtFiiQFjK8IMzanNoGhgo9WyL4d_28HQ3tCmauchSPvtmcPDAjs1jfwDFFvjRQkjAXuE9nXxrtOcnurRWiEHplTOEyoGWB30H0_DRsi_GdcMmogQbDtx51Oq1BWgYn0srRRlRjHgOIUV9NvhAJYRO5_Kg2Zs_faU"/>
+<button class="absolute top-sm right-sm w-10 h-10 flex items-center justify-center rounded-full bg-white/80 backdrop-blur-sm shadow-sm active:scale-90 transition-all">
+<span class="material-symbols-outlined text-[20px] text-on-surface-variant">favorite</span>
+</button>
+</div>
+<h3 class="font-title-lg text-title-lg text-on-surface truncate">Nylon Field Jacket</h3>
+<div class="flex items-center gap-xs mt-xs">
+<span class="material-symbols-outlined text-[16px] text-tertiary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-md text-label-md text-on-surface-variant">4.9</span>
+</div>
+<p class="font-label-lg text-label-lg text-[#0F766E] mt-xs">$145.00</p>
+</div>
+<!-- More cards generated for visual density -->
+<div class="group flex flex-col">
+<div class="relative aspect-[3/4] rounded-xl overflow-hidden mb-sm bg-surface-variant">
+<img alt="Product" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Close up of high-quality sustainable cotton white t-shirt hanging on a minimalist wooden hanger. Soft sunlight streaming from a window, creating organic shadows on a white wall. Clean minimalist lifestyle photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBshT71H5yFXKHD6AlPL5u92drsdYcTVMJS5o0ddQLoLnrZ3ccb9H1wDAoOZ3VuBd7MS6Bbvj4Yu1Wa2G7Ye9BtaISOmOWJ7YdRnWpl-iBEre-YwUNjshHdBV_k_qiwHo8AHv_atyuIlYuZvbGHLmfAoLSdO2nBNYz3lqZ-fSEHDNwx_2iT_w3TDi8CWGYrT1SCZhoPWNyLyIqq_Rjn59Crd5C_UYjkN3Ut9TGbMm2C6jJBKpANxE-x5e9IbnS-RnUeZHe8CmKyoMQ"/>
+<button class="absolute top-sm right-sm w-10 h-10 flex items-center justify-center rounded-full bg-white/80 backdrop-blur-sm shadow-sm">
+<span class="material-symbols-outlined text-[20px] text-on-surface-variant">favorite</span>
+</button>
+</div>
+<h3 class="font-title-lg text-title-lg text-on-surface truncate">Essential Pima Tee</h3>
+<p class="font-label-lg text-label-lg text-[#0F766E] mt-xs">$45.00</p>
+</div>
+<div class="group flex flex-col">
+<div class="relative aspect-[3/4] rounded-xl overflow-hidden mb-sm bg-surface-variant">
+<img alt="Product" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Folded pair of premium raw denim jeans on a clean light grey surface. The focus is on the stitching and high-quality material. Studio lighting with a clean and professional look for a luxury clothing store." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYqwrEc15kKzmXk5ME3rlm3jnF7ZZCpi0ASmNFT_pzQMtye9uBsYAtFbOlUwOTMPpCM5Khup8ymlUFQoMpvrdrWY7Dx-bR7e0H9WfennY3z5YUzPRhAkY0svI7qOBOva1b1eJUszgZP9qilmEMI8n3a2d4Xo0ZgTy4UFNRzpBsa8wumbZYl7_iwLsBEU2qK9Y4KaeYeSp5cs2KCwzm5dQZbzKmuO1XwwAznF-DK3mg80aClOSW-AtTGZosxd-uwnWRqj5GGRUUKco"/>
+<button class="absolute top-sm right-sm w-10 h-10 flex items-center justify-center rounded-full bg-white/80 backdrop-blur-sm shadow-sm">
+<span class="material-symbols-outlined text-[20px] text-on-surface-variant">favorite</span>
+</button>
+</div>
+<h3 class="font-title-lg text-title-lg text-on-surface truncate">Selvedge Slim Fit</h3>
+<p class="font-label-lg text-label-lg text-[#0F766E] mt-xs">$120.00</p>
+</div>
+</div>
+<div class="mt-4xl mb-4xl flex justify-center">
+<button class="px-5xl py-md rounded-full border border-[#0F766E] text-[#0F766E] font-label-lg text-label-lg hover:bg-primary-container/10 transition-colors">
+                        Load More
+                    </button>
+</div>
+</main>
+</section>
+<!-- DARK THEME VERSION -->
+<section class="flex-1 bg-[#0F172A] relative pb-32 border-l border-outline/10">
+<!-- App Bar (Dark) -->
+<header class="sticky top-0 z-50 bg-[#0F172A]/80 backdrop-blur-md px-lg h-16 flex items-center justify-between border-b border-white/5">
+<div class="flex items-center gap-md">
+<button class="p-sm rounded-full hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-white">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md text-white">Men's Wear</h1>
+</div>
+<div class="flex items-center gap-xs">
+<button class="p-sm rounded-full hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-white">search</span>
+</button>
+<button class="p-sm rounded-full hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-white">shopping_bag</span>
+</button>
+</div>
+</header>
+<main class="px-lg pt-md">
+<!-- Filter Header (Dark) -->
+<div class="flex items-center justify-between mb-lg">
+<span class="font-label-md text-label-md text-outline-variant">156 products</span>
+<div class="flex gap-sm">
+<button class="flex items-center gap-xs px-md py-xs rounded-full border border-outline hover:bg-white/5 transition-colors">
+<span class="material-symbols-outlined text-[18px] text-outline-variant">sort</span>
+<span class="font-label-md text-label-md text-outline-variant">Sort</span>
+</button>
+<button class="flex items-center gap-xs px-md py-xs rounded-full border border-outline hover:bg-white/5 transition-colors">
+<span class="material-symbols-outlined text-[18px] text-outline-variant">filter_list</span>
+<span class="font-label-md text-label-md text-outline-variant">Filter</span>
+</button>
+</div>
+</div>
+<!-- Category Chips (Dark) -->
+<div class="flex gap-sm overflow-x-auto hide-scrollbar mb-2xl">
+<button class="px-lg py-sm rounded-full bg-[#14B8A6] text-[#0F172A] font-label-lg text-label-lg whitespace-nowrap font-bold shadow-lg shadow-teal-900/20">All Items</button>
+<button class="px-lg py-sm rounded-full bg-[#1E293B] text-outline-variant font-label-lg text-label-lg whitespace-nowrap hover:bg-white/10 transition-colors">T-Shirts</button>
+<button class="px-lg py-sm rounded-full bg-[#1E293B] text-outline-variant font-label-lg text-label-lg whitespace-nowrap hover:bg-white/10 transition-colors">Outerwear</button>
+<button class="px-lg py-sm rounded-full bg-[#1E293B] text-outline-variant font-label-lg text-label-lg whitespace-nowrap hover:bg-white/10 transition-colors">Jeans</button>
+<button class="px-lg py-sm rounded-full bg-[#1E293B] text-outline-variant font-label-lg text-label-lg whitespace-nowrap hover:bg-white/10 transition-colors">Footwear</button>
+</div>
+<!-- Product Grid (Dark) -->
+<div class="grid grid-cols-2 gap-md">
+<!-- Product Card 1 -->
+<div class="group flex flex-col">
+<div class="relative aspect-[3/4] rounded-xl overflow-hidden mb-sm bg-[#1E293B]">
+<img alt="Product" class="w-full h-full object-cover opacity-90 transition-transform duration-500 group-hover:scale-105 group-hover:opacity-100" data-alt="A male model wearing a premium minimalist navy blue blazer and white t-shirt, standing in a dimly lit, high-contrast urban environment with cool blue tones. High-end fashion photography with sharp dramatic shadows. The aesthetic is sleek, technologically advanced, and professional for a dark-mode UI." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_s1IhclQ660uLHRN0qKN2eTtA7LRLbwRoxHxqcmFZfgmMz2OkFT_Jo8Z-GIVzrjtlhTFUVgwy4cP7n6430fpgYQlpa7fYpm2RtyLDREOx75FqUXA2bGC_yPMtGn9HT446fURNn166NyU04-wUS5XlwDjPxZ0P41oYOmjR_OrVhAJbjXRy8RfHqXSVKaGpKIULBPtAeUKFVfuHvehLWGoGdZ9buNNkkOw7nIGSXjKeGOQCqbzWYLf1328qir5rosPFCfJo3j3OXWo"/>
+<button class="absolute top-sm right-sm w-10 h-10 flex items-center justify-center rounded-full bg-[#0F172A]/60 backdrop-blur-md border border-white/10 shadow-lg active:scale-90 transition-all">
+<span class="material-symbols-outlined text-[20px] text-white">favorite</span>
+</button>
+</div>
+<h3 class="font-title-lg text-title-lg text-white truncate">Architect Blazer</h3>
+<div class="flex items-center gap-xs mt-xs">
+<span class="material-symbols-outlined text-[16px] text-tertiary-fixed" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-md text-label-md text-outline-variant">4.8</span>
+</div>
+<p class="font-label-lg text-label-lg text-[#14B8A6] mt-xs">$189.00</p>
+</div>
+<!-- Product Card 2 -->
+<div class="group flex flex-col">
+<div class="relative aspect-[3/4] rounded-xl overflow-hidden mb-sm bg-[#1E293B]">
+<img alt="Product" class="w-full h-full object-cover opacity-90 transition-transform duration-500 group-hover:scale-105 group-hover:opacity-100" data-alt="Modern casual jacket in dark forest green displayed in a dark studio setting. Controlled moody lighting accentuates the texture and quality of the garment. Minimalist aesthetic designed for a luxury dark-themed e-commerce experience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAq7K30Cv_Zm6tUlT8YSCIlrbHbabh4C7SJmdaCMqvKrn7Dgy5x0qBPYkXO606nNH3Xz4Jk9hv31OiSIgktLkv8Os4vh_3tZALLjmMUqJabYqPPtzU7vK0yuYzGi-xwWaVT_zUxKuqKLk4ZsHUph62u-GjVY0eXij8g7TtEmv0qFNtFwGp8d9dqmNEZetVqkl96D822287gxe8ursLM3RwzNgc17GjFhL8108Rh8r9YqgrMHISiNhYj-5iUuZ0U-QXeiKIO2jB5tfg"/>
+<button class="absolute top-sm right-sm w-10 h-10 flex items-center justify-center rounded-full bg-[#0F172A]/60 backdrop-blur-md border border-white/10 shadow-lg active:scale-90 transition-all">
+<span class="material-symbols-outlined text-[20px] text-white">favorite</span>
+</button>
+</div>
+<h3 class="font-title-lg text-title-lg text-white truncate">Nylon Field Jacket</h3>
+<div class="flex items-center gap-xs mt-xs">
+<span class="material-symbols-outlined text-[16px] text-tertiary-fixed" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-md text-label-md text-outline-variant">4.9</span>
+</div>
+<p class="font-label-lg text-label-lg text-[#14B8A6] mt-xs">$145.00</p>
+</div>
+<div class="group flex flex-col">
+<div class="relative aspect-[3/4] rounded-xl overflow-hidden mb-sm bg-[#1E293B]">
+<img alt="Product" class="w-full h-full object-cover opacity-90 transition-transform duration-500 group-hover:scale-105 group-hover:opacity-100" data-alt="Detail of a minimalist white t-shirt textile against a dark, contrasting background. Cinematic lighting highlights the premium weave of the fabric. Luxury apparel photography with a moody, dark-mode friendly palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQTiTNqn4BUe_aqdL9pYYXwuLw7ckFDJdZS6y_SACwOO4ppn6voj47OMozkuHkU9Xrc6op-xHI7bgyPEctfnI-wM8MTLYBi4r-5FaGl6TvyHxdUQmzcNBFMoPqgsctX8BXlUPW9JGTwD6OUZAsiL8ayTP-fvtgT0JGnkTL_IjubgtpE7oRN9jsyEB4K4N-YpInU64ri2vo-wtmLhQnCeylx-vRu0pT__oaAv_h9J6fNvwzN1b7s5WCaQk5E6lyR1mWf-a9ZJGhBAU"/>
+<button class="absolute top-sm right-sm w-10 h-10 flex items-center justify-center rounded-full bg-[#0F172A]/60 backdrop-blur-md border border-white/10 shadow-lg">
+<span class="material-symbols-outlined text-[20px] text-white">favorite</span>
+</button>
+</div>
+<h3 class="font-title-lg text-title-lg text-white truncate">Essential Pima Tee</h3>
+<p class="font-label-lg text-label-lg text-[#14B8A6] mt-xs">$45.00</p>
+</div>
+<div class="group flex flex-col">
+<div class="relative aspect-[3/4] rounded-xl overflow-hidden mb-sm bg-[#1E293B]">
+<img alt="Product" class="w-full h-full object-cover opacity-90 transition-transform duration-500 group-hover:scale-105 group-hover:opacity-100" data-alt="Raw dark indigo denim jeans with golden stitching, photographed in low key lighting with deep shadows and sharp highlights. High-end product photography for a premium brand, emphasizing durability and style in a dark aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9fyCmeCfg7Wn15pwxN0Rd8krU9KsrxnGtgNhIO3NIsavJOyQNhGEL8c8rj2-4xvkpE7boyXdegyOrAkhiSc1jETSA-4-vHN7aRowr8JLhFyP_21LTAOiLgOoAbX8gTpw1bTsHKvNOFpL4CWpxlG-ryA-yVtOQj1GydRL38u63ZWumofkMZ2Muc47k4QMchmUbwHyUQhZKOMZdOJZiaUxHm3QWF7QRlEOGvCvJ5NofkedYUSRYQY-MwvQZdoLAe4-rOe4kaH5n8ks"/>
+<button class="absolute top-sm right-sm w-10 h-10 flex items-center justify-center rounded-full bg-[#0F172A]/60 backdrop-blur-md border border-white/10 shadow-lg">
+<span class="material-symbols-outlined text-[20px] text-white">favorite</span>
+</button>
+</div>
+<h3 class="font-title-lg text-title-lg text-white truncate">Selvedge Slim Fit</h3>
+<p class="font-label-lg text-label-lg text-[#14B8A6] mt-xs">$120.00</p>
+</div>
+</div>
+<div class="mt-4xl mb-4xl flex justify-center">
+<button class="px-5xl py-md rounded-full border border-[#14B8A6] text-[#14B8A6] font-label-lg text-label-lg hover:bg-white/5 transition-colors">
+                        Load More
+                    </button>
+</div>
+</main>
+</section>
+</div>
+<!-- Universal Bottom Bar Mockup (Floating) -->
+<nav class="fixed bottom-lg left-1/2 -translate-x-1/2 w-[calc(100%-32px)] max-w-md z-[100] bg-white/70 dark:bg-[#1e293b]/70 backdrop-blur-xl border border-white/20 dark:border-white/5 rounded-[32px] px-lg h-20 shadow-2xl flex justify-around items-center">
+<div class="flex flex-col items-center text-[#0F766E] dark:text-[#14B8A6]">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="text-[10px] font-bold mt-xs uppercase tracking-wider">Home</span>
+</div>
+<div class="flex flex-col items-center text-on-surface-variant dark:text-outline-variant">
+<span class="material-symbols-outlined">explore</span>
+<span class="text-[10px] font-medium mt-xs uppercase tracking-wider">Shop</span>
+</div>
+<div class="relative">
+<div class="absolute -top-1 -right-1 w-4 h-4 bg-error rounded-full text-[9px] text-white flex items-center justify-center font-bold">2</div>
+<span class="material-symbols-outlined text-on-surface-variant dark:text-outline-variant">shopping_cart</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant dark:text-outline-variant">favorite</span>
+<span class="material-symbols-outlined text-on-surface-variant dark:text-outline-variant">person</span>
+</nav>
+<script>
+        // Simple micro-interaction for heart buttons
+        document.querySelectorAll('button').forEach(btn => {
+            if (btn.querySelector('.material-symbols-outlined')?.textContent === 'favorite') {
+                btn.addEventListener('click', () => {
+                    const icon = btn.querySelector('.material-symbols-outlined');
+                    const isFilled = icon.style.fontVariationSettings.includes("'FILL' 1");
+                    
+                    if (isFilled) {
+                        icon.style.fontVariationSettings = "'FILL' 0";
+                        icon.classList.remove('text-error');
+                        icon.classList.add('text-on-surface-variant');
+                        icon.classList.add('dark:text-white');
+                    } else {
+                        icon.style.fontVariationSettings = "'FILL' 1";
+                        icon.classList.remove('text-on-surface-variant');
+                        icon.classList.remove('dark:text-white');
+                        icon.classList.add('text-error');
+                        
+                        // Small bounce effect
+                        btn.style.transform = 'scale(1.3)';
+                        setTimeout(() => btn.style.transform = 'scale(1)', 150);
+                    }
+                });
+            }
+        });
+    </script>
+</body></html>

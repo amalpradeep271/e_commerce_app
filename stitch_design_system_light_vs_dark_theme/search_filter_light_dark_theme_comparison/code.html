@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LuxeShop Search &amp; Filter</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error": "#ffffff",
+                        "outline": "#7a7582",
+                        "secondary-fixed": "#e9ddff",
+                        "on-tertiary": "#ffffff",
+                        "on-background": "#1d1b20",
+                        "inverse-on-surface": "#f5eff7",
+                        "tertiary": "#765b00",
+                        "on-secondary": "#ffffff",
+                        "surface-bright": "#fdf7ff",
+                        "background": "#fdf7ff",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#e1d4fd",
+                        "outline-variant": "#cbc4d2",
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#ded8e0",
+                        "primary": "#4f378a",
+                        "on-primary-fixed-variant": "#4f378a",
+                        "tertiary-fixed": "#ffdf93",
+                        "on-secondary-fixed-variant": "#4b4263",
+                        "surface-tint": "#6750a4",
+                        "surface-container": "#f2ecf4",
+                        "primary-fixed-dim": "#cfbcff",
+                        "on-tertiary-container": "#503d00",
+                        "on-surface": "#1d1b20",
+                        "surface": "#fdf7ff",
+                        "on-primary-container": "#e0d2ff",
+                        "secondary-fixed-dim": "#cdc0e9",
+                        "on-tertiary-fixed-variant": "#594400",
+                        "surface-variant": "#e6e0e9",
+                        "inverse-surface": "#322f35",
+                        "primary-container": "#6750a4",
+                        "surface-container-high": "#ece6ee",
+                        "error": "#ba1a1a",
+                        "surface-container-highest": "#e6e0e9",
+                        "secondary": "#63597c",
+                        "on-surface-variant": "#494551",
+                        "tertiary-container": "#c9a74d",
+                        "on-primary": "#ffffff",
+                        "surface-container-low": "#f8f2fa",
+                        "on-secondary-fixed": "#1f1635",
+                        "on-secondary-container": "#645a7d",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed-dim": "#e7c365",
+                        "primary-fixed": "#e9ddff",
+                        "on-tertiary-fixed": "#241a00",
+                        "on-primary-fixed": "#22005d",
+                        "inverse-primary": "#cfbcff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "20px",
+                        "sm": "8px",
+                        "lg": "16px",
+                        "4xl": "40px",
+                        "5xl": "48px",
+                        "3xl": "32px",
+                        "2xl": "24px",
+                        "xs": "4px",
+                        "md": "12px"
+                    },
+                    "fontSize": {
+                        "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "600"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "title-lg": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "caption": ["11px", {"lineHeight": "14px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface-container-low dark:bg-black min-h-screen">
+<div class="flex flex-col md:flex-row items-start justify-center p-lg gap-3xl">
+<!-- LIGHT THEME VERSION -->
+<section class="w-full max-w-[400px] bg-white text-slate-900 rounded-[32px] overflow-hidden shadow-2xl relative border border-slate-100 h-[844px] flex flex-col">
+<!-- Search Bar -->
+<div class="p-lg pt-4xl flex items-center gap-md">
+<span class="material-symbols-outlined text-slate-600 cursor-pointer">arrow_back</span>
+<div class="flex-1 bg-slate-50 flex items-center px-lg py-sm rounded-xl border border-slate-100">
+<input class="bg-transparent border-none outline-none flex-1 font-body-lg text-slate-900 focus:ring-0" placeholder="Search for Kurta..." type="text" value="kurta"/>
+<span class="material-symbols-outlined text-slate-400">mic</span>
+</div>
+</div>
+<!-- Content Area -->
+<div class="flex-1 overflow-y-auto px-lg pb-4xl hide-scrollbar">
+<!-- Recent Searches -->
+<div class="mt-lg">
+<div class="flex justify-between items-center mb-md">
+<h3 class="font-title-lg text-title-lg">Recent Searches</h3>
+<button class="text-teal-700 font-label-lg text-label-lg">Clear All</button>
+</div>
+<div class="flex flex-wrap gap-sm">
+<span class="px-lg py-xs bg-slate-100 rounded-full font-label-md text-label-md text-slate-700">Kurta</span>
+<span class="px-lg py-xs bg-slate-100 rounded-full font-label-md text-label-md text-slate-700">Cotton Shirt</span>
+<span class="px-lg py-xs bg-slate-100 rounded-full font-label-md text-label-md text-slate-700">Summer Dress</span>
+</div>
+</div>
+<!-- Popular Categories -->
+<div class="mt-2xl">
+<h3 class="font-title-lg text-title-lg mb-md">Popular Categories</h3>
+<div class="flex gap-sm overflow-x-auto hide-scrollbar">
+<span class="shrink-0 px-lg py-sm bg-teal-50 text-teal-800 rounded-xl font-label-lg text-label-lg border border-teal-100">Ethnic Wear</span>
+<span class="shrink-0 px-lg py-sm bg-slate-100 text-slate-700 rounded-xl font-label-lg text-label-lg border border-slate-200">Casual Shirts</span>
+<span class="shrink-0 px-lg py-sm bg-slate-100 text-slate-700 rounded-xl font-label-lg text-label-lg border border-slate-200">Dresses</span>
+<span class="shrink-0 px-lg py-sm bg-slate-100 text-slate-700 rounded-xl font-label-lg text-label-lg border border-slate-200">Footwear</span>
+</div>
+</div>
+<!-- Results State -->
+<div class="mt-2xl">
+<p class="font-body-md text-body-md text-slate-500 mb-lg">24 results for <span class="text-slate-900 font-bold italic">"kurta"</span></p>
+<div class="grid grid-cols-2 gap-md">
+<!-- Product Card 1 -->
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] rounded-2xl overflow-hidden bg-slate-100 relative">
+<img class="w-full h-full object-cover" data-alt="A high-end editorial fashion shot of a model wearing a luxury white cotton kurta with delicate embroidery. The setting is a minimalist, sun-drenched studio with soft, clean shadows. The color palette consists of crisp whites, soft teals, and warm skin tones, conveying a premium and serene lifestyle vibe." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzC2lyVmb-5sbH5zhjHjD43XA0KxxhD3Rh3RBDA0wkaJZ0ZjDCy0wTYMDtSS3DH2B9kyBU7QF6lHmOiTclzPn7FEyMa09vYMHGfBqt8eJ1OK3RRffLqVejZeIETRrymVzIska_h_ZXil4SXt1-SezCgLUwNFBn2knnNxhzx-YzbphyQOQmhGwpnd8_uZP183Vu5mPc5bTX1XQRUP6u5V57gv6vaMv0nptyDcXtjVba5NdC8epBYdSdIhDxqj1s5stiO5N_sW4bliE"/>
+<button class="absolute top-sm right-sm w-sm-8 h-sm-8 bg-white/80 backdrop-blur-sm rounded-full p-xs">
+<span class="material-symbols-outlined text-[20px] text-slate-800">favorite</span>
+</button>
+</div>
+<div class="mt-sm">
+<h4 class="font-label-lg text-label-lg text-slate-900 truncate">Premium Cotton Kurta</h4>
+<p class="font-body-md text-body-md text-teal-700 font-bold">₹2,499</p>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] rounded-2xl overflow-hidden bg-slate-100 relative">
+<img class="w-full h-full object-cover" data-alt="Modern high-fashion product photography showing a designer indigo blue printed kurta. The lighting is crisp and professional, highlighting the fabric texture against a neutral off-white background. The aesthetic is clean and corporate modern, focusing on the sophisticated patterns and deep blue hues." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsYCYis0Y1VycuPAE5aS-xyDMqJcApT2ksu7oxCt3AQtLnJ7Oxy5RmFmkKez25TRYNiyhS8yQnS5y8ziJ8COoR8L81T0nrxN-vy_zxS7OrZqu1oauFZlMYNs2Zyj0u0sjZg9sJC2NVzWsdZxQc3mhc_Gfc3P3_VAURxnfIY6k2m1PYvQ99ygHT0CLXHzK2uyq5VmsHNRPzx-VF63ZOJkcO181Hnsd-XJkd9mVfjvEdMUIT4Wv19GfMAsgW0w2c6QrNmzvVg-U45mM"/>
+<button class="absolute top-sm right-sm w-sm-8 h-sm-8 bg-white/80 backdrop-blur-sm rounded-full p-xs">
+<span class="material-symbols-outlined text-[20px] text-slate-800">favorite</span>
+</button>
+</div>
+<div class="mt-sm">
+<h4 class="font-label-lg text-label-lg text-slate-900 truncate">Indigo Handblock Print</h4>
+<p class="font-body-md text-body-md text-teal-700 font-bold">₹1,899</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Floating Filter Button -->
+<button class="absolute bottom-8 left-1/2 -translate-x-1/2 bg-teal-700 text-white flex items-center gap-sm px-2xl py-md rounded-full shadow-lg active:scale-95 transition-transform z-10">
+<span class="material-symbols-outlined">tune</span>
+<span class="font-label-lg text-label-lg">Filter</span>
+</button>
+</section>
+<!-- DARK THEME VERSION -->
+<section class="w-full max-w-[400px] bg-slate-950 text-slate-100 rounded-[32px] overflow-hidden shadow-2xl relative border border-slate-800 h-[844px] flex flex-col">
+<!-- Search Bar -->
+<div class="p-lg pt-4xl flex items-center gap-md">
+<span class="material-symbols-outlined text-slate-400 cursor-pointer">arrow_back</span>
+<div class="flex-1 bg-slate-900 flex items-center px-lg py-sm rounded-xl border border-slate-800">
+<input class="bg-transparent border-none outline-none flex-1 font-body-lg text-slate-100 focus:ring-0" placeholder="Search for Kurta..." type="text" value="kurta"/>
+<span class="material-symbols-outlined text-slate-400">mic</span>
+</div>
+</div>
+<!-- Content Area -->
+<div class="flex-1 overflow-y-auto px-lg pb-4xl hide-scrollbar">
+<!-- Recent Searches -->
+<div class="mt-lg">
+<div class="flex justify-between items-center mb-md">
+<h3 class="font-title-lg text-title-lg">Recent Searches</h3>
+<button class="text-teal-400 font-label-lg text-label-lg">Clear All</button>
+</div>
+<div class="flex flex-wrap gap-sm">
+<span class="px-lg py-xs bg-slate-800 rounded-full font-label-md text-label-md text-slate-300">Kurta</span>
+<span class="px-lg py-xs bg-slate-800 rounded-full font-label-md text-label-md text-slate-300">Cotton Shirt</span>
+<span class="px-lg py-xs bg-slate-800 rounded-full font-label-md text-label-md text-slate-300">Summer Dress</span>
+</div>
+</div>
+<!-- Popular Categories -->
+<div class="mt-2xl">
+<h3 class="font-title-lg text-title-lg mb-md">Popular Categories</h3>
+<div class="flex gap-sm overflow-x-auto hide-scrollbar">
+<span class="shrink-0 px-lg py-sm bg-teal-900/40 text-teal-300 rounded-xl font-label-lg text-label-lg border border-teal-800/50">Ethnic Wear</span>
+<span class="shrink-0 px-lg py-sm bg-slate-800 text-slate-300 rounded-xl font-label-lg text-label-lg border border-slate-700">Casual Shirts</span>
+<span class="shrink-0 px-lg py-sm bg-slate-800 text-slate-300 rounded-xl font-label-lg text-label-lg border border-slate-700">Dresses</span>
+<span class="shrink-0 px-lg py-sm bg-slate-800 text-slate-300 rounded-xl font-label-lg text-label-lg border border-slate-700">Footwear</span>
+</div>
+</div>
+<!-- Results State -->
+<div class="mt-2xl">
+<p class="font-body-md text-body-md text-slate-400 mb-lg">24 results for <span class="text-teal-400 font-bold">"kurta"</span></p>
+<div class="grid grid-cols-2 gap-md">
+<!-- Product Card 1 -->
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] rounded-2xl overflow-hidden bg-slate-800 relative">
+<img class="w-full h-full object-cover" data-alt="Dramatic high-contrast fashion photography of a premium designer kurta for men. The model is lit with cinematic cool-toned lighting against a dark slate background, creating a sophisticated dark-mode aesthetic. Accents of vibrant aqua blue light emphasize the fabric quality and modern tailored fit." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmGyEqhOn7PDcj5P70ZXtPN_7TIIwfN-eSvXDM4FlW7gXXV04vnlo_7Qc_LfFkC4zZB3acPeNVxV_L95h67j1t9PH2pfi9-3-yAb58WdEPsLY06iCo5o-q0hVKTLUegeGyqaUTVOfpvFGB9bTAnjOq9wQ1xBFiLgsCGsmc0ko3eZOdX_PWVvfpkISFfCBCsnbs7CcVnMx6K5qsQ4G6__qjYOPLnCmcItVYSzca2Bd_dEopRPvPdHhsimzFFLqTzSsaT84leA6ZKwg"/>
+<button class="absolute top-sm right-sm w-sm-8 h-sm-8 bg-slate-900/60 backdrop-blur-sm rounded-full p-xs">
+<span class="material-symbols-outlined text-[20px] text-teal-400">favorite</span>
+</button>
+</div>
+<div class="mt-sm">
+<h4 class="font-label-lg text-label-lg text-slate-100 truncate">Onyx Silk Kurta</h4>
+<p class="font-body-md text-body-md text-teal-400 font-bold">₹3,999</p>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] rounded-2xl overflow-hidden bg-slate-800 relative">
+<img class="w-full h-full object-cover" data-alt="A striking studio product image of a light grey minimal kurta. The lighting is moody and directional, casting soft shadows that reveal the premium textile weave. The dark background enhances the cool tones, fitting perfectly into a high-end luxury e-commerce interface designed for a dark theme user experience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWkG02_dUPbYNHTRszB-ZFYmJxD-70s2LTjErnIiStnKYQXtlzBd1xws32BFtOMNQ3VIagueYAYKKre04MqvKfa184TArn_ZhTlILi8CeNkfsACFPyJp314Mr39XyuJaw08G65fTbfMic2PEVFiAoahRHNZkAKjpTscNizSUOPd-caM--5EftvZz7-RFPhE91-GqGxiBDnrdr9zh3ru8GrFZQh9QCRTJ6bw781GeOxOt8s1jBas1MlzhVA8vsulQPz9IytFVBGXDM"/>
+<button class="absolute top-sm right-sm w-sm-8 h-sm-8 bg-slate-900/60 backdrop-blur-sm rounded-full p-xs">
+<span class="material-symbols-outlined text-[20px] text-teal-400">favorite</span>
+</button>
+</div>
+<div class="mt-sm">
+<h4 class="font-label-lg text-label-lg text-slate-100 truncate">Linen Blend Tunic</h4>
+<p class="font-body-md text-body-md text-teal-400 font-bold">₹2,299</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Filter Bottom Sheet Overlay (Active for demo) -->
+<div class="absolute inset-0 bg-black/60 z-20 transition-opacity flex items-end">
+<div class="w-full bg-slate-900 rounded-t-[32px] p-lg pt-4xl transform translate-y-0 transition-transform shadow-[0_-10px_40px_rgba(0,0,0,0.5)] border-t border-slate-800">
+<div class="w-12 h-1.5 bg-slate-700 rounded-full mx-auto mb-2xl"></div>
+<div class="flex justify-between items-center mb-xl">
+<h2 class="font-headline-md text-headline-md">Filters</h2>
+<button class="text-teal-400 font-label-lg text-label-lg">Reset</button>
+</div>
+<!-- Price Range -->
+<div class="mb-2xl">
+<div class="flex justify-between mb-sm">
+<span class="font-label-lg text-label-lg">Price Range</span>
+<span class="font-body-md text-body-md text-teal-400">₹0 - ₹5000</span>
+</div>
+<div class="relative h-2 bg-slate-800 rounded-full">
+<div class="absolute left-0 right-1/4 h-full bg-teal-500 rounded-full"></div>
+<div class="absolute left-0 w-5 h-5 bg-white rounded-full border-4 border-teal-500 -top-1.5"></div>
+<div class="absolute right-1/4 w-5 h-5 bg-white rounded-full border-4 border-teal-500 -top-1.5"></div>
+</div>
+</div>
+<!-- Categories -->
+<div class="mb-2xl">
+<h3 class="font-label-lg text-label-lg mb-md">Category</h3>
+<div class="flex flex-wrap gap-sm">
+<span class="px-lg py-sm bg-teal-500 text-white rounded-xl font-label-md text-label-md">Ethnic Wear</span>
+<span class="px-lg py-sm bg-slate-800 text-slate-300 rounded-xl font-label-md text-label-md">Casual</span>
+<span class="px-lg py-sm bg-slate-800 text-slate-300 rounded-xl font-label-md text-label-md">Formals</span>
+<span class="px-lg py-sm bg-slate-800 text-slate-300 rounded-xl font-label-md text-label-md">Sportswear</span>
+</div>
+</div>
+<!-- Rating -->
+<div class="mb-2xl">
+<h3 class="font-label-lg text-label-lg mb-md">Rating</h3>
+<div class="flex gap-md">
+<span class="flex items-center gap-xs px-lg py-sm bg-slate-800 rounded-xl text-yellow-400">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span> 4+
+                            </span>
+<span class="flex items-center gap-xs px-lg py-sm bg-slate-800 rounded-xl text-slate-400">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span> 3+
+                            </span>
+</div>
+</div>
+<button class="w-full bg-teal-500 hover:bg-teal-400 text-slate-950 font-label-lg text-label-lg py-lg rounded-2xl font-bold transition-colors mb-lg">
+                        Apply Filters
+                    </button>
+</div>
+</div>
+</section>
+</div>
+<!-- Micro-interaction script -->
+<script>
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.classList.add('ring-2', 'ring-teal-500/50', 'border-teal-500');
+            });
+            input.addEventListener('blur', () => {
+                input.parentElement.classList.remove('ring-2', 'ring-teal-500/50', 'border-teal-500');
+            });
+        });
+    </script>
+</body></html>

@@ -7,13 +7,15 @@ class OrdersDisplayCubit extends Cubit<OrdersDisplayState> {
   OrdersDisplayCubit() : super(OrdersLoading());
 
   void displayOrders() async {
+    if (isClosed) return;
     var returnedData = await sl<GetOrdersUseCase>().call();
+    if (isClosed) return;
     returnedData.fold(
       (error){
-        emit(LoadOrdersFailure(errorMessage: error));
+        if (!isClosed) emit(LoadOrdersFailure(errorMessage: error));
       }, 
       (orders) {
-        emit(OrdersLoaded(orders: orders));
+        if (!isClosed) emit(OrdersLoaded(orders: orders));
       }
     );
   }

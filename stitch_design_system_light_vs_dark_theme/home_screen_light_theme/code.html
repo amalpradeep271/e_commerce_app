@@ -1,0 +1,341 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-secondary-fixed": "#1f1635",
+                        "background": "#fdf7ff",
+                        "surface-dim": "#ded8e0",
+                        "inverse-surface": "#322f35",
+                        "error-container": "#ffdad6",
+                        "surface-bright": "#fdf7ff",
+                        "primary-fixed": "#e9ddff",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#6750a4",
+                        "secondary": "#63597c",
+                        "primary-fixed-dim": "#cfbcff",
+                        "on-error-container": "#93000a",
+                        "surface-container-highest": "#e6e0e9",
+                        "on-surface": "#1d1b20",
+                        "tertiary-container": "#c9a74d",
+                        "tertiary": "#765b00",
+                        "surface-container-high": "#ece6ee",
+                        "on-tertiary-fixed": "#241a00",
+                        "on-secondary": "#ffffff",
+                        "primary": "#4f378a",
+                        "on-surface-variant": "#494551",
+                        "outline-variant": "#cbc4d2",
+                        "tertiary-fixed-dim": "#e7c365",
+                        "secondary-container": "#e1d4fd",
+                        "on-background": "#1d1b20",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed-variant": "#594400",
+                        "error": "#ba1a1a",
+                        "on-tertiary-container": "#503d00",
+                        "secondary-fixed-dim": "#cdc0e9",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#f8f2fa",
+                        "surface-tint": "#6750a4",
+                        "surface-container": "#f2ecf4",
+                        "on-primary-fixed-variant": "#4f378a",
+                        "inverse-on-surface": "#f5eff7",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed": "#ffdf93",
+                        "surface": "#fdf7ff",
+                        "outline": "#7a7582",
+                        "surface-variant": "#e6e0e9",
+                        "secondary-fixed": "#e9ddff",
+                        "on-secondary-fixed-variant": "#4b4263",
+                        "on-primary-container": "#e0d2ff",
+                        "on-primary-fixed": "#22005d",
+                        "inverse-primary": "#cfbcff",
+                        "on-secondary-container": "#645a7d",
+                        "brand-teal": "#0F766E",
+                        "brand-orange": "#F97316"
+                    },
+                    spacing: {
+                        "sm": "8px", "lg": "16px", "4xl": "40px", "xs": "4px", "md": "12px", "xl": "20px", "3xl": "32px", "5xl": "48px", "2xl": "24px"
+                    },
+                    fontSize: {
+                        "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "600"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "title-lg": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "3xl": "1.5rem", "full": "9999px"
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Poppins', sans-serif; -webkit-tap-highlight-color: transparent; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .glass-nav { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+</head>
+<body class="bg-white text-on-surface antialiased overflow-x-hidden">
+<!-- Top App Bar -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm px-lg h-16 flex justify-between items-center transition-shadow duration-300">
+<div class="flex items-center gap-md">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container transition-colors active:scale-95">
+<span class="material-symbols-outlined text-on-surface">menu</span>
+</button>
+<h1 class="text-brand-teal font-bold text-headline-md tracking-tight">E-Commerce</h1>
+</div>
+<div class="flex items-center gap-xs">
+<button class="relative w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container transition-colors active:scale-95">
+<span class="material-symbols-outlined text-on-surface">notifications</span>
+<span class="absolute top-2 right-2 w-4 h-4 bg-red-600 text-white text-[10px] font-bold flex items-center justify-center rounded-full border-2 border-white">3</span>
+</button>
+<button class="relative w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container transition-colors active:scale-95">
+<span class="material-symbols-outlined text-on-surface">shopping_cart</span>
+<span class="absolute top-2 right-2 w-4 h-4 bg-brand-teal text-white text-[10px] font-bold flex items-center justify-center rounded-full border-2 border-white">2</span>
+</button>
+</div>
+</header>
+<main class="pt-20 pb-32">
+<!-- Search Bar -->
+<section class="px-lg mb-2xl">
+<div class="flex items-center gap-md">
+<div class="flex-1 flex items-center bg-[#F9FAFB] border border-[#E5E7EB] rounded-2xl px-md py-sm">
+<span class="material-symbols-outlined text-outline">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-md w-full placeholder:text-outline ml-sm" placeholder="Search products..." type="text">
+</div>
+<button class="w-11 h-11 bg-brand-teal text-white rounded-2xl flex items-center justify-center shadow-lg shadow-brand-teal/20 active:scale-95 transition-transform">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+</div>
+</section>
+<!-- Banner Carousel -->
+<section class="px-lg mb-2xl">
+<div class="relative w-full h-44 rounded-2xl overflow-hidden shadow-xl group">
+<img class="w-full h-full object-cover" data-alt="A vibrant high-end fashion promotional banner for a summer sale. A stylish young woman models light, breezy summer apparel against a soft pastel backdrop. The composition is clean and modern, featuring elegant typography overlaying the image that says 50 percent off. Warm, golden hour lighting enhances the fresh and premium lifestyle feel of the brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDa9xt0mmPtl8JTtGbhl8-Vh2SzV9ijTXNDnPTPL06AZKZ87dyxqHQ4cwtHx9kvGyxhAgcdp1OQKAQ2M4yY3F-qB9jVVZBKqdil2EYdSiNhdO6bD7LMeLjiKSbV1b-ZoKlY02DSNpytpm1tq2Bv08q9MTKljv7K5ANabslA-_R5asgvmHzOQUUVHmA3mrpUC877fF7mKMdbd-yI0QBHP_9nxPpj3NHwre-JtQ2MtIre7xGhpk-EJVwbKG_sXmuJ1XaiYpYfSZfiaKE">
+<div class="absolute inset-0 bg-gradient-to-r from-black/60 via-black/20 to-transparent flex flex-col justify-center p-xl">
+<span class="text-white/80 font-label-lg uppercase tracking-widest mb-xs">Summer Collection</span>
+<h2 class="text-white font-bold text-headline-lg leading-tight mb-md">50% OFF<br>Summer Sale</h2>
+<button class="w-fit bg-white text-brand-teal px-lg py-sm rounded-xl font-bold text-label-lg shadow-lg active:scale-95 transition-transform">Shop Now</button>
+</div>
+<div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-xs">
+<div class="w-6 h-1 bg-white rounded-full"></div>
+<div class="w-2 h-1 bg-white/40 rounded-full"></div>
+<div class="w-2 h-1 bg-white/40 rounded-full"></div>
+</div>
+</div>
+</section>
+<!-- Categories -->
+<section class="mb-2xl">
+<div class="px-lg flex justify-between items-center mb-md">
+<h3 class="text-[#1F2937] font-bold text-title-lg">Categories</h3>
+</div>
+<div class="flex gap-lg overflow-x-auto no-scrollbar px-lg">
+<div class="flex flex-col items-center gap-sm shrink-0">
+<div class="w-16 h-16 rounded-full border border-[#E5E7EB] flex items-center justify-center bg-white shadow-sm active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-brand-teal">man</span>
+</div>
+<span class="text-label-md text-on-surface-variant">Men</span>
+</div>
+<div class="flex flex-col items-center gap-sm shrink-0">
+<div class="w-16 h-16 rounded-full border border-[#E5E7EB] flex items-center justify-center bg-white shadow-sm active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-brand-teal">woman</span>
+</div>
+<span class="text-label-md text-on-surface-variant">Women</span>
+</div>
+<div class="flex flex-col items-center gap-sm shrink-0">
+<div class="w-16 h-16 rounded-full border border-[#E5E7EB] flex items-center justify-center bg-white shadow-sm active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-brand-teal">child_care</span>
+</div>
+<span class="text-label-md text-on-surface-variant">Kids</span>
+</div>
+<div class="flex flex-col items-center gap-sm shrink-0">
+<div class="w-16 h-16 rounded-full border border-[#E5E7EB] flex items-center justify-center bg-white shadow-sm active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-brand-teal">snowshoeing</span>
+</div>
+<span class="text-label-md text-on-surface-variant">Footwear</span>
+</div>
+<div class="flex flex-col items-center gap-sm shrink-0">
+<div class="w-16 h-16 rounded-full border border-[#E5E7EB] flex items-center justify-center bg-white shadow-sm active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-brand-teal">watch</span>
+</div>
+<span class="text-label-md text-on-surface-variant">Accessories</span>
+</div>
+<div class="flex flex-col items-center gap-sm shrink-0">
+<div class="w-16 h-16 rounded-full border border-[#E5E7EB] flex items-center justify-center bg-white shadow-sm active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-brand-teal">checkroom</span>
+</div>
+<span class="text-label-md text-on-surface-variant">Ethnic</span>
+</div>
+</div>
+</section>
+<!-- Top Selling -->
+<section class="mb-2xl">
+<div class="px-lg flex justify-between items-center mb-md">
+<h3 class="text-[#1F2937] font-bold text-title-lg">Top Selling</h3>
+<button class="text-brand-teal font-bold text-label-lg active:opacity-70 transition-opacity">See All</button>
+</div>
+<div class="flex gap-lg overflow-x-auto no-scrollbar px-lg py-xs">
+<!-- Product Card 1 -->
+<div class="w-48 bg-white rounded-2xl shadow-md border border-surface-container shrink-0 overflow-hidden relative group">
+<button class="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-brand-teal text-[18px]">favorite</span>
+</button>
+<div class="absolute top-3 left-3 z-10 bg-brand-orange text-white text-[10px] font-bold px-sm py-[2px] rounded-full">Best Seller</div>
+<div class="h-44 bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A professional product shot of a sleek crimson red athletic running shoe. The shoe is positioned dynamically in the frame against a clean, neutral gray background with professional studio lighting. The high-contrast image highlights the intricate texture of the mesh and the polished finish of the sole, conveying speed and premium craftsmanship." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRXF5HE2XHhMfK6XCzPGuT-TYNJZ80zGEhi8zIIh7y2GH814LbO6w8J4laDxXVjJ1c58CmF5t-ZtZ3ppuu_wVHiMpqWWhrt2qoQMaGyklYonvcvLqQENAyvbZkSq4z9XPcd8R-tj8RPVrtA2mfmbPZsHL3xe-YJbaG-7LoUv05pCq4nxMcFpx0TAvAkhYE5v-wNRihnSe2KSpDWK9i81toGfdyOB0ZHvUCF0TvU3nfu4FSq0vvvvfj5dh0lidGfp_exZPjlO1oye0">
+</div>
+<div class="p-md">
+<p class="text-on-surface-variant text-label-md truncate mb-xs">Nike Air Zoom Pegasus</p>
+<div class="flex items-center gap-xs mb-sm">
+<span class="material-symbols-outlined text-yellow-400 text-[14px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-label-md font-bold">4.8</span>
+<span class="text-outline text-label-md">(124)</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-brand-teal font-bold text-title-lg">$120.00</span>
+<span class="text-[#6B7280] text-label-md line-through">$150.00</span>
+</div>
+<button class="w-10 h-10 bg-brand-teal text-white rounded-xl flex items-center justify-center active:scale-90 transition-transform">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="w-48 bg-white rounded-2xl shadow-md border border-surface-container shrink-0 overflow-hidden relative group">
+<button class="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-brand-teal text-[18px]">favorite</span>
+</button>
+<div class="absolute top-3 left-3 z-10 bg-brand-orange text-white text-[10px] font-bold px-sm py-[2px] rounded-full">Best Seller</div>
+<div class="h-44 bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A high-end, modern matte black wireless headphone set presented on a minimalist wooden surface. The lighting is soft and directional, casting subtle shadows that emphasize the ergonomic design and luxury materials. The overall aesthetic is clean, sophisticated, and focused on tech-lifestyle excellence, using a muted tonal color palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-x9pE1AfCZx00ktnRW0Y4q2DeYV6EZhkH7ZutfEC8Ef8FN-Q-wCXCfNwbABEyJUl29SKqJ1iQPCcp7e9Rhv8SW328i9AZIaORGHrlp9wwzYLkT3_gjyBv4TFGsAxyGZq4lV6n9ncNbStnCO4eacHHYsqh0n-wjw5yORmozTnFrIkU5VGbFd1PUIFfNXh78xYZkbvCVnjel0gsdL8cbps3FSg4HajSOPBYgUr0aA0aWAfAVM8_6HDDyoPlr-JWl35xp7l8pvrsNB4">
+</div>
+<div class="p-md">
+<p class="text-on-surface-variant text-label-md truncate mb-xs">Premium Wireless Audio</p>
+<div class="flex items-center gap-xs mb-sm">
+<span class="material-symbols-outlined text-yellow-400 text-[14px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-label-md font-bold">4.9</span>
+<span class="text-outline text-label-md">(89)</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-brand-teal font-bold text-title-lg">$240.00</span>
+<span class="text-[#6B7280] text-label-md line-through">$299.00</span>
+</div>
+<button class="w-10 h-10 bg-brand-teal text-white rounded-xl flex items-center justify-center active:scale-90 transition-transform">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- New Arrivals -->
+<section class="px-lg pb-10">
+<div class="flex justify-between items-center mb-md">
+<h3 class="text-[#1F2937] font-bold text-title-lg">New Arrivals</h3>
+<button class="text-brand-teal font-bold text-label-lg active:opacity-70 transition-opacity">See All</button>
+</div>
+<div class="grid grid-cols-2 gap-md">
+<!-- Grid Card 1 -->
+<div class="bg-white rounded-2xl shadow-md border border-surface-container overflow-hidden relative group">
+<div class="absolute top-3 left-3 z-10 bg-brand-orange text-white text-[10px] font-bold px-sm py-[2px] rounded-full">New</div>
+<div class="aspect-square bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="An elegant, minimalist leather designer handbag in a rich tan brown color. The bag is featured in a high-fashion editorial style, set against an architectural white background with crisp, geometric shadows. The professional photography highlights the fine stitching and premium leather texture, capturing a sense of luxury and timeless style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJAMBlAS-5OtIhaJ91XpZG0YDuU8xKsvyEfFwjMbhJaIK8qzhERZGfjYeCYxSXiTtm1foBbVyWwIJPFytO-fqzpEfoInK1Bk_FAXejR9ny4MzrCI7nn5XE4-RSAU5qSevviU5QwkP5luB9I4gmcQnSxx6VLyTSxBSbMtsrFERD9bsaJRdlD_r9eDrQWNm2ib_GCFo6_dfeNg6Rpgaatg1KZyckHjgJcp3ju3WyIzuGVvxjCC5Oi_YXtdSOdxIhEXMeIGl5vhhQTcU">
+</div>
+<div class="p-md">
+<p class="text-on-surface-variant text-label-md truncate mb-xs">Luxury Leather Bag</p>
+<span class="text-brand-teal font-bold text-title-lg">$85.00</span>
+</div>
+</div>
+<!-- Grid Card 2 -->
+<div class="bg-white rounded-2xl shadow-md border border-surface-container overflow-hidden relative group">
+<div class="absolute top-3 left-3 z-10 bg-brand-orange text-white text-[10px] font-bold px-sm py-[2px] rounded-full">New</div>
+<div class="aspect-square bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A clean, minimalist white modern wristwatch with a silver metal bezel. The watch is presented in a top-down view on a soft, light-colored fabric texture, creating a high-key, bright aesthetic. The image exudes a sense of precision, cleanliness, and contemporary fashion design, perfect for a high-end e-commerce interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEtvDJJWitchxFcE998hU-PPxIHf53mWcS1ydtrZFV-lB8Y9VQUsW_rPsQARq5OZHclNmyKtYcc2f9uznmas27wKHinh5mVo1tD1sntZZPFp7jp46UynCIdi5cnwPfMIf-1j6Q8PS6Du0-8uS7GlZdPBl1TCZQucOlNWWXrIdcrzZpZk3prUkMFCf0ZdcvHNtVw_oaDOUIq86AyITZ0e1XN5ZZfNYcUtg2586oK0B3JPbV0UQjjoPBxdxDUjnkN1RDZeWZgkNVqC0">
+</div>
+<div class="p-md">
+<p class="text-on-surface-variant text-label-md truncate mb-xs">Minimalist Watch</p>
+<span class="text-brand-teal font-bold text-title-lg">$115.00</span>
+</div>
+</div>
+<!-- Grid Card 3 -->
+<div class="bg-white rounded-2xl shadow-md border border-surface-container overflow-hidden relative group">
+<div class="absolute top-3 left-3 z-10 bg-brand-orange text-white text-[10px] font-bold px-sm py-[2px] rounded-full">New</div>
+<div class="aspect-square bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A pair of stylish, modern denim blue casual shoes with white laces and soles. The image is captured in a bright studio setting with soft lighting that emphasizes the textile's weave and the shoe's relaxed silhouette. The visual style is trendy, youthful, and high-quality, appealing to a contemporary urban lifestyle audience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKJ9gYVllt4THVCyJ5lUjXoyYAZDcSWgSpPWakPrm54l2W8DZF70x4gz8TvOfmjibUBDyNnMqAVl8w8S1UA_WCxQgFi3ks4s4ZgfDOd8Wn7hPtnhiHajr9ZxrgbaYR4pNbKucvpBN9gLoEQr-6-OsF3LjliNxQ64YWhu5drQjYPt2H9tdOm5kR3iNci8jJvVaUlZLBbpon-oFsc_8biQb-Rl0dPk1UOJVQVFUl4fVMbZtfNpFNyyOfl1Dj4-u7fTS9HH3MO_CcCZk">
+</div>
+<div class="p-md">
+<p class="text-on-surface-variant text-label-md truncate mb-xs">Denim Sneakers</p>
+<span class="text-brand-teal font-bold text-title-lg">$55.00</span>
+</div>
+</div>
+<!-- Grid Card 4 -->
+<div class="bg-white rounded-2xl shadow-md border border-surface-container overflow-hidden relative group">
+<div class="absolute top-3 left-3 z-10 bg-brand-orange text-white text-[10px] font-bold px-sm py-[2px] rounded-full">New</div>
+<div class="aspect-square bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A pair of classic white tennis sneakers with subtle beige accents, shown in a clean and well-lit studio environment. The image uses a minimalist composition and soft shadows to create a premium, high-end feel. The focus is on the clean lines and timeless design, embodying a professional and fashion-forward shopping experience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvyqiTGTXaMeC95S837XE4gFzKNpxvRPvwbViWJRXFihDEme9d3waO-KENIxJYRzZk0xlUa96rhrO9bLZnHGfceHwamcbx2jDC3U_Job6s1Nl2ygMZW3lJZD4drK5TWdUX9xnbxqMNPcENMjeQzx2LsyMEvUB_2qRzq11bPj77tJHQh1oIToEZIHeYbmVEMiWw_MiljLjkUFP4VNL58taxFtId3bkDHZqjUljbnEUKDNBxGWKmakmKZK6hPsyjnj8jBW2weOAGzQ8">
+</div>
+<div class="p-md">
+<p class="text-on-surface-variant text-label-md truncate mb-xs">Classic T-Series</p>
+<span class="text-brand-teal font-bold text-title-lg">$95.00</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Floating Bottom Navigation -->
+<nav class="fixed bottom-6 left-lg right-lg h-16 glass-nav rounded-3xl shadow-2xl z-50 flex items-center justify-around px-md">
+<button class="flex flex-col items-center justify-center gap-xs text-brand-teal group">
+<div class="relative">
+<span class="material-symbols-outlined text-[26px]" style="font-variation-settings: 'FILL' 1;">home</span>
+<div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-brand-teal rounded-full"></div>
+</div>
+<span class="text-[10px] font-bold">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-xs text-[#6B7280] hover:text-brand-teal transition-colors active:scale-90">
+<span class="material-symbols-outlined text-[26px]">search</span>
+<span class="text-[10px] font-medium">Search</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-xs text-[#6B7280] hover:text-brand-teal transition-colors active:scale-90">
+<span class="material-symbols-outlined text-[26px]">shopping_bag</span>
+<span class="text-[10px] font-medium">Cart</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-xs text-[#6B7280] hover:text-brand-teal transition-colors active:scale-90">
+<span class="material-symbols-outlined text-[26px]">person</span>
+<span class="text-[10px] font-medium">Profile</span>
+</button>
+</nav>
+<script>
+        // Simple scroll interaction for App Bar shadow
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 10) {
+                header.classList.add('shadow-md');
+            } else {
+                header.classList.remove('shadow-md');
+            }
+        });
+
+        // Feedback for buttons
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('touchstart', () => btn.classList.add('opacity-80'));
+            btn.addEventListener('touchend', () => btn.classList.remove('opacity-80'));
+        });
+    </script>
+</body></html>

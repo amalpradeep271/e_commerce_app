@@ -1,8 +1,10 @@
 import 'package:e_commerce_application/common/helper/navigator/app_navigator.dart';
 import 'package:e_commerce_application/common/widgets/appbar/app_bar.dart';
+import 'package:e_commerce_application/common/widgets/app_button/basic_app_button.dart';
 import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
 import 'package:e_commerce_application/domain/order/entity/order_entity.dart';
 import 'package:e_commerce_application/presentation/order/pages/order_items_page.dart';
+import 'package:e_commerce_application/presentation/order/pages/order_tracking_page.dart';
 import 'package:flutter/material.dart';
 
 class OrderDetailPage extends StatelessWidget {
@@ -14,6 +16,8 @@ class OrderDetailPage extends StatelessWidget {
     return Scaffold(
         appBar: CustomAppBar(
           title: 'Order #${orderEntity.code}',
+          leadingIconData: Icons.arrow_back,
+          onLeadingPressed: () => Navigator.pop(context),
         ),
         body: SingleChildScrollView(
           padding: const EdgeInsets.all(16),
@@ -22,7 +26,22 @@ class OrderDetailPage extends StatelessWidget {
             children: [
               _status(),
               const SizedBox(
-                height: 50,
+                height: 24,
+              ),
+              BasicAppButton(
+                title: 'Live Track Order Status',
+                onPressed: () {
+                  AppNavigator.push(
+                    context,
+                    OrderTrackingPage(
+                      orderId: orderEntity.code,
+                      orderCode: orderEntity.code,
+                    ),
+                  );
+                },
+              ),
+              const SizedBox(
+                height: 32,
               ),
               _items(context),
               const SizedBox(

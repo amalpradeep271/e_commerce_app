@@ -9,12 +9,16 @@ class UserInfoDisplayCubit extends Cubit<UserInfoDisaplyState> {
   UserInfoDisplayCubit() : super(UserInfoDisaplyLoading());
 
   void displayUserInfo() async {
+    if (isClosed) return;
     var returnedData = await sl<GetUserUseCase>().call();
+    if (isClosed) return;
     returnedData.fold(
       (error) {
-        emit(
-          UserInfoDisaplyFailure(),
-        );
+        if (!isClosed) {
+          emit(
+            UserInfoDisaplyFailure(),
+          );
+        }
       },
       (data) async {
         UserEntity dat = data;
@@ -25,9 +29,11 @@ class UserInfoDisplayCubit extends Cubit<UserInfoDisaplyState> {
           value: dat.image,
         );
 
-        emit(
-          UserInfoDisaplyLoaded(user: data),
-        );
+        if (!isClosed) {
+          emit(
+            UserInfoDisaplyLoaded(user: data),
+          );
+        }
       },
     );
   }

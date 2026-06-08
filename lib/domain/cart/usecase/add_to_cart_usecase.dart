@@ -4,9 +4,9 @@ import 'package:e_commerce_application/data/cart/model/add_to_cart_req_model.dar
 import 'package:e_commerce_application/domain/cart/repository/cart_repository.dart';
 import 'package:e_commerce_application/service_locator.dart';
 
-class AddToCartUseCase implements UseCase<Either, AddToCartReq> {
+class AddToCartUseCase implements UseCase<Either<String, String>, AddToCartReq> {
   @override
-  Future<Either> call({AddToCartReq? params}) async {
+  Future<Either<String, String>> call({AddToCartReq? params}) async {
     return await sl<CartRepository>().addToCart(params!);
   }
 }

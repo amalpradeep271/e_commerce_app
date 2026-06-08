@@ -1,19 +1,31 @@
 import 'package:e_commerce_application/core/constants/app_urls.dart';
 
 class ImageDisplayHelper {
-  static String generateCategoryImageURL(String title) {
-    return AppUrl.categoryImage + title + AppUrl.alt;
+  static String generateCategoryImageURL(String image) {
+    if (image.startsWith('http://') || image.startsWith('https://')) {
+      return image;
+    }
+    return AppUrl.categoryImage + image + AppUrl.alt;
   }
 
-   static String generateBannerImageURL(String title) {
-    return AppUrl.bannerImage + title + AppUrl.alt;
+   static String generateBannerImageURL(String image) {
+    if (image.startsWith('http://') || image.startsWith('https://')) {
+      return image;
+    }
+    return AppUrl.bannerImage + image + AppUrl.alt;
   }
 
-  static String generateProductImageURL(String title) {
-    return AppUrl.productImage + title + AppUrl.alt;
+  static String generateProductImageURL(String image) {
+    if (image.startsWith('http://') || image.startsWith('https://')) {
+      return image;
+    }
+    return AppUrl.productImage + image + AppUrl.alt;
   }
 
-    static String generateSingleProductImageURL(String title) {
-    return AppUrl.productSelectImage + title + AppUrl.alt;
+    static String generateSingleProductImageURL(String image) {
+    if (image.startsWith('http://') || image.startsWith('https://')) {
+      return image;
+    }
+    return AppUrl.productSelectImage + image + AppUrl.alt;
   }
 }

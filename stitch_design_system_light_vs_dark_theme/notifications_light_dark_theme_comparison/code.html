@@ -1,0 +1,340 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Notifications Comparison</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .pb-safe {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+        /* Hide scrollbars for the comparison view */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#e7c365",
+                        "on-primary": "#ffffff",
+                        "primary-fixed-dim": "#cfbcff",
+                        "on-tertiary": "#ffffff",
+                        "primary-container": "#6750a4",
+                        "on-secondary-fixed-variant": "#4b4263",
+                        "tertiary-fixed": "#ffdf93",
+                        "surface-tint": "#6750a4",
+                        "on-surface-variant": "#494551",
+                        "surface-container-highest": "#e6e0e9",
+                        "background": "#fdf7ff",
+                        "error-container": "#ffdad6",
+                        "outline-variant": "#cbc4d2",
+                        "on-secondary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "primary-fixed": "#e9ddff",
+                        "on-primary-container": "#e0d2ff",
+                        "surface-container": "#f2ecf4",
+                        "inverse-surface": "#322f35",
+                        "surface-bright": "#fdf7ff",
+                        "surface": "#fdf7ff",
+                        "tertiary-container": "#c9a74d",
+                        "secondary-fixed-dim": "#cdc0e9",
+                        "on-secondary-container": "#645a7d",
+                        "secondary-container": "#e1d4fd",
+                        "on-tertiary-fixed": "#241a00",
+                        "on-secondary-fixed": "#1f1635",
+                        "surface-variant": "#e6e0e9",
+                        "inverse-on-surface": "#f5eff7",
+                        "on-surface": "#1d1b20",
+                        "surface-dim": "#ded8e0",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed-variant": "#4f378a",
+                        "inverse-primary": "#cfbcff",
+                        "error": "#ba1a1a",
+                        "secondary-fixed": "#e9ddff",
+                        "secondary": "#63597c",
+                        "on-background": "#1d1b20",
+                        "on-tertiary-fixed-variant": "#594400",
+                        "on-error": "#ffffff",
+                        "primary": "#4f378a",
+                        "surface-container-high": "#ece6ee",
+                        "on-tertiary-container": "#503d00",
+                        "tertiary": "#765b00",
+                        "outline": "#7a7582",
+                        "surface-container-low": "#f8f2fa",
+                        "on-primary-fixed": "#22005d"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "sm": "8px",
+                        "md": "12px",
+                        "lg": "16px",
+                        "xl": "20px",
+                        "2xl": "24px",
+                        "3xl": "32px",
+                        "4xl": "40px"
+                    },
+                    "fontSize": {
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "title-lg": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "600"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface-dim dark:bg-black min-h-screen flex items-center justify-center p-xl overflow-x-auto">
+<!-- Container for side-by-side view -->
+<div class="flex flex-row gap-8 min-w-max">
+<!-- LIGHT THEME PHONE (390x844) -->
+<div class="relative w-[390px] h-[844px] bg-white rounded-[40px] shadow-2xl overflow-hidden border-[8px] border-gray-900 flex flex-col">
+<!-- Top App Bar -->
+<header class="flex items-center justify-between px-lg h-16 w-full bg-white border-b border-[#E5E7EB]">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-[#1F2937] cursor-pointer" data-icon="arrow_back">arrow_back</span>
+<h1 class="font-headline-md text-headline-md text-[#1F2937]">Notifications</h1>
+</div>
+<button class="text-[14px] font-semibold text-[#0F766E] transition-colors hover:opacity-70">Mark all read</button>
+</header>
+<!-- Notification List -->
+<main class="flex-1 overflow-y-auto no-scrollbar pb-20">
+<!-- Notification 1 (Unread) -->
+<div class="flex gap-md p-lg bg-[#EFF6FF] border-l-[3px] border-[#3B82F6] border-b border-[#E5E7EB]">
+<div class="w-10 h-10 rounded-full bg-[#3B82F6] flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-white text-[20px]" data-icon="package">package</span>
+</div>
+<div class="flex flex-col gap-xs flex-1">
+<div class="flex justify-between items-start">
+<span class="font-bold text-[15px] text-[#1F2937]">Order Shipped!</span>
+<span class="text-[11px] text-[#94A3B8]">2 hours ago</span>
+</div>
+<p class="text-[14px] text-[#6B7280] leading-relaxed">Your order #ORD-12345 has been shipped and is on its way.</p>
+</div>
+</div>
+<!-- Notification 5 (Unread - Order sequence adapted for visual flow) -->
+<div class="flex gap-md p-lg bg-[#EFF6FF] border-l-[3px] border-[#3B82F6] border-b border-[#E5E7EB]">
+<div class="w-10 h-10 rounded-full bg-pink-500 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-white text-[20px]" data-icon="favorite">favorite</span>
+</div>
+<div class="flex flex-col gap-xs flex-1">
+<div class="flex justify-between items-start">
+<span class="font-bold text-[15px] text-[#1F2937]">Price Drop on Wishlist</span>
+<span class="text-[11px] text-[#94A3B8]">3 hours ago</span>
+</div>
+<p class="text-[14px] text-[#6B7280] leading-relaxed">An item in your wishlist is now at a lower price. Check it out!</p>
+</div>
+</div>
+<!-- Notification 2 (Unread) -->
+<div class="flex gap-md p-lg bg-[#EFF6FF] border-l-[3px] border-[#3B82F6] border-b border-[#E5E7EB]">
+<div class="w-10 h-10 rounded-full bg-[#F97316] flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-white text-[20px]" data-icon="confirmation_number">confirmation_number</span>
+</div>
+<div class="flex flex-col gap-xs flex-1">
+<div class="flex justify-between items-start">
+<span class="font-bold text-[15px] text-[#1F2937]">Flash Sale! 30% OFF</span>
+<span class="text-[11px] text-[#94A3B8]">5 hours ago</span>
+</div>
+<p class="text-[14px] text-[#6B7280] leading-relaxed">Use code FLASH30 at checkout. Valid until midnight!</p>
+</div>
+</div>
+<!-- Notification 3 (Read) -->
+<div class="flex gap-md p-lg bg-white border-b border-[#E5E7EB]">
+<div class="w-10 h-10 rounded-full bg-[#10B981] flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-white text-[20px]" data-icon="check_circle">check_circle</span>
+</div>
+<div class="flex flex-col gap-xs flex-1">
+<div class="flex justify-between items-start">
+<span class="font-medium text-[15px] text-[#1F2937]">Order Delivered</span>
+<span class="text-[11px] text-[#94A3B8]">Yesterday</span>
+</div>
+<p class="text-[14px] text-[#6B7280] leading-relaxed">Your order #ORD-12340 has been delivered.</p>
+</div>
+</div>
+<!-- Notification 4 (Read) -->
+<div class="flex gap-md p-lg bg-white border-b border-[#E5E7EB]">
+<div class="w-10 h-10 rounded-full bg-gray-400 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-white text-[20px]" data-icon="person">person</span>
+</div>
+<div class="flex flex-col gap-xs flex-1">
+<div class="flex justify-between items-start">
+<span class="font-medium text-[15px] text-[#1F2937]">Welcome to E-Commerce</span>
+<span class="text-[11px] text-[#94A3B8]">2 days ago</span>
+</div>
+<p class="text-[14px] text-[#6B7280] leading-relaxed">We're glad to have you here! Start exploring our latest collections.</p>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation -->
+<nav class="fixed bottom-0 w-[374px] mx-auto z-50 bg-white/80 backdrop-blur-md border-t border-[#E5E7EB] flex justify-around items-center h-20 px-lg pb-safe rounded-b-[32px]">
+<div class="flex flex-col items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-md text-label-md mt-1">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+<span class="font-label-md text-label-md mt-1">Shop</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#0F766E] font-bold">
+<span class="material-symbols-outlined" data-icon="notifications" style="font-variation-settings: 'FILL' 1;">notifications</span>
+<span class="font-label-md text-label-md mt-1">Alerts</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+<span class="font-label-md text-label-md mt-1">Wishlist</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-md text-label-md mt-1">Profile</span>
+</div>
+</nav>
+</div>
+<!-- DARK THEME PHONE (390x844) -->
+<div class="relative w-[390px] h-[844px] bg-[#0F172A] rounded-[40px] shadow-2xl overflow-hidden border-[8px] border-gray-800 flex flex-col">
+<!-- Top App Bar -->
+<header class="flex items-center justify-between px-lg h-16 w-full bg-[#0F172A] border-b border-[#334155]">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-[#F1F5F9] cursor-pointer" data-icon="arrow_back">arrow_back</span>
+<h1 class="font-headline-md text-headline-md text-[#F1F5F9]">Notifications</h1>
+</div>
+<button class="text-[14px] font-semibold text-[#14B8A6] transition-colors hover:opacity-70">Mark all read</button>
+</header>
+<!-- Notification List -->
+<main class="flex-1 overflow-y-auto no-scrollbar pb-20">
+<!-- Notification 1 (Unread) -->
+<div class="flex gap-md p-lg bg-[#1E293B]/60 border-l-[3px] border-[#3B82F6] border-b border-[#334155]">
+<div class="w-10 h-10 rounded-full bg-[#3B82F6] flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-white text-[20px]" data-icon="package">package</span>
+</div>
+<div class="flex flex-col gap-xs flex-1">
+<div class="flex justify-between items-start">
+<span class="font-bold text-[15px] text-[#F1F5F9]">Order Shipped!</span>
+<span class="text-[11px] text-[#64748B]">2 hours ago</span>
+</div>
+<p class="text-[14px] text-[#94A3B8] leading-relaxed">Your order #ORD-12345 has been shipped and is on its way.</p>
+</div>
+</div>
+<!-- Notification 5 (Unread) -->
+<div class="flex gap-md p-lg bg-[#1E293B]/60 border-l-[3px] border-[#3B82F6] border-b border-[#334155]">
+<div class="w-10 h-10 rounded-full bg-pink-600 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-white text-[20px]" data-icon="favorite">favorite</span>
+</div>
+<div class="flex flex-col gap-xs flex-1">
+<div class="flex justify-between items-start">
+<span class="font-bold text-[15px] text-[#F1F5F9]">Price Drop on Wishlist</span>
+<span class="text-[11px] text-[#64748B]">3 hours ago</span>
+</div>
+<p class="text-[14px] text-[#94A3B8] leading-relaxed">An item in your wishlist is now at a lower price. Check it out!</p>
+</div>
+</div>
+<!-- Notification 2 (Unread) -->
+<div class="flex gap-md p-lg bg-[#1E293B]/60 border-l-[3px] border-[#3B82F6] border-b border-[#334155]">
+<div class="w-10 h-10 rounded-full bg-[#F97316] flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-white text-[20px]" data-icon="confirmation_number">confirmation_number</span>
+</div>
+<div class="flex flex-col gap-xs flex-1">
+<div class="flex justify-between items-start">
+<span class="font-bold text-[15px] text-[#F1F5F9]">Flash Sale! 30% OFF</span>
+<span class="text-[11px] text-[#64748B]">5 hours ago</span>
+</div>
+<p class="text-[14px] text-[#94A3B8] leading-relaxed">Use code FLASH30 at checkout. Valid until midnight!</p>
+</div>
+</div>
+<!-- Notification 3 (Read) -->
+<div class="flex gap-md p-lg bg-[#0F172A] border-b border-[#334155]">
+<div class="w-10 h-10 rounded-full bg-[#10B981] flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-white text-[20px]" data-icon="check_circle">check_circle</span>
+</div>
+<div class="flex flex-col gap-xs flex-1">
+<div class="flex justify-between items-start">
+<span class="font-medium text-[15px] text-[#F1F5F9]">Order Delivered</span>
+<span class="text-[11px] text-[#64748B]">Yesterday</span>
+</div>
+<p class="text-[14px] text-[#94A3B8] leading-relaxed">Your order #ORD-12340 has been delivered.</p>
+</div>
+</div>
+<!-- Notification 4 (Read) -->
+<div class="flex gap-md p-lg bg-[#0F172A] border-b border-[#334155]">
+<div class="w-10 h-10 rounded-full bg-slate-600 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-white text-[20px]" data-icon="person">person</span>
+</div>
+<div class="flex flex-col gap-xs flex-1">
+<div class="flex justify-between items-start">
+<span class="font-medium text-[15px] text-[#F1F5F9]">Welcome to E-Commerce</span>
+<span class="text-[11px] text-[#64748B]">2 days ago</span>
+</div>
+<p class="text-[14px] text-[#94A3B8] leading-relaxed">We're glad to have you here! Start exploring our latest collections.</p>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation -->
+<nav class="fixed bottom-0 w-[374px] mx-auto z-50 bg-[#0F172A]/80 backdrop-blur-md border-t border-[#334155] flex justify-around items-center h-20 px-lg pb-safe rounded-b-[32px]">
+<div class="flex flex-col items-center justify-center text-[#94A3B8]">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-md text-label-md mt-1">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#94A3B8]">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+<span class="font-label-md text-label-md mt-1">Shop</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#14B8A6] font-bold">
+<span class="material-symbols-outlined" data-icon="notifications" style="font-variation-settings: 'FILL' 1;">notifications</span>
+<span class="font-label-md text-label-md mt-1">Alerts</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#94A3B8]">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+<span class="font-label-md text-label-md mt-1">Wishlist</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#94A3B8]">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-md text-label-md mt-1">Profile</span>
+</div>
+</nav>
+</div>
+</div>
+<!-- Floating Label for clarity -->
+<div class="fixed top-8 left-1/2 -translate-x-1/2 bg-primary px-lg py-sm rounded-full shadow-lg z-50">
+<span class="text-white font-bold text-label-lg">Theme Comparison Mode</span>
+</div>
+<script>
+        // Simple touch feedback micro-interactions
+        document.querySelectorAll('button, .material-symbols-outlined').forEach(el => {
+            el.addEventListener('mousedown', () => {
+                el.style.transform = 'scale(0.95)';
+                el.style.transition = 'transform 0.1s ease';
+            });
+            el.addEventListener('mouseup', () => {
+                el.style.transform = 'scale(1)';
+            });
+            el.addEventListener('mouseleave', () => {
+                el.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body></html>

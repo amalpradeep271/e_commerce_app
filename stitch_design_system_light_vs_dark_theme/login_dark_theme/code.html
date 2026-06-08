@@ -1,0 +1,191 @@
+<!DOCTYPE html><html class="dark" lang="en" style="width: 390px; height: 884px; overflow: hidden; position: relative;"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>ShopPremium - Login</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bg-custom-gradient {
+            background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-error-container": "#93000a",
+                      "surface-dim": "#ded8e0",
+                      "primary": "#4f378a",
+                      "on-primary-fixed-variant": "#4f378a",
+                      "tertiary-fixed": "#ffdf93",
+                      "surface-tint": "#6750a4",
+                      "on-secondary-fixed-variant": "#4b4263",
+                      "on-secondary": "#ffffff",
+                      "surface-bright": "#fdf7ff",
+                      "surface-container-lowest": "#ffffff",
+                      "secondary-container": "#e1d4fd",
+                      "outline-variant": "#cbc4d2",
+                      "background": "#fdf7ff",
+                      "inverse-on-surface": "#f5eff7",
+                      "tertiary": "#765b00",
+                      "on-error": "#ffffff",
+                      "secondary-fixed": "#e9ddff",
+                      "outline": "#7a7582",
+                      "on-background": "#1d1b20",
+                      "on-tertiary": "#ffffff",
+                      "on-secondary-container": "#645a7d",
+                      "on-secondary-fixed": "#1f1635",
+                      "tertiary-fixed-dim": "#e7c365",
+                      "error-container": "#ffdad6",
+                      "primary-fixed": "#e9ddff",
+                      "on-tertiary-fixed": "#241a00",
+                      "on-primary-fixed": "#22005d",
+                      "inverse-primary": "#cfbcff",
+                      "on-surface-variant": "#494551",
+                      "surface-container-highest": "#e6e0e9",
+                      "secondary": "#63597c",
+                      "tertiary-container": "#c9a74d",
+                      "on-primary": "#ffffff",
+                      "surface-container-low": "#f8f2fa",
+                      "secondary-fixed-dim": "#cdc0e9",
+                      "on-tertiary-fixed-variant": "#594400",
+                      "primary-container": "#6750a4",
+                      "surface-variant": "#e6e0e9",
+                      "inverse-surface": "#322f35",
+                      "error": "#ba1a1a",
+                      "surface-container-high": "#ece6ee",
+                      "surface-container": "#f2ecf4",
+                      "primary-fixed-dim": "#cfbcff",
+                      "on-tertiary-container": "#503d00",
+                      "on-surface": "#1d1b20",
+                      "on-primary-container": "#e0d2ff",
+                      "surface": "#fdf7ff",
+                      // Custom brand colors mapped to prompts
+                      "brand-teal": "#14B8A6",
+                      "brand-card": "#1E293B",
+                      "brand-border": "#334155",
+                      "brand-input": "#0F172A",
+                      "brand-heading": "#F1F5F9",
+                      "brand-subtitle": "#94A3B8"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "2xl": "24px",
+                      "xs": "4px",
+                      "md": "12px",
+                      "xl": "20px",
+                      "lg": "16px",
+                      "4xl": "40px",
+                      "sm": "8px",
+                      "5xl": "48px",
+                      "3xl": "32px"
+              },
+              "fontSize": {
+                      "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "600"}],
+                      "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "500"}]
+              }
+            },
+          },
+        }
+      </script>
+</head>
+<body class="bg-custom-gradient min-h-screen flex flex-col items-center justify-center px-lg py-3xl">
+<!-- Header Section (Suppressed Shell as per Transactional Mandate) -->
+<div class="w-full max-w-md flex flex-col items-center mb-4xl">
+<img alt="ShopPremium Logo" class="w-[60px] h-[60px] rounded-md mb-2xl object-contain" src="https://lh3.googleusercontent.com/aida/AP1WRLttFuA6AWl4cjTIAFo_W2y7tSmTW0Apkk6S03OAtjtuLqaoWMH4mWUtRB75_M_BXwzkTPjrpCkXmkHluEZB9nYJY6PL1-H0s7cZdX2poxKJIDrUQtNhf36ThPeaFcniqCsuqkU-bbRiXNoxQctqt9qlpwvOgyLIVuAlG6EmeZYuA8LTQEsLLPdwQGFgrCR15hyTF9D3BOwtqspJg2V1x8IKHka5mzyMOmQhP37HCFy2qrbBXim5LN5j7UQ">
+<h1 class="text-brand-heading font-headline-lg text-headline-lg mb-sm">Welcome Back</h1>
+<p class="text-brand-subtitle font-body-md text-body-md">Sign in to continue shopping</p>
+</div>
+<!-- Login Card -->
+<main class="w-full max-w-md bg-brand-card border border-brand-border rounded-xl p-2xl shadow-2xl transition-all duration-300">
+<form class="space-y-xl" onsubmit="return false;">
+<!-- Email Input -->
+<div class="space-y-sm">
+<label class="text-brand-subtitle font-label-md text-label-md" for="email">Email Address</label>
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-md flex items-center pointer-events-none text-brand-subtitle group-focus-within:text-brand-teal transition-colors">
+<span class="material-symbols-outlined text-[20px]">mail</span>
+</div>
+<input class="block w-full pl-10 pr-md py-md bg-brand-input border border-brand-border rounded-lg text-brand-heading font-body-md text-body-md placeholder-brand-subtitle focus:ring-1 focus:ring-brand-teal focus:border-brand-teal transition-all outline-none" id="email" placeholder="example@email.com" type="email">
+</div>
+</div>
+<!-- Password Input -->
+<div class="space-y-sm">
+<div class="flex justify-between items-center">
+<label class="text-brand-subtitle font-label-md text-label-md" for="password">Password</label>
+<a class="text-brand-teal font-label-md text-label-md hover:underline transition-all" href="#">Forgot Password?</a>
+</div>
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-md flex items-center pointer-events-none text-brand-subtitle group-focus-within:text-brand-teal transition-colors">
+<span class="material-symbols-outlined text-[20px]">lock</span>
+</div>
+<input class="block w-full pl-10 pr-12 py-md bg-brand-input border border-brand-border rounded-lg text-brand-heading font-body-md text-body-md placeholder-brand-subtitle focus:ring-1 focus:ring-brand-teal focus:border-brand-teal transition-all outline-none" id="password" placeholder="••••••••" type="password">
+<button class="absolute inset-y-0 right-0 pr-md flex items-center text-brand-subtitle hover:text-brand-heading transition-colors" onclick="togglePassword()" type="button">
+<span class="material-symbols-outlined text-[20px]" id="pass-icon">visibility</span>
+</button>
+</div>
+</div>
+<!-- Primary CTA -->
+<button class="w-full bg-brand-teal hover:bg-brand-teal/90 text-white font-label-lg text-label-lg py-md rounded-xl transition-all active:scale-[0.98] shadow-lg shadow-brand-teal/20">
+                Sign In
+            </button>
+<!-- Divider -->
+<div class="relative flex py-sm items-center">
+<div class="flex-grow border-t border-brand-border"></div>
+<span class="flex-shrink mx-md text-brand-subtitle font-label-md text-label-md">OR</span>
+<div class="flex-grow border-t border-brand-border"></div>
+</div>
+<!-- Google Login -->
+<button class="w-full flex items-center justify-center gap-md bg-transparent border border-brand-border hover:bg-brand-border/30 text-brand-heading font-label-lg text-label-lg py-md rounded-xl transition-all active:scale-[0.98]">
+<svg fill="none" height="20" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
+<path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
+<path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"></path>
+<path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 12-4.53z" fill="#EA4335"></path>
+</svg>
+                Continue with Google
+            </button>
+</form>
+<!-- Footer Text -->
+<div class="mt-2xl text-center">
+<p class="text-brand-subtitle font-body-md text-body-md">
+                Don't have an account? <a class="text-brand-teal font-bold hover:underline" href="#">Sign Up</a>
+</p>
+</div>
+</main>
+<!-- Decorative Atmospheric Elements -->
+<div class="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-primary/10 blur-[100px] pointer-events-none"></div>
+<div class="fixed bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-brand-teal/10 blur-[100px] pointer-events-none"></div>
+<script>
+        function togglePassword() {
+            const input = document.getElementById('password');
+            const icon = document.getElementById('pass-icon');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.innerText = 'visibility_off';
+            } else {
+                input.type = 'password';
+                icon.innerText = 'visibility';
+            }
+        }
+    </script>
+</body></html>

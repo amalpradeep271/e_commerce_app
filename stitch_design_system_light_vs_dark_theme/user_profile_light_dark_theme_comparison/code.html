@@ -1,0 +1,349 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed": "#241a00",
+                    "tertiary-container": "#c9a74d",
+                    "surface-variant": "#e6e0e9",
+                    "outline": "#7a7582",
+                    "tertiary-fixed-dim": "#e7c365",
+                    "primary": "#4f378a",
+                    "on-secondary-fixed": "#1f1635",
+                    "secondary": "#63597c",
+                    "surface-container-high": "#ece6ee",
+                    "on-primary-fixed-variant": "#4f378a",
+                    "on-tertiary-container": "#503d00",
+                    "on-secondary-container": "#645a7d",
+                    "inverse-on-surface": "#f5eff7",
+                    "on-tertiary-fixed-variant": "#594400",
+                    "on-primary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "secondary-fixed": "#e9ddff",
+                    "surface-dim": "#ded8e0",
+                    "surface-bright": "#fdf7ff",
+                    "outline-variant": "#cbc4d2",
+                    "error-container": "#ffdad6",
+                    "surface-container": "#f2ecf4",
+                    "surface": "#fdf7ff",
+                    "on-surface": "#1d1b20",
+                    "tertiary": "#765b00",
+                    "inverse-primary": "#cfbcff",
+                    "on-error": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "background": "#fdf7ff",
+                    "primary-fixed-dim": "#cfbcff",
+                    "on-secondary-fixed-variant": "#4b4263",
+                    "on-primary-fixed": "#22005d",
+                    "on-surface-variant": "#494551",
+                    "on-primary-container": "#e0d2ff",
+                    "primary-fixed": "#e9ddff",
+                    "secondary-fixed-dim": "#cdc0e9",
+                    "on-background": "#1d1b20",
+                    "tertiary-fixed": "#ffdf93",
+                    "primary-container": "#6750a4",
+                    "error": "#ba1a1a",
+                    "surface-container-highest": "#e6e0e9",
+                    "secondary-container": "#e1d4fd",
+                    "surface-container-low": "#f8f2fa",
+                    "surface-tint": "#6750a4",
+                    "inverse-surface": "#322f35"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "3xl": "32px",
+                    "sm": "8px",
+                    "md": "12px",
+                    "lg": "16px",
+                    "2xl": "24px",
+                    "xs": "4px",
+                    "5xl": "48px",
+                    "xl": "20px",
+                    "4xl": "40px"
+            },
+            "fontSize": {
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "600"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "title-lg": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "caption": ["11px", {"lineHeight": "14px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { margin: 0; padding: 0; overflow-x: hidden; }
+        .mobile-view { width: 390px; height: 844px; overflow-y: auto; overflow-x: hidden; position: relative; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .toggle-switch { width: 44px; height: 24px; border-radius: 12px; transition: background-color 0.3s; position: relative; cursor: pointer; }
+        .toggle-thumb { width: 20px; height: 20px; border-radius: 50%; background: white; position: absolute; top: 2px; left: 2px; transition: transform 0.3s; }
+        .toggle-active .toggle-thumb { transform: translateX(20px); }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface-container-low flex flex-wrap justify-center items-start gap-8 p-8">
+<!-- LIGHT THEME SCREEN -->
+<div class="mobile-view bg-white shadow-2xl rounded-[32px] no-scrollbar">
+<!-- TopAppBar -->
+<header class="bg-surface sticky top-0 z-10 border-b border-outline-variant w-full h-16 flex justify-between items-center px-lg">
+<button class="text-primary hover:bg-surface-container-high transition-colors active:scale-95 p-2 rounded-full">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md font-bold text-on-surface">Profile</h1>
+<button class="text-primary hover:bg-surface-container-high transition-colors active:scale-95 p-2 rounded-full">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</header>
+<main class="pb-24">
+<!-- Hero Section -->
+<section class="bg-gradient-to-b from-white to-[#F0FDFA] pt-10 pb-8 flex flex-col items-center">
+<div class="relative mb-md">
+<div class="w-[100px] h-[100px] rounded-full border-2 border-[#0F766E] p-1 overflow-hidden">
+<img class="w-full h-full object-cover rounded-full" data-alt="A professional headshot of a smiling man with short dark hair in his late 20s. He is wearing a clean white t-shirt, posed against a bright, minimalist studio backdrop with soft, diffused lighting. The image captures a high-end, contemporary aesthetic suitable for a premium mobile shopping application, featuring crisp clarity and a warm, inviting tone." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGRulxgehg1oKSmiwH-e9a4KRO757a2zDvzAkkqAxb2ZoBKCpnkHA9wl-e1DDmTqA5Q8pcY4wlSfYMh_g5wOjJt29KMwqpWi7R6fNLZaH6EvDlgvplv1zP6aU860P37CVbAYSo1Po8DmhRqNMY3lCPreuS9PZPuVydyz8H1Dc1un9aBkSoSIOXFE9AOlQ7W3V-7TAdxab4SXqsn211jajBfMyDj0g5rHiT6HedT8_ZAgsNAzmtTbi6jIVPQK7nRlygMCxuwIU42V8">
+</div>
+<button class="absolute bottom-0 right-0 bg-[#0F766E] text-white w-8 h-8 rounded-full flex items-center justify-center shadow-lg border-2 border-white">
+<span class="material-symbols-outlined text-[18px]">photo_camera</span>
+</button>
+</div>
+<h2 class="font-headline-md text-headline-md text-[#1F2937] font-bold">John Doe</h2>
+<p class="font-body-md text-body-md text-[#6B7280]">john@example.com</p>
+<button class="mt-md px-6 py-2 border border-[#0F766E] text-[#0F766E] rounded-full font-label-lg text-label-lg hover:bg-[#0F766E]/5 transition-colors">
+                    Edit Profile
+                </button>
+</section>
+<!-- Stats Card -->
+<div class="mx-lg bg-white rounded-xl shadow-sm border border-[#E5E7EB] p-md flex items-center justify-around mb-2xl">
+<div class="text-center flex-1">
+<p class="font-headline-md text-headline-md text-[#0F766E] font-bold">12</p>
+<p class="font-label-md text-label-md text-[#6B7280]">Orders</p>
+</div>
+<div class="w-[1px] h-8 bg-[#E5E7EB]"></div>
+<div class="text-center flex-1">
+<p class="font-headline-md text-headline-md text-[#0F766E] font-bold">8</p>
+<p class="font-label-md text-label-md text-[#6B7280]">Wishlist</p>
+</div>
+</div>
+<!-- Menu Card -->
+<div class="mx-lg bg-white rounded-xl shadow-sm border border-[#E5E7EB] overflow-hidden">
+<button class="w-full flex items-center justify-between p-lg hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-[#0F766E]">package_2</span>
+<span class="font-title-lg text-title-lg text-[#1F2937]">My Orders</span>
+</div>
+<span class="material-symbols-outlined text-[#6B7280]">chevron_right</span>
+</button>
+<hr class="border-[#E5E7EB]">
+<button class="w-full flex items-center justify-between p-lg hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-[#0F766E]">location_on</span>
+<span class="font-title-lg text-title-lg text-[#1F2937]">Address Book</span>
+</div>
+<span class="material-symbols-outlined text-[#6B7280]">chevron_right</span>
+</button>
+<hr class="border-[#E5E7EB]">
+<button class="w-full flex items-center justify-between p-lg hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-[#0F766E]">notifications</span>
+<span class="font-title-lg text-title-lg text-[#1F2937]">Notifications</span>
+</div>
+<span class="material-symbols-outlined text-[#6B7280]">chevron_right</span>
+</button>
+<hr class="border-[#E5E7EB]">
+<div class="w-full flex items-center justify-between p-lg">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-[#0F766E]">dark_mode</span>
+<span class="font-title-lg text-title-lg text-[#1F2937]">Dark Mode</span>
+</div>
+<div class="toggle-switch bg-[#E5E7EB]">
+<div class="toggle-thumb"></div>
+</div>
+</div>
+<hr class="border-[#E5E7EB]">
+<button class="w-full flex items-center justify-between p-lg hover:bg-red-50 transition-colors">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-[#EF4444]">logout</span>
+<span class="font-title-lg text-title-lg text-[#EF4444]">Sign Out</span>
+</div>
+<span class="material-symbols-outlined text-[#EF4444]">chevron_right</span>
+</button>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-[390px] h-16 bg-white/80 backdrop-blur-md border-t border-outline-variant shadow-lg flex justify-around items-center px-md z-50 rounded-b-[32px]">
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-secondary-container/10 transition-all active:scale-90">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-md text-label-md">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-secondary-container/10 transition-all active:scale-90">
+<span class="material-symbols-outlined">storefront</span>
+<span class="font-label-md text-label-md">Shop</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-secondary-container/10 transition-all active:scale-90">
+<span class="material-symbols-outlined">search</span>
+<span class="font-label-md text-label-md">Search</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-secondary-container/10 transition-all active:scale-90">
+<span class="material-symbols-outlined">favorite</span>
+<span class="font-label-md text-label-md">Wishlist</span>
+</div>
+<div class="flex flex-col items-center justify-center text-primary font-semibold transition-all active:scale-90">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-md text-label-md">Profile</span>
+</div>
+</nav>
+</div>
+<!-- DARK THEME SCREEN -->
+<div class="dark mobile-view bg-[#0F172A] shadow-2xl rounded-[32px] no-scrollbar">
+<!-- TopAppBar -->
+<header class="bg-on-background sticky top-0 z-10 border-b border-outline w-full h-16 flex justify-between items-center px-lg">
+<button class="text-primary-fixed-dim hover:bg-surface-variant transition-colors active:scale-95 p-2 rounded-full">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md font-bold text-inverse-on-surface">Profile</h1>
+<button class="text-primary-fixed-dim hover:bg-surface-variant transition-colors active:scale-95 p-2 rounded-full">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</header>
+<main class="pb-24">
+<!-- Hero Section -->
+<section class="bg-gradient-to-b from-[#0F172A] to-[#1E293B] pt-10 pb-8 flex flex-col items-center">
+<div class="relative mb-md">
+<div class="w-[100px] h-[100px] rounded-full border-2 border-[#14B8A6] p-1 overflow-hidden">
+<img class="w-full h-full object-cover rounded-full" data-alt="A professional headshot of a smiling man with short dark hair in his late 20s. He is wearing a clean charcoal grey t-shirt, posed against a dark, atmospheric studio backdrop with blue and teal rim lighting. The image captures a high-end, contemporary dark-mode aesthetic for a fintech or premium e-commerce app, featuring rich shadows and sharp details." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2VIqdTg0Kfv5bpAj69tGSFm00Yh87O1yqkf2Dt6FWVH-RM8C5tubWDAIQBilroKmR4piqG5KTXs-tREsKdKg8Obp2BaUDcHdD4ZR2WXVJhuw7O13_N6XNrEzzhU8U_LJWX1ExB3wEr_16z_id9ABVHqokkRYo_VvdzLgv4xx8NXGdDKcQqeeKanZiZKnjIPOp0_UT_816BWrtk5RAY5ds0UW55RRW8T_LfdHdiW1JfGfZ6m2gTYEO5w3Hb6SP_1DYLFy8Zx8h2IY">
+</div>
+<button class="absolute bottom-0 right-0 bg-[#14B8A6] text-white w-8 h-8 rounded-full flex items-center justify-center shadow-lg border-2 border-[#0F172A]">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">photo_camera</span>
+</button>
+</div>
+<h2 class="font-headline-md text-headline-md text-[#F1F5F9] font-bold">John Doe</h2>
+<p class="font-body-md text-body-md text-[#94A3B8]">john@example.com</p>
+<button class="mt-md px-6 py-2 border border-[#14B8A6] text-[#14B8A6] rounded-full font-label-lg text-label-lg hover:bg-[#14B8A6]/10 transition-colors">
+                    Edit Profile
+                </button>
+</section>
+<!-- Stats Card -->
+<div class="mx-lg bg-[#1E293B] rounded-xl border border-[#334155] p-md flex items-center justify-around mb-2xl">
+<div class="text-center flex-1">
+<p class="font-headline-md text-headline-md text-[#14B8A6] font-bold">12</p>
+<p class="font-label-md text-label-md text-[#94A3B8]">Orders</p>
+</div>
+<div class="w-[1px] h-8 bg-[#334155]"></div>
+<div class="text-center flex-1">
+<p class="font-headline-md text-headline-md text-[#14B8A6] font-bold">8</p>
+<p class="font-label-md text-label-md text-[#94A3B8]">Wishlist</p>
+</div>
+</div>
+<!-- Menu Card -->
+<div class="mx-lg bg-[#1E293B] rounded-xl border border-[#334155] overflow-hidden">
+<button class="w-full flex items-center justify-between p-lg hover:bg-[#334155] transition-colors">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-[#14B8A6]">package_2</span>
+<span class="font-title-lg text-title-lg text-[#F1F5F9]">My Orders</span>
+</div>
+<span class="material-symbols-outlined text-[#94A3B8]">chevron_right</span>
+</button>
+<hr class="border-[#334155]">
+<button class="w-full flex items-center justify-between p-lg hover:bg-[#334155] transition-colors">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-[#14B8A6]">location_on</span>
+<span class="font-title-lg text-title-lg text-[#F1F5F9]">Address Book</span>
+</div>
+<span class="material-symbols-outlined text-[#94A3B8]">chevron_right</span>
+</button>
+<hr class="border-[#334155]">
+<button class="w-full flex items-center justify-between p-lg hover:bg-[#334155] transition-colors">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-[#14B8A6]">notifications</span>
+<span class="font-title-lg text-title-lg text-[#F1F5F9]">Notifications</span>
+</div>
+<span class="material-symbols-outlined text-[#94A3B8]">chevron_right</span>
+</button>
+<hr class="border-[#334155]">
+<div class="w-full flex items-center justify-between p-lg">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-[#14B8A6]">dark_mode</span>
+<span class="font-title-lg text-title-lg text-[#F1F5F9]">Dark Mode</span>
+</div>
+<div class="toggle-switch bg-[#14B8A6] toggle-active">
+<div class="toggle-thumb"></div>
+</div>
+</div>
+<hr class="border-[#334155]">
+<button class="w-full flex items-center justify-between p-lg hover:bg-red-900/20 transition-colors">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-[#F87171]">logout</span>
+<span class="font-title-lg text-title-lg text-[#F87171]">Sign Out</span>
+</div>
+<span class="material-symbols-outlined text-[#F87171]">chevron_right</span>
+</button>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-[390px] h-16 bg-on-background/80 backdrop-blur-md border-t border-outline shadow-lg flex justify-around items-center px-md z-50 rounded-b-[32px]">
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-secondary-fixed/10 transition-all active:scale-90">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-md text-label-md">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-secondary-fixed/10 transition-all active:scale-90">
+<span class="material-symbols-outlined">storefront</span>
+<span class="font-label-md text-label-md">Shop</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-secondary-fixed/10 transition-all active:scale-90">
+<span class="material-symbols-outlined">search</span>
+<span class="font-label-md text-label-md">Search</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-secondary-fixed/10 transition-all active:scale-90">
+<span class="material-symbols-outlined">favorite</span>
+<span class="font-label-md text-label-md">Wishlist</span>
+</div>
+<div class="flex flex-col items-center justify-center text-primary-fixed-dim font-semibold transition-all active:scale-90">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-md text-label-md">Profile</span>
+</div>
+</nav>
+</div>
+<script>
+        document.querySelectorAll('.toggle-switch').forEach(toggle => {
+            toggle.addEventListener('click', function() {
+                this.classList.toggle('toggle-active');
+                if (this.classList.contains('toggle-active')) {
+                    this.style.backgroundColor = this.closest('.dark') ? '#14B8A6' : '#0F766E';
+                } else {
+                    this.style.backgroundColor = '#E5E7EB';
+                }
+            });
+        });
+
+        // Interactive states for buttons
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('touchstart', () => btn.classList.add('scale-95'));
+            btn.addEventListener('touchend', () => btn.classList.remove('scale-95'));
+        });
+    </script>
+</body></html>

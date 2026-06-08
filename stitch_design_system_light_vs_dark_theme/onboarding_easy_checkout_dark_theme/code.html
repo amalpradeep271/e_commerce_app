@@ -1,0 +1,196 @@
+<!DOCTYPE html><html class="dark" lang="en" style="width: 390px; height: 884px; overflow: hidden; position: relative;"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Seamless Checkout Onboarding</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed-variant": "#594400",
+                        "error": "#ba1a1a",
+                        "on-tertiary-container": "#503d00",
+                        "outline-variant": "#cbc4d2",
+                        "tertiary-fixed-dim": "#e7c365",
+                        "secondary-container": "#e1d4fd",
+                        "on-background": "#1d1b20",
+                        "surface-variant": "#e6e0e9",
+                        "secondary-fixed": "#e9ddff",
+                        "on-secondary-fixed-variant": "#4b4263",
+                        "on-primary-container": "#e0d2ff",
+                        "on-primary-fixed": "#22005d",
+                        "inverse-primary": "#cfbcff",
+                        "on-secondary-container": "#645a7d",
+                        "secondary-fixed-dim": "#cdc0e9",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#f8f2fa",
+                        "surface-tint": "#6750a4",
+                        "surface-container": "#f2ecf4",
+                        "on-primary-fixed-variant": "#4f378a",
+                        "inverse-on-surface": "#f5eff7",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed": "#ffdf93",
+                        "surface": "#0F172A",
+                        "outline": "#7a7582",
+                        "inverse-surface": "#322f35",
+                        "error-container": "#ffdad6",
+                        "surface-bright": "#fdf7ff",
+                        "primary-fixed": "#e9ddff",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#6750a4",
+                        "on-secondary-fixed": "#1f1635",
+                        "background": "#0F172A",
+                        "surface-dim": "#ded8e0",
+                        "tertiary": "#14B8A6",
+                        "surface-container-high": "#ece6ee",
+                        "on-tertiary-fixed": "#241a00",
+                        "on-secondary": "#ffffff",
+                        "primary": "#14B8A6",
+                        "on-surface-variant": "#94A3B8",
+                        "secondary": "#63597c",
+                        "primary-fixed-dim": "#cfbcff",
+                        "on-error-container": "#93000a",
+                        "surface-container-highest": "#e6e0e9",
+                        "on-surface": "#F1F5F9"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "12px",
+                        "2xl": "16px",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "3xl": "32px",
+                        "5xl": "48px",
+                        "2xl": "24px",
+                        "xs": "4px",
+                        "sm": "8px",
+                        "lg": "16px",
+                        "4xl": "40px",
+                        "xl": "20px",
+                        "md": "12px"
+                    },
+                    "fontFamily": {
+                        "sans": ["Poppins", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "title-lg": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "600"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "caption": ["11px", {"lineHeight": "14px", "fontWeight": "400"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #0F172A;
+            color: #F1F5F9;
+            font-family: 'Poppins', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-between">
+<!-- Top App Bar -->
+<header class="w-full top-0 sticky z-50 bg-surface dark:bg-surface border-b border-outline-variant dark:border-outline flex items-center justify-between px-lg h-16">
+<button aria-label="Go back" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-variant/20 transition-colors">
+<span class="material-symbols-outlined text-primary dark:text-inverse-primary">arrow_back</span>
+</button>
+<h1 class="font-title-lg text-title-lg text-primary dark:text-inverse-primary">Step 1 of 3</h1>
+<div class="w-10"></div> <!-- Spacer for centering -->
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex flex-col items-center justify-center w-full max-w-md px-lg text-center gap-y-3xl overflow-hidden">
+<!-- Illustration Section -->
+<div class="relative w-full aspect-square max-w-[320px] flex items-center justify-center">
+<!-- Background Glow Effect -->
+<div class="absolute inset-0 bg-primary/10 blur-[80px] rounded-full scale-125"></div>
+<img alt="Seamless Checkout Experience" class="relative z-10 w-full h-full object-contain drop-shadow-2xl animate-[float_6s_ease-in-out_infinite]" src="https://lh3.googleusercontent.com/aida/AP1WRLs6yEdC5f9CY_SG3yk2rvsv9l05qiFlvVeoleV0fXH4PhoX5S0vbiMCq0ChZ7IjXZvPTN_HYZ3lAZp3Udl-ERFtOZN7nQ9QWQt1ExmxshSzkX7wtcux9hITvDfbTZpmsFFNpk4CpFMS9magmfDgct5WUlhmy9Ml4YcwS3lsyFxjTsBS_MQwy1aPzROsoW6x9V-2jQk_u_1Edio4JHTppWGN2ge8icPyHcGibIDWDIoDbcC3xfTYQbR8218">
+</div>
+<!-- Text Content -->
+<div class="space-y-md animate-fade-in">
+<h2 class="font-display-lg text-display-lg text-on-surface tracking-tight">
+                Seamless Checkout
+            </h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-[280px] mx-auto">
+                Apply coupons, save addresses, and pay securely
+            </p>
+</div>
+<!-- Feature Chips (Modern Asymmetric Layout) -->
+<div class="grid grid-cols-2 gap-sm w-full mt-4">
+<div class="glass-card p-md rounded-2xl flex flex-col items-start gap-xs">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">confirmation_number</span>
+<span class="font-label-md text-on-surface">Smart Coupons</span>
+</div>
+<div class="glass-card p-md rounded-2xl flex flex-col items-start gap-xs mt-4">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">shield_lock</span>
+<span class="font-label-md text-on-surface">Secure Pay</span>
+</div>
+</div>
+</main>
+<!-- Navigation & Action Section -->
+<footer class="w-full max-w-md px-lg pb-5xl pt-xl flex flex-col items-center gap-2xl">
+<!-- Progress Dots -->
+<div class="flex items-center gap-sm">
+<div class="h-1.5 w-1.5 rounded-full bg-[#334155]"></div>
+<div class="h-1.5 w-6 rounded-full bg-[#14B8A6] shadow-[0_0_8px_rgba(20,184,166,0.6)]"></div>
+<div class="h-1.5 w-1.5 rounded-full bg-[#334155]"></div>
+</div>
+<!-- Primary Action -->
+<div class="w-full space-y-md">
+<button class="w-full bg-[#14B8A6] text-white py-4 rounded-2xl font-label-lg text-label-lg shadow-lg shadow-primary/20 active:scale-[0.98] transition-all duration-200">
+                Next
+            </button>
+<button class="w-full text-on-surface-variant font-label-md text-label-md py-2 hover:text-on-surface transition-colors">
+                Skip Onboarding
+            </button>
+</div>
+</footer>
+<style>
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+        @keyframes fade-in {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fade-in 0.8s ease-out forwards;
+        }
+    </style>
+<script>
+        // Simple micro-interaction for the button
+        const nextBtn = document.querySelector('button.bg-\\[\\#14B8A6\\]');
+        nextBtn.addEventListener('mousedown', () => {
+            nextBtn.style.transform = 'scale(0.97)';
+        });
+        nextBtn.addEventListener('mouseup', () => {
+            nextBtn.style.transform = 'scale(1)';
+        });
+        nextBtn.addEventListener('mouseleave', () => {
+            nextBtn.style.transform = 'scale(1)';
+        });
+    </script>
+<div id="snapdom-sandbox" data-snapdom-sandbox="true" aria-hidden="true" style="position: absolute; left: -9999px; top: -9999px; width: 0px; height: 0px; overflow: hidden;"></div></body></html>

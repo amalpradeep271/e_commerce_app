@@ -39,7 +39,9 @@ class ProductQuantity extends StatelessWidget {
             BlocBuilder<ProductQuantityCubit, int>(
               builder: (context, state) => Text(
                 state.toString(),
-                style: AppTextStyles.base.w900.s18,
+                style: AppTextStyles.base.w900.s18.copyWith(
+                  color: Theme.of(context).colorScheme.onSurface,
+                ),
               ),
             ),
             SizedBox(width: 10.w),
