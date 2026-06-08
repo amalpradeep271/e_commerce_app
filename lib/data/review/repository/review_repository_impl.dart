@@ -13,7 +13,12 @@ class ReviewRepositoryImpl extends ReviewRepository {
     final result = await sl<ReviewApiService>().addReview(addReviewReqModel);
     return result.fold(
       (error) => Left(error),
-      (data) => Right(data as String),
+      (data) {
+        if (data is Map && data['message'] != null) {
+          return Right(data['message'].toString());
+        }
+        return Right(data.toString());
+      },
     );
   }
   
