@@ -31,6 +31,8 @@ class CustomAppBar extends AppBar {
     void Function()? onTap,
     int? itemcount,
     bool? isLoading,
+    int? notificationBadge,
+    int? cartBadge,
   }) : super(
           titleSpacing: 0,
           centerTitle: true,
@@ -39,12 +41,15 @@ class CustomAppBar extends AppBar {
           title: title != null
               ? Builder(
                   builder: (context) {
+                    final isDark = Theme.of(context).brightness == Brightness.dark;
+                    // Brand teal title colors matching light vs dark screen designs
+                    final titleThemeColor = isDark ? const Color(0xFF14B8A6) : const Color(0xFF006970);
                     return Text(
                       title,
                       style: TextStyle(
-                        fontSize: titleSize ?? 20.h,
+                        fontSize: titleSize ?? 20.sp,
                         fontWeight: FontWeight.bold,
-                        color: titleColor ?? Theme.of(context).colorScheme.primary,
+                        color: titleColor ?? titleThemeColor,
                       ),
                     );
                   }
@@ -83,38 +88,35 @@ class CustomAppBar extends AppBar {
           actions: [
             if (actionIconData1 != null)
               Padding(
-                padding: const EdgeInsets.only(right: 0),
-                child: IconButton(
+                padding: const EdgeInsets.only(right: 4),
+                child: _buildBadgeIcon(
+                  icon: actionIconData1,
+                  badgeCount: notificationBadge,
+                  color: actionIconColor ?? AppColors.black,
+                  size: actionIcon1Size ?? 22.0,
                   onPressed: onAction1Pressed,
-                  icon: Icon(
-                    actionIconData1,
-                    color: actionIconColor ?? AppColors.black,
-                    size: actionIcon1Size ?? 20.0,
-                  ),
                 ),
               ),
             if (actionIconData3 != null)
               Padding(
-                padding: const EdgeInsets.only(right: 0),
-                child: IconButton(
+                padding: const EdgeInsets.only(right: 4),
+                child: _buildBadgeIcon(
+                  icon: actionIconData3,
+                  badgeCount: null,
+                  color: actionIconColor ?? AppColors.red,
+                  size: actionIcon2Size ?? 22.0,
                   onPressed: onAction3Pressed,
-                  icon: Icon(
-                    actionIconData3,
-                    color: actionIconColor ?? AppColors.red,
-                    size: actionIcon2Size ?? 20.0,
-                  ),
                 ),
               ),
             if (actionIconData2 != null)
               Padding(
-                padding: const EdgeInsets.only(right: 0),
-                child: IconButton(
+                padding: const EdgeInsets.only(right: 8),
+                child: _buildBadgeIcon(
+                  icon: actionIconData2,
+                  badgeCount: cartBadge,
+                  color: actionIconColor ?? AppColors.black,
+                  size: actionIcon2Size ?? 22.0,
                   onPressed: onAction2Pressed,
-                  icon: Icon(
-                    actionIconData2,
-                    color: actionIconColor ?? AppColors.black,
-                    size: actionIcon2Size ?? 20.0,
-                  ),
                 ),
               ),
           ],
@@ -124,9 +126,58 @@ class CustomAppBar extends AppBar {
                   icon: Icon(
                     leadingIconData,
                     color: leadingIconColor ?? AppColors.black,
-                    size: leadingIconSize ?? 20.0,
+                    size: leadingIconSize ?? 22.0,
                   ),
                 )
               : null,
         );
+
+  static Widget _buildBadgeIcon({
+    required IconData icon,
+    required int? badgeCount,
+    required Color color,
+    required double size,
+    required VoidCallback? onPressed,
+  }) {
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        IconButton(
+          onPressed: onPressed,
+          icon: Icon(
+            icon,
+            color: color,
+            size: size,
+          ),
+        ),
+        if (badgeCount != null && badgeCount > 0)
+          Positioned(
+            top: 4.h,
+            right: 4.w,
+            child: Container(
+              padding: const EdgeInsets.all(2),
+              decoration: BoxDecoration(
+                color: Colors.red,
+                shape: BoxShape.circle,
+                border: Border.all(color: Colors.white, width: 1.5),
+              ),
+              constraints: BoxConstraints(
+                minWidth: 14.w,
+                minHeight: 14.h,
+              ),
+              child: Text(
+                '$badgeCount',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 7.5.sp,
+                  fontWeight: FontWeight.bold,
+                  height: 1.0,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+      ],
+    );
+  }
 }

@@ -12,12 +12,25 @@ class ProductCard extends StatelessWidget {
   const ProductCard({
     super.key,
     required this.productEntity,
+    this.showRating = true,
+    this.showCartButton = true,
+    this.badgeText,
   });
+
   final ProductEntity productEntity;
+  final bool showRating;
+  final bool showCartButton;
+  final String? badgeText;
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final isDark = theme.brightness == Brightness.dark;
+    
+    // Exact brand colors matching the provided screen designs
+    final brandTeal = isDark ? const Color(0xFF14B8A6) : const Color(0xFF006970);
+    const badgeOrange = Color(0xFFE5951F);
 
     return Stack(
       children: [
@@ -32,16 +45,20 @@ class ProductCard extends StatelessWidget {
           },
           child: Container(
             decoration: BoxDecoration(
-              color: colorScheme.surface,
+              color: isDark ? const Color(0xFF1E293B) : Colors.white, // slate 800 in dark, white in light
               borderRadius: BorderRadius.circular(16.r),
               border: Border.all(
-                color: colorScheme.surfaceContainerHighest,
+                color: isDark 
+                    ? const Color(0xFF334155).withValues(alpha: 0.5) 
+                    : const Color(0xFFE2E8F0), // clean borders
                 width: 1.0,
               ),
               boxShadow: [
                 BoxShadow(
-                  color: colorScheme.shadow.withValues(alpha: 0.05),
-                  blurRadius: 10,
+                  color: isDark
+                      ? Colors.black.withValues(alpha: 0.2)
+                      : Colors.black.withValues(alpha: 0.04),
+                  blurRadius: 8,
                   offset: const Offset(0, 4),
                 ),
               ],
@@ -62,8 +79,8 @@ class ProductCard extends StatelessWidget {
                       fit: BoxFit.cover,
                       width: double.infinity,
                       placeholder: (context, url) => Shimmer.fromColors(
-                        baseColor: colorScheme.surfaceContainerHighest,
-                        highlightColor: colorScheme.surface,
+                        baseColor: isDark ? const Color(0xFF334155) : const Color(0xFFE2E8F0),
+                        highlightColor: isDark ? const Color(0xFF1E293B) : const Color(0xFFF1F5F9),
                         child: Container(
                           color: Colors.white,
                         ),
@@ -75,46 +92,100 @@ class ProductCard extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.all(12.w),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  padding: EdgeInsets.all(10.w),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Text(
-                        productEntity.title,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w500,
-                          color: colorScheme.onSurfaceVariant,
-                        ),
-                      ),
-                      SizedBox(height: 4.h),
-                      Row(
-                        children: [
-                          Text(
-                            productEntity.discountPrice == 0
-                                ? "₹ ${productEntity.price}"
-                                : "₹ ${productEntity.discountPrice}",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14.sp,
-                              color: colorScheme.primary,
-                            ),
-                          ),
-                          if (productEntity.discountPrice != 0) ...[
-                            SizedBox(width: 8.w),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
                             Text(
-                              "₹ ${productEntity.price}",
+                              productEntity.title,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
                               style: TextStyle(
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w300,
-                                color: colorScheme.outline,
-                                decoration: TextDecoration.lineThrough,
+                                fontSize: 13.sp,
+                                fontWeight: FontWeight.w600,
+                                color: isDark ? Colors.white : const Color(0xFF0F172A), // slate 900
                               ),
                             ),
+                            if (showRating) ...[
+                              SizedBox(height: 3.h),
+                              Row(
+                                children: [
+                                  Icon(Icons.star, color: Colors.amber, size: 12.sp),
+                                  SizedBox(width: 3.w),
+                                  Text(
+                                    productEntity.rating.toStringAsFixed(1),
+                                    style: TextStyle(
+                                      fontSize: 11.sp,
+                                      fontWeight: FontWeight.bold,
+                                      color: isDark ? Colors.white70 : Colors.black87,
+                                    ),
+                                  ),
+                                  SizedBox(width: 3.w),
+                                  Text(
+                                    "(${productEntity.ratingCount})",
+                                    style: TextStyle(
+                                      fontSize: 10.sp,
+                                      color: colorScheme.outline,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                            SizedBox(height: 5.h),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  productEntity.discountPrice == 0
+                                      ? "\$${productEntity.price}"
+                                      : "\$${productEntity.discountPrice}",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 13.sp,
+                                    color: brandTeal,
+                                  ),
+                                ),
+                                if (productEntity.discountPrice != 0) ...[
+                                  SizedBox(width: 4.w),
+                                  Flexible(
+                                    child: Text(
+                                      "\$${productEntity.price}",
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                        fontSize: 11.sp,
+                                        color: colorScheme.outline,
+                                        decoration: TextDecoration.lineThrough,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ],
+                            ),
                           ],
-                        ],
+                        ),
                       ),
+                      if (showCartButton && isDark) ...[
+                        SizedBox(width: 4.w),
+                        Container(
+                          width: 32.w,
+                          height: 32.h,
+                          decoration: BoxDecoration(
+                            color: brandTeal,
+                            shape: BoxShape.circle,
+                          ),
+                          child: Icon(
+                            Icons.shopping_cart_outlined,
+                            color: Colors.white,
+                            size: 16.sp,
+                          ),
+                        ),
+                      ],
                     ],
                   ),
                 ),
@@ -122,14 +193,36 @@ class ProductCard extends StatelessWidget {
             ),
           ),
         ),
+        // Heart favorite button at the top-right
         Positioned(
           top: 8.h,
           right: 8.w,
           child: FavoriteButton(
-            iconSize: 18.sp,
+            iconSize: 16.sp,
             productEntity: productEntity,
           ),
         ),
+        // Badge at the top-left
+        if (badgeText != null)
+          Positioned(
+            top: 8.h,
+            left: 8.w,
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 3.h),
+              decoration: BoxDecoration(
+                color: badgeOrange,
+                borderRadius: BorderRadius.circular(4.r),
+              ),
+              child: Text(
+                badgeText!,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 9.sp,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
       ],
     );
   }

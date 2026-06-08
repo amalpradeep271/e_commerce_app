@@ -16,6 +16,8 @@ class ProductModel {
   final String description;
   final String dimensions;
   final String manufactureInformation;
+  final double rating;
+  final int ratingCount;
 
   ProductModel({
     required this.description,
@@ -32,6 +34,8 @@ class ProductModel {
     required this.sizes,
     required this.salesNumber,
     required this.title,
+    this.rating = 0.0,
+    this.ratingCount = 0,
   });
 
   factory ProductModel.fromMap(Map<String, dynamic> map) {
@@ -43,12 +47,11 @@ class ProductModel {
     }
 
     return ProductModel(
-      categoryId:
-          map['categoryId'] as String? ?? '', // Fallback to empty string
+      categoryId: map['categoryId'] as String? ?? '',
       color: (map['colors'] as List<dynamic>?)
               ?.map((e) => ProductColorModel.fromMap(e))
               .toList() ??
-          [], // Default to empty list if null
+          [],
       createdDate: parsedCreatedDate,
       discountPrice: map['discountPrice'] as num? ?? 0,
       gender: map['gender'] as num? ?? 0,
@@ -58,15 +61,14 @@ class ProductModel {
           [],
       price: map['price'] as num? ?? 0,
       productId: map['productId'] as String? ?? '',
-      sizes:
-          (map['sizes'] as List<dynamic>?)?.map((e) => e.toString()).toList() ??
-              [],
+      sizes: (map['sizes'] as List<dynamic>?)?.map((e) => e.toString()).toList() ?? [],
       salesNumber: map['salesNumber'] as num? ?? 0,
       title: map['title'] as String? ?? 'Unknown Product',
       description: map['description'] as String? ?? 'No description available',
       dimensions: map['dimensions'] as String? ?? 'Unknown',
-      manufactureInformation:
-          map['manufacture information'] as String? ?? 'N/A',
+      manufactureInformation: map['manufacture information'] as String? ?? 'N/A',
+      rating: (map['rating'] as num?)?.toDouble() ?? 0.0,
+      ratingCount: map['ratingCount'] as int? ?? 0,
     );
   }
 
@@ -86,6 +88,8 @@ class ProductModel {
       'description': description,
       'dimensions': dimensions,
       'manufacture information': manufactureInformation,
+      'rating': rating,
+      'ratingCount': ratingCount,
     };
   }
 }
@@ -107,6 +111,8 @@ extension ProductModelX on ProductModel {
       sizes: sizes,
       title: title,
       salesNumber: salesNumber,
+      rating: rating,
+      ratingCount: ratingCount,
     );
   }
 }
@@ -128,6 +134,8 @@ extension ProductXEntity on ProductEntity {
       productId: productId,
       salesNumber: salesNumber,
       title: title,
+      rating: rating,
+      ratingCount: ratingCount,
     );
   }
 }

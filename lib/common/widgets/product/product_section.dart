@@ -25,6 +25,8 @@ class ProductSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isTopSelling = heading.toLowerCase().contains("top");
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
@@ -36,7 +38,7 @@ class ProductSection extends StatelessWidget {
           },
         ),
         SizedBox(
-          height: 20.h,
+          height: 12.h,
         ),
         BlocProvider(
           create: (context) =>
@@ -47,7 +49,14 @@ class ProductSection extends StatelessWidget {
                 return const ProductGridShimmer();
               }
               if (state is ProductsLoaded) {
-                return _products(state.products);
+                if (isTopSelling) {
+                  return SizedBox(
+                    height: 240.h,
+                    child: _products(context, state.products),
+                  );
+                } else {
+                  return _products(context, state.products);
+                }
               }
               if (state is LoadProductsFailure) {
                 return PleaseTryAgainWidget(
@@ -66,25 +75,70 @@ class ProductSection extends StatelessWidget {
     );
   }
 
-  Widget _products(List<ProductEntity> products) {
-    return SizedBox(
-      height: 280.h,
-      child: GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          mainAxisSpacing: 10,
-          crossAxisSpacing: 10.0,
-          mainAxisExtent: 300,
+  Widget _products(BuildContext context, List<ProductEntity> products) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final isTopSelling = heading.toLowerCase().contains("top");
+    final maxItems = isTopSelling ? 2 : 4;
+    final displayProducts = products.take(maxItems).toList();
+
+    if (displayProducts.isEmpty) {
+      return Container(
+        height: 60.h,
+        alignment: Alignment.center,
+        child: Text(
+          "No products available",
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.outline,
+            fontSize: 14.sp,
+          ),
         ),
-        itemCount: products.length < 2 ? products.length : 2,
+      );
+    }
+
+    if (isTopSelling) {
+      return Row(
+        children: [
+          Expanded(
+            child: ProductCard(
+              productEntity: displayProducts[0],
+              showRating: true,
+              showCartButton: !isDark, // Cart button only in light mode for Top Selling
+              badgeText: "Best Seller",
+            ),
+          ),
+          SizedBox(width: 12.w),
+          Expanded(
+            child: displayProducts.length > 1
+                ? ProductCard(
+                    productEntity: displayProducts[1],
+                    showRating: true,
+                    showCartButton: !isDark,
+                    badgeText: "Best Seller",
+                  )
+                : const SizedBox(),
+          ),
+        ],
+      );
+    } else {
+      return GridView.builder(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
-        itemBuilder: (_, index) {
+        itemCount: displayProducts.length,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          mainAxisSpacing: 12.h,
+          crossAxisSpacing: 12.w,
+          mainAxisExtent: 240.h,
+        ),
+        itemBuilder: (context, index) {
           return ProductCard(
-            productEntity: products[index],
+            productEntity: displayProducts[index],
+            showRating: false, // New Arrivals has no ratings
+            showCartButton: false, // New Arrivals has no cart button
+            badgeText: "New",
           );
         },
-      ),
-    );
+      );
+    }
   }
 }

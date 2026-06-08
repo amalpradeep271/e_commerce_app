@@ -1,4 +1,3 @@
-import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
@@ -19,23 +18,26 @@ class ProductGridShimmer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
     Widget grid = GridView.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        mainAxisSpacing: 10,
-        crossAxisSpacing: 10.0,
-        mainAxisExtent: 300,
+        mainAxisSpacing: 12.h,
+        crossAxisSpacing: 12.w,
+        mainAxisExtent: 240.h,
       ),
       physics: physics,
       shrinkWrap: shrinkWrap,
       itemCount: itemCount,
       itemBuilder: (context, index) => Shimmer.fromColors(
-        baseColor: const Color.fromARGB(255, 218, 221, 227),
-        highlightColor: AppColors.colorDivider,
+        baseColor: isDark ? const Color(0xFF334155) : const Color(0xFFE2E8F0),
+        highlightColor: isDark ? const Color(0xFF1E293B) : const Color(0xFFF1F5F9),
         child: Container(
           decoration: BoxDecoration(
-            color: AppColors.white,
-            borderRadius: BorderRadius.circular(8),
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(16.r),
           ),
         ),
       ),
@@ -43,7 +45,7 @@ class ProductGridShimmer extends StatelessWidget {
 
     if (height != null || shrinkWrap) {
       return SizedBox(
-        height: height ?? 280.h,
+        height: height ?? 240.h,
         child: grid,
       );
     }

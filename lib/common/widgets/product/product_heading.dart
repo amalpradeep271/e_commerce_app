@@ -13,14 +13,18 @@ class ProductHeading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+    final colorScheme = theme.colorScheme;
+    final seeAllColor =
+        isDark ? const Color(0xFF14B8A6) : const Color(0xFF006970);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
           productHeading,
           style: TextStyle(
-            fontSize: 18.sp,
+            fontSize: 14.sp,
             fontWeight: FontWeight.bold,
             color: colorScheme.onSurface,
           ),
@@ -30,9 +34,9 @@ class ProductHeading extends StatelessWidget {
           child: Text(
             "See All",
             style: TextStyle(
-              fontSize: 14.sp,
+              fontSize: 11.sp,
               fontWeight: FontWeight.bold,
-              color: colorScheme.primary,
+              color: seeAllColor,
             ),
           ),
         )

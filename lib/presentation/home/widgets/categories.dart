@@ -22,7 +22,7 @@ class Categories extends StatelessWidget {
       children: [
         _title(context),
         SizedBox(
-          height: 20.h,
+          height: 12.h,
         ),
         BlocBuilder<CategoriesDisplayCubit, CategoriesDisplayState>(
           builder: (context, state) {
@@ -67,21 +67,16 @@ class Categories extends StatelessWidget {
   }
 
   Widget _title(BuildContext context) {
-    return Column(
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        SizedBox(height: 14.h),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              "Categories",
-              style: TextStyle(
-                fontSize: 18.sp,
-                fontWeight: FontWeight.bold,
-                color: Theme.of(context).colorScheme.onSurface,
-              ),
-            ),
-          ],
+        Text(
+          "Categories",
+          style: TextStyle(
+            fontSize: 14.sp,
+            fontWeight: FontWeight.bold,
+            color: Theme.of(context).colorScheme.onSurface,
+          ),
         ),
       ],
     );

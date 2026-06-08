@@ -15,6 +15,8 @@ class ProductEntity {
   final String description;
   final String dimensions;
   final String manufactureInformation;
+  final double rating;
+  final int ratingCount;
 
   ProductEntity({
     required this.description,
@@ -31,5 +33,7 @@ class ProductEntity {
     required this.sizes,
     required this.title,
     required this.salesNumber,
+    this.rating = 0.0,
+    this.ratingCount = 0,
   });
 }
