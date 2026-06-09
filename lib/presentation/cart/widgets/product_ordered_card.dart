@@ -14,125 +14,179 @@ class ProductOrderedCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final cardColor = isDark ? const Color(0xFF1E293B) : Colors.white;
+    final borderColor = isDark ? const Color(0xFF334155) : Colors.grey.shade200;
+    final textColor = isDark ? Colors.white : Colors.black;
+    final subTextColor = isDark ? Colors.grey.shade400 : Colors.grey.shade600;
+    final tealColor =
+        isDark ? const Color(0xFF14B8A6) : const Color(0xFF0D9488);
+    final quantityBgColor =
+        isDark ? const Color(0xFF0F172A) : const Color(0xFFF8FAFC);
+    final quantityBorderColor =
+        isDark ? const Color(0xFF334155) : Colors.grey.shade200;
+
     return Container(
-      height: 100.h,
       padding: EdgeInsets.all(8.w),
       decoration: BoxDecoration(
-        color: AppColors.kPrimaryColor,
-        borderRadius: BorderRadius.circular(
-          8.r,
-        ),
+        color: cardColor,
+        border: Border.all(color: borderColor),
+        borderRadius: BorderRadius.circular(16.r),
+        boxShadow: isDark
+            ? []
+            : [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.02),
+                  blurRadius: 8,
+                  offset: const Offset(0, 4),
+                ),
+              ],
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Product Image
+          Container(
+            width: 65.w,
+            height: 65.w,
+            decoration: BoxDecoration(
+              color: isDark ? Colors.black : Colors.grey.shade100,
+              borderRadius: BorderRadius.circular(12.r),
+              image: DecorationImage(
+                fit: BoxFit.cover,
+                image: NetworkImage(
+                  ImageDisplayHelper.generateProductImageURL(
+                    productOrderedEntity.productImage,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          SizedBox(width: 12.w),
+          // Product Details
           Expanded(
-            flex: 4,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Expanded(
-                  flex: 3,
-                  child: Container(
-                    width: 90.w,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      image: DecorationImage(
-                        fit: BoxFit.fill,
-                        image: NetworkImage(
-                          ImageDisplayHelper.generateProductImageURL(
-                            productOrderedEntity.productImage,
-                          ),
-                        ),
-                      ),
-                      borderRadius: BorderRadius.circular(4.r),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  width: 10.w,
-                ),
-                Expanded(
-                  flex: 6,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
+                // Title and Delete Icon
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Text(
                         productOrderedEntity.productTitle,
+                        maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: AppTextStyles.base.w600.s16,
-                      ),
-                      Text(
-                        'X ${productOrderedEntity.productQuantity.toString()}',
-                        overflow: TextOverflow.ellipsis,
-                        style: AppTextStyles.base.w600.s16,
-                      ),
-                      Text.rich(
-                        overflow: TextOverflow.ellipsis,
-                        TextSpan(
-                          text: 'Size - ',
-                          style: AppTextStyles.base.w600.s12,
-                          children: [
-                            TextSpan(
-                              text: productOrderedEntity.productSize,
-                              style: AppTextStyles.base.w600.s12,
-                            )
-                          ],
+                        style: TextStyle(
+                          fontSize: 13.sp,
+                          fontWeight: FontWeight.w600,
+                          color: textColor,
                         ),
                       ),
-                      SizedBox(
-                        width: 10.w,
-                      ),
-                      Text.rich(
-                        overflow: TextOverflow.ellipsis,
-                        TextSpan(
-                          text: 'Color - ',
-                          style: AppTextStyles.base.w600.s12,
-                          children: [
-                            TextSpan(
-                              text: productOrderedEntity.productColor,
-                              style: AppTextStyles.base.w600.s12,
-                            )
-                          ],
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        context
+                            .read<CartProductsDisplayCubit>()
+                            .removeProduct(productOrderedEntity, context);
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 8.w),
+                        child: Icon(
+                          Icons.delete_outline,
+                          size: 20.sp,
+                          color: subTextColor,
                         ),
                       ),
-                    ],
-                  ),
-                )
+                    ),
+                  ],
+                ),
+                SizedBox(height: 4.h),
+                // Color and Size
+                Row(
+                  children: [
+                    Container(
+                      width: 10.w,
+                      height: 10.w,
+                      decoration: const BoxDecoration(
+                        color: Colors.red, // Placeholder color dot
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                    SizedBox(width: 6.w),
+                    Expanded(
+                      child: Text(
+                        '${productOrderedEntity.productColor} • Size ${productOrderedEntity.productSize}',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontSize: 10.sp,
+                          color: subTextColor,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 12.h),
+                // Quantity and Price
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    // Quantity Selector
+                    Container(
+                      height: 26.h,
+                      decoration: BoxDecoration(
+                        color: quantityBgColor,
+                        border: Border.all(color: quantityBorderColor),
+                        borderRadius: BorderRadius.circular(8.r),
+                      ),
+                      child: Row(
+                        children: [
+                          IconButton(
+                            padding: EdgeInsets.zero,
+                            constraints: BoxConstraints(minWidth: 32.w),
+                            icon: Icon(Icons.remove,
+                                size: 16.sp, color: textColor),
+                            onPressed: () {
+                              // Quantity update logic here
+                            },
+                          ),
+                          Text(
+                            productOrderedEntity.productQuantity.toString(),
+                            style: TextStyle(
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w600,
+                              color: textColor,
+                            ),
+                          ),
+                          IconButton(
+                            padding: EdgeInsets.zero,
+                            constraints: BoxConstraints(minWidth: 32.w),
+                            icon:
+                                Icon(Icons.add, size: 16.sp, color: textColor),
+                            onPressed: () {
+                              // Quantity update logic here
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                    // Price
+                    Text(
+                      '₹${productOrderedEntity.totalPrice}',
+                      style: TextStyle(
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.bold,
+                        color: tealColor,
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text(
-                  '₹ ${productOrderedEntity.totalPrice}',
-                  style: AppTextStyles.base.s14.w600,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    context
-                        .read<CartProductsDisplayCubit>()
-                        .removeProduct(productOrderedEntity, context);
-                  },
-                  child: Container(
-                    height: 23.h,
-                    width: 23.w,
-                    decoration: const BoxDecoration(
-                        color: Color(0xffFF8383), shape: BoxShape.circle),
-                    child: const Icon(
-                      Icons.remove,
-                      size: 15,
-                    ),
-                  ),
-                )
-              ],
-            ),
-          )
         ],
       ),
     );

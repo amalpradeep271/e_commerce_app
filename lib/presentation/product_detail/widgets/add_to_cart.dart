@@ -25,9 +25,12 @@ class AddToCart extends StatelessWidget {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
     final colorScheme = theme.colorScheme;
-    final activeBtnColor = isDark ? const Color(0xFF14B8A6) : const Color(0xFF006970);
+    final activeBtnColor =
+        isDark ? const Color(0xFF14B8A6) : const Color(0xFF006970);
     final bottomBarBg = isDark ? const Color(0xFF1E293B) : Colors.white;
-    final borderTopColor = isDark ? const Color(0xFF334155).withValues(alpha: 0.5) : const Color(0xFFE2E8F0);
+    final borderTopColor = isDark
+        ? const Color(0xFF334155).withValues(alpha: 0.5)
+        : const Color(0xFFE2E8F0);
 
     return BlocListener<ButtonStateCubit, ButtonState>(
       listener: (context, state) {
@@ -37,7 +40,9 @@ class AddToCart extends StatelessWidget {
             behavior: SnackBarBehavior.floating,
           );
           ScaffoldMessenger.of(context).showSnackBar(snackbar);
-          AppNavigator.push(context, const CartPage());
+          context
+              .read<CartStatusCubit>()
+              .checkCartStatus(productEntity.productId);
         }
         if (state is ButtonFailureState) {
           var snackbar = SnackBar(
@@ -66,8 +71,10 @@ class AddToCart extends StatelessWidget {
           ],
         ),
         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
-        child: BlocBuilder<CartStatusCubit, bool>(
+        child: BlocBuilder<CartStatusCubit, bool?>(
           builder: (context, inCart) {
+            final isCheckingCart = inCart == null;
+            final isProductInCart = inCart == true;
             return Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -105,28 +112,37 @@ class AddToCart extends StatelessWidget {
                 ),
                 // Add to Cart / Go to Cart reactive button
                 GestureDetector(
-                  onTap: () {
-                    if (inCart) {
+                  onTap: () async {
+                    if (isProductInCart) {
                       AppNavigator.push(context, const CartPage());
+                      if (context.mounted) {
+                        context
+                            .read<CartStatusCubit>()
+                            .checkCartStatus(productEntity.productId);
+                      }
                     } else {
                       context.read<ButtonStateCubit>().execute(
                             usecase: AddToCartUseCase(),
                             params: AddToCartReq(
                               productId: productEntity.productId,
                               productTitle: productEntity.title,
-                              productQuantity: context.read<ProductQuantityCubit>().state,
+                              productQuantity:
+                                  context.read<ProductQuantityCubit>().state,
                               productColor: productEntity
-                                  .color[context.read<ProductColorSelectionCubit>().selectedIndex]
+                                  .color[context
+                                      .read<ProductColorSelectionCubit>()
+                                      .selectedIndex]
                                   .title,
                               productSize: productEntity.sizes[context
                                   .read<ProductSizeSelectionCubit>()
                                   .selectedIndex],
                               productPrice: productEntity.price.toDouble(),
-                              discountPrice: productEntity.discountPrice.toDouble(),
+                              discountPrice:
+                                  productEntity.discountPrice.toDouble(),
                               totalPrice: (productEntity.discountPrice != 0
-                                      ? productEntity.discountPrice
-                                      : productEntity.price)
-                                  .toDouble() *
+                                          ? productEntity.discountPrice
+                                          : productEntity.price)
+                                      .toDouble() *
                                   context.read<ProductQuantityCubit>().state,
                               productImage: productEntity.images[0],
                               createdDate: DateTime.now().toString(),
@@ -134,30 +150,48 @@ class AddToCart extends StatelessWidget {
                           );
                     }
                   },
-                  child: Container(
-                    height: 50.h,
-                    padding: EdgeInsets.symmetric(horizontal: 36.w),
-                    decoration: BoxDecoration(
-                      color: activeBtnColor,
-                      borderRadius: BorderRadius.circular(16.r),
-                      boxShadow: [
-                        if (!isDark)
-                          BoxShadow(
-                            color: activeBtnColor.withValues(alpha: 0.25),
-                            blurRadius: 8,
-                            offset: const Offset(0, 4),
-                          ),
-                      ],
-                    ),
-                    alignment: Alignment.center,
-                    child: Text(
-                      inCart ? 'Go to Cart' : 'Add to Cart',
-                      style: TextStyle(
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.bold,
-                        color: isDark ? Colors.black : Colors.white,
-                      ),
-                    ),
+                  child: BlocBuilder<ButtonStateCubit, ButtonState>(
+                    builder: (context, buttonState) {
+                      bool isLoading = buttonState is ButtonLoadingState;
+                      return Container(
+                        height: 50.h,
+                        padding: EdgeInsets.symmetric(horizontal: 36.w),
+                        decoration: BoxDecoration(
+                          color: activeBtnColor,
+                          borderRadius: BorderRadius.circular(16.r),
+                          boxShadow: [
+                            if (!isDark)
+                              BoxShadow(
+                                color: activeBtnColor.withValues(alpha: 0.25),
+                                blurRadius: 8,
+                                offset: const Offset(0, 4),
+                              ),
+                          ],
+                        ),
+                        alignment: Alignment.center,
+                        child: isLoading
+                            ? SizedBox(
+                                height: 20.h,
+                                width: 20.h,
+                                child: CircularProgressIndicator(
+                                  color: isDark ? Colors.black : Colors.white,
+                                  strokeWidth: 2,
+                                ),
+                              )
+                            : Text(
+                                isCheckingCart
+                                    ? ''
+                                    : (isProductInCart
+                                        ? 'Go to Cart'
+                                        : 'Add to Cart'),
+                                style: TextStyle(
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.bold,
+                                  color: isDark ? Colors.black : Colors.white,
+                                ),
+                              ),
+                      );
+                    },
                   ),
                 ),
               ],

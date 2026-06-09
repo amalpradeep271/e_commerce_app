@@ -16,33 +16,78 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:e_commerce_application/common/widgets/please_try_again/please_try_again_widget.dart';
 import 'package:e_commerce_application/common/widgets/empty/empty_state_widget.dart';
+import 'package:shimmer/shimmer.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ConnectivityCubit, ConnectivityState>(
-      builder: (context, state) {
-        if (state is ConnectivityDisconnected) {
-          return const NoInternetScreen();
-        }
-        return Scaffold(
-          appBar: CustomAppBar(
-            title: 'Cart',
-          ),
-          body: MultiBlocProvider(
-            providers: [
-              BlocProvider(
-                create: (context) =>
-                    CartProductsDisplayCubit()..displayCartProducts(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) =>
+              CartProductsDisplayCubit()..displayCartProducts(),
+        ),
+        BlocProvider(create: (context) => CartStatusCubit()),
+        BlocProvider(
+          create: (context) => PaymentCubit(),
+        ),
+      ],
+      child: BlocBuilder<ConnectivityCubit, ConnectivityState>(
+        builder: (context, state) {
+          if (state is ConnectivityDisconnected) {
+            return const NoInternetScreen();
+          }
+          
+          final isDark = Theme.of(context).brightness == Brightness.dark;
+          final bgColor = isDark ? const Color(0xFF0F172A) : const Color(0xFFF3F4F6);
+          
+          return Scaffold(
+            backgroundColor: bgColor,
+            appBar: AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              centerTitle: true,
+              leading: IconButton(
+                icon: Icon(Icons.arrow_back, color: isDark ? Colors.white : Colors.black),
+                onPressed: () => Navigator.pop(context),
               ),
-              BlocProvider(create: (context) => CartStatusCubit()),
-              BlocProvider(
-                create: (context) => PaymentCubit(),
+              title: BlocBuilder<CartProductsDisplayCubit, CartProductsDisplayState>(
+                builder: (context, cartState) {
+                  int itemCount = 0;
+                  if (cartState is CartProductsLoaded) {
+                    itemCount = cartState.products.length;
+                  }
+                  return Column(
+                    children: [
+                      Text(
+                        'My Cart',
+                        style: TextStyle(
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.bold,
+                          color: isDark ? Colors.white : Colors.black,
+                        ),
+                      ),
+                      Text(
+                        '$itemCount items',
+                        style: TextStyle(
+                          fontSize: 12.sp,
+                          color: isDark ? Colors.grey[400] : Colors.grey[600],
+                        ),
+                      ),
+                    ],
+                  );
+                },
               ),
-            ],
-            child: Builder(
+              actions: [
+                IconButton(
+                  icon: Icon(Icons.shopping_bag_outlined, color: isDark ? Colors.white : Colors.black),
+                  onPressed: () {},
+                ),
+              ],
+            ),
+            body: Builder(
               builder: (context) {
                 return RefreshIndicator(
                   onRefresh: () async {
@@ -51,9 +96,7 @@ class CartPage extends StatelessWidget {
                   child: BlocBuilder<CartProductsDisplayCubit, CartProductsDisplayState>(
                     builder: (context, state) {
                       if (state is CartProductsLoading) {
-                        return const Center(
-                          child: CupertinoActivityIndicator(),
-                        );
+                        return _buildSkeletonLoader(context);
                       }
                       if (state is CartProductsLoaded) {
                         return state.products.isEmpty
@@ -107,6 +150,67 @@ class CartPage extends StatelessWidget {
                   ),
                 );
               }
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildSkeletonLoader(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final baseColor = isDark ? Colors.grey.shade800 : Colors.grey.shade300;
+    final highlightColor = isDark ? Colors.grey.shade700 : Colors.grey.shade100;
+    final cardColor = isDark ? const Color(0xFF1E293B) : Colors.white;
+    final borderColor = isDark ? const Color(0xFF334155) : Colors.grey.shade200;
+
+    return ListView.separated(
+      physics: const NeverScrollableScrollPhysics(),
+      padding: EdgeInsets.all(16.w),
+      itemCount: 4,
+      separatorBuilder: (context, index) => SizedBox(height: 10.h),
+      itemBuilder: (context, index) {
+        return Container(
+          padding: EdgeInsets.all(8.w),
+          decoration: BoxDecoration(
+            color: cardColor,
+            borderRadius: BorderRadius.circular(16.r),
+            border: Border.all(color: borderColor),
+          ),
+          child: Shimmer.fromColors(
+            baseColor: baseColor,
+            highlightColor: highlightColor,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  width: 65.w,
+                  height: 65.w,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12.r),
+                  ),
+                ),
+                SizedBox(width: 12.w),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(height: 14.h, width: double.infinity, color: Colors.white),
+                      SizedBox(height: 8.h),
+                      Container(height: 10.h, width: 100.w, color: Colors.white),
+                      SizedBox(height: 12.h),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(height: 26.h, width: 80.w, color: Colors.white),
+                          Container(height: 14.h, width: 50.w, color: Colors.white),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
         );

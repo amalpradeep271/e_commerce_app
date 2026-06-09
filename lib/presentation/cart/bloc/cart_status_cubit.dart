@@ -2,11 +2,12 @@ import 'package:e_commerce_application/domain/cart/usecase/is_product_in_cart_us
  import 'package:e_commerce_application/service_locator.dart';
  import 'package:flutter_bloc/flutter_bloc.dart';
  
- class CartStatusCubit extends Cubit<bool> {
-   CartStatusCubit() : super(false);
+ class CartStatusCubit extends Cubit<bool?> {
+   CartStatusCubit() : super(null);
  
    void checkCartStatus(String productId) async {
      if (isClosed) return;
+     emit(null);
      var result = await sl<IsProductInCartUsecase>().call(params: productId);
      if (isClosed) return;
      result.fold((error) {
