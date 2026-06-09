@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:e_commerce_application/common/widgets/appbar/app_bar.dart';
+import 'package:e_commerce_application/common/widgets/app_button/basic_app_button.dart';
 import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
 import 'package:e_commerce_application/domain/notification/entity/notification_entity.dart';
 import 'package:e_commerce_application/presentation/notification/bloc/notification_cubit.dart';
@@ -60,9 +61,10 @@ class NotificationsPage extends StatelessWidget {
                   }
 
                   return Center(
-                    child: ElevatedButton(
+                    child: BasicAppButton(
                       onPressed: () => context.read<NotificationCubit>().loadNotifications(),
-                      child: const Text('Try Again'),
+                      title: 'Try Again',
+                      width: 150.w,
                     ),
                   );
                 },
@@ -105,8 +107,8 @@ class NotificationsPage extends StatelessWidget {
       elevation: item.isRead ? 0 : 1,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
       color: item.isRead
-          ? (isDark ? const Color(0xFF1E293B) : AppColors.white)
-          : (isDark ? const Color(0xFF14B8A6).withValues(alpha: 0.12) : AppColors.kPrimaryColor.withValues(alpha: 0.06)),
+          ? (isDark ? AppColors.slate800 : AppColors.white)
+          : (isDark ? AppColors.brandTeal.withValues(alpha: 0.12) : AppColors.kPrimaryColor.withValues(alpha: 0.06)),
       margin: EdgeInsets.only(bottom: 12.h),
       child: ListTile(
         contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
@@ -132,7 +134,7 @@ class NotificationsPage extends StatelessWidget {
                 width: 8.w,
                 height: 8.h,
                 decoration: BoxDecoration(
-                  color: isDark ? const Color(0xFF14B8A6) : AppColors.kPrimaryColor,
+                  color: AppColors.getPrimary(context),
                   shape: BoxShape.circle,
                 ),
               ),

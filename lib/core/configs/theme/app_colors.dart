@@ -105,6 +105,55 @@ class AppColors {
   static const Color pink = Color(0xFFFCE7F3);
   static Color appDividerColor = Colors.grey.shade200;
 
+  // Standardised design colors from screens
+  static const Color brandTeal = Color(0xFF14B8A6);
+  static const Color brandTealDark = Color(0xFF0D9488);
+  static const Color brandTealLightAccent = Color(0xFF006970);
+  static const Color slate900 = Color(0xFF0F172A);
+  static const Color slate800 = Color(0xFF1E293B);
+  static const Color slate700 = Color(0xFF334155);
+  static const Color slate600 = Color(0xFF475569);
+  static const Color slate200 = Color(0xFFE2E8F0);
+  static const Color slate100 = Color(0xFFF1F5F9);
+  static const Color slate50 = Color(0xFFF8FAFC);
+  static const Color teal50 = Color(0xFFF0FDFA);
+
+  static const Color green100 = Color(0xFFD1FAE5);
+  static const Color green900 = Color(0xFF064E3B);
+  static const Color green950 = Color(0xFF022C22);
+  static const Color greenSuccess = Color(0xFF10B981);
+
+  // Dynamic context-based helpers
+  static Color getPrimary(BuildContext context) {
+    return Theme.of(context).brightness == Brightness.dark
+        ? brandTeal
+        : kPrimaryColor;
+  }
+
+  static Color getBrandTeal(BuildContext context) {
+    return Theme.of(context).brightness == Brightness.dark
+        ? brandTeal
+        : brandTealLightAccent;
+  }
+
+  static Color getCardBg(BuildContext context) {
+    return Theme.of(context).brightness == Brightness.dark
+        ? slate800
+        : white;
+  }
+
+  static Color getScaffoldBg(BuildContext context) {
+    return Theme.of(context).brightness == Brightness.dark
+        ? slate900
+        : white;
+  }
+
+  static Color getBorderColor(BuildContext context) {
+    return Theme.of(context).brightness == Brightness.dark
+        ? slate700
+        : slate200;
+  }
+
   static const LinearGradient categoryLinercolor = LinearGradient(
     colors: [
       Color(0xFF4F378A), // Updated to primary

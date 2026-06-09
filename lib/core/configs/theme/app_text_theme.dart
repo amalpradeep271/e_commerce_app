@@ -1,7 +1,7 @@
 import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppTextStyles {
   AppTextStyles._();
@@ -36,6 +36,33 @@ class AppTextStyles {
       color: textColor,
     );
   }
+
+  // Unified dynamic typography system resolving colors contextually
+  static TextStyle getAppTextStyle({
+    required BuildContext context,
+    required double fontSize,
+    FontWeight fontWeight = FontWeight.normal,
+    Color? color,
+  }) {
+    return GoogleFonts.nunito(
+      fontSize: fontSize,
+      fontWeight: fontWeight,
+      color: color ?? Theme.of(context).colorScheme.onSurface,
+    );
+  }
+
+  static TextStyle displayLarge(BuildContext context) => getAppTextStyle(context: context, fontSize: 32.sp, fontWeight: FontWeight.bold);
+  static TextStyle displayMedium(BuildContext context) => getAppTextStyle(context: context, fontSize: 24.sp, fontWeight: FontWeight.bold);
+  static TextStyle displaySmall(BuildContext context) => getAppTextStyle(context: context, fontSize: 20.sp, fontWeight: FontWeight.bold);
+  static TextStyle titleLarge(BuildContext context) => getAppTextStyle(context: context, fontSize: 18.sp, fontWeight: FontWeight.bold);
+  static TextStyle titleMedium(BuildContext context) => getAppTextStyle(context: context, fontSize: 16.sp, fontWeight: FontWeight.w600);
+  static TextStyle titleSmall(BuildContext context) => getAppTextStyle(context: context, fontSize: 14.sp, fontWeight: FontWeight.w600);
+  static TextStyle bodyLarge(BuildContext context) => getAppTextStyle(context: context, fontSize: 16.sp);
+  static TextStyle bodyMedium(BuildContext context) => getAppTextStyle(context: context, fontSize: 14.sp);
+  static TextStyle bodySmall(BuildContext context) => getAppTextStyle(context: context, fontSize: 12.sp, color: Theme.of(context).colorScheme.onSurfaceVariant);
+  static TextStyle labelLarge(BuildContext context) => getAppTextStyle(context: context, fontSize: 14.sp, fontWeight: FontWeight.w500);
+  static TextStyle labelMedium(BuildContext context) => getAppTextStyle(context: context, fontSize: 12.sp, fontWeight: FontWeight.w500);
+  static TextStyle labelSmall(BuildContext context) => getAppTextStyle(context: context, fontSize: 11.sp, color: Theme.of(context).colorScheme.onSurfaceVariant);
 }
 
 extension AppFontWeight on TextStyle {

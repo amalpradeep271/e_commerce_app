@@ -4,8 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:e_commerce_application/common/helper/navigator/app_navigator.dart';
+import 'package:e_commerce_application/common/widgets/app_button/basic_app_button.dart';
 import 'package:e_commerce_application/common/widgets/appbar/app_bar.dart';
 import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
+import 'package:e_commerce_application/core/configs/theme/app_text_theme.dart';
 import 'package:e_commerce_application/domain/auth/entity/user_entity.dart';
 import 'package:e_commerce_application/domain/order/usecase/get_orders_usecase.dart';
 import 'package:e_commerce_application/domain/wishlist/usecase/get_wishlist_usecase.dart';
@@ -113,9 +115,10 @@ class _SettingsPageState extends State<SettingsPage> {
                 }
 
                 return Center(
-                  child: ElevatedButton(
+                  child: BasicAppButton(
                     onPressed: () => context.read<ProfileCubit>().loadProfile(),
-                    child: const Text('Try Again'),
+                    title: 'Try Again',
+                    width: 150.w,
                   ),
                 );
               },
@@ -128,7 +131,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
   Widget _profileHeader(BuildContext context, UserEntity user) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final primaryColor = isDark ? const Color(0xFF14B8A6) : AppColors.kPrimaryColor;
+    final primaryColor = AppColors.getPrimary(context);
     return Column(
       children: [
         Stack(
@@ -179,7 +182,7 @@ class _SettingsPageState extends State<SettingsPage> {
         child: Row(
           children: [
             Expanded(child: _statItem('Orders', _ordersCount)),
-            Container(width: 1, height: 40.h, color: isDark ? const Color(0xFF334155) : AppColors.colorDivider),
+            Container(width: 1, height: 40.h, color: AppColors.getBorderColor(context)),
             Expanded(child: _statItem('Wishlist', _wishlistCount)),
           ],
         ),
@@ -189,7 +192,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
   Widget _statItem(String label, int value) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final primaryColor = isDark ? const Color(0xFF14B8A6) : AppColors.kPrimaryColor;
+    final primaryColor = AppColors.getPrimary(context);
     return Column(
       children: [
         if (_isLoadingStats)
@@ -212,7 +215,7 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget _settingsOptions(BuildContext context) {
     final themeCubit = context.watch<ThemeCubit>();
     final isDarkMode = themeCubit.state == ThemeMode.dark;
-    final primaryColor = isDarkMode ? const Color(0xFF14B8A6) : AppColors.kPrimaryColor;
+    final primaryColor = AppColors.getPrimary(context);
 
     return Card(
       elevation: 1,
@@ -276,7 +279,7 @@ class _SettingsPageState extends State<SettingsPage> {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
     final defaultTitleColor = isDark ? Colors.white : AppColors.black;
-    final defaultIconColor = isDark ? const Color(0xFF14B8A6) : AppColors.kPrimaryColor;
+    final defaultIconColor = AppColors.getPrimary(context);
     return ListTile(
       leading: Icon(icon, color: iconColor ?? defaultIconColor),
       title: Text(

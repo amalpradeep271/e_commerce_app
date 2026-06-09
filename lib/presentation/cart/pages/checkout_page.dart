@@ -5,8 +5,10 @@ import 'package:e_commerce_application/common/bloc/button/button_state_cubit.dar
 import 'package:e_commerce_application/common/helper/cart/cart_helper.dart';
 import 'package:e_commerce_application/common/helper/navigator/app_navigator.dart';
 import 'package:e_commerce_application/common/widgets/app_button/basic_reactive_button.dart';
+import 'package:e_commerce_application/common/widgets/app_button/basic_app_button.dart';
 import 'package:e_commerce_application/common/widgets/appbar/app_bar.dart';
 import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
+import 'package:e_commerce_application/core/configs/theme/app_text_theme.dart';
 import 'package:e_commerce_application/domain/cart/entity/product_ordered_entity.dart';
 import 'package:e_commerce_application/domain/address/entity/address_entity.dart';
 import 'package:e_commerce_application/presentation/address/bloc/address_cubit.dart';
@@ -214,11 +216,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
   Widget _sectionHeader(String title) {
     return Text(
       title,
-      style: TextStyle(
-        fontSize: 16.sp,
-        fontWeight: FontWeight.bold,
-        color: AppColors.black,
-      ),
+      style: AppTextStyles.titleMedium(context),
     );
   }
 
@@ -362,18 +360,16 @@ class _CheckOutPageState extends State<CheckOutPage> {
             ),
             if (_appliedCouponCode == null) ...[
               SizedBox(width: 12.w),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25.r)),
-                ),
+              BasicAppButton(
                 onPressed: () {
                   final code = _couponCon.text.trim();
                   if (code.isNotEmpty) {
                     couponCubit.validateCoupon(code, subtotal);
                   }
                 },
-                child: const Text('Apply', style: TextStyle(color: AppColors.white)),
+                width: 90.w,
+                height: 48.h,
+                title: 'Apply',
               ),
             ],
           ],
@@ -414,14 +410,12 @@ class _CheckOutPageState extends State<CheckOutPage> {
               children: [
                 Text(
                   'Order Total',
-                  style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
+                  style: AppTextStyles.titleMedium(context),
                 ),
                 Text(
                   '₹ ${(subtotal + widget.shipping + widget.tax - _couponDiscount).toStringAsFixed(2)}',
-                  style: TextStyle(
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.kPrimaryColor,
+                  style: AppTextStyles.titleLarge(context).copyWith(
+                    color: AppColors.getPrimary(context),
                   ),
                 ),
               ],
@@ -434,15 +428,20 @@ class _CheckOutPageState extends State<CheckOutPage> {
 
   Widget _priceRow(String label, dynamic value, {bool isDiscount = false}) {
     final doubleVal = (value as num).toDouble();
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(label, style: TextStyle(fontSize: 14.sp, color: Colors.grey[700])),
+        Text(
+          label,
+          style: AppTextStyles.bodyMedium(context).copyWith(
+            color: isDark ? Colors.grey[400] : Colors.grey[700],
+          ),
+        ),
         Text(
           isDiscount ? '- ₹ ${doubleVal.abs().toStringAsFixed(2)}' : '₹ ${doubleVal.toStringAsFixed(2)}',
-          style: TextStyle(
-            fontSize: 14.sp,
-            color: isDiscount ? Colors.green : AppColors.black,
+          style: AppTextStyles.bodyMedium(context).copyWith(
+            color: isDiscount ? Colors.green : (isDark ? AppColors.white : AppColors.black),
             fontWeight: isDiscount ? FontWeight.bold : FontWeight.normal,
           ),
         ),

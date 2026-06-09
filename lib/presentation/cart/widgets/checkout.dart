@@ -15,13 +15,12 @@ class Checkout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final bgColor = isDark ? const Color(0xFF0F172A) : const Color(0xFFF3F4F6);
-    final cardColor = isDark ? const Color(0xFF1E293B) : Colors.white;
-    final borderColor = isDark ? const Color(0xFF334155) : Colors.grey.shade200;
-    final textColor = isDark ? Colors.white : Colors.black;
-    final subTextColor = isDark ? Colors.grey.shade400 : Colors.grey.shade600;
-    final tealColor =
-        isDark ? const Color(0xFF14B8A6) : const Color(0xFF0D9488);
+    final bgColor = AppColors.getScaffoldBg(context);
+    final cardColor = AppColors.getCardBg(context);
+    final borderColor = AppColors.getBorderColor(context);
+    final textColor = isDark ? AppColors.white : AppColors.black;
+    final subTextColor = isDark ? AppColors.slate600 : AppColors.grey;
+    final tealColor = AppColors.getBrandTeal(context);
 
     final subtotal = CartHelper.calculateCartSubtotal(products);
     final discount = 500.0;
@@ -68,20 +67,13 @@ class Checkout extends StatelessWidget {
                 ),
               ),
               SizedBox(width: 12.w),
-              ElevatedButton(
+              BasicAppButton(
                 onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: tealColor,
-                  foregroundColor: Colors.white,
-                  minimumSize: Size(80.w, 40.h),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8.r),
-                  ),
-                  elevation: 0,
-                ),
-                child: Text('Apply',
-                    style: TextStyle(
-                        fontSize: 12.sp, fontWeight: FontWeight.bold)),
+                title: 'Apply',
+                width: 80.w,
+                height: 40.h,
+                backgroundColor: tealColor,
+                textColor: AppColors.white,
               ),
             ],
           ),
@@ -91,22 +83,22 @@ class Checkout extends StatelessWidget {
             width: double.infinity,
             padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
             decoration: BoxDecoration(
-              color: isDark ? const Color(0xFF022C22) : const Color(0xFFECFDF5),
+              color: isDark ? AppColors.green950 : AppColors.cream,
               borderRadius: BorderRadius.circular(8.r),
               border: Border.all(
                   color: isDark
-                      ? const Color(0xFF064E3B)
-                      : const Color(0xFFD1FAE5)),
+                      ? AppColors.green900
+                      : AppColors.green100),
             ),
             child: Row(
               children: [
                 Icon(Icons.check_circle_outline,
-                    color: const Color(0xFF10B981), size: 16.sp),
+                    color: AppColors.greenSuccess, size: 16.sp),
                 SizedBox(width: 8.w),
                 Text(
                   'Coupon Applied! ₹500 discount saved.',
                   style: TextStyle(
-                    color: const Color(0xFF10B981),
+                    color: AppColors.greenSuccess,
                     fontSize: 10.sp,
                     fontWeight: FontWeight.w500,
                   ),
@@ -183,7 +175,7 @@ class Checkout extends StatelessWidget {
           SizedBox(height: 16.h),
 
           // Proceed to Checkout Button
-          ElevatedButton(
+          BasicAppButton(
             onPressed: () {
               AppNavigator.push(
                 context,
@@ -194,16 +186,10 @@ class Checkout extends StatelessWidget {
                 ),
               );
             },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: tealColor,
-              foregroundColor: Colors.white,
-              minimumSize: Size(double.infinity, 48.h),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12.r),
-              ),
-              elevation: 0,
-            ),
-            child: Row(
+            height: 48.h,
+            backgroundColor: tealColor,
+            textColor: AppColors.white,
+            content: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text('Proceed to Checkout',

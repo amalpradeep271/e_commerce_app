@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:e_commerce_application/common/widgets/appbar/app_bar.dart';
+import 'package:e_commerce_application/common/widgets/app_button/basic_app_button.dart';
 import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
 import 'package:e_commerce_application/domain/address/entity/address_entity.dart';
 import 'package:e_commerce_application/presentation/address/bloc/address_cubit.dart';
@@ -25,7 +26,7 @@ class AddressBookPage extends StatelessWidget {
               onLeadingPressed: () => Navigator.pop(context),
             ),
             floatingActionButton: FloatingActionButton(
-              backgroundColor: Theme.of(context).brightness == Brightness.dark ? const Color(0xFF14B8A6) : AppColors.kPrimaryColor,
+              backgroundColor: AppColors.getPrimary(context),
               onPressed: () {
                 AppNavigator.push(
                   context,
@@ -35,7 +36,7 @@ class AddressBookPage extends StatelessWidget {
                   ),
                 );
               },
-              child: Icon(Icons.add, color: Theme.of(context).brightness == Brightness.dark ? Colors.black : AppColors.white),
+              child: Icon(Icons.add, color: Theme.of(context).brightness == Brightness.dark ? AppColors.black : AppColors.white),
             ),
             body: BlocConsumer<AddressCubit, AddressState>(
               listener: (context, state) {
@@ -82,9 +83,10 @@ class AddressBookPage extends StatelessWidget {
                 }
 
                 return Center(
-                  child: ElevatedButton(
+                  child: BasicAppButton(
                     onPressed: () => context.read<AddressCubit>().loadAddresses(),
-                    child: const Text('Try Again'),
+                    title: 'Try Again',
+                    width: 150.w,
                   ),
                 );
               },
@@ -97,7 +99,7 @@ class AddressBookPage extends StatelessWidget {
 
   Widget _addressCard(BuildContext context, AddressEntity address) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final primaryColor = isDark ? const Color(0xFF14B8A6) : AppColors.kPrimaryColor;
+    final primaryColor = AppColors.getPrimary(context);
     return Card(
       elevation: 2,
       margin: EdgeInsets.only(bottom: 12.h),
