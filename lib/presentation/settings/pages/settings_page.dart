@@ -127,16 +127,18 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   Widget _profileHeader(BuildContext context, UserEntity user) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final primaryColor = isDark ? const Color(0xFF14B8A6) : AppColors.kPrimaryColor;
     return Column(
       children: [
         Stack(
           children: [
             CircleAvatar(
               radius: 54.r,
-              backgroundColor: AppColors.kPrimaryColor.withValues(alpha: 0.1),
+              backgroundColor: primaryColor.withValues(alpha: 0.1),
               backgroundImage: user.image.isNotEmpty ? NetworkImage(user.image) : null,
               child: user.image.isEmpty
-                  ? Icon(Icons.person, size: 54.r, color: AppColors.kPrimaryColor)
+                  ? Icon(Icons.person, size: 54.r, color: primaryColor)
                   : null,
             ),
             Positioned(
@@ -146,7 +148,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 onTap: () => _pickAndUploadImage(context),
                 child: CircleAvatar(
                   radius: 18.r,
-                  backgroundColor: AppColors.kPrimaryColor,
+                  backgroundColor: primaryColor,
                   child: const Icon(Icons.camera_alt, color: AppColors.white, size: 16),
                 ),
               ),
@@ -161,13 +163,14 @@ class _SettingsPageState extends State<SettingsPage> {
         SizedBox(height: 4.h),
         Text(
           user.email,
-          style: TextStyle(fontSize: 14.sp, color: Colors.grey[600]),
+          style: TextStyle(fontSize: 14.sp, color: isDark ? Colors.grey[400] : Colors.grey[600]),
         ),
       ],
     );
   }
 
   Widget _statsCard() {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Card(
       elevation: 2,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r)),
@@ -176,7 +179,7 @@ class _SettingsPageState extends State<SettingsPage> {
         child: Row(
           children: [
             Expanded(child: _statItem('Orders', _ordersCount)),
-            Container(width: 1, height: 40.h, color: AppColors.colorDivider),
+            Container(width: 1, height: 40.h, color: isDark ? const Color(0xFF334155) : AppColors.colorDivider),
             Expanded(child: _statItem('Wishlist', _wishlistCount)),
           ],
         ),
@@ -185,6 +188,8 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   Widget _statItem(String label, int value) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final primaryColor = isDark ? const Color(0xFF14B8A6) : AppColors.kPrimaryColor;
     return Column(
       children: [
         if (_isLoadingStats)
@@ -196,10 +201,10 @@ class _SettingsPageState extends State<SettingsPage> {
         else
           Text(
             value.toString(),
-            style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold, color: AppColors.kPrimaryColor),
+            style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold, color: primaryColor),
           ),
         SizedBox(height: 4.h),
-        Text(label, style: TextStyle(fontSize: 13.sp, color: Colors.grey[700])),
+        Text(label, style: TextStyle(fontSize: 13.sp, color: isDark ? Colors.grey[400] : Colors.grey[700])),
       ],
     );
   }
@@ -207,6 +212,7 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget _settingsOptions(BuildContext context) {
     final themeCubit = context.watch<ThemeCubit>();
     final isDarkMode = themeCubit.state == ThemeMode.dark;
+    final primaryColor = isDarkMode ? const Color(0xFF14B8A6) : AppColors.kPrimaryColor;
 
     return Card(
       elevation: 1,
@@ -234,9 +240,9 @@ class _SettingsPageState extends State<SettingsPage> {
           ),
           const Divider(height: 1),
           SwitchListTile(
-            secondary: Icon(isDarkMode ? Icons.dark_mode : Icons.light_mode, color: AppColors.kPrimaryColor),
+            secondary: Icon(isDarkMode ? Icons.dark_mode : Icons.light_mode, color: primaryColor),
             title: Text('Dark Mode', style: TextStyle(fontSize: 14.sp)),
-            activeColor: AppColors.kPrimaryColor,
+            activeColor: primaryColor,
             value: isDarkMode,
             onChanged: (val) {
               themeCubit.updateTheme(val ? ThemeMode.dark : ThemeMode.light);
@@ -267,11 +273,15 @@ class _SettingsPageState extends State<SettingsPage> {
     Color? iconColor,
     Color? titleColor,
   }) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+    final defaultTitleColor = isDark ? Colors.white : AppColors.black;
+    final defaultIconColor = isDark ? const Color(0xFF14B8A6) : AppColors.kPrimaryColor;
     return ListTile(
-      leading: Icon(icon, color: iconColor ?? AppColors.kPrimaryColor),
+      leading: Icon(icon, color: iconColor ?? defaultIconColor),
       title: Text(
         title,
-        style: TextStyle(fontSize: 14.sp, color: titleColor ?? AppColors.black),
+        style: TextStyle(fontSize: 14.sp, color: titleColor ?? defaultTitleColor),
       ),
       trailing: const Icon(Icons.chevron_right, color: Colors.grey),
       onTap: onTap,

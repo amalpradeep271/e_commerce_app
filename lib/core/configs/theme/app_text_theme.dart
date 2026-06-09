@@ -7,13 +7,13 @@ class AppTextStyles {
   AppTextStyles._();
 
   static TextStyle base = getAppTextStyleCustomized();
-  static TextStyle malayalamStyle = getAppTextStyleCustomized();
+  static TextStyle malayalamStyle = getMalayalamTextStyleCustomized();
 
   static TextStyle getAppTextStyleCustomized({
     double textSize = 20,
     double textHeight = 0,
     FontWeight textWeight = FontWeight.normal,
-    Color textColor = AppColors.black,
+    Color? textColor,
   }) {
     return GoogleFonts.nunito(
       height: textHeight,
@@ -27,7 +27,7 @@ class AppTextStyles {
     double textSize = 20,
     double textHeight = 0,
     FontWeight textWeight = FontWeight.normal,
-    Color textColor = AppColors.black,
+    Color? textColor,
   }) {
     return GoogleFonts.notoSansMalayalam(
       height: textHeight,

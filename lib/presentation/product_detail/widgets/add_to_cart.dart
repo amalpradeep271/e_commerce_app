@@ -114,7 +114,7 @@ class AddToCart extends StatelessWidget {
                 GestureDetector(
                   onTap: () async {
                     if (isProductInCart) {
-                      AppNavigator.push(context, const CartPage());
+                      await AppNavigator.push(context, const CartPage());
                       if (context.mounted) {
                         context
                             .read<CartStatusCubit>()

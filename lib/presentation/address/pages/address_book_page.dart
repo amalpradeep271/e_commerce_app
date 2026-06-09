@@ -25,7 +25,7 @@ class AddressBookPage extends StatelessWidget {
               onLeadingPressed: () => Navigator.pop(context),
             ),
             floatingActionButton: FloatingActionButton(
-              backgroundColor: AppColors.kPrimaryColor,
+              backgroundColor: Theme.of(context).brightness == Brightness.dark ? const Color(0xFF14B8A6) : AppColors.kPrimaryColor,
               onPressed: () {
                 AppNavigator.push(
                   context,
@@ -35,7 +35,7 @@ class AddressBookPage extends StatelessWidget {
                   ),
                 );
               },
-              child: const Icon(Icons.add, color: AppColors.white),
+              child: Icon(Icons.add, color: Theme.of(context).brightness == Brightness.dark ? Colors.black : AppColors.white),
             ),
             body: BlocConsumer<AddressCubit, AddressState>(
               listener: (context, state) {
@@ -96,6 +96,8 @@ class AddressBookPage extends StatelessWidget {
   }
 
   Widget _addressCard(BuildContext context, AddressEntity address) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final primaryColor = isDark ? const Color(0xFF14B8A6) : AppColors.kPrimaryColor;
     return Card(
       elevation: 2,
       margin: EdgeInsets.only(bottom: 12.h),
@@ -111,7 +113,7 @@ class AddressBookPage extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
                   decoration: BoxDecoration(
-                    color: AppColors.kPrimaryColor.withValues(alpha: 0.1),
+                    color: primaryColor.withValues(alpha: 0.15),
                     borderRadius: BorderRadius.circular(4.r),
                   ),
                   child: Text(
@@ -119,7 +121,7 @@ class AddressBookPage extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 12.sp,
                       fontWeight: FontWeight.bold,
-                      color: AppColors.kPrimaryColor,
+                      color: primaryColor,
                     ),
                   ),
                 ),
@@ -155,7 +157,7 @@ class AddressBookPage extends StatelessWidget {
             SizedBox(height: 4.h),
             Text(
               address.phone,
-              style: TextStyle(fontSize: 14.sp, color: Colors.grey[700]),
+              style: TextStyle(fontSize: 14.sp, color: isDark ? Colors.grey[400] : Colors.grey[700]),
             ),
             SizedBox(height: 8.h),
             Text(
@@ -207,11 +209,11 @@ class AddressBookPage extends StatelessWidget {
                   padding: EdgeInsets.symmetric(vertical: 4.h),
                   child: Row(
                     children: [
-                      const Icon(Icons.circle_outlined, color: Colors.grey),
+                      Icon(Icons.circle_outlined, color: isDark ? Colors.grey[500] : Colors.grey),
                       SizedBox(width: 8.w),
                       Text(
                         'Set as Default',
-                        style: TextStyle(fontSize: 14.sp, color: Colors.grey[700]),
+                        style: TextStyle(fontSize: 14.sp, color: isDark ? Colors.grey[400] : Colors.grey[700]),
                       ),
                     ],
                   ),

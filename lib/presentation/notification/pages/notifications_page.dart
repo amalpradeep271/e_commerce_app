@@ -75,6 +75,8 @@ class NotificationsPage extends StatelessWidget {
   }
 
   Widget _notificationTile(BuildContext context, NotificationEntity item) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    
     IconData getIcon() {
       switch (item.type) {
         case 'order':
@@ -90,24 +92,26 @@ class NotificationsPage extends StatelessWidget {
     Color getIconColor() {
       switch (item.type) {
         case 'order':
-          return Colors.blue;
+          return isDark ? const Color(0xFF22D3EE) : Colors.blue;
         case 'promo':
-          return Colors.green;
+          return isDark ? const Color(0xFF34D399) : Colors.green;
         case 'system':
         default:
-          return Colors.orange;
+          return isDark ? const Color(0xFFFB923C) : Colors.orange;
       }
     }
 
     return Card(
       elevation: item.isRead ? 0 : 1,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
-      color: item.isRead ? AppColors.white : AppColors.kPrimaryColor.withValues(alpha: 0.05),
+      color: item.isRead
+          ? (isDark ? const Color(0xFF1E293B) : AppColors.white)
+          : (isDark ? const Color(0xFF14B8A6).withValues(alpha: 0.12) : AppColors.kPrimaryColor.withValues(alpha: 0.06)),
       margin: EdgeInsets.only(bottom: 12.h),
       child: ListTile(
         contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
         leading: CircleAvatar(
-          backgroundColor: getIconColor().withValues(alpha: 0.1),
+          backgroundColor: getIconColor().withValues(alpha: 0.15),
           child: Icon(getIcon(), color: getIconColor()),
         ),
         title: Row(
@@ -119,6 +123,7 @@ class NotificationsPage extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 14.sp,
                   fontWeight: item.isRead ? FontWeight.normal : FontWeight.bold,
+                  color: isDark ? Colors.white : Colors.black87,
                 ),
               ),
             ),
@@ -126,8 +131,8 @@ class NotificationsPage extends StatelessWidget {
               Container(
                 width: 8.w,
                 height: 8.h,
-                decoration: const BoxDecoration(
-                  color: AppColors.kPrimaryColor,
+                decoration: BoxDecoration(
+                  color: isDark ? const Color(0xFF14B8A6) : AppColors.kPrimaryColor,
                   shape: BoxShape.circle,
                 ),
               ),
@@ -139,12 +144,12 @@ class NotificationsPage extends StatelessWidget {
             SizedBox(height: 6.h),
             Text(
               item.body,
-              style: TextStyle(fontSize: 13.sp, color: Colors.grey[700]),
+              style: TextStyle(fontSize: 13.sp, color: isDark ? Colors.grey[300] : Colors.grey[700]),
             ),
             SizedBox(height: 8.h),
             Text(
               DateFormat('dd MMM yyyy, hh:mm a').format(item.createdAt),
-              style: TextStyle(fontSize: 11.sp, color: Colors.grey),
+              style: TextStyle(fontSize: 11.sp, color: isDark ? Colors.grey[500] : Colors.grey),
             ),
           ],
         ),
