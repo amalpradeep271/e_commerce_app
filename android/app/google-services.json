@@ -23,6 +23,44 @@
           "other_platform_oauth_client": []
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:529537759885:android:898c8f2e5bcc5ffdd3c0c4",
+        "android_client_info": {
+          "package_name": "com.example.e_commerce_application.irinjalakuda_khadi"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQTXcKR17a-_XeM9XVYQBLMHlTLr_YQLA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:529537759885:android:898c8f2e5bcc5ffdd3c0c4",
+        "android_client_info": {
+          "package_name": "com.example.e_commerce_application.shopify"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQTXcKR17a-_XeM9XVYQBLMHlTLr_YQLA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
     }
   ],
   "configuration_version": "1"

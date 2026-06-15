@@ -1,4 +1,5 @@
 import 'package:e_commerce_application/common/widgets/appbar/app_bar.dart';
+import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
 import 'package:e_commerce_application/core/configs/theme/app_text_theme.dart';
 import 'package:e_commerce_application/data/agreements/model/terms_and_condition_model.dart';
 import 'package:flutter/material.dart';
@@ -38,6 +39,7 @@ class TermsAndConditionPage extends StatelessWidget {
                     right: 8.w,
                   ),
                   child: termsandconditioncontent(
+                    context: context,
                     content: termsandcondition.content,
                     title: termsandcondition.title,
                   ),
@@ -50,19 +52,25 @@ class TermsAndConditionPage extends StatelessWidget {
   }
 
   Widget termsandconditioncontent({
+    required BuildContext context,
     required String title,
     required String content,
   }) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final primaryColor =
+        isDark ? const Color(0xFF14B8A6) : AppColors.kPrimaryColor;
     return Text.rich(
         textAlign: TextAlign.justify,
         TextSpan(children: [
           TextSpan(
             text: title,
-            style: AppTextStyles.base.kPrimaryColor.s14,
+            style: AppTextStyles.base.s14
+                .copyWith(color: primaryColor, fontWeight: FontWeight.bold),
           ),
           TextSpan(
             text: content,
-            style: AppTextStyles.base.blackColor.s14,
+            style: AppTextStyles.base.s14
+                .copyWith(color: isDark ? Colors.white70 : Colors.black87),
           ),
         ]));
   }

@@ -19,6 +19,7 @@ import 'package:flutter/material.dart';
 import 'package:e_commerce_application/domain/product/entity/product_entity.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:e_commerce_application/core/configs/tenant/tenant_config.dart';
 
 class ProductDetailsPage extends StatelessWidget {
   final ProductEntity productEntity;
@@ -45,7 +46,7 @@ class ProductDetailsPage extends StatelessWidget {
         BlocProvider(create: (context) => ProductSizeSelectionCubit()),
         BlocProvider(create: (context) => ProductColorSelectionCubit()),
         BlocProvider(create: (context) => ButtonStateCubit()),
-        BlocProvider(create: (context) => CartStatusCubit()),
+        BlocProvider(create: (context) => CartStatusCubit()..checkCartStatus(productEntity.productId)),
         BlocProvider(create: (context) => WishlistCubit()..loadWishlist()),
       ],
       child: BlocBuilder<ConnectivityCubit, ConnectivityState>(
@@ -101,7 +102,7 @@ class ProductDetailsPage extends StatelessWidget {
                                   Text(
                                     productEntity.title,
                                     style: TextStyle(
-                                      fontSize: 18.sp,
+                                      fontSize: 16.sp,
                                       fontWeight: FontWeight.bold,
                                       color: colorScheme.onSurface,
                                     ),
@@ -140,10 +141,10 @@ class ProductDetailsPage extends StatelessWidget {
                                 // Current Price
                                 Text(
                                   productEntity.discountPrice != 0
-                                      ? "\$${productEntity.discountPrice.toStringAsFixed(2)}"
-                                      : "\$${productEntity.price.toStringAsFixed(2)}",
+                                      ? "${TenantConfig.instance.currencySymbol}${productEntity.discountPrice.toStringAsFixed(2)}"
+                                      : "${TenantConfig.instance.currencySymbol}${productEntity.price.toStringAsFixed(2)}",
                                   style: TextStyle(
-                                    fontSize: 20.sp,
+                                    fontSize: 18.sp,
                                     fontWeight: FontWeight.w800,
                                     color: activeThemeColor,
                                   ),
@@ -154,7 +155,7 @@ class ProductDetailsPage extends StatelessWidget {
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       Text(
-                                        "\$${productEntity.price.toStringAsFixed(2)}",
+                                        "${TenantConfig.instance.currencySymbol}${productEntity.price.toStringAsFixed(2)}",
                                         style: TextStyle(
                                           fontSize: 11.sp,
                                           color: colorScheme.outline,
@@ -220,7 +221,7 @@ class ProductDetailsPage extends StatelessWidget {
                         Text(
                           "Description",
                           style: TextStyle(
-                            fontSize: 14.sp,
+                            fontSize: 12.sp,
                             fontWeight: FontWeight.bold,
                             color: colorScheme.onSurface,
                           ),
@@ -229,7 +230,7 @@ class ProductDetailsPage extends StatelessWidget {
                         Text(
                           productEntity.description,
                           style: TextStyle(
-                            fontSize: 13.sp,
+                            fontSize: 11.sp,
                             color: colorScheme.onSurfaceVariant,
                             height: 1.5,
                           ),

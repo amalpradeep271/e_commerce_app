@@ -1,9 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
-        android:label="Irinjalakuda Khadi"
+        android:label="${appLabel}"
         android:name="${applicationName}"
-        android:icon="@mipmap/logo"
+        android:icon="${appIcon}"
         android:usesCleartextTraffic="true">
         <activity
             android:name=".MainActivity"

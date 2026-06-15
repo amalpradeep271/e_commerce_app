@@ -51,6 +51,8 @@ class OrderTrackingPage extends StatelessWidget {
                           itemBuilder: (context, index) {
                             final step = steps[index];
                             final isLast = index == steps.length - 1;
+                            final isDark = Theme.of(context).brightness == Brightness.dark;
+                            final primaryColor = isDark ? const Color(0xFF14B8A6) : AppColors.kPrimaryColor;
                             
                             return Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,9 +64,9 @@ class OrderTrackingPage extends StatelessWidget {
                                       height: 24.h,
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
-                                        color: step.done ? AppColors.kPrimaryColor : Colors.grey[300],
+                                        color: step.done ? primaryColor : (isDark ? const Color(0xFF334155) : Colors.grey[300]),
                                         border: Border.all(
-                                          color: step.done ? AppColors.kPrimaryColor : Colors.grey[400]!,
+                                          color: step.done ? primaryColor : (isDark ? const Color(0xFF475569) : Colors.grey[400]!),
                                           width: 2,
                                         ),
                                       ),
@@ -77,8 +79,8 @@ class OrderTrackingPage extends StatelessWidget {
                                         width: 2.w,
                                         height: 60.h,
                                         color: step.done && steps[index + 1].done
-                                            ? AppColors.kPrimaryColor
-                                            : Colors.grey[300],
+                                            ? primaryColor
+                                            : (isDark ? const Color(0xFF334155) : Colors.grey[300]),
                                       ),
                                   ],
                                 ),
@@ -92,7 +94,9 @@ class OrderTrackingPage extends StatelessWidget {
                                         style: TextStyle(
                                           fontSize: 15.sp,
                                           fontWeight: FontWeight.bold,
-                                          color: step.done ? AppColors.black : Colors.grey[600],
+                                          color: step.done 
+                                              ? (isDark ? Colors.white : AppColors.black) 
+                                              : (isDark ? Colors.grey[500] : Colors.grey[600]),
                                         ),
                                       ),
                                       SizedBox(height: 4.h),
@@ -100,12 +104,12 @@ class OrderTrackingPage extends StatelessWidget {
                                         Text(
                                           DateFormat('dd MMM yyyy, hh:mm a')
                                               .format(step.createdDate.toDate()),
-                                          style: TextStyle(fontSize: 12.sp, color: Colors.grey[700]),
+                                          style: TextStyle(fontSize: 12.sp, color: isDark ? Colors.grey[400] : Colors.grey[700]),
                                         )
                                       else
                                         Text(
                                           'Pending',
-                                          style: TextStyle(fontSize: 12.sp, color: Colors.grey[500]),
+                                          style: TextStyle(fontSize: 12.sp, color: isDark ? Colors.grey[600] : Colors.grey[500]),
                                         ),
                                     ],
                                   ),

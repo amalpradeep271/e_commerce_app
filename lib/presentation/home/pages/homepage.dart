@@ -24,6 +24,7 @@ import 'package:e_commerce_application/domain/product/repository/product_reposit
 import 'package:e_commerce_application/domain/category/repository/category_repository.dart';
 import 'package:e_commerce_application/domain/home/repository/banner_repository.dart';
 import 'package:e_commerce_application/service_locator.dart';
+import 'package:e_commerce_application/core/configs/tenant/tenant_config.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -84,7 +85,7 @@ class _HomePageState extends State<HomePage> {
           child: Builder(builder: (context) {
             return Scaffold(
               appBar: CustomAppBar(
-                title: "E-Commerce",
+                title: TenantConfig.instance.appName,
                 leadingIconData: Icons.menu,
                 leadingIconColor:
                     isDark ? Colors.white : const Color(0xFF0F172A),
@@ -265,28 +266,36 @@ class _HomePageState extends State<HomePage> {
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.center,
                                                 children: [
-                                                  Text(
-                                                    subtitleText,
-                                                    style: TextStyle(
-                                                      color: isDark
-                                                          ? const Color(
-                                                              0xFFE5951F)
-                                                          : Colors.white70,
-                                                      fontSize: 9.sp,
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                      letterSpacing: 1.0,
+                                                  FittedBox(
+                                                    fit: BoxFit.scaleDown,
+                                                    alignment: Alignment.centerLeft,
+                                                    child: Text(
+                                                      subtitleText,
+                                                      style: TextStyle(
+                                                        color: isDark
+                                                            ? const Color(
+                                                                0xFFE5951F)
+                                                            : Colors.white70,
+                                                        fontSize: 9.sp,
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        letterSpacing: 1.0,
+                                                      ),
                                                     ),
                                                   ),
                                                   SizedBox(height: 4.h),
-                                                  Text(
-                                                    titleText,
-                                                    style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 17.sp,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      height: 1.15,
+                                                  FittedBox(
+                                                    fit: BoxFit.scaleDown,
+                                                    alignment: Alignment.centerLeft,
+                                                    child: Text(
+                                                      titleText,
+                                                      style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 17.sp,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        height: 1.15,
+                                                      ),
                                                     ),
                                                   ),
                                                   SizedBox(height: 8.h),

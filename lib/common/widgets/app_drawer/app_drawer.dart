@@ -129,7 +129,7 @@ class CustomAppDrawer extends StatelessWidget {
       child: SizedBox(
         height: 280,
         child: Container(
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             gradient: AppColors.drawerHeaderColor,
           ),
           padding: const EdgeInsets.fromLTRB(16.0, 0, 16.0, 0),

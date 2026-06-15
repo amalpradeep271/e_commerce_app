@@ -58,6 +58,8 @@ class OrderDetailPage extends StatelessWidget {
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
+          final isDark = Theme.of(context).brightness == Brightness.dark;
+          final primaryColor = isDark ? const Color(0xFF14B8A6) : AppColors.kPrimaryColor;
           return Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -68,11 +70,11 @@ class OrderDetailPage extends StatelessWidget {
                     width: 30,
                     decoration: BoxDecoration(
                         color: orderEntity.orderStatus[index].done
-                            ? AppColors.kPrimaryColor
-                            : Colors.grey,
+                            ? primaryColor
+                            : (isDark ? const Color(0xFF334155) : Colors.grey),
                         shape: BoxShape.circle),
                     child: orderEntity.orderStatus[index].done
-                        ? const Icon(Icons.check)
+                        ? const Icon(Icons.check, color: Colors.white, size: 16)
                         : Container(),
                   ),
                   const SizedBox(
@@ -84,7 +86,7 @@ class OrderDetailPage extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                       fontSize: 16,
                       color: orderEntity.orderStatus[index].done
-                          ? Colors.black
+                          ? (isDark ? Colors.white : Colors.black)
                           : Colors.grey,
                     ),
                   )
@@ -101,7 +103,7 @@ class OrderDetailPage extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                   fontSize: 14,
                   color: orderEntity.orderStatus[index].done
-                      ? Colors.black
+                      ? (isDark ? Colors.grey[400] : Colors.black)
                       : Colors.grey,
                 ),
               )
@@ -116,6 +118,7 @@ class OrderDetailPage extends StatelessWidget {
   }
 
   Widget _items(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -132,34 +135,41 @@ class OrderDetailPage extends StatelessWidget {
                 context, OrderItemsPage(products: orderEntity.products));
           },
           child: Container(
-            height: 70,
+            height: 72,
             padding: const EdgeInsets.symmetric(horizontal: 16),
             decoration: BoxDecoration(
-              color: AppColors.cream,
-              borderRadius: BorderRadius.circular(10),
+              color: isDark ? const Color(0xFF1E293B) : const Color(0xFFF0FDFA),
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: isDark ? const Color(0xFF334155).withValues(alpha: 0.5) : const Color(0xFFE2E8F0),
+                width: 1.0,
+              ),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
                   children: [
-                    const Icon(Icons.receipt_rounded),
+                    Icon(Icons.receipt_rounded, color: isDark ? const Color(0xFF14B8A6) : AppColors.kPrimaryColor),
                     const SizedBox(
                       width: 20,
                     ),
                     Text(
                       '${orderEntity.products.length} Items',
-                      style: const TextStyle(
-                          fontWeight: FontWeight.w400, fontSize: 16),
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500, 
+                        fontSize: 16,
+                        color: isDark ? Colors.white : Colors.black87,
+                      ),
                     )
                   ],
                 ),
-                const Text(
+                Text(
                   'View All',
                   style: TextStyle(
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.bold,
                     fontSize: 14,
-                    color: AppColors.black,
+                    color: isDark ? const Color(0xFF14B8A6) : AppColors.kPrimaryColor,
                   ),
                 )
               ],
@@ -171,23 +181,40 @@ class OrderDetailPage extends StatelessWidget {
   }
 
   Widget _shipping() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text(
-          'Shipping details',
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-        ),
-        const SizedBox(
-          height: 15,
-        ),
-        Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-                color: AppColors.grey, borderRadius: BorderRadius.circular(10)),
-            child: Text(orderEntity.shippingAddress))
-      ],
+    return Builder(
+      builder: (context) {
+        final isDark = Theme.of(context).brightness == Brightness.dark;
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Shipping details',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: isDark ? const Color(0xFF1E293B) : const Color(0xFFF3F4F6),
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(
+                    color: isDark ? const Color(0xFF334155).withValues(alpha: 0.5) : const Color(0xFFE5E7EB),
+                    width: 1.0,
+                  ),
+                ),
+                child: Text(
+                  orderEntity.shippingAddress,
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: isDark ? Colors.grey[300] : Colors.black87,
+                  ),
+                ))
+          ],
+        );
+      }
     );
   }
 }

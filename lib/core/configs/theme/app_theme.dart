@@ -1,17 +1,49 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:e_commerce_application/core/configs/tenant/tenant_config.dart';
 import 'app_colors.dart';
 
+String? _getFontFamily(String slug) {
+  switch (slug.toLowerCase()) {
+    case 'roboto':
+      return GoogleFonts.roboto().fontFamily;
+    case 'inter':
+      return GoogleFonts.inter().fontFamily;
+    case 'poppins':
+      return GoogleFonts.poppins().fontFamily;
+    case 'outfit':
+      return GoogleFonts.outfit().fontFamily;
+    case 'bevietnampro':
+    default:
+      return GoogleFonts.beVietnamPro().fontFamily;
+  }
+}
+
+TextTheme _getFontTextTheme(String slug, TextTheme baseTheme) {
+  switch (slug.toLowerCase()) {
+    case 'roboto':
+      return GoogleFonts.robotoTextTheme(baseTheme);
+    case 'inter':
+      return GoogleFonts.interTextTheme(baseTheme);
+    case 'poppins':
+      return GoogleFonts.poppinsTextTheme(baseTheme);
+    case 'outfit':
+      return GoogleFonts.outfitTextTheme(baseTheme);
+    case 'bevietnampro':
+    default:
+      return GoogleFonts.beVietnamProTextTheme(baseTheme);
+  }
+}
+
 class AppTheme {
-  static final lightTheme = ThemeData(
+  static ThemeData get lightTheme => ThemeData(
     useMaterial3: true,
     colorScheme: AppColors.lightColorScheme,
     primaryColor: AppColors.lightColorScheme.primary,
     scaffoldBackgroundColor: AppColors.lightColorScheme.surface,
     brightness: Brightness.light,
-    fontFamily: GoogleFonts.beVietnamPro().fontFamily,
-    textTheme: GoogleFonts.beVietnamProTextTheme(ThemeData.light().textTheme),
+    fontFamily: _getFontFamily(TenantConfig.instance.fontFamily),
+    textTheme: _getFontTextTheme(TenantConfig.instance.fontFamily, ThemeData.light().textTheme),
     appBarTheme: AppBarTheme(
       backgroundColor: Colors.transparent,
       elevation: 0.0,
@@ -69,14 +101,14 @@ class AppTheme {
     ),
   );
 
-  static final appTheme = ThemeData(
+  static ThemeData get appTheme => ThemeData(
     useMaterial3: true,
     colorScheme: AppColors.darkColorScheme,
     primaryColor: AppColors.darkColorScheme.primary,
     scaffoldBackgroundColor: AppColors.darkColorScheme.background, // Slate 900
     brightness: Brightness.dark,
-    fontFamily: GoogleFonts.beVietnamPro().fontFamily,
-    textTheme: GoogleFonts.beVietnamProTextTheme(ThemeData.dark().textTheme),
+    fontFamily: _getFontFamily(TenantConfig.instance.fontFamily),
+    textTheme: _getFontTextTheme(TenantConfig.instance.fontFamily, ThemeData.dark().textTheme),
     appBarTheme: AppBarTheme(
       backgroundColor: Colors.transparent,
       elevation: 0.0,
