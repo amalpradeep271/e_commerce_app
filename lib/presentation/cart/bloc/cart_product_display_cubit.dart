@@ -31,21 +31,29 @@ class CartProductsDisplayCubit extends Cubit<CartProductsDisplayState> {
     log("🛑 Removing product: ${product.id}");
 
     if (isClosed) return;
-    emit(CartProductsLoading());
+    
+    // Optimistic UI Update
+    if (state is CartProductsLoaded) {
+      final currentState = state as CartProductsLoaded;
+      final updatedProducts = List<ProductOrderedEntity>.from(currentState.products)
+        ..removeWhere((p) => p.id == product.id);
+      emit(CartProductsLoaded(products: updatedProducts));
+    }
+
     var returnedData =
         await sl<RemoveCartProductsUseCase>().call(params: product.id);
     if (isClosed) return;
 
     returnedData.fold((error) {
       log("❌ Failed to remove product: $error");
-      if (!isClosed) emit(LoadCartProductsFailure(errorMessage: error));
+      // Revert if API call fails
+      displayCartProducts();
     }, (data) {
       log("✅ Product removed successfully!");
-      displayCartProducts();
       if (context.mounted) {
         context
             .read<CartStatusCubit>()
-            .checkCartStatus(product.productId); // ✅ Refresh UI after removal
+            .checkCartStatus(product.productId);
       }
     });
   }

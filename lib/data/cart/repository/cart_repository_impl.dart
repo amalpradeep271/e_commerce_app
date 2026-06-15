@@ -13,7 +13,12 @@ class CartRepositoryImpl extends CartRepository {
     final result = await sl<CartApiService>().addToCart(addToCartReq);
     return result.fold(
       (error) => Left(error),
-      (message) => Right(message as String),
+      (data) {
+        if (data is Map && data['message'] != null) {
+          return Right(data['message'].toString());
+        }
+        return Right(data.toString());
+      },
     );
   }
 
@@ -31,7 +36,12 @@ class CartRepositoryImpl extends CartRepository {
     final returnedData = await sl<CartApiService>().removeCartProduct(id);
     return returnedData.fold(
       (error) => Left(error),
-      (message) => Right(message as String),
+      (data) {
+        if (data is Map && data['message'] != null) {
+          return Right(data['message'].toString());
+        }
+        return Right(data.toString());
+      },
     );
   }
 

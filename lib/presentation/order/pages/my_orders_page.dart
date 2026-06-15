@@ -99,6 +99,7 @@ class MyOrdersPage extends StatelessWidget {
         physics: const AlwaysScrollableScrollPhysics(),
         padding: const EdgeInsets.all(16),
         itemBuilder: (context, index) {
+          final isDark = Theme.of(context).brightness == Brightness.dark;
           return GestureDetector(
             onTap: () {
               AppNavigator.push(
@@ -108,17 +109,24 @@ class MyOrdersPage extends StatelessWidget {
                   ));
             },
             child: Container(
-              height: 70,
+              height: 72,
               padding: const EdgeInsets.symmetric(horizontal: 16),
               decoration: BoxDecoration(
-                  color: AppColors.cream,
-                  borderRadius: BorderRadius.circular(10)),
+                  color: isDark ? const Color(0xFF1E293B) : const Color(0xFFF0FDFA),
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(
+                    color: isDark ? const Color(0xFF334155).withValues(alpha: 0.5) : const Color(0xFFE2E8F0),
+                    width: 1.0,
+                  )),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Row(
                     children: [
-                      const Icon(Icons.receipt_rounded),
+                      Icon(
+                        Icons.receipt_rounded,
+                        color: isDark ? const Color(0xFF14B8A6) : AppColors.kPrimaryColor,
+                      ),
                       const SizedBox(
                         width: 20,
                       ),
@@ -128,21 +136,29 @@ class MyOrdersPage extends StatelessWidget {
                         children: [
                           Text(
                             'Order #${orders[index].code}',
-                            style: const TextStyle(
-                                fontWeight: FontWeight.w400, fontSize: 16),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                              color: isDark ? Colors.white : Colors.black87,
+                            ),
                           ),
                           Text(
                             '${orders[index].products.length} item',
-                            style: const TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 12,
-                                color: Colors.grey),
+                            style: TextStyle(
+                              fontWeight: FontWeight.w400,
+                              fontSize: 12,
+                              color: isDark ? Colors.grey[400] : Colors.grey,
+                            ),
                           ),
                         ],
                       )
                     ],
                   ),
-                  const Icon(Icons.arrow_forward_ios_rounded)
+                  Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    color: isDark ? Colors.white70 : Colors.black54,
+                    size: 16,
+                  )
                 ],
               ),
             ),

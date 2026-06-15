@@ -85,10 +85,12 @@ class _AddEditAddressPageState extends State<AddEditAddressPage> {
                     child: ChoiceChip(
                       label: Text(type),
                       selected: isSelected,
-                      selectedColor: AppColors.kPrimaryColor.withValues(alpha: 0.2),
-                      checkmarkColor: AppColors.kPrimaryColor,
+                      selectedColor: (Theme.of(context).brightness == Brightness.dark ? const Color(0xFF14B8A6) : AppColors.kPrimaryColor).withValues(alpha: 0.2),
+                      checkmarkColor: Theme.of(context).brightness == Brightness.dark ? const Color(0xFF14B8A6) : AppColors.kPrimaryColor,
                       labelStyle: TextStyle(
-                        color: isSelected ? AppColors.kPrimaryColor : AppColors.black,
+                        color: isSelected 
+                            ? (Theme.of(context).brightness == Brightness.dark ? const Color(0xFF14B8A6) : AppColors.kPrimaryColor) 
+                            : (Theme.of(context).brightness == Brightness.dark ? Colors.white70 : AppColors.black),
                         fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
                       ),
                       onSelected: (selected) {

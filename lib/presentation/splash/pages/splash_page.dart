@@ -6,6 +6,8 @@ import 'package:e_commerce_application/presentation/splash/bloc/splash_cubit.dar
 import 'package:e_commerce_application/presentation/splash/bloc/splash_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:e_commerce_application/core/configs/tenant/tenant_config.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -88,14 +90,26 @@ class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateM
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Image.asset(
-                          AppImages.logo,
+                        CachedNetworkImage(
+                          imageUrl: TenantConfig.instance.logoUrl,
                           width: 140,
                           height: 140,
+                          placeholder: (context, url) => const SizedBox(
+                            width: 140,
+                            height: 140,
+                            child: Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                          ),
+                          errorWidget: (context, url, error) => Image.asset(
+                            AppImages.logo,
+                            width: 140,
+                            height: 140,
+                          ),
                         ),
                         const SizedBox(height: 24),
                         Text(
-                          'Khadi Irinjalakuda',
+                          TenantConfig.instance.appName,
                           style: TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
@@ -105,7 +119,7 @@ class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateM
                         ),
                         const SizedBox(height: 8),
                         Text(
-                          'Premium E-Commerce Experience',
+                          TenantConfig.instance.tagline,
                           style: TextStyle(
                             fontSize: 14,
                             color: colorScheme.onSurfaceVariant,

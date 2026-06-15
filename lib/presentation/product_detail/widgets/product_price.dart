@@ -3,6 +3,8 @@ import 'package:e_commerce_application/domain/product/entity/product_entity.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'package:e_commerce_application/core/configs/tenant/tenant_config.dart';
+
 class ProductPrice extends StatelessWidget {
   final ProductEntity productEntity;
   const ProductPrice({
@@ -16,7 +18,7 @@ class ProductPrice extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "₹${productEntity.discountPrice != 0 ? productEntity.discountPrice : productEntity.price}",
+          "${TenantConfig.instance.currencySymbol}${productEntity.discountPrice != 0 ? productEntity.discountPrice : productEntity.price}",
           style: AppTextStyles.base.s24.w600,
         ),
         SizedBox(

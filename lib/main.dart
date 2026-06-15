@@ -9,12 +9,17 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:e_commerce_application/core/configs/tenant/tenant_config.dart';
+import 'package:e_commerce_application/core/configs/tenant/tenant_config_service.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  const slug = String.fromEnvironment('TENANT_SLUG', defaultValue: 'khadi');
+  await TenantConfigService.initialize(slug);
 
   await initializeDependencies();
   runApp(
@@ -43,7 +48,7 @@ class MyApp extends StatelessWidget {
           builder: (context, themeMode) {
             return MaterialApp(
               debugShowCheckedModeBanner: false,
-              title: 'Khadi Irinjalakuda',
+              title: TenantConfig.instance.appName,
               theme: AppTheme.lightTheme,
               darkTheme: AppTheme.appTheme,
               themeMode: themeMode,

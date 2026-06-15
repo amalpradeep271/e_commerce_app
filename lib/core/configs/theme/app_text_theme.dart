@@ -1,21 +1,39 @@
 import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:e_commerce_application/core/configs/tenant/tenant_config.dart';
+
+String _getGoogleFontName(String slug) {
+  switch (slug.toLowerCase()) {
+    case 'roboto':
+      return 'Roboto';
+    case 'inter':
+      return 'Inter';
+    case 'poppins':
+      return 'Poppins';
+    case 'outfit':
+      return 'Outfit';
+    case 'bevietnampro':
+    default:
+      return 'Be Vietnam Pro';
+  }
+}
 
 class AppTextStyles {
   AppTextStyles._();
 
   static TextStyle base = getAppTextStyleCustomized();
-  static TextStyle malayalamStyle = getAppTextStyleCustomized();
+  static TextStyle malayalamStyle = getMalayalamTextStyleCustomized();
 
   static TextStyle getAppTextStyleCustomized({
     double textSize = 20,
     double textHeight = 0,
     FontWeight textWeight = FontWeight.normal,
-    Color textColor = AppColors.black,
+    Color? textColor,
   }) {
-    return GoogleFonts.nunito(
+    return GoogleFonts.getFont(
+      _getGoogleFontName(TenantConfig.instance.fontFamily),
       height: textHeight,
       fontSize: textSize,
       fontWeight: textWeight,
@@ -27,7 +45,7 @@ class AppTextStyles {
     double textSize = 20,
     double textHeight = 0,
     FontWeight textWeight = FontWeight.normal,
-    Color textColor = AppColors.black,
+    Color? textColor,
   }) {
     return GoogleFonts.notoSansMalayalam(
       height: textHeight,
@@ -36,6 +54,34 @@ class AppTextStyles {
       color: textColor,
     );
   }
+
+  // Unified dynamic typography system resolving colors contextually
+  static TextStyle getAppTextStyle({
+    required BuildContext context,
+    required double fontSize,
+    FontWeight fontWeight = FontWeight.normal,
+    Color? color,
+  }) {
+    return GoogleFonts.getFont(
+      _getGoogleFontName(TenantConfig.instance.fontFamily),
+      fontSize: fontSize,
+      fontWeight: fontWeight,
+      color: color ?? Theme.of(context).colorScheme.onSurface,
+    );
+  }
+
+  static TextStyle displayLarge(BuildContext context) => getAppTextStyle(context: context, fontSize: 32.sp, fontWeight: FontWeight.bold);
+  static TextStyle displayMedium(BuildContext context) => getAppTextStyle(context: context, fontSize: 24.sp, fontWeight: FontWeight.bold);
+  static TextStyle displaySmall(BuildContext context) => getAppTextStyle(context: context, fontSize: 20.sp, fontWeight: FontWeight.bold);
+  static TextStyle titleLarge(BuildContext context) => getAppTextStyle(context: context, fontSize: 18.sp, fontWeight: FontWeight.bold);
+  static TextStyle titleMedium(BuildContext context) => getAppTextStyle(context: context, fontSize: 16.sp, fontWeight: FontWeight.w600);
+  static TextStyle titleSmall(BuildContext context) => getAppTextStyle(context: context, fontSize: 14.sp, fontWeight: FontWeight.w600);
+  static TextStyle bodyLarge(BuildContext context) => getAppTextStyle(context: context, fontSize: 16.sp);
+  static TextStyle bodyMedium(BuildContext context) => getAppTextStyle(context: context, fontSize: 14.sp);
+  static TextStyle bodySmall(BuildContext context) => getAppTextStyle(context: context, fontSize: 12.sp, color: Theme.of(context).colorScheme.onSurfaceVariant);
+  static TextStyle labelLarge(BuildContext context) => getAppTextStyle(context: context, fontSize: 14.sp, fontWeight: FontWeight.w500);
+  static TextStyle labelMedium(BuildContext context) => getAppTextStyle(context: context, fontSize: 12.sp, fontWeight: FontWeight.w500);
+  static TextStyle labelSmall(BuildContext context) => getAppTextStyle(context: context, fontSize: 11.sp, color: Theme.of(context).colorScheme.onSurfaceVariant);
 }
 
 extension AppFontWeight on TextStyle {
