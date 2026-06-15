@@ -12,6 +12,7 @@ import 'package:e_commerce_application/presentation/product_detail/bloc/product_
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:e_commerce_application/core/configs/tenant/tenant_config.dart';
 
 class AddToCart extends StatelessWidget {
   final ProductEntity productEntity;
@@ -99,7 +100,7 @@ class AddToCart extends StatelessWidget {
                             : productEntity.price;
                         final totalPrice = currentPrice * qty;
                         return Text(
-                          "\$${totalPrice.toStringAsFixed(2)}",
+                          "${TenantConfig.instance.currencySymbol}${totalPrice.toStringAsFixed(2)}",
                           style: TextStyle(
                             fontSize: 18.sp,
                             fontWeight: FontWeight.w800,

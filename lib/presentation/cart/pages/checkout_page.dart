@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:e_commerce_application/core/configs/tenant/tenant_config.dart';
 import 'package:e_commerce_application/common/bloc/button/button_state_cubit.dart';
 import 'package:e_commerce_application/common/helper/cart/cart_helper.dart';
 import 'package:e_commerce_application/common/helper/navigator/app_navigator.dart';
@@ -65,150 +66,154 @@ class _CheckOutPageState extends State<CheckOutPage> {
           BlocProvider(create: (context) => AddressCubit()..loadAddresses()),
           BlocProvider(create: (context) => CouponCubit()),
         ],
-        child: Builder(
-          builder: (context) {
-            final double total = subtotal + widget.shipping + widget.tax - _couponDiscount;
-            
-            return MultiBlocListener(
-              listeners: [
-                BlocListener<PaymentCubit, PaymentState>(
-                  listener: (context, state) {
-                    if (state is PaymentSuccess) {
-                      context.read<PaymentCubit>().placeOrder(
-                            shippingAddress: _formatAddress(_selectedAddress!),
-                            products: widget.products,
-                            shipping: widget.shipping,
-                            tax: widget.tax,
-                            totalPrice: total,
-                          );
-                    } else if (state is PaymentFailure) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text(state.errorMessage)),
-                      );
-                    } else if (state is OrderPlacedSuccessfully) {
-                      AppNavigator.pushAndRemove(context, const OrderPlacedPage());
-                    }
-                  },
-                ),
-                BlocListener<CouponCubit, CouponState>(
-                  listener: (context, state) {
-                    if (state is CouponValidationSuccess) {
-                      setState(() {
-                        _couponDiscount = state.coupon.discountAmount;
-                        _appliedCouponCode = state.coupon.code;
-                      });
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Coupon applied successfully!')),
-                      );
-                    } else if (state is CouponValidationFailure) {
-                      setState(() {
-                        _couponDiscount = 0.0;
-                        _appliedCouponCode = null;
-                      });
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text(state.errorMessage)),
-                      );
-                    }
-                  },
-                ),
-                BlocListener<AddressCubit, AddressState>(
-                  listener: (context, state) {
-                    if (state is AddressLoaded && state.addresses.isNotEmpty) {
-                      // Automatically select default address, or the first address
-                      final defaultAddr = state.addresses.firstWhere(
-                        (a) => a.isDefault,
-                        orElse: () => state.addresses.first,
-                      );
-                      setState(() {
-                        _selectedAddress = defaultAddr;
-                      });
-                    }
-                  },
-                ),
-              ],
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: SingleChildScrollView(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            // 1. Shipping Address Section
-                            _sectionHeader('Shipping Address'),
-                            SizedBox(height: 8.h),
-                            _addressSelectionCard(context),
-                            
-                            SizedBox(height: 24.h),
-                            
-                            // 2. Coupon Section
-                            _sectionHeader('Promo Coupon'),
-                            SizedBox(height: 8.h),
-                            _couponInputField(context, subtotal),
-                            
-                            SizedBox(height: 24.h),
-                            
-                            // 3. Price Breakdown Section
-                            _sectionHeader('Payment Summary'),
-                            SizedBox(height: 8.h),
-                            _priceSummaryCard(subtotal),
-                          ],
-                        ),
+        child: Builder(builder: (context) {
+          final double total =
+              subtotal + widget.shipping + widget.tax - _couponDiscount;
+
+          return MultiBlocListener(
+            listeners: [
+              BlocListener<PaymentCubit, PaymentState>(
+                listener: (context, state) {
+                  if (state is PaymentSuccess) {
+                    context.read<PaymentCubit>().placeOrder(
+                          shippingAddress: _formatAddress(_selectedAddress!),
+                          products: widget.products,
+                          shipping: widget.shipping,
+                          tax: widget.tax,
+                          totalPrice: total,
+                        );
+                  } else if (state is PaymentFailure) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text(state.errorMessage)),
+                    );
+                  } else if (state is OrderPlacedSuccessfully) {
+                    AppNavigator.pushAndRemove(
+                        context, const OrderPlacedPage());
+                  }
+                },
+              ),
+              BlocListener<CouponCubit, CouponState>(
+                listener: (context, state) {
+                  if (state is CouponValidationSuccess) {
+                    setState(() {
+                      _couponDiscount = state.coupon.discountAmount;
+                      _appliedCouponCode = state.coupon.code;
+                    });
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                          content: Text('Coupon applied successfully!')),
+                    );
+                  } else if (state is CouponValidationFailure) {
+                    setState(() {
+                      _couponDiscount = 0.0;
+                      _appliedCouponCode = null;
+                    });
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text(state.errorMessage)),
+                    );
+                  }
+                },
+              ),
+              BlocListener<AddressCubit, AddressState>(
+                listener: (context, state) {
+                  if (state is AddressLoaded && state.addresses.isNotEmpty) {
+                    // Automatically select default address, or the first address
+                    final defaultAddr = state.addresses.firstWhere(
+                      (a) => a.isDefault,
+                      orElse: () => state.addresses.first,
+                    );
+                    setState(() {
+                      _selectedAddress = defaultAddr;
+                    });
+                  }
+                },
+              ),
+            ],
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // 1. Shipping Address Section
+                          _sectionHeader('Shipping Address'),
+                          SizedBox(height: 8.h),
+                          _addressSelectionCard(context),
+
+                          SizedBox(height: 24.h),
+
+                          // 2. Coupon Section
+                          _sectionHeader('Promo Coupon'),
+                          SizedBox(height: 8.h),
+                          _couponInputField(context, subtotal),
+
+                          SizedBox(height: 24.h),
+
+                          // 3. Price Breakdown Section
+                          _sectionHeader('Payment Summary'),
+                          SizedBox(height: 8.h),
+                          _priceSummaryCard(subtotal),
+                        ],
                       ),
                     ),
-                    
-                    // 4. Place Order Reactive Button
-                    BlocBuilder<PaymentCubit, PaymentState>(
-                      builder: (context, state) {
-                        return BasicReactiveButton(
-                          content: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                '₹ ${total.toStringAsFixed(2)}',
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                ),
-                              ),
-                              const Text(
-                                'Pay & Place Order',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ],
-                          ),
-                          onPressed: () {
-                            if (_selectedAddress == null) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(content: Text('Please select a shipping address')),
-                              );
-                              return;
-                            }
+                  ),
 
-                            context.read<PaymentCubit>().makePayment(
-                                  amount: total,
-                                  shippingAddress: _formatAddress(_selectedAddress!),
-                                  products: widget.products,
-                                  shipping: widget.shipping,
-                                  tax: widget.tax,
-                                );
-                          },
-                        );
-                      },
-                    ),
-                  ],
-                ),
+                  // 4. Place Order Reactive Button
+                  BlocBuilder<PaymentCubit, PaymentState>(
+                    builder: (context, state) {
+                      return BasicReactiveButton(
+                        content: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              '${TenantConfig.instance.currencySymbol} ${total.toStringAsFixed(2)}',
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                            ),
+                            const Text(
+                              'Pay & Place Order',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ],
+                        ),
+                        onPressed: () {
+                          if (_selectedAddress == null) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content:
+                                      Text('Please select a shipping address')),
+                            );
+                            return;
+                          }
+
+                          context.read<PaymentCubit>().makePayment(
+                                amount: total,
+                                shippingAddress:
+                                    _formatAddress(_selectedAddress!),
+                                products: widget.products,
+                                shipping: widget.shipping,
+                                tax: widget.tax,
+                              );
+                        },
+                      );
+                    },
+                  ),
+                ],
               ),
-            );
-          }
-        ),
+            ),
+          );
+        }),
       ),
     );
   }
@@ -242,7 +247,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Icon(Icons.add_location, color: AppColors.kPrimaryColor),
+                    Icon(Icons.add_location, color: AppColors.kPrimaryColor),
                     SizedBox(width: 8.w),
                     Text(
                       'Select Shipping Address',
@@ -261,7 +266,8 @@ class _CheckOutPageState extends State<CheckOutPage> {
 
         return Card(
           elevation: 2,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
           child: Padding(
             padding: EdgeInsets.all(16.w),
             child: Column(
@@ -273,9 +279,11 @@ class _CheckOutPageState extends State<CheckOutPage> {
                     Row(
                       children: [
                         Container(
-                          padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 8.w, vertical: 4.h),
                           decoration: BoxDecoration(
-                            color: AppColors.kPrimaryColor.withValues(alpha: 0.1),
+                            color:
+                                AppColors.kPrimaryColor.withValues(alpha: 0.1),
                             borderRadius: BorderRadius.circular(4.r),
                           ),
                           child: Text(
@@ -291,21 +299,27 @@ class _CheckOutPageState extends State<CheckOutPage> {
                           SizedBox(width: 8.w),
                           Text(
                             '(Default)',
-                            style: TextStyle(fontSize: 11.sp, color: Colors.green, fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                                fontSize: 11.sp,
+                                color: Colors.green,
+                                fontWeight: FontWeight.bold),
                           ),
                         ],
                       ],
                     ),
                     TextButton(
-                      onPressed: () => _showAddressSelectionBottomSheet(context),
-                      child: const Text('Change', style: TextStyle(fontWeight: FontWeight.bold)),
+                      onPressed: () =>
+                          _showAddressSelectionBottomSheet(context),
+                      child: const Text('Change',
+                          style: TextStyle(fontWeight: FontWeight.bold)),
                     ),
                   ],
                 ),
                 SizedBox(height: 8.h),
                 Text(
                   _selectedAddress!.fullName,
-                  style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.bold),
+                  style:
+                      TextStyle(fontSize: 15.sp, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 4.h),
                 Text(
@@ -378,7 +392,10 @@ class _CheckOutPageState extends State<CheckOutPage> {
           SizedBox(height: 8.h),
           Text(
             "Promo Coupon '$_appliedCouponCode' applied successfully!",
-            style: TextStyle(color: Colors.green, fontSize: 13.sp, fontWeight: FontWeight.w500),
+            style: TextStyle(
+                color: Colors.green,
+                fontSize: 13.sp,
+                fontWeight: FontWeight.w500),
           ),
         ],
       ],
@@ -413,7 +430,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                   style: AppTextStyles.titleMedium(context),
                 ),
                 Text(
-                  '₹ ${(subtotal + widget.shipping + widget.tax - _couponDiscount).toStringAsFixed(2)}',
+                  '${TenantConfig.instance.currencySymbol} ${(subtotal + widget.shipping + widget.tax - _couponDiscount).toStringAsFixed(2)}',
                   style: AppTextStyles.titleLarge(context).copyWith(
                     color: AppColors.getPrimary(context),
                   ),
@@ -439,9 +456,13 @@ class _CheckOutPageState extends State<CheckOutPage> {
           ),
         ),
         Text(
-          isDiscount ? '- ₹ ${doubleVal.abs().toStringAsFixed(2)}' : '₹ ${doubleVal.toStringAsFixed(2)}',
+          isDiscount
+              ? '- ${TenantConfig.instance.currencySymbol} ${doubleVal.abs().toStringAsFixed(2)}'
+              : '${TenantConfig.instance.currencySymbol} ${doubleVal.toStringAsFixed(2)}',
           style: AppTextStyles.bodyMedium(context).copyWith(
-            color: isDiscount ? Colors.green : (isDark ? AppColors.white : AppColors.black),
+            color: isDiscount
+                ? Colors.green
+                : (isDark ? AppColors.white : AppColors.black),
             fontWeight: isDiscount ? FontWeight.bold : FontWeight.normal,
           ),
         ),
@@ -462,102 +483,109 @@ class _CheckOutPageState extends State<CheckOutPage> {
       builder: (_) {
         return BlocProvider.value(
           value: parentContext.read<AddressCubit>()..loadAddresses(),
-          child: Builder(
-            builder: (context) {
-              return Container(
-                padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 16.w),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Select Address',
-                          style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
-                        ),
-                        IconButton(
-                          icon: const Icon(Icons.add, color: AppColors.kPrimaryColor),
-                          onPressed: () {
-                            Navigator.pop(context);
-                            AppNavigator.push(
-                              parentContext,
-                              BlocProvider.value(
-                                value: parentContext.read<AddressCubit>(),
-                                child: const AddEditAddressPage(),
-                              ),
-                            );
-                          },
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 12.h),
-                    Expanded(
-                      child: BlocBuilder<AddressCubit, AddressState>(
-                        builder: (context, state) {
-                          if (state is AddressLoading) {
-                            return const Center(child: CircularProgressIndicator());
-                          }
-                          if (state is AddressLoaded) {
-                            if (state.addresses.isEmpty) {
-                              return Center(
-                                child: Text(
-                                  'No saved addresses.',
-                                  style: TextStyle(color: Colors.grey, fontSize: 14.sp),
-                                ),
-                              );
-                            }
-                            return ListView.builder(
-                              itemCount: state.addresses.length,
-                              itemBuilder: (context, idx) {
-                                final addr = state.addresses[idx];
-                                final isSelected = _selectedAddress?.id == addr.id;
-
-                                return Card(
-                                  elevation: isSelected ? 2 : 0,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10.r),
-                                    side: BorderSide(
-                                      color: isSelected ? AppColors.kPrimaryColor : AppColors.colorDivider,
-                                      width: isSelected ? 2 : 1,
-                                    ),
-                                  ),
-                                  margin: EdgeInsets.only(bottom: 8.h),
-                                  child: ListTile(
-                                    title: Text(
-                                      '${addr.fullName} (${addr.label.toUpperCase()})',
-                                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.sp),
-                                    ),
-                                    subtitle: Text(
-                                      '${addr.addressLine1}, ${addr.city} - ${addr.pinCode}',
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(fontSize: 12.sp),
-                                    ),
-                                    trailing: isSelected
-                                        ? const Icon(Icons.check_circle, color: AppColors.kPrimaryColor)
-                                        : null,
-                                    onTap: () {
-                                      setState(() {
-                                        _selectedAddress = addr;
-                                      });
-                                      Navigator.pop(context);
-                                    },
-                                  ),
-                                );
-                              },
-                            );
-                          }
-                          return const SizedBox();
+          child: Builder(builder: (context) {
+            return Container(
+              padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 16.w),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Select Address',
+                        style: TextStyle(
+                            fontSize: 18.sp, fontWeight: FontWeight.bold),
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.add, color: AppColors.kPrimaryColor),
+                        onPressed: () {
+                          Navigator.pop(context);
+                          AppNavigator.push(
+                            parentContext,
+                            BlocProvider.value(
+                              value: parentContext.read<AddressCubit>(),
+                              child: const AddEditAddressPage(),
+                            ),
+                          );
                         },
                       ),
+                    ],
+                  ),
+                  SizedBox(height: 12.h),
+                  Expanded(
+                    child: BlocBuilder<AddressCubit, AddressState>(
+                      builder: (context, state) {
+                        if (state is AddressLoading) {
+                          return const Center(
+                              child: CircularProgressIndicator());
+                        }
+                        if (state is AddressLoaded) {
+                          if (state.addresses.isEmpty) {
+                            return Center(
+                              child: Text(
+                                'No saved addresses.',
+                                style: TextStyle(
+                                    color: Colors.grey, fontSize: 14.sp),
+                              ),
+                            );
+                          }
+                          return ListView.builder(
+                            itemCount: state.addresses.length,
+                            itemBuilder: (context, idx) {
+                              final addr = state.addresses[idx];
+                              final isSelected =
+                                  _selectedAddress?.id == addr.id;
+
+                              return Card(
+                                elevation: isSelected ? 2 : 0,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.r),
+                                  side: BorderSide(
+                                    color: isSelected
+                                        ? AppColors.kPrimaryColor
+                                        : AppColors.colorDivider,
+                                    width: isSelected ? 2 : 1,
+                                  ),
+                                ),
+                                margin: EdgeInsets.only(bottom: 8.h),
+                                child: ListTile(
+                                  title: Text(
+                                    '${addr.fullName} (${addr.label.toUpperCase()})',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 14.sp),
+                                  ),
+                                  subtitle: Text(
+                                    '${addr.addressLine1}, ${addr.city} - ${addr.pinCode}',
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(fontSize: 12.sp),
+                                  ),
+                                  trailing: isSelected
+                                      ? Icon(Icons.check_circle,
+                                          color: AppColors.kPrimaryColor)
+                                      : null,
+                                  onTap: () {
+                                    setState(() {
+                                      _selectedAddress = addr;
+                                    });
+                                    Navigator.pop(context);
+                                  },
+                                ),
+                              );
+                            },
+                          );
+                        }
+                        return const SizedBox();
+                      },
                     ),
-                  ],
-                ),
-              );
-            }
-          ),
+                  ),
+                ],
+              ),
+            );
+          }),
         );
       },
     );

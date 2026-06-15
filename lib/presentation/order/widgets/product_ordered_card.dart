@@ -3,6 +3,7 @@ import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
 import 'package:e_commerce_application/domain/cart/entity/product_ordered_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:e_commerce_application/core/configs/tenant/tenant_config.dart';
 
 class OrderItemCard extends StatelessWidget {
   final ProductOrderedEntity productOrderedEntity;
@@ -99,7 +100,7 @@ class OrderItemCard extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '\$${productOrderedEntity.totalPrice.toStringAsFixed(2)}',
+                      '${TenantConfig.instance.currencySymbol}${productOrderedEntity.totalPrice.toStringAsFixed(2)}',
                       style: TextStyle(
                         fontSize: 14.sp,
                         fontWeight: FontWeight.bold,

@@ -4,13 +4,17 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:dartz/dartz.dart';
+import '../configs/tenant/tenant_config.dart';
 
 class ApiClient {
   // Use localhost for Windows/Web/iOS Simulator, 10.0.2.2 for Android Emulator, or update to your Render.com URL
   static final String baseUrl = _getBaseUrl();
 
   static String _getBaseUrl() {
-    return 'https://ecommerce-api-dev-7dyi.onrender.com/v1';
+    return const String.fromEnvironment(
+      'API_BASE_URL',
+      defaultValue: 'https://ecommerce-api-dev-7dyi.onrender.com/v1',
+    );
   }
 
   final FlutterSecureStorage _storage = const FlutterSecureStorage();
@@ -98,6 +102,7 @@ class ApiClient {
     final headers = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
+      'x-tenant-slug': TenantConfig.instance.tenantSlug,
     };
     if (token != null) {
       headers['Authorization'] = 'Bearer $token';
@@ -275,6 +280,7 @@ class ApiClient {
     var token = await getAccessToken();
 
     var request = http.MultipartRequest('POST', url);
+    request.headers['x-tenant-slug'] = TenantConfig.instance.tenantSlug;
     if (token != null) {
       request.headers['Authorization'] = 'Bearer $token';
     }
@@ -291,6 +297,7 @@ class ApiClient {
       if (success) {
         token = await getAccessToken();
         request = http.MultipartRequest('POST', url);
+        request.headers['x-tenant-slug'] = TenantConfig.instance.tenantSlug;
         if (token != null) {
           request.headers['Authorization'] = 'Bearer $token';
         }

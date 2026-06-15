@@ -14,6 +14,8 @@ import 'package:e_commerce_application/presentation/auth/pages/signin_page.dart'
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:e_commerce_application/core/configs/tenant/tenant_config.dart';
 import '../../../common/bloc/button/button_state_cubit.dart';
 
 class SignupPage extends StatelessWidget {
@@ -74,10 +76,22 @@ class SignupPage extends StatelessWidget {
                 child: Column(
                   children: [
                     const Spacer(),
-                    Image.asset(
-                      AppImages.logo,
+                    CachedNetworkImage(
+                      imageUrl: TenantConfig.instance.logoUrl,
                       width: 60.w,
                       height: 60.h,
+                      placeholder: (context, url) => SizedBox(
+                        width: 60.w,
+                        height: 60.h,
+                        child: const Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      ),
+                      errorWidget: (context, url, error) => Image.asset(
+                        AppImages.logo,
+                        width: 60.w,
+                        height: 60.h,
+                      ),
                     ),
                     SizedBox(height: 24.h),
                     Text(

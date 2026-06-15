@@ -2,6 +2,23 @@ import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:e_commerce_application/core/configs/tenant/tenant_config.dart';
+
+String _getGoogleFontName(String slug) {
+  switch (slug.toLowerCase()) {
+    case 'roboto':
+      return 'Roboto';
+    case 'inter':
+      return 'Inter';
+    case 'poppins':
+      return 'Poppins';
+    case 'outfit':
+      return 'Outfit';
+    case 'bevietnampro':
+    default:
+      return 'Be Vietnam Pro';
+  }
+}
 
 class AppTextStyles {
   AppTextStyles._();
@@ -15,7 +32,8 @@ class AppTextStyles {
     FontWeight textWeight = FontWeight.normal,
     Color? textColor,
   }) {
-    return GoogleFonts.nunito(
+    return GoogleFonts.getFont(
+      _getGoogleFontName(TenantConfig.instance.fontFamily),
       height: textHeight,
       fontSize: textSize,
       fontWeight: textWeight,
@@ -44,7 +62,8 @@ class AppTextStyles {
     FontWeight fontWeight = FontWeight.normal,
     Color? color,
   }) {
-    return GoogleFonts.nunito(
+    return GoogleFonts.getFont(
+      _getGoogleFontName(TenantConfig.instance.fontFamily),
       fontSize: fontSize,
       fontWeight: fontWeight,
       color: color ?? Theme.of(context).colorScheme.onSurface,

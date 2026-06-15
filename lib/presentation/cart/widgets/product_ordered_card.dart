@@ -5,6 +5,7 @@ import 'package:e_commerce_application/presentation/cart/bloc/cart_product_displ
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:e_commerce_application/core/configs/tenant/tenant_config.dart';
 
 import '../../../core/configs/theme/app_colors.dart';
 
@@ -175,7 +176,7 @@ class ProductOrderedCard extends StatelessWidget {
                     ),
                     // Price
                     Text(
-                      '₹${productOrderedEntity.totalPrice}',
+                      '${TenantConfig.instance.currencySymbol}${productOrderedEntity.totalPrice}',
                       style: TextStyle(
                         fontSize: 14.sp,
                         fontWeight: FontWeight.bold,

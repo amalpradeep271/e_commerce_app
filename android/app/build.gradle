@@ -7,6 +7,36 @@ plugins {
     id "dev.flutter.flutter-gradle-plugin"
 }
 
+def dartEnvironmentVariables = [:]
+if (project.hasProperty('dart-defines')) {
+    def dartDefinesString = project.property('dart-defines')
+    dartDefinesString.split(',').each { define ->
+        if (define) {
+            try {
+                def decoded = new String(define.decodeBase64(), 'UTF-8')
+                if (decoded.contains('=')) {
+                    def pair = decoded.split('=')
+                    if (pair.size() == 2) {
+                        dartEnvironmentVariables[pair[0]] = pair[1]
+                    }
+                } else if (define.contains('=')) {
+                    def pair = define.split('=')
+                    if (pair.size() == 2) {
+                        dartEnvironmentVariables[pair[0]] = pair[1]
+                    }
+                }
+            } catch (Exception e) {
+                if (define.contains('=')) {
+                    def pair = define.split('=')
+                    if (pair.size() == 2) {
+                        dartEnvironmentVariables[pair[0]] = pair[1]
+                    }
+                }
+            }
+        }
+    }
+}
+
 android {
     namespace = "com.example.e_commerce_application"
     compileSdk = flutter.compileSdkVersion
@@ -22,10 +52,29 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.example.e_commerce_application"
-        // You can update the following values to match your application needs.
-        // For more information, see: https://flutter.dev/to/review-gradle-config.
+        def baseAppId = "com.example.e_commerce_application"
+        def appName = "E-Commerce"
+        def appIcon = "@mipmap/logo"
+        if (dartEnvironmentVariables.containsKey('TENANT_SLUG')) {
+            def slug = dartEnvironmentVariables['TENANT_SLUG'].toLowerCase().replaceAll("[^a-z0-9_.]", "_")
+            applicationId = "${baseAppId}.${slug}"
+            if (slug == 'irinjalakuda_khadi') {
+                appName = "Irinjalakuda Khadi"
+            } else if (slug == 'shopify') {
+                appName = "Shopify"
+                appIcon = "@mipmap/shopify_logo"
+            } else {
+                appName = slug.capitalize()
+            }
+        } else {
+            applicationId = baseAppId
+        }
+
+        manifestPlaceholders += [
+            appLabel: appName,
+            appIcon: appIcon
+        ]
+
         minSdkVersion = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
@@ -34,8 +83,6 @@ android {
 
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig = signingConfigs.debug
             minifyEnabled false
             shrinkResources false

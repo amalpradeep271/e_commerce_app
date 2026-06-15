@@ -1,4 +1,5 @@
 import 'package:e_commerce_application/common/helper/cart/cart_helper.dart';
+import 'package:e_commerce_application/core/configs/tenant/tenant_config.dart';
 import 'package:e_commerce_application/common/helper/navigator/app_navigator.dart';
 import 'package:e_commerce_application/common/widgets/app_button/basic_app_button.dart';
 import 'package:e_commerce_application/core/configs/theme/app_colors.dart';
@@ -96,7 +97,7 @@ class Checkout extends StatelessWidget {
                     color: AppColors.greenSuccess, size: 16.sp),
                 SizedBox(width: 8.w),
                 Text(
-                  'Coupon Applied! ₹500 discount saved.',
+                  'Coupon Applied! ${TenantConfig.instance.currencySymbol}500 discount saved.',
                   style: TextStyle(
                     color: AppColors.greenSuccess,
                     fontSize: 10.sp,
@@ -118,10 +119,10 @@ class Checkout extends StatelessWidget {
             ),
             child: Column(
               children: [
-                _buildSummaryRow('Subtotal', '₹${subtotal.toStringAsFixed(0)}',
+                _buildSummaryRow('Subtotal', '${TenantConfig.instance.currencySymbol}${subtotal.toStringAsFixed(0)}',
                     subTextColor, textColor),
                 SizedBox(height: 12.h),
-                _buildSummaryRow('Discount', '-₹${discount.toStringAsFixed(0)}',
+                _buildSummaryRow('Discount', '-${TenantConfig.instance.currencySymbol}${discount.toStringAsFixed(0)}',
                     subTextColor, tealColor),
                 SizedBox(height: 12.h),
                 Row(
@@ -161,7 +162,7 @@ class Checkout extends StatelessWidget {
                           fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      '₹${total.toStringAsFixed(0)}',
+                      '${TenantConfig.instance.currencySymbol}${total.toStringAsFixed(0)}',
                       style: TextStyle(
                           color: tealColor,
                           fontSize: 16.sp,

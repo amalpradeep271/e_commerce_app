@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:e_commerce_application/core/configs/tenant/tenant_config.dart';
 
 class WishlistCard extends StatelessWidget {
   const WishlistCard({
@@ -86,7 +87,7 @@ class WishlistCard extends StatelessWidget {
                 ),
                 SizedBox(height: 8.h),
                 Text(
-                  "₹${productEntity.price}",
+                  "${TenantConfig.instance.currencySymbol}${productEntity.price}",
                   style: TextStyle(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.bold,
